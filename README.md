@@ -1,66 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# traspasalo.es
+traspasalo.es website for business listing real estate listing and other services listing using Laravel 11 and Tailwind TALL Stack
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Installation
+use npm install and then run npm run dev for frotnend and php artisan serve to run Laravel 11.
+# Author
+Mian Salman @Thinkdelivers.com
 
-## About Laravel
+# Instalation terminal commands
+composer create-project --prefer-dist laravel/laravel:^11.0 traspasalo.es
+cd traspasalo.es
+# Install Tailwindcss
+npm install -D tailwindcss postcss autoprefixer
+# Initialize Tailwindcss
+npx tailwindcss init -p
+# Install Node Modules
+npm install
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Tailwind Configure
+/** @type {import('tailwindcss').Config} */
+export default {
+content: [
+'./resources/**/*.blade.php',
+'./resources/**/*.js',
+'./resources/**/*.vue',
+"./node_modules/flowbite/**/*.js",
+],
+theme: {
+extend: {
+//   colors: {
+//     white: "#fff",
+//     black: "#000",
+//     coral: "#ec642a",
+//     indigo: "#270b79",
+//     dimgray: "#707070",
+//     purple: "#270B79",
+//     gray: {
+//       "100": "#8e8e8e",
+//       "200": "#828282",
+//     },
+//     darkslategray: {
+//       "100": "#454545",
+//       "200": "#333",
+//     },
+//     gainsboro: "#e6e6e6",
+//     whitesmoke: "#f7f7f7",
+//   },
+//   spacing: {
+//     "spacing-sm": "32px",
+//     "spacing-m": "48px",
+//   },
+//   fontFamily: {
+//     "plus-jakarta-sans": "'Plus Jakarta Sans'",
+//     poppins: "Poppins",
+//     "small-text": "Inter",
+//     ubuntu: "Ubuntu",
+//   },
+// },
+// fontSize: {
+//   base: "16px",
+//   sm: "14px",
+//   xl: "20px",
+//   "29xl": "48px",
+//   "10xl": "29px",
+//   "19xl": "38px",
+//   xs: "12px",
+//   "9xl": "28px",
+//   "3xl": "22px",
+//   "16xl": "35px",
+//   "2xl": "21px",
+//   lg: "18px",
+//   "41xl": "60px",
+//   "17xl": "36px",
+//   lgi: "19px",
+//   "5xl": "24px",
+//   "21xl": "40px",
+//   "45xl": "64px",
+//   inherit: "inherit",
+},
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+},
+plugins: [
+require('flowbite/plugin')
+],
+};
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Vite Configure
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
 
-## Learning Laravel
+export default defineConfig({
+plugins: [
+laravel({
+input: ['resources/css/app.css', 'resources/js/app.js'],
+refresh: true,
+}),
+],
+});
+# Postcss configure
+export default {
+plugins: {
+tailwindcss: {},
+autoprefixer: {},
+},
+}
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
