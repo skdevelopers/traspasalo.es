@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* background  */
+@layer utilities {
+    .bg-custom {
+        background-image: url('/public/assets/images/background.png');
+        /*background-color: rgba(39,11,121, 0.75); /* bg-blue-500 with 50% opacity */
+
+        background-color: rgba(127,17,224, 0.9); /* Semi-transparent purple */
+        background-blend-mode: overlay;  /*Blend color and image */
+    }
+}
+body {
+    @apply leading-[normal] m-0;
+}
+*,
+::before,
+::after {
+    border-width: 0;
+}
