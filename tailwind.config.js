@@ -57,6 +57,9 @@ export default {
     //   "21xl": "40px",
     //   "45xl": "64px",
     //   inherit: "inherit",
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+    },
     },
 
   },

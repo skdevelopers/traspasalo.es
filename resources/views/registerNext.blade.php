@@ -9,23 +9,24 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="h-full bg-custom bg-cover bg-center flex items-center justify-center">
+<body>
+    <div class="bg-custom">
     <!-- Back to Home Button -->
-    <div class="absolute top-0 left-0 m-4 flex items-center space-x-2 text-white">
+    <div class="absolute top-0 left-0 m-4 flex items-center space-x-2 text-white z-10">
         <img src="{{ asset('/assets/images/back.svg') }}" alt="Back button" class="w-12 h-12">
         <span class="opacity-85">Back to home</span>
     </div>
 
     <!-- Register Form -->
-    <div class="flex items-center justify-center w-full h-screen p-4">
-        <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
+    <div class="flex items-center justify-center w-full p-4 relative z-10">
+        <div class="bg-white rounded-xl p-6 w-full max-w-xs sm:max-w-md lg:max-w-md shadow-lg">
             <!-- Logo -->
             <div class="flex justify-center mb-6">
-                <img class="h-18 w-auto" src="{{ asset('assets/images/logo.svg') }}" alt="Your Company">
+                <img class="h-12 w-auto sm:h-14 lg:h-18" src="{{ asset('assets/images/logo.svg') }}" alt="Your Company">
             </div>
             <!-- Register Form -->
             <div>
-                <h2 class="text-[16px] font-bold text-left uppercase text-black mb-6">REGISTER ME</h2>
+                <h2 class="text-sm sm:text-base lg:text-lg font-bold text-left uppercase text-black mb-6">REGISTER ME&nbsp;|&nbsp;<a href="{{ url('/login') }}" class="underline underline-offset-2 text-indigo-900">Login</a></h2>
                 <div class="flex justify-center w-full">
                     <div class="flex flex-col w-2/3">
                         <div class="flex justify-between mb-1">
@@ -209,7 +210,7 @@
 
                     <div>
                         <button type="button"
-                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-violet-950 hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-violet-950">
                             Create Account
                         </button>
                     </div>
@@ -217,6 +218,7 @@
             </div>
         </div>
     </div>
+</div>
     @vite('resources/js/app.js')
 </body>
 

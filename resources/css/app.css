@@ -4,18 +4,28 @@
 /* background  */
 @layer utilities {
     .bg-custom {
-        background-image: url('/public/assets/images/background.png');
-        /*background-color: rgba(39,11,121, 0.75); /* bg-blue-500 with 50% opacity */
-
-        background-color: rgba(127,17,224, 0.9); /* Semi-transparent purple */
-        background-blend-mode: overlay;  /*Blend color and image */
+        background: url('/public/assets/images/background.png') no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+    
+    .bg-custom::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        background: rgba(39, 11, 121, 0.70);
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+    
+    
 }
-body {
-    @apply leading-[normal] m-0;
-}
-*,
-::before,
-::after {
-    border-width: 0;
-}
+
+

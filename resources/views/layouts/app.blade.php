@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>@yield('title', 'Traspasalo')</title>
     @vite('resources/css/app.css')
     @stack('styles')
 </head>
-<body class="bg-purple-950">
+<body class="bg-gray-100 font-poppins">
 <header>
     @include('partials.nav')
 </header>

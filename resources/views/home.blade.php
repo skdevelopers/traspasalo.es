@@ -2,119 +2,159 @@
 
 @section('title', 'Home')
 
+@push('styles')
+<style>
+   .bg-banner {
+    background: url('/assets/images/bg-banner.svg') no-repeat center center;
+    background-size: cover;
+    position: relative; 
+    height: 445px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-banner::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    background: rgba(39, 11, 121, 0.70);
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+.relative-container {
+    position: relative;
+    padding: 0;
+    z-index: 0;
+}
+    </style>
+    
+@endpush
+
 @section('content')
-    <header class="bg-purple-950 text-white text-center py-10">
-        <h1 class="text-4xl font-bold">Find Your Business</h1>
-        <p class="mt-4 text-lg">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
-    </header>
-
-    <!-- Search Area -->
-    <div class="container mx-auto px-4 py-10">
-        <div class="bg-white rounded shadow p-6 flex flex-wrap justify-center items-center mx-auto w-4/5">
-            <div class="flex-1 min-w-[150px] max-w-[200px] p-3">
-                <input type="text" placeholder="Search By Keyword" class="w-full p-3 border rounded">
-            </div>
-            <div class="flex-1 min-w-[150px] max-w-[200px] p-3">
-                <select class="w-full p-3 border rounded">
-                    <option>Operation Type</option>
-                </select>
-            </div>
-            <div class="flex-1 min-w-[150px] max-w-[200px] p-3">
-                <select class="w-full p-3 border rounded">
-                    <option>Business Type</option>
-                </select>
-            </div>
-            <div class="flex-1 min-w-[150px] max-w-[200px] p-3">
-                <select class="w-full p-3 border rounded">
-                    <option>Location</option>
-                </select>
-            </div>
-            <div class="flex-1 min-w-[150px] max-w-[200px] p-3">
-                <button class="w-full bg-orange-500 text-white px-4 py-3 rounded">Find Now</button>
-            </div>
+<section class="bg-banner">
+    <div class=" text-center z-0">
+        <!-- Heading Content -->
+        <div class="flex flex-col pt-40">
+            <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
+            <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
         </div>
-    </div>
 
-    <!-- Slider Section -->
-    <div class="relative overflow-hidden w-full">
-        <div class="absolute inset-x-0 top-0 h-1/2 bg-purple-950"></div>
-        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-200"></div>
-        <div class="relative container mx-auto px-4 py-10 w-4/5">
-            <div class="relative flex items-center">
-                <button id="prevButton" class="absolute left-0 transform -translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <div id="slider" class="flex space-x-4 overflow-hidden w-full">
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h2l2 10h10l2-10h2"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 1 1-8 0h8z"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Real Estate</p>
-                    </div>
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17h-1v-4a4 4 0 1 0-8 0v4H6"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 17a6 6 0 1 1 12 0"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Business Consulting</p>
-                    </div>
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a1 1 0 0 0-1-1h-4.338a2 2 0 1 0-3.324 0H6a1 1 0 0 0-1 1v6H2l1.08 5.323A2 2 0 0 0 5.045 20h13.91a2 2 0 0 0 1.965-1.677L22 13h-2z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10V7a5 5 0 0 1 10 0v3"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Car Washer</p>
-                    </div>
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 12V7a2 2 0 1 1 4 0v5"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7a2 2 0 0 1 4 0"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 21V12a2 2 0 0 1 4 0v9"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Beauty Salon</p>
-                    </div>
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Real Estate</p>
-                    </div>
-                    <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/5 text-center">
-                        <div class="text-orange-500 mx-auto">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"></path>
-                            </svg>
-                        </div>
-                        <p class="mt-4">Business Consulting</p>
-                    </div>
+        <!-- Search Area -->
+        <div class="container mx-auto mt-8 position-relative">
+            <div class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
+                <div class="flex-1 min-w-[200px] p-1">
+                    <input type="text" placeholder="Search By Keyword" class="w-full p-2 border-2 rounded">
                 </div>
-                <button id="nextButton" class="absolute right-0 transform translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
+                <div class="flex-1 min-w-[200px] p-1">
+                    <select class="w-full p-2 border-2 rounded">
+                        <option>Operation Type</option>
+                    </select>
+                </div>
+                <div class="flex-1 min-w-[200px] p-1">
+                    <select class="w-full p-2 border-2 rounded">
+                        <option>Business Type</option>
+                    </select>
+                </div>
+                <div class="flex-1 min-w-[200px] p-1">
+                    <select class="w-full p-2 border-2 rounded">
+                        <option>Location</option>
+                    </select>
+                </div>
+                <div class="flex-1 p-1">
+                    <button class="w-full bg-orange-500 text-white p-2 rounded">Find Now</button>
+                </div>
             </div>
         </div>
     </div>
+        <!-- Slider Section -->
+        <div class="slider-container">
+            <div class="container-fluid mx-0 px-6 py-10">
+                <div class="relative flex items-center">
+                    <button id="prevButton" class="absolute left-0 transform -translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="slider" class="flex space-x-4 overflow-hidden w-full">
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h2l2 10h10l2-10h2"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 1 1 1-8 0h8z"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Real Estate</p>
+                        </div>
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17h-1v-4a4 4 0 1 0-8 0v4H6"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 17a6 6 1 1 1 12 0"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Business Consulting</p>
+                        </div>
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a1 1 0 0 0-1-1h-4.338a2 2 0 1 0-3.324 0H6a1 1 0 0 0-1 1v6H2l1.08 5.323A2 2 0 0 0 5.045 20h13.91a2 2 0 0 0 1.965-1.677L22 13h-2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10V7a5 5 0 0 1 10 0v3"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Car Washer</p>
+                        </div>
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 12V7a2 2 0 1 1 4 0v5"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7a2 2 0 0 1 4 0"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 21V12a2 2 0 0 1 4 0v9"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Beauty Salon</p>
+                        </div>
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Real Estate</p>
+                        </div>
+                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                            <div class="text-orange-500 mx-auto">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"></path>
+                                </svg>
+                            </div>
+                            <p class="mt-4">Business Consulting</p>
+                        </div>
+                    </div>
+                    <button id="nextButton" class="absolute right-0 transform translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
 
     <!-- Product Slider Section -->
-    <div class="bg-gray-200 py-10">
+    <div class="position-relative  bg-gray-200 py-10">
         <div class="container mx-auto px-4 w-9/12">
             <h2 class="text-2xl font-bold mb-4 text-center">Explore Profitable Business Ventures</h2>
             <p class="text-center mb-6">We Discover Your Business Success</p>
