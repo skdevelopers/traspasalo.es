@@ -21,7 +21,7 @@
                        aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ url('/about-us') }}"
                        class="block py-2 px-3 text-white rounded hover:bg-violet-600 md:hover:bg-transparent md:border-0 md:hover:text-violet-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About
                         Us</a>
                 </li>
@@ -30,7 +30,7 @@
                        class="block py-2 px-3 text-white rounded hover:bg-violet-600 md:hover:bg-transparent md:border-0 md:hover:text-violet-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Newsletter</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ url('/about-us') }}"
                        class="block py-2 px-3 text-white rounded hover:bg-violet-600 md:hover:bg-transparent md:border-0 md:hover:text-violet-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
                 </li>
                 <li>

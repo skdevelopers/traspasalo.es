@@ -38,15 +38,15 @@
 
 @section('content')
 <section class="bg-banner">
-    <div class=" text-center z-0">
+    <div class="container text-center z-0">
         <!-- Heading Content -->
-        <div class="flex flex-col pt-40">
+        <div class="flex flex-col pt-40 mt-8">
             <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
             <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
         </div>
 
         <!-- Search Area -->
-        <div class="container mx-auto mt-8 position-relative">
+        <div class="w-4/5 mx-auto mt-10 position-relative">
             <div class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
                 <div class="flex-1 min-w-[200px] p-1">
                     <input type="text" placeholder="Search By Keyword" class="w-full p-2 border-2 rounded">
@@ -74,15 +74,15 @@
     </div>
         <!-- Slider Section -->
         <div class="slider-container">
-            <div class="container-fluid mx-0 px-6 py-10">
+            <div class="container-fluid mx-0 px-6 py-20 mt-16">
                 <div class="relative flex items-center">
-                    <button id="prevButton" class="absolute left-0 transform -translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
+                    <button id="prevButton" class="absolute -left-7 transform -translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
                     <div id="slider" class="flex space-x-4 overflow-hidden w-full">
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg p-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h2l2 10h10l2-10h2"></path>
@@ -91,7 +91,7 @@
                             </div>
                             <p class="mt-4">Real Estate</p>
                         </div>
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg py-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17h-1v-4a4 4 0 1 0-8 0v4H6"></path>
@@ -100,7 +100,7 @@
                             </div>
                             <p class="mt-4">Business Consulting</p>
                         </div>
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg py-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V7a1 1 0 0 0-1-1h-4.338a2 2 0 1 0-3.324 0H6a1 1 0 0 0-1 1v6H2l1.08 5.323A2 2 0 0 0 5.045 20h13.91a2 2 0 0 0 1.965-1.677L22 13h-2z"></path>
@@ -109,7 +109,7 @@
                             </div>
                             <p class="mt-4">Car Washer</p>
                         </div>
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg py-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 12V7a2 2 0 1 1 4 0v5"></path>
@@ -120,7 +120,7 @@
                             </div>
                             <p class="mt-4">Beauty Salon</p>
                         </div>
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg py-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
@@ -129,7 +129,7 @@
                             </div>
                             <p class="mt-4">Real Estate</p>
                         </div>
-                        <div class="bg-white rounded shadow p-6 flex-shrink-0 w-1/6 text-center">
+                        <div class="bg-white rounded-lg shadow-lg py-6 flex-shrink-0 w-44 h-32 text-center">
                             <div class="text-orange-500 mx-auto">
                                 <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2z"></path>
@@ -139,7 +139,7 @@
                             <p class="mt-4">Business Consulting</p>
                         </div>
                     </div>
-                    <button id="nextButton" class="absolute right-0 transform translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
+                    <button id="nextButton" class="absolute -right-7 transform translate-x-1/2 bg-orange-500 text-white rounded-full p-2 z-10">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
@@ -154,19 +154,19 @@
 
 
     <!-- Product Slider Section -->
-    <div class="position-relative  bg-gray-200 py-10">
-        <div class="container mx-auto px-4 w-9/12">
+    <div class="position-relative  bg-gray-200 pb-10 pt-32">
+        <div class="container mx-auto px-4 w-4/5">
             <h2 class="text-2xl font-bold mb-4 text-center">Explore Profitable Business Ventures</h2>
             <p class="text-center mb-6">We Discover Your Business Success</p>
             <div class="relative flex items-center">
-                <button id="productPrevButton" class="absolute left-0 transform -translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
+                <button id="productPrevButton" class="absolute -left-6 transform -translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
                 <div id="productSlider" class="flex space-x-4 overflow-hidden w-full">
                     <!-- Slide Items -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -181,7 +181,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -196,7 +196,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -211,7 +211,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -226,7 +226,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                 </div>
-                <button id="productNextButton" class="absolute right-0 transform translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
+                <button id="productNextButton" class="absolute -right-6 transform translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -253,8 +253,9 @@
     <div class="container mx-auto p-4 w-4/5 bg-white">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- Main image on the left -->
-            <div class="col-span-1">
+            <div class="col-span-1 pr-32 relative">
                 <img src="{{ asset('/assets/images/18516.png') }}" alt="Main Image" class="w-full h-96 object-cover rounded-lg">
+                <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 1" class="w-44 h-64 object-cover rounded-lg absolute -right-6 -bottom-6">
             </div>
             <!-- Text and smaller images on the right -->
             <div class="col-span-1 flex flex-col justify-center">
@@ -267,9 +268,8 @@
                     <button class="mt-6 px-6 py-3 bg-purple-700 text-white rounded">Join Us Now</button>
                 </div>
                 <!-- Two smaller images below -->
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 1" class="w-full h-32 object-cover rounded-lg">
-                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 2" class="w-full h-32 object-cover rounded-lg">
+                <div class="grid grid-cols-2 gap-4 mt-4">                    
+                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 2" class="w-full h-32 object-cover rounded-lg float-end">
                 </div>
             </div>
         </div>
@@ -340,6 +340,70 @@
                 <h2 class="text-3xl font-bold">Find Best Places in Your City</h2>
                 <p class="mt-2">We Help You Turn Your Ideas Into Reality</p>
                 <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md">Know More</button>
+            </div>
+        </div>
+         <!-- Find Best Places Section -->
+         <div class="relative mt-16">
+            <img src="{{ asset('/assets/images/city.jpg') }}" alt="City" class="w-full h-96 object-cover rounded-lg">
+            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
+                <h2 class="text-3xl font-bold">Find Best Places in Your City</h2>
+                <p class="mt-2">We Help You Turn Your Ideas Into Reality</p>
+                <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md">Know More</button>
+            </div>
+        </div>
+        <!-- Success Stories Section -->
+        <div class="bg-purple-950 py-12" x-data="slider()">
+            <div class="container mx-auto text-center text-white">
+                <h2 class="text-3xl font-bold mb-4">Our Clients' Success Stories</h2>
+                <p class="text-lg mb-8">Discover the experiences of those who have achieved success with us</p>
+                <div class="relative">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-hidden">
+                        <!-- Slide 1 -->
+                        <div class="bg-white text-black p-6 rounded-lg shadow-lg">
+                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
+                            <div class="flex items-center">
+                                <img class="w-12 h-12 rounded-full mr-4" src="{{ asset('/assets/images/avatar1.jpg') }}" alt="Avatar 1">
+                                <div>
+                                    <p class="font-bold">Jonathan Barki</p>
+                                    <p class="text-gray-700">Co-Founder and CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="bg-white text-black p-6 rounded-lg shadow-lg">
+                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
+                            <div class="flex items-center">
+                                <img class="w-12 h-12 rounded-full mr-4" src="{{ asset('/assets/images/avatar2.jpg') }}" alt="Avatar 2">
+                                <div>
+                                    <p class="font-bold">Jonathan Barki</p>
+                                    <p class="text-gray-700">Co-Founder and CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="bg-white text-black p-6 rounded-lg shadow-lg">
+                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
+                            <div class="flex items-center">
+                                <img class="w-12 h-12 rounded-full mr-4" src="{{ asset('/assets/images/avatar3.jpg') }}" alt="Avatar 3">
+                                <div>
+                                    <p class="font-bold">Jonathan Barki</p>
+                                    <p class="text-gray-700">Co-Founder and CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <button @click="prev" class="absolute top-1/2 transform -translate-y-1/2 left-0 bg-orange-500 text-white p-2 rounded-full">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button @click="next" class="absolute top-1/2 transform -translate-y-1/2 right-0 bg-orange-500 text-white p-2 rounded-full">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
