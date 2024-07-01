@@ -143,7 +143,7 @@
             </div>
             <!-- Image Section -->
             <div class="bg-orange-500  flex items-center justify-center">
-                <img src={{asset('assets/images/3D-cubes-shapes-on-transparent-background-PNG.svg')}} alt="Productivity Image" class="w-full h-auto">
+                <img src={{asset('assets/images/3D-cubes.svg')}} alt="Productivity Image" class="w-full h-auto">
             </div>
         </div>
     </div>
