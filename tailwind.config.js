@@ -57,6 +57,12 @@ export default {
     //   "21xl": "40px",
     //   "45xl": "64px",
     //   inherit: "inherit",
+    fontSize: {
+      'superscript': '0.70em',
+    },
+    verticalAlign: {
+      'super': 'super',
+    },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
     },

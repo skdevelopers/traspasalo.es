@@ -4,14 +4,6 @@
 
 @push('styles')
 <style>
-   
-    .slider-container {
-        overflow: hidden;
-    }
-    .slider {
-        display: flex;
-        transition: transform 0.5s ease;
-    }
    .bg-banner {
     background: url('/assets/images/bg-banner.svg') no-repeat center center;
     background-size: cover;
@@ -48,7 +40,7 @@
 <section class="bg-banner">
     <div class=" text-center z-0">
         <!-- Heading Content -->
-        <div class="flex flex-col pt-20">
+        <div class="flex flex-col pt-40">
             <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
             <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
         </div>
@@ -162,19 +154,19 @@
 
 
     <!-- Product Slider Section -->
-    <div class="position-relative  bg-gray-200 pb-10 pt-32">
-        <div class="container mx-auto px-4 w-4/5">
+    <div class="position-relative  bg-gray-200 py-10">
+        <div class="container mx-auto px-4 w-9/12">
             <h2 class="text-2xl font-bold mb-4 text-center">Explore Profitable Business Ventures</h2>
             <p class="text-center mb-6">We Discover Your Business Success</p>
             <div class="relative flex items-center">
-                <button id="productPrevButton" class="absolute -left-6 transform -translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
+                <button id="productPrevButton" class="absolute left-0 transform -translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
                 <div id="productSlider" class="flex space-x-4 overflow-hidden w-full">
                     <!-- Slide Items -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -189,7 +181,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -204,7 +196,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -219,7 +211,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                     <!-- Repeat Slide Item -->
-                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-64">
+                    <div class="bg-white rounded shadow p-4 flex-shrink-0 w-1/4">
                         <img src="{{ asset('/assets/images/logo.png') }}" alt="Hotel Arc New York City" class="w-full h-48 object-cover rounded mb-4">
                         <div class="flex items-center justify-between mb-2">
                             <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -234,7 +226,7 @@
                         <button class="bg-purple-500 text-white text-sm px-4 py-2 rounded">View</button>
                     </div>
                 </div>
-                <button id="productNextButton" class="absolute -right-6 transform translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
+                <button id="productNextButton" class="absolute right-0 transform translate-x-1/2 bg-purple-500 text-white rounded-full p-2 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                     </svg>
@@ -261,9 +253,8 @@
     <div class="container mx-auto p-4 w-4/5 bg-white">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <!-- Main image on the left -->
-            <div class="col-span-1 pr-32 relative">
+            <div class="col-span-1">
                 <img src="{{ asset('/assets/images/18516.png') }}" alt="Main Image" class="w-full h-96 object-cover rounded-lg">
-                <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 1" class="w-44 h-64 object-cover rounded-lg absolute -right-6 -bottom-6">
             </div>
             <!-- Text and smaller images on the right -->
             <div class="col-span-1 flex flex-col justify-center">
@@ -276,8 +267,9 @@
                     <button class="mt-6 px-6 py-3 bg-purple-700 text-white rounded">Join Us Now</button>
                 </div>
                 <!-- Two smaller images below -->
-                <div class="grid grid-cols-2 gap-4 mt-4">                    
-                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 2" class="w-full h-32 object-cover rounded-lg float-end">
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 1" class="w-full h-32 object-cover rounded-lg">
+                    <img src="{{ asset('/assets/images/18516.png') }}" alt="Small Image 2" class="w-full h-32 object-cover rounded-lg">
                 </div>
             </div>
         </div>
@@ -341,114 +333,13 @@
             </div>
         </div>
 
-         <!-- Find Best Places Section -->
-         <div class="relative mt-16">
+        <!-- Find Best Places Section -->
+        <div class="relative mt-16">
             <img src="{{ asset('/assets/images/city.jpg') }}" alt="City" class="w-full h-96 object-cover rounded-lg">
             <div class="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white">
                 <h2 class="text-3xl font-bold">Find Best Places in Your City</h2>
                 <p class="mt-2">We Help You Turn Your Ideas Into Reality</p>
                 <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md">Know More</button>
-            </div>
-        </div>
-        <!-- Success Stories Section -->
-        <div class=" bg-violet-950 text-white flex items-center justify-center min-h-screen">
-            <div class=" container w-auto px-10 py-16">
-                <div class="text-center mb-20">
-                    <h2 class="text-3xl font-bold mb-4">Our Clients' Success Stories</h2>
-                    <p class="text-gray-200">Discover the experiences of those who have achieved success with us</p>
-                </div>
-                <div class="relative -top-20">
-                    <div class="absolute right-0 p-6">
-                        <button id="prev" class="bg-violet-950 text-gray-400 border-2 border-gray-400 px-2 py-2 rounded ">
-                            &larr;
-                        </button>
-                        <button id="next" class="bg-violet-950 text-gray-400 border-2 border-gray-400 px-2 py-2 rounded ">
-                            &rarr;
-                        </button>
-                    </div>
-                </div>
-                <div class="relative slider-container">
-                    
-                    <div id="slider" class="slider space-x-8">
-                        <!-- Slide 1 -->
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-72 flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
-                            <div class="flex items-center">
-                                <img src={{asset('assets/images/janathan-barkri.png')}} alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                                <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add more slides as needed -->
-                    </div>
-                    
-        
-        
-                </div>
             </div>
         </div>
 
@@ -457,8 +348,8 @@
             <h2 class="text-3xl font-bold">Latest Blogs For You</h2>
             <p class="text-gray-600 mt-2">Embrace the advantages of property listing and become a part of our community today.</p>
         </div>
-        <div class="container justify-center items-center grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            <div class="relative ">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+            <div class="relative">
                 <img src="{{ asset('/assets/images/blog1.jpg') }}" alt="Blog 1" class="w-full h-64 object-cover rounded-lg">
                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-4 py-2 rounded-lg shadow-lg">
                     <h3 class="text-lg font-semibold">Blog Title 1</h3>
@@ -469,6 +360,13 @@
                 <img src="{{ asset('/assets/images/blog2.jpg') }}" alt="Blog 2" class="w-full h-64 object-cover rounded-lg">
                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-4 py-2 rounded-lg shadow-lg">
                     <h3 class="text-lg font-semibold">Blog Title 2</h3>
+                    <p class="text-gray-600">Short description of the blog.</p>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="{{ asset('/assets/images/blog3.jpg') }}" alt="Blog 3" class="w-full h-64 object-cover rounded-lg">
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 px-4 py-2 rounded-lg shadow-lg">
+                    <h3 class="text-lg font-semibold">Blog Title 3</h3>
                     <p class="text-gray-600">Short description of the blog.</p>
                 </div>
             </div>
