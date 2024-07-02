@@ -8,6 +8,24 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'sm': '576px',
+        'md': '768px',
+        'lg': '992px',
+        'xl': '1200px',
+        '2xl': '1536px',
+      },
+      container: {
+        center: true,
+        padding: '2rem',
+        screens: {
+          'sm': '100%',
+          'md': '100%',
+          'lg': '992px',
+          'xl': '1200px',
+          '2xl': '1536px',
+        },
+      },
     //   colors: {
     //     white: "#fff",
     //     black: "#000",

@@ -1,5 +1,10 @@
 import './bootstrap';
 import 'flowbite';
+import Alpine from 'alpinejs';
+window.Alpine = Alpine;
+Alpine.start();
+
+
 function togglePassword() {
     const passwordField = document.getElementById('password');
     const phoneField = document.getElementById('phone-input');
@@ -30,3 +35,4 @@ function togglePassword() {
 }
 
 window.togglePassword = togglePassword;
+
