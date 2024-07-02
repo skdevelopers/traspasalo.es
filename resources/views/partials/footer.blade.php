@@ -1,28 +1,25 @@
 <!-- Footer Section -->
 <footer class="bg-violet-950 text-white py-12">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4 p-4">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 gap-4 ">
             <!-- First Column -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-2 p-2">
+            <div class="col-span-1 md:col-span-3 lg:col-span-3 md:pr-16 lg:pr-16">
                 <div class="py-6">
                     <h2 class="text-2xl md:text-4xl mb-4 text-gray-100">Let's Start to find Best Business</h2>
                 </div>
                 <div class="py-6">
-                    <img src="{{ asset('assets/images/footer-logo.svg') }}" alt="Logo" class="mb-4 w-12 h-12">
+                    <img src="{{ asset('assets/images/footer-logo.svg') }}" alt="Logo" class="mb-4 w-10 h-12">
                     <p class="mb-4 text-gray-300 text-sm">Nullo eleifend pulvinar purus, malesuada euismod odio imperdiet. Ut sit amet erat nec nibh rhoncus varius in non lorem. Donec interdum, lectus in convallis.</p>
                 </div>
             </div>
 
-            <!-- Spacer Column for Large Screens -->
-            <div class="hidden lg:block col-span-1"></div>
-
             <!-- Second Column -->
-            <div class="flex flex-col p-2 col-span-1 md:col-span-1 lg:col-span-1">
+            <div class="flex-col p-2 col-span-1 md:col-span-1 lg:col-span-1">
                 <!-- Middle Column (Only Border) -->
-                <div class="py-6">
+                <div class="py-6 hidden sm:block">
                     <div class="border-l-2 border-gray-400 h-11"></div>
                 </div>
-                <div class="py-6">
+                <div class="pt-16">
                     <ul class="text-gray-300 text-sm">
                         <li class="mb-2">Countries</li>
                         <li class="mb-2">Regions</li>
@@ -34,7 +31,7 @@
             </div>
 
             <!-- Third Column -->
-            <div class="col-span-1 md:col-span-3 lg:col-span-3 flex flex-col">
+            <div class="col-span-1 md:col-span-4 lg:col-span-4 flex flex-col">
                 <div class="p-2">
                     <h3 class="text-xl mb-4 md:mb-0 md:mr-4 text-gray-300">Join Our Newsletter</h3>
                     <form class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
@@ -42,7 +39,7 @@
                         <button type="submit" class="bg-orange-500 rounded-sm px-4 py-2">Subscribe</button>
                     </form>
                 </div>
-                <div class="flex flex-col md:flex-row p-2 space-y-4 md:space-y-0 md:space-x-8">
+                <div class="flex flex-col md:flex-row pt-14 space-y-4 md:space-y-0 md:space-x-8">
                     <div class="py-6">
                         <ul class="text-gray-300 text-sm">
                             <li class="mb-2">Unique places to stay</li>

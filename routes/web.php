@@ -20,6 +20,18 @@ Route::get('/forgot-password', function () {
 Route::get('/add-property', function () {
     return view('add-property');
 });
-Route::get('/about-us', function () {
+Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact-us');
+});
+
+Route::get('/price', function () {
+    return view('price');
+});
+
+Route::get('/blogs', function () {
+    return view('blog');
 });
