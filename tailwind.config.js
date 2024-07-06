@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'sm': '576px',
+        'sm': '576px', 
         'md': '768px',
         'lg': '992px',
         'xl': '1200px',
@@ -75,6 +75,12 @@ export default {
     //   "21xl": "40px",
     //   "45xl": "64px",
     //   inherit: "inherit",
+    fontSize: {
+      'superscript': '0.70em',
+    },
+    verticalAlign: {
+      'super': 'super',
+    },
     fontSize: {
       'superscript': '0.70em',
     },
