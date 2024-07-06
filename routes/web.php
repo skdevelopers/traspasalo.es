@@ -21,6 +21,7 @@ Route::get('/add-property', function () {
     return view('add-property');
 });
 Route::get('/about', function () {
+Route::get('/about', function () {
     return view('about');
 });
 
@@ -34,4 +35,10 @@ Route::get('/price', function () {
 
 Route::get('/blogs', function () {
     return view('blog');
+});
+Route::get('/services', function () {
+    return view('services');
+});
+Route::get('/test', function () {
+    return view('test');
 });
