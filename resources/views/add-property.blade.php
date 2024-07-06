@@ -39,8 +39,8 @@
 </div>
 
 <!--description and host contact-->
-<div class="container max-w-screen-xl  bg-white">
-<div class="container mx-auto max-w-5xl bg-white  ">
+<div class="bg-white">
+<div class=" container xl:container-xl px-4">
 <!-- Header Section -->
 <div class="bg-white p-6 flex flex-col md:flex-row md:justify-between items-start md:items-center">
     <div class="flex-col">

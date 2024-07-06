@@ -1,59 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpine Modal Example</title>
-    @vite('resources/css/app.css')
-    <style>
-        .modal-content {
-            max-height: calc(100vh - 150px); /* Adjust as needed */
-            overflow-y: auto;
-        }
-    </style>
-</head>
-<body>
-    <div x-data="{ open: false }" x-init="$watch('open', value => { if (value) loadContent() })">
-        <!-- Button to open the modal -->
-        <button @click="open = true" class="bg-blue-500 text-white px-4 py-2 rounded">
-            Open Services Modal
-        </button>
-
-        <!-- Modal -->
-        <div x-show="open" x-cloak @keydown.escape.window="open = false" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div @click.away="open = false" class="bg-white rounded-lg shadow-lg w-full max-w-2xl">
-                <!-- Modal header -->
-                <div class="flex justify-between items-center p-2 border-b border-gray-200">
-                    <h2 class="text-xl font-semibold">Add Business</h2>
-                    <button @click="open = false" class="text-gray-700">X</button>
-                </div>
-
-                <!-- Modal content -->
-                <div id="modal-content" class="modal-content p-4">
-                    <!-- Blade content will be loaded here via AJAX -->
-                </div>
-
-                <!-- Modal footer -->
-                <div class="flex justify-center p-4 border-t border-gray-200">
-                    <button type="button" class="bg-violet-900 text-white  px-10 py-2 opacity-50 rounded mr-2 cursor-not-allowed" disabled>Add Business</button>
-                    <button type="submit" class="bg-white text-gray-700 border-2 border-gray-500 opacity-50 px-10 py-2 rounded cursor-not-allowed" disabled>Save Draft</button>
-                </div>
-            </div>
+<div x-data="{ imgModal : false, imgModalSrc : '', imgModalDesc : '' }">
+    <template @img-modal.window="imgModal = true; imgModalSrc = $event.detail.imgModalSrc; imgModalDesc = $event.detail.imgModalDesc;" x-if="imgModal">
+      <div x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-on:click.away="imgModalSrc = ''" class="p-2 fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center bg-black bg-opacity-75">
+        <div @click.away="imgModal = ''" class="flex flex-col max-w-3xl max-h-full overflow-auto">
+          <div class="z-50">
+            <button @click="imgModal = ''" class="float-right pt-2 pr-2 outline-none focus:outline-none">
+              <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                </path>
+              </svg>
+            </button>
+          </div>
+          <div class="p-2">
+            <img :alt="imgModalSrc" class="object-contain h-1/2-screen" :src="imgModalSrc">
+            <p x-text="imgModalDesc" class="text-center text-white"></p>
+          </div>
         </div>
+      </div>
+    </template>
+  </div>
+  
+  <div x-data="{}" class="px-2">
+    <div class="flex -mx-2">
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: 'Random Image One Description' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
+  
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: '' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: '' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: '' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: '' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
+      <div class="w-1/6 px-2">
+        <div class="bg-gray-400">
+          <a @click="$dispatch('img-modal', {  imgModalSrc: 'https://picsum.photos/640/480', imgModalDesc: '' })" class="cursor-pointer">
+            <img alt="Placeholder" class="object-fit w-full" src="https://picsum.photos/640/480">
+          </a>
+        </div>
+      </div>
     </div>
-
-    <script>
-        function loadContent() {
-            fetch('/services')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('modal-content').innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error loading modal content:', error);
-                });
-        }
-    </script>
-    @vite('resources/js/app.js')
-</body>
-</html>
+  </div>

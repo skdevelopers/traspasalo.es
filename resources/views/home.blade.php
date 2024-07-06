@@ -96,7 +96,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container xl:container-xl">
+            <div class="container xl:container-xl ">
                 <div x-data="carousel()" class="relative flex items-center justify-center w-full h-full py-20 mt-10">
                     <button @click="prev" class="w-12 h-12 absolute -left-14 z-10 p-2 text-white bg-orange-500 rounded-full focus:outline-none">
                         &lt;
@@ -135,7 +135,7 @@
                 </svg>
             </button>
             <div class="container xl:container-xl px-4 slider-container overflow-hidden w-full max-w-6xl mx-4">
-                <div class="slider flex transition-transform duration-500 overflow-hidden">
+                <div class="slider grid grid-cols-1 lg:grid-cols-4 transition-transform duration-500 overflow-hidden">
                     <div class="slide w-1/4 p-2">
                         <!-- Slide content here -->
                         <div class="bg-white rounded-lg shadow-lg">
@@ -601,27 +601,27 @@
                 slides: [{
                         id: 1,
                         text: 'Real Estate',
-                        image: '{{ asset('assets/images/static-report.svg') }}'
+                        image: '{{ asset('assets/icons/real-state.svg') }}'
                     },
                     {
                         id: 2,
                         text: 'Business Consulting',
-                        image: '{{ asset('assets/images/static-report.svg') }}'
+                        image: '{{ asset('assets/icons/business.svg') }}'
                     },
                     {
                         id: 3,
                         text: 'Car Washer',
-                        image: '{{ asset('assets/images/static-report.svg') }}'
+                        image: '{{ asset('assets/icons/car-washer.svg') }}'
                     },
                     {
                         id: 4,
                         text: 'Beauty Salon',
-                        image: '{{ asset('assets/images/static-report.svg') }}'
+                        image: '{{ asset('assets/icons/beauty-salon.svg') }}'
                     },
                     {
                         id: 5,
                         text: 'Fitness Center',
-                        image: '{{ asset('assets/images/static-report.svg') }}'
+                        image: '{{ asset('assets/icons/fitness-center.svg') }}'
                     }
                 ],
                 prev() {

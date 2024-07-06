@@ -64,8 +64,9 @@
                                 <!-- Modal content -->
                                 <div id="modal-content" class="modal-body p-4">
                                     <!-- Blade content will be loaded here via AJAX -->
-                                </div>
-                    
+                                </div> 
+
+
                                 <!-- Modal footer -->
                                 <div class="modal-footer flex justify-center p-4 border-t border-gray-200">
                                     <button type="button" class="bg-violet-900 text-white px-10 py-2 opacity-50 rounded mr-2 cursor-not-allowed" disabled>Add Business</button>
@@ -96,10 +97,13 @@
     });
 
     function loadContent() {
+        
             fetch('/services')
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('modal-content').innerHTML = html;
+                  //  document.getElementById('modal-content').scrollTop = 0;
+
                 })
                 .catch(error => {
                     console.error('Error loading modal content:', error);
