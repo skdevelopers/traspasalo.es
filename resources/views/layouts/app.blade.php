@@ -9,7 +9,7 @@
     @stack('styles')
 </head>
 <body class="bg-gray-100 font-poppins">
-<header>
+<header class="relative z-30">
     @include('partials.nav')
 </header>
 <main>

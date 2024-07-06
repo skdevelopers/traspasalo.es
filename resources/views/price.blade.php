@@ -8,8 +8,8 @@
 @section('content')
     @include('partials.banner')
 
-    <div class="flex items-center justify-center min-h-screen bg-white">
-        <div class="w-full max-w-6xl mx-auto p-20">
+    <div class="min-h-screen bg-white">
+        <div class="container xl:container-xl px-4 mx-auto py-10 md:py-20">
             <!-- Tab Switcher -->
             <div class="text-center mb-8">
                 <div class="inline-block bg-gray-200 rounded-full p-1">
@@ -17,7 +17,7 @@
                     <button class="px-4 py-2 text-gray-600 rounded-full focus:outline-none">Yearly</button>
                 </div>
             </div>
-    
+
             <!-- Pricing Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Free Account -->
@@ -55,7 +55,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
 
                 <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
                     <h3 class="text-xl font-bold mb-4">Pro Account</h3>
@@ -77,11 +77,13 @@
         </div>
     </div>
 
+    {{-- we offer  --}}
     <div class="container ">
-        <div class="flex-col items-center justify-center flex px-20 py-10">
-            <div class="text-center mb-12 w-2/3">
+        <div class="flex-col items-center justify-center flex px-3 md:px-20 py-10">
+            <div class="text-center mb-12 w-full md:w-2/3">
                 <h2 class="text-3xl font-bold mb-4">What We Offers</h2>
-                <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat.</p>
+                <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel
+                    malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -89,33 +91,39 @@
                         <img src="{{ asset('assets/icons/low-rate.png') }}" alt="Low Rates" class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Low Rates</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.</p>
+                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('assets/icons/booking-reservation-icon.png') }}" alt="No Reservation Fees" class="mx-auto">
+                        <img src="{{ asset('assets/icons/booking-reservation-icon.png') }}" alt="No Reservation Fees"
+                            class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">No Reservation Fees</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.</p>
+                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
                         <img src="{{ asset('assets/icons/secure-booking.png') }}" alt="Secure Booking" class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Secure Booking</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.</p>
+                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('assets/icons/24-hours-phone-support-icon.png') }}" alt="24/7 Support" class="mx-auto">
+                        <img src="{{ asset('assets/icons/24-hours-phone-support-icon.png') }}" alt="24/7 Support"
+                            class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.</p>
+                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
     @include('partials.footer')
 @endsection

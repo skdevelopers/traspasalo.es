@@ -32,6 +32,10 @@ Route::get('/price', function () {
     return view('price');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 Route::get('/blogs', function () {
     return view('blog');
 });

@@ -55,7 +55,7 @@
     @include('partials.banner')
 
     <div class="bg-white flex items-center justify-center min-h-screen">
-        <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        <div class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
             <!-- Card 1 -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src={{asset('assets/images/building.svg')}} alt="News Image 1" class="w-full h-64 object-cover">
@@ -66,7 +66,7 @@
                     <a href="#" class="text-orange-500 hover:underline">Read More &rarr;</a>
                 </div>
             </div>
-    
+
             <!-- Card 2 -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                 <img src={{asset('assets/images/static-report.svg')}} alt="News Image 2" class="w-full h-64 object-cover">
@@ -129,7 +129,7 @@
             </div>
           </div>
         </div>
-    
+
 
 
     <div class="bg-white flex items-center justify-center min-h-screen">
@@ -214,7 +214,7 @@
       </div>
     </div>
 
-   
+
 
 
     @include('partials.footer')

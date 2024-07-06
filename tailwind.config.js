@@ -8,13 +8,13 @@ export default {
   ],
   theme: {
     extend: {
-      screens: {
-        'sm': '576px',
-        'md': '768px',
-        'lg': '992px',
-        'xl': '1200px',
-        '2xl': '1536px',
-      },
+    //   screens: {
+    //     'sm': '576px',
+    //     'md': '768px',
+    //     'lg': '992px',
+    //     'xl': '1200px',
+    //     '2xl': '1536px',
+    //   },
       container: {
         center: true,
         padding: '2rem',
