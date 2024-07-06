@@ -21,6 +21,7 @@ Route::get('/add-property', function () {
     return view('add-property');
 });
 Route::get('/about', function () {
+Route::get('/about', function () {
     return view('about');
 });
 
