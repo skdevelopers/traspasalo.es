@@ -114,7 +114,7 @@
     {{-- silder for clients --}}
     <div class="bg-violet-950 p-10">
     <div x-data="slider()" class="relative container xl:container-xl max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients' Success Stories</h2>
+        <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
         <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
         
         <div class="relative overflow-hidden py-20">
