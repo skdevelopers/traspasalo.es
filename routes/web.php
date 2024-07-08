@@ -17,8 +17,8 @@ Route::get('/register-next', function () {
 Route::get('/forgot-password', function () {
     return view('forgotPassword');
 });
-Route::get('/add-property', function () {
-    return view('add-property');
+Route::get('/business', function () {
+    return view('business');
 });
 Route::get('/about', function () {
     return view('about');
