@@ -1,3 +1,4 @@
+
 <nav class="bg-violet-950 border-violet-900 dark:bg-gray-900 px-4 md:px-20">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
         <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse">
@@ -43,11 +44,53 @@
                         md:hover:text-violet-400 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Blogs</a>
                 </li>
                 <li class="mt-2 md:mt-0 flex space-x-3 rtl:space-x-reverse">
-                    <a href="{{ url('/add-property') }}" class="flex">
-                        <button class="px-4 py-2 font-thin border-2 border-white text-white hover:bg-purple-700 rounded">
-                           Add Property
+                    
+                    <div x-data="{ open: false }" x-init="$watch('open', value => { if (value) loadContent() })">
+                        <!-- Button to open the modal -->
+                        <button @click="open = true" class="text-gray-300 px-4 py-2 border-2 border-gray-300 rounded">
+                            Add Business
                         </button>
-                    </a>
+                    
+                        <!-- Modal -->
+                        <div x-show="open" x-cloak @keydown.escape.window="open = false"
+                             class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100"
+                             x-transition:leave-end="opacity-0">
+                            
+                            <div @click.away="open = false"
+                                 class="bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto p-4 transform transition-transform duration-300"
+                                 x-transition:enter="transform transition ease-out duration-300"
+                                 x-transition:enter-start="scale-90"
+                                 x-transition:enter-end="scale-100"
+                                 x-transition:leave="transform transition ease-in duration-200"
+                                 x-transition:leave-start="scale-100"
+                                 x-transition:leave-end="scale-90">
+                                
+                                <!-- Modal header -->
+                                <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+                                    <h2 class="text-xl font-semibold text-violet-950">Add Business</h2>
+                                    <button @click="open = false" class="text-violet-950 text-xl font-bold">X</button>
+                                </div>
+                    
+                                <!-- Modal content -->
+                                <div id="modal-content" class="overflow-y-auto max-h-[75vh] p-4">
+                                    <!-- Content will be loaded here via AJAX -->
+                                </div> 
+                    
+                                <!-- Modal footer -->
+                                <div class="flex justify-center border-t border-gray-200 pt-2 mt-4">
+                                    <button type="button" class="bg-violet-900 text-white px-10 py-2 opacity-50 rounded mr-2 cursor-not-allowed" disabled>Add Business</button>
+                                    <button type="submit" class="bg-white text-gray-700 border-2 border-gray-500 opacity-50 px-10 py-2 rounded cursor-not-allowed" disabled>Save Draft</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
                     <a href="{{ url('/register') }}" class="flex">
                         <button class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
                            Register
@@ -67,5 +110,19 @@
             target.classList.toggle('hidden');
         }
     });
+
+ // modal scripting code 
+ function loadContent() {
+    fetch('/services')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('modal-content').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading modal content:', error);
+        });
+}
+
+   
 </script>
 @endpush
