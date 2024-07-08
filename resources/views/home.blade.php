@@ -325,124 +325,39 @@
         </div>
     </div>
     <!-- Success Stories Section -->
-    <div class="py-20 bg-violet-950 text-white flex items-center justify-center min-h-screen">
-        <div class="container xl:container-xl px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-4">Our Clients' Success Stories</h2>
-                <p class="text-gray-200">Discover the experiences of those who have achieved success with us</p>
-            </div>
-            <div class="flex justify-end pb-6">
-                <button id="prev" class="bg-violet-950 text-gray-400 border-2 border-gray-400 px-2 py-2 rounded mr-2">
-                    &larr;
-                </button>
-                <button id="next" class="bg-violet-950 text-gray-400 border-2 border-gray-400 px-2 py-2 rounded">
-                    &rarr;
-                </button>
-            </div>
-
-            <div class="relative slider-container">
-                <div id="slider" class="slider space-x-8">
-                    <!-- Slide 1 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
+    <div class="bg-violet-950 p-10">
+        <div x-data="slider()" class="relative container xl:container-xl max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients' Success Stories</h2>
+            <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
+            
+            <div class="relative overflow-hidden py-20">
+                <div id="slider" class="flex transition-transform duration-500 space-x-6" :style="{'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)`}">
+                    <template x-for="(item, index) in items" :key="index">
+                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
+                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
+                            <div class="flex items-center pt-5">
+                                <img :src="item.img" alt="User Image" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <h3 class="font-semibold">Jonathan Barkl</h3>
+                                    <p class="text-gray-600">Co-Founder and CEO</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 4 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 5 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 6 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 7 -->
-                    <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[366px] flex-shrink-0">
-                        <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication
-                            ensured outstanding results. We're thrilled with the seamless process and incredible
-                            transformation. Highly recommend!</p>
-                        <div class="flex items-center">
-                            <img src={{ asset('assets/images/janathan-barkri.png') }} alt="User Image"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold">Jonathan Barkl</h3>
-                                <p class="text-gray-600">Co-Founder and CEO</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add more slides as needed -->
+                    </template>
                 </div>
+    
+                <div class="absolute top-0 right-0 flex space-x-2 mt-4 mr-4">
+                    <button @click="prev" class=" text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
+                        &larr;
+                    </button>
+                    <button @click="next" class="text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
+                        &rarr;
+                    </button>
+                </div>
+    
             </div>
+        
+           
         </div>
     </div>
 
@@ -619,6 +534,38 @@
                     }
                 };
             }
+
+
+    function slider() {
+        return {
+            currentIndex: 0,
+            items: [
+                { img: 'assets/images/janathan-barkri.png' },
+                { img: 'assets/images/janathan-barkri.png' },
+                { img: 'assets/images/janathan-barkri.png' },
+                { img: 'assets/images/janathan-barkri.png' },
+                { img: 'assets/images/janathan-barkri.png' }
+            ],
+            prev() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                }
+            },
+            next() {
+                if (this.currentIndex < this.totalSlides - 1) {
+                    this.currentIndex++;
+                }
+            },
+            get itemsPerPage() {
+                if (window.innerWidth >= 1024) return 3;
+                if (window.innerWidth >= 640) return 2;
+                return 1;
+            },
+            get totalSlides() {
+                return Math.ceil(this.items.length / this.itemsPerPage);
+            }
+        }
+    }
         </script>
     
 
