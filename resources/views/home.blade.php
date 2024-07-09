@@ -39,29 +39,28 @@
                     <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
                 </div>
                 <!-- Search Area -->
-                <div class="container px-4 mx-auto mt-8 position-relative">
-                    <div
-                        class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
-                        <div class="flex-1 lg:min-w-[200px] min-w-full p-1">
+                <div class="mx-auto mt-8 position-relative">
+                    <div class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
+                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
                             <input type="text" placeholder="Search By Keyword" class="w-full p-2 border-1 rounded-lg border-gray-300">
                         </div>
-                        <div class="flex-1 lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Operation Type</option>
                             </select>
                         </div>
-                        <div class="flex-1 lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Business Type</option>
                             </select>
                         </div>
-                        <div class="flex-1 lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Location</option>
                             </select>
                         </div>
                         <div class="flex-1 p-1">
-                            <button class="w-full bg-orange-500 text-white p-2 rounded">Find Now</button>
+                            <button class="w-32 bg-orange-500 text-white p-2 rounded">Find Now</button>
                         </div>
                     </div>
                 </div>
@@ -70,15 +69,15 @@
         <div class="container xl:container-xl">
             <div x-data="carousel()" class="relative flex items-center justify-center w-full h-full lg:py-16 py-y mt-10">
                 <button @click="prev"
-                    class="w-10 h-10 absolute -left-10 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
+                    class="w-8 h-8 absolute -left-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
                     &lt;
                 </button>
-                <div class="overflow-hidden w-full">
+                <div class="overflow-hidden p-0.5">
                     <div class="flex transition-transform duration-500"
                         :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%); width: ${slides.length * (100 / slidesToShow)}%`">
                         <template x-for="(slide, index) in slides" :key="index">
-                            <div class="flex-shrink-0 p-1">
-                                <div class=" w-[181px] h-[128px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center">
+                            <div class="flex-shrink-0 p-1.5">
+                                <div class="bg-white md:w-44 h-44 w-80  rounded-lg shadow-sm flex flex-col justify-center items-center">
                                     <div class="flex flex-col justify-center items-center">
                                         <img :src="slide.image" alt="" class="w-12 h-12 mx-auto mb-2">
                                         <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
@@ -89,28 +88,28 @@
                     </div>
                 </div>
                 <button @click="next"
-                    class="w-10 h-10 absolute -right-11 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
+                    class="w-8 h-8 absolute -right-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
                     &gt;
                 </button>
             </div>
         </div>
     </section>
 
-    <section class="pt-32">
-        <div class="text-center pb-20">
+    <section class="pt-28 py-10">
+        <div class="text-center pb-16">
             <h2 class="text-[28px] font-bold">Explore Profitable Business Ventures</h2>
             <p class="mt-2 text-lg text-gray-600">We Discover Your Business Success</p>
         </div>
-        <div class="container xl:container-xl flex justify-center items-center py-8 relative" x-data="sliderData()">
-            <button @click="prev()" class="prev1 absolute left-0 z-10 bg-violet-950 text-white p-2 rounded-full">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div class=" flex justify-center items-center py-8 relative" x-data="sliderData()">
+            <button @click="prev()" class="prev1 absolute left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
-            <div class="overflow-hidden w-full max-w-6xl mx-2">
+            <div class="container xl:container-xl w-3/4 md:w-full  px-0 mx-0 overflow-hidden">
                 <div class="slider flex transition-transform duration-500" :style="`transform: translateX(-${currentIndex * 100 / visibleSlides}%)`">
                     <template x-for="(hotel, index) in hotels" :key="index">
-                        <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-1">
+                        <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-3">
                             <div class="bg-white rounded-lg shadow-lg">
                                 <img :src="hotel.image" alt="Hotel" class="w-full h-44 object-cover">
                                 <div class="p-4">
@@ -129,8 +128,8 @@
                     </template>
                 </div>
             </div>
-            <button @click="next()" class="next1 absolute right-0 z-10 bg-violet-950 text-white p-2 rounded-full">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <button @click="next()" class="next1 absolute right-6 z-10 bg-violet-950 text-white p-2 rounded-full">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </button>
