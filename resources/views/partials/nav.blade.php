@@ -1,7 +1,7 @@
 
 <nav class="bg-violet-950 border-violet-900 dark:bg-gray-900 px-4 md:px-20">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
-        <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse">
+        <a href={{ url('/') }} class="flex items-center space-x-5 rtl:space-x-reverse">
             <img src="{{ asset('/assets/images/logo-white.png') }}" class="h-16" alt="Logo" />
         </a>
         <button data-collapse-toggle="navbar-default" type="button"

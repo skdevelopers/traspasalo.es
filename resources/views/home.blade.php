@@ -30,31 +30,34 @@
 @endpush
 
 @section('content')
+    <!-- Start Business Banner Section -->
     <section class="bg-banner lg:h-[445px] h-auto">
         <div class=" text-center z-0">
-            <div class="container lg:pt-24 pt-5">
+            <div class="container xl:container-xl xl:pt-24 pt-5 xl:px-[50px] px-4">
                 <!-- Heading Content -->
-                <div class="flex flex-col lg:pt-20 pt-0">
-                    <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
-                    <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
+                <div class="w-100">
+                    <div class="flex flex-col lg:pt-20 pt-4">
+                        <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
+                        <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
+                    </div>
                 </div>
                 <!-- Search Area -->
                 <div class="mx-auto mt-8 position-relative">
                     <div class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
-                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
                             <input type="text" placeholder="Search By Keyword" class="w-full p-2 border-1 rounded-lg border-gray-300">
                         </div>
-                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Operation Type</option>
                             </select>
                         </div>
-                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Business Type</option>
                             </select>
                         </div>
-                        <div class="flex-1 xl:min-w-[240px] lg:min-w-[200px] min-w-full p-1">
+                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
                             <select class="w-full p-2 border-1 rounded-lg border-gray-300">
                                 <option>Location</option>
                             </select>
@@ -77,7 +80,7 @@
                         :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%); width: ${slides.length * (100 / slidesToShow)}%`">
                         <template x-for="(slide, index) in slides" :key="index">
                             <div class="flex-shrink-0 p-1.5">
-                                <div class="bg-white md:w-44 h-44 w-80  rounded-lg shadow-sm flex flex-col justify-center items-center">
+                                <div class="bg-white md:w-44 h-44 w-96  rounded-lg shadow-sm flex flex-col justify-center items-center">
                                     <div class="flex flex-col justify-center items-center">
                                         <img :src="slide.image" alt="" class="w-12 h-12 mx-auto mb-2">
                                         <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
@@ -94,6 +97,7 @@
             </div>
         </div>
     </section>
+    <!-- End Business Banner Section -->
 
     <section class="pt-28 py-10">
         <div class="text-center pb-16">
@@ -138,15 +142,15 @@
     <!-- End Business Ventures Section -->
 
     <!-- Side by Side Section -->
-    <div class="container xl:container-xl mx-auto px-4 pb-20 rounded-lg">
-        <div class="block md:flex lg:flex rounded-lg overflow-hidden shadow-lg">
+    <div class="container xl:container-xl mx-auto px-4 pb-20 ">
+        <div class="block md:flex lg:flex overflow-hidden">
             <!-- Image Part -->
             <div class="w-full md:w-1/3 lg:w-2/5">
                 <img src="{{ asset('/assets/images/18516.png') }}" alt="Business Image"
-                    class="w-full h-full object-cover">
+                    class="w-full h-full object-cover md:rounded-l-3xl">
             </div>
             <!-- Text Part -->
-            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center">
+            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center  md:rounded-r-3xl">
                 <img src="{{ asset('/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
                 <h2 class="text-lg md:text-3xl mb-4">We Don’t Just Find Premises, We Discover Your Business Success</h2>
                 <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded">Find Now</button>
@@ -157,7 +161,7 @@
 
     <!-- Section with Images and Text -->
     <div class="py-20 bg-white">
-        <div class="relative container xl:container-xl mx-auto bg-white">
+        <div class="relative container xl:container-xl px-4 mx-auto bg-white">
             <div class="grid grid-cols-12">
                 <!-- Main image on the left -->
                 <div class="col-span-12 lg:col-span-6">
@@ -202,36 +206,37 @@
 
         <div class="container xl:container-xl px-4 bottom-0 lg:-bottom-1/3">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-20">
-                <div class="relative">
-                    <img src="{{ asset('/assets/images/business1.jpg') }}" alt="Real Estate"
-                        class="w-full object-cover rounded-lg">
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">Real Estate
-                            &rarr;</a>
+                <div class="relative w-full">
+                    <img src="{{ asset('/assets/images/business1.jpg') }}" alt="Real Estate" class="w-full h-5/6 object-cover rounded-lg">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
+                            Real Estate &rarr;
+                        </a>
                     </div>
                 </div>
-                <div class="relative">
-                    <img src="{{ asset('/assets/images/business2.jpg') }}" alt="Business Consulting"
-                        class="w-full object-cover rounded-lg">
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/3 w-full">
-                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">Business Consulting
-                            &rarr;</a>
+                <div class="relative w-full">
+                    <img src="{{ asset('/assets/images/business2.jpg') }}" alt="Real Estate" class="w-full h-5/6 object-cover rounded-lg">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
+                            Business Consulting &rarr;
+                        </a>
                     </div>
                 </div>
-                <div class="relative">
-                    <img src="{{ asset('/assets/images/business3.jpg') }}" alt="Real Estate"
-                        class="w-full object-cover rounded-lg">
-                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">Cars Washer
-                            &rarr;</a>
+                <div class="relative w-full">
+                    <img src="{{ asset('/assets/images/business3.jpg') }}" alt="Real Estate" class="w-full  h-5/6 object-cover rounded-lg">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                        <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
+                            Cars Washer &rarr;
+                        </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div> <!-- Business Categories Section -->
 
     <!-- Easy Steps to Join Section -->
-    <div class="pt-14 px-5 lg:px-20 lg:pt-96">
+    <div class="pt-14 px-5 lg:px-20 lg:pt-64">
         <div class="max-w-xs md:max-w-5xl mx-auto">
             <div class="text-center mb-10">
                 <h1 class="text-2xl font-bold">Easy Steps to join Us!</h1>
@@ -325,12 +330,12 @@
     </div>
     <!-- Success Stories Section --->
     <div class="bg-violet-950 p-10">
-        <div x-data="slider()" class="relative container xl:container-xl max-w-5xl mx-auto px-4">
+        <div x-data="slider()" class="relative container xl:container-xl px-4">
             <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
             <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
-            
+
             <div class="relative overflow-hidden py-20">
-                <div id="slider" class="flex transition-transform duration-500 space-x-6" :style="{'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)`}">
+                <div id="slider" class="flex transition-transform duration-500 space-x-8" :style="{'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)`}">
                     <template x-for="(item, index) in items" :key="index">
                         <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
                             <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
@@ -344,7 +349,7 @@
                         </div>
                     </template>
                 </div>
-    
+
                 <div class="absolute top-0 right-0 flex space-x-2 mt-4 mr-4">
                     <button @click="prev" class=" text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
                         &larr;
@@ -353,10 +358,10 @@
                         &rarr;
                     </button>
                 </div>
-    
+
             </div>
-        
-           
+
+
         </div>
     </div>
 
@@ -565,7 +570,7 @@
         }
     }
         </script>
-    
+
 
 
 
