@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect all requests to the public folder
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Serve the Laravel application
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^public/ /public/index.php [L]
+</IfModule>
