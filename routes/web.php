@@ -62,7 +62,7 @@ Route::prefix('/api/')->group(function () {
 });
 
 Route::get('/admin/login', fn() => redirect('/login'));
-//Route::get('/home', fn() => view('front.home'))->name('home');
+Route::get('/home', fn() => view('index'))->name('home');
 Route::get('/charts', fn() => view('charts'))->name('charts');
 Route::get('/apps/calendar', fn() => view('apps.calender'))->name('apps.calendar');
 Route::get('/apps/tickets', fn() => view('apps.tickets'))->name('apps.tickets');
@@ -151,9 +151,9 @@ Route::get('/maps/google', fn() => view('maps.google'))->name('maps.google');
 Route::get('/', function () {
     return view('front.home');
 });
-Route::get('/login', function () {
-    return view('front.login');
-});
+// Route::get('/login', function () {
+//     return view('front.login');
+//});
 Route::get('/register', function () {
     return view('front.register');
 });
@@ -185,3 +185,5 @@ Route::get('/price', function () {
 Route::get('/blogs', function () {
     return view('front.blog');
 });
+
+Route::get('/getCategories', [CategoryController::class,'getCategories']);

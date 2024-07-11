@@ -16,8 +16,8 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
-
-    /**
+    
+       /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -91,6 +91,21 @@ class CategoryController extends Controller
         $subcategories = $category->children()->get(['id', 'name']);
         return response()->json($subcategories);
     }
+
+     /**
+     * display all categories
+     */
+    public function getCategories()
+    {
+
+        $categories = Category::pluck('id','name');
+        return response()->json([
+            'categories' => $categories,
+            'status' => 1,
+        ], 200);
+
+    }
+
 }
 
 

@@ -20,8 +20,8 @@
 
             <!-- Small Images -->
             <div class="relative lg:col-span-3">
-                <img src={{ asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool.jpg') }} alt="Image 3"
-                    class="w-full h-full object-cover">
+                <img src={{ asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool.jpg') }}
+                    alt="Image 3" class="w-full h-full object-cover">
             </div>
             <div class="relative lg:col-span-2">
                 <img src={{ asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg') }}
@@ -189,7 +189,8 @@
                     <p class="text-gray-800">License</p>
                 </div>
                 <div class="p-6 bg-white shadow rounded-lg text-center">
-                    <img src="{{ asset('front/assets/icons/smart-door.svg') }}" alt="Security door" class="mx-auto mb-4">
+                    <img src="{{ asset('front/assets/icons/smart-door.svg') }}" alt="Security door"
+                        class="mx-auto mb-4">
                     <p class="text-gray-800">Security door</p>
                 </div>
                 <div class="p-6 bg-white shadow rounded-lg text-center">
@@ -646,5 +647,7 @@
             button.setAttribute("aria-expanded", button.getAttribute("aria-expanded") === "false" ? "true" : "false");
             content.style.maxHeight = button.getAttribute("aria-expanded") === "true" ? content.scrollHeight + "px" : "0";
         }
+
+        
     </script>
 @endpush
