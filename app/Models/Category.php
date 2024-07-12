@@ -45,5 +45,11 @@ class Category extends Model
     {
         return $this->children();
     }
+
+    //business relation
+    public function businesses()
+    {
+        return $this->hasMany(Business::class);
+    }
 }
 

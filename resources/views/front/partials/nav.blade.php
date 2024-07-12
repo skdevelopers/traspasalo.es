@@ -204,5 +204,43 @@
 
 
         }
+
+        
+        let map;
+        let marker;
+
+function initMap() {
+    const initialLocation = { lat: 0, lng: 0 };
+
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: initialLocation,
+        zoom: 8,
+    });
+
+    marker = new google.maps.Marker({
+        position: initialLocation,
+        map: map,
+    });
+
+    document.getElementById('addressInput').addEventListener('change', function() {
+        const address = this.value;
+
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': address }, function(results, status) {
+            if (status === 'OK') {
+                const location = results[0].geometry.location;
+
+                map.setCenter(location);
+                marker.setPosition(location);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    });
+}
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD50KFykS3KaH24kUGq6ziJ00zQpeVUy0c&callback=initMap">
     </script>
 @endpush

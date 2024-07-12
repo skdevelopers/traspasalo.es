@@ -174,8 +174,11 @@
             <label class="block text-gray-700">Add On Map</label>
             <div class="w-full h-64 bg-gray-200 rounded-md overflow-hidden">
                 <!-- Placeholder for map. Replace with actual map implementation -->
-                <img src={{ asset('/front/assets/images/passenger-plane-airport-near-terminal-stands-concept-flight-airport-vacation.svg') }}
-                    alt="Map placeholder" class="w-auto h-full  object-cover">
+                {{-- <img src={{ asset('/front/assets/images/passenger-plane-airport-near-terminal-stands-concept-flight-airport-vacation.svg') }}
+                    alt="Map placeholder" class="w-auto h-full  object-cover"> --}}
+                    <div id="map">
+
+                    </div>
             </div>
         </div>
 
