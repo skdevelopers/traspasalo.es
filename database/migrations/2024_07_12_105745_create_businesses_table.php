@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('pets_permission');
             $table->json('images')->nullable();
             $table->string('location');
+            $table->unsignedBigInteger('features_services_id');
             //features_service is morphmany relation 
             $table->timestamps();
             $table->softDeletes();

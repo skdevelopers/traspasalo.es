@@ -25,7 +25,7 @@ class Business extends Model implements HasMedia
 
     public function featuresServices()
     {
-        return $this->morphMany(FeaturesService::class, 'featureable');
+        return $this->belongsTo(FeaturesService::class);
     }
 
     /**

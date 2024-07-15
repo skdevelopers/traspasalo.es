@@ -70,7 +70,6 @@
                                     <h2 class="text-xl font-semibold text-violet-950">Add Business</h2>
                                     <button @click="open = false" class="text-violet-950 text-xl font-bold">X</button>
                                 </div>
-
                                 <!-- Modal content -->
                                 <div id="modal-content" class="overflow-y-auto max-h-[75vh] p-4">
                                     <!-- Content will be loaded here via AJAX -->
@@ -110,13 +109,14 @@
             }
         });
 
+
         // modal scripting code 
         function loadContent() {
-            fetch('/services')
+            fetch('/add-business')
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('modal-content').innerHTML = html;
-                    loadCategories();
+                  //  loadCategories();
                     ageRestrictionList();
 
                 })
@@ -127,42 +127,42 @@
         }
 
         // Function to load categories
-        function loadCategories() {
-            axios.get('/getCategories')
-                .then(function(response) {
-                    // Log the response to see its structure
-                    //console.log('Response Data:', response.data.categories);
+        // function loadCategories() {
+        //     axios.get('/getCategories')
+        //         .then(function(response) {
+        //             // Log the response to see its structure
+        //             //console.log('Response Data:', response.data.categories);
 
-                    let categories = response.data.categories;
+        //             let categories = response.data.categories;
 
-                    // Select the <select> element
-                    let selectElement = document.getElementById('business-category');
+        //             // Select the <select> element
+        //             let selectElement = document.getElementById('business-category');
 
-                    // Clear existing options
-                    selectElement.innerHTML = '';
+        //             // Clear existing options
+        //             selectElement.innerHTML = '';
 
-                    // Add a default "Select" option
-                    let defaultOption = document.createElement('option');
-                    defaultOption.text = 'Select';
-                    selectElement.appendChild(defaultOption);
+        //             // Add a default "Select" option
+        //             let defaultOption = document.createElement('option');
+        //             defaultOption.text = 'Select';
+        //             selectElement.appendChild(defaultOption);
 
 
 
-                    // Add options for each category
+        //             // Add options for each category
 
-                    for (let category in categories) {
-                        //console.log(categories[category]);
-                        let option = document.createElement('option');
-                        option.value = categories[category]; // Set value to category ID
-                        option.text = category; // Set text to category name
-                        selectElement.appendChild(option);
+        //             for (let category in categories) {
+        //                 //console.log(categories[category]);
+        //                 let option = document.createElement('option');
+        //                 option.value = categories[category]; // Set value to category ID
+        //                 option.text = category; // Set text to category name
+        //                 selectElement.appendChild(option);
 
-                    }
-                })
-                .catch(function(error) {
-                    console.error('There was an error fetching the data!', error);
-                });
-        }
+        //             }
+        //         })
+        //         .catch(function(error) {
+        //             console.error('There was an error fetching the data!', error);
+        //         });
+        // }
 
         function ageRestrictionList() {
 
@@ -205,42 +205,76 @@
 
         }
 
-        
-        let map;
-        let marker;
+        function imageUploader() {
+            return {
+                files: [],
+                handleFileUpload(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            this.files.push({ url: e.target.result });
+                        };
+                        reader.readAsDataURL(file);
 
-function initMap() {
-    const initialLocation = { lat: 0, lng: 0 };
+                        // Clear the input to allow uploading the same file again
+                        event.target.value = '';
+                    }
+                }
+            };
+        } 
+               
+                    function locationApp() {
+            return {
+                initMap() {
+                    const map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: -34.397, lng: 150.644 },
+                        zoom: 8
+                    });
 
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: initialLocation,
-        zoom: 8,
-    });
+                    const input = document.getElementById('autocomplete');
+                    const autocomplete = new google.maps.places.Autocomplete(input);
 
-    marker = new google.maps.Marker({
-        position: initialLocation,
-        map: map,
-    });
+                    autocomplete.addListener('place_changed', function() {
+                        const place = autocomplete.getPlace();
+                        if (!place.geometry) {
+                            return;
+                        }
 
-    document.getElementById('addressInput').addEventListener('change', function() {
-        const address = this.value;
+                        if (place.geometry.viewport) {
+                            map.fitBounds(place.geometry.viewport);
+                        } else {
+                            map.setCenter(place.geometry.location);
+                            map.setZoom(17);
+                        }
 
-        const geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': address }, function(results, status) {
-            if (status === 'OK') {
-                const location = results[0].geometry.location;
-
-                map.setCenter(location);
-                marker.setPosition(location);
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+                        new google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map
+                        });
+                    });
+                }
             }
-        });
-    });
-}
+        }
 
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD50KFykS3KaH24kUGq6ziJ00zQpeVUy0c&callback=initMap">
-    </script>
+        // Load Google Maps script dynamically with async and defer
+        const script = document.createElement('script');
+        script.src = "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places";
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+
+        window.initMap = function() {
+            // Initialize Alpine.js if not already initialized
+            if (!window.Alpine) {
+                document.addEventListener('alpine:init', () => {
+                    locationApp().initMap();
+                });
+            } else {
+                locationApp().initMap();
+            }
+        }
+
+                </script>
+    
 @endpush

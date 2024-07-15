@@ -11,8 +11,9 @@ class FeaturesService extends Model
 
     protected $fillable = ['name', 'featureable_id'];
 
-    public function featureable()
+    //business relation
+    public function businesses()
     {
-        return $this->morphTo();
+        return $this->hasMany(Business::class);
     }
 }

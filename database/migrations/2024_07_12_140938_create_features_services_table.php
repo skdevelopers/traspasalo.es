@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('features_services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->morphs('featureable'); // Adds featureable_id and featureable_type columns
             $table->timestamps();
             $table->softDeletes();
         });

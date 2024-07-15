@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Category;
+use App\Models\FeaturesService;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -21,6 +23,9 @@ class BusinessController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        $features_services = FeaturesService::all();
+        return view('front.add-business', compact('categories', 'features_services'));
     }
 
     /**

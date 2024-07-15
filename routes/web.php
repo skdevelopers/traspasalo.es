@@ -8,6 +8,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UploadController;
+use App\http\Controllers\FeaturesServiceController;
+use App\Http\Controllers\BusinessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
@@ -42,7 +44,9 @@ require __DIR__ . '/auth.php';
 Route::get('categories/{category}/subcategories', [CategoryController::class, 'getSubcategories'])
     ->name('categories.subcategories');
 Route::resource('categories', CategoryController::class)->middleware('auth');
+
 Route::resource('roles', RoleController::class)->middleware('auth');
+Route::resource('features-services', FeaturesServiceController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::resource('cash-flows', CashFlowController::class)->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
@@ -163,15 +167,15 @@ Route::get('/register-next', function () {
 Route::get('/forgot-password', function () {
     return view('front.forgotPassword');
 });
-Route::get('/business', function () {
-    return view('front.business');
-});
+Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create');
+Route::post('/business', [BusinessController::class, 'store'])->name('business.store');
+
 Route::get('/about', function () {
     return view('front.about');
 });
-Route::get('/services', function () {
-    return view('front.services');
-});
+// Route::get('/services', function () {
+//     return view('front.services');
+// });
 Route::get('/contact', function () {
     return view('front.contact-us');
 });
@@ -187,3 +191,7 @@ Route::get('/blogs', function () {
 });
 
 Route::get('/getCategories', [CategoryController::class,'getCategories']);
+
+Route::get('/check-api-key', function () {
+    return view('front.check-api-key');
+});
