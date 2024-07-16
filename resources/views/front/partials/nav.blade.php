@@ -69,6 +69,9 @@
                                 <div class="flex justify-between items-center border-b border-gray-200 pb-2">
                                     <h2 class="text-xl font-semibold text-violet-950">Add Business</h2>
                                     <button @click="open = false" class="text-violet-950 text-xl font-bold">X</button>
+                                    @error('business_title')
+                                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <!-- Modal content -->
                                 <div id="modal-content" class="overflow-y-auto max-h-[75vh] p-4">
@@ -76,14 +79,13 @@
                                 </div>
 
                                 <!-- Modal footer -->
-                                <div class="flex justify-center border-t border-gray-200 pt-2 mt-4">
+                                {{-- <div class="flex justify-center border-t border-gray-200 pt-2 mt-4">
+                                    <button type="submit" @click="submitForm"
+                                        class="bg-violet-900 text-white px-10 py-2 opacity-50 rounded mr-2" id="business-form" >Add Business</button>
                                     <button type="button"
-                                        class="bg-violet-900 text-white px-10 py-2 opacity-50 rounded mr-2 cursor-not-allowed"
-                                        disabled>Add Business</button>
-                                    <button type="submit"
                                         class="bg-white text-gray-700 border-2 border-gray-500 opacity-50 px-10 py-2 rounded cursor-not-allowed"
                                         disabled>Save Draft</button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -116,7 +118,7 @@
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('modal-content').innerHTML = html;
-                  //  loadCategories();
+                    //  loadCategories();
                     ageRestrictionList();
 
                 })
@@ -164,71 +166,93 @@
         //         });
         // }
 
-        function ageRestrictionList() {
+        function ageRestrictionComponent() {
+            return {
+                ageList: [{
+                        id: 1,
+                        range: '0-17'
+                    },
+                    {
+                        id: 2,
+                        range: '18-25'
+                    },
+                    {
+                        id: 3,
+                        range: '26-40'
+                    },
+                    {
+                        id: 4,
+                        range: '>40'
+                    }
+                ],
+                initializeAgeRestrictions() {
+                    let selectElement = document.getElementById('age-restriction');
 
-            let ageList = [{
-                    1: '0-17'
-                },
-                {
-                    2: '18-25'
-                },
-                {
-                    3: '26-40'
-                },
-                {
-                    4: '>40'
-                },
+                    // Clear existing options
+                    selectElement.innerHTML = '';
 
-            ];
+                    // Add a default "Select" option
+                    let defaultOption = document.createElement('option');
+                    defaultOption.text = 'Select';
+                    selectElement.appendChild(defaultOption);
 
-            // Select the <select> element
-            let selectElement = document.getElementById('age-restriction');
-
-            // Clear existing options
-            selectElement.innerHTML = '';
-
-            // Add a default "Select" option
-            let defaultOption = document.createElement('option');
-            defaultOption.text = 'Select';
-            selectElement.appendChild(defaultOption);
-
-            ageList.forEach(ageObject => {
-                
-                let option = document.createElement('option');
-                let key = Object.keys(ageObject)[0];
-                option.value = key; // Set value to category ID
-                option.text = ageObject[key]; // Set text to category name
-                selectElement.appendChild(option);
-
-            });
-
-
+                    this.ageList.forEach(age => {
+                        let option = document.createElement('option');
+                        option.value = age.id; // Set value to age ID
+                        option.text = age.range; // Set text to age range
+                        selectElement.appendChild(option);
+                    });
+                }
+            }
         }
 
         function imageUploader() {
             return {
                 files: [],
+                fileId: 0,
+                get imageCountText() {
+                    return `(${this.files.length}/10)`;
+                },
                 handleFileUpload(event) {
-                    const file = event.target.files[0];
-                    if (file) {
+                    const selectedFiles = Array.from(event.target.files);
+
+                    // Prevent uploading more than 10 images
+                    if (this.files.length + selectedFiles.length > 10) {
+                        alert('You can upload a maximum of 10 images.');
+                        return;
+                    }
+
+                    selectedFiles.forEach(file => {
                         const reader = new FileReader();
                         reader.onload = (e) => {
-                            this.files.push({ url: e.target.result });
+                            this.files.push({
+                                id: this.fileId++,
+                                url: e.target.result
+                            });
                         };
                         reader.readAsDataURL(file);
+                    });
 
-                        // Clear the input to allow uploading the same file again
-                        event.target.value = '';
-                    }
+                    // Clear the input to allow uploading the same file again
+                    event.target.value = '';
+                },
+                removeFile(index, event) {
+                    event.stopPropagation(); // Prevent the event from bubbling up
+                    this.files.splice(index, 1);
                 }
             };
-        } 
-               
-                    function locationApp() {
+        }
+
+
+
+        function locationApp() {
             return {
                 initMap() {
                     const map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: -34.397, lng: 150.644 },
+                        center: {
+                            lat: -34.397,
+                            lng: 150.644
+                        },
                         zoom: 8
                     });
 
@@ -259,7 +283,8 @@
 
         // Load Google Maps script dynamically with async and defer
         const script = document.createElement('script');
-        script.src = "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places";
+        script.src =
+        "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places";
         script.async = true;
         script.defer = true;
         document.head.appendChild(script);
@@ -275,6 +300,27 @@
             }
         }
 
-                </script>
-    
+        function featuresForm() {
+            return {
+                selectedFeatures: [],
+                toggleFeature(featureId) {
+                    if (this.selectedFeatures.includes(featureId)) {
+                        this.selectedFeatures = this.selectedFeatures.filter(id => id !== featureId);
+                        console.log(selectedFeatures);
+
+                    } else {
+                        this.selectedFeatures.push(featureId);
+                    }
+                },
+                get selectedFeaturesString() {
+                    return this.selectedFeatures.join(',');
+                }
+            };
+        }
+
+
+        function submitForm() {
+            document.getElementById('business-form').submit();
+        }
+    </script>
 @endpush

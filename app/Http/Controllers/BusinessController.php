@@ -1,70 +1,82 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
 use App\Models\Category;
-use App\Models\FeaturesService;
+use App\Models\FeatureService;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $businesses = Business::all();
+        return view('business.index', compact('businesses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
         $categories = Category::all();
-        $features_services = FeaturesService::all();
-        return view('front.add-business', compact('categories', 'features_services'));
+        $features = FeatureService::all();
+        return view('front.add-business', compact('categories', 'features'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(BusinessRequest $request)
     {
-        //
+       // die($request);
+        $business = Business::create($request->validated());
+
+        if ($request->has('images')) {
+            foreach ($request->file('images') as $image) {
+                $business->addMedia($image)->toMediaCollection('imagesss');
+
+            }
+        }
+
+        if ($request->has('features')) {
+            $business->features()->sync($request->features);
+        }
+
+        return redirect()->route('business.index')->with('success', 'Business created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Business $business)
     {
-        //
+        return view('businesses.show', compact('business'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Business $business)
     {
-        //
+        $categories = Category::all();
+        $features = FeatureService::all();
+        return view('businesses.edit', compact('business', 'categories', 'features'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Business $business)
+    public function update(BusinessRequest $request, Business $business)
     {
-        //
+        $business->update($request->validated());
+
+        if ($request->has('images')) {
+            $business->clearMediaCollection('images');
+            foreach ($request->file('images') as $image) {
+                $business->addMedia($image)->toMediaCollection('images');
+            }
+        }
+
+        if ($request->has('features')) {
+            $business->features()->sync($request->features);
+        }
+
+        return redirect()->route('businesses.index')->with('success', 'Business updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Business $business)
     {
-        //
+        $business->features()->detach();
+        $business->delete();
+        return redirect()->route('businesses.index')->with('success', 'Business deleted successfully.');
     }
 }

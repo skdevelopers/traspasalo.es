@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -20,19 +20,15 @@ return new class extends Migration
             $table->time('check_out');
             $table->string('age_restriction');
             $table->string('pets_permission');
-            $table->json('images')->nullable();
             $table->string('location');
-            $table->unsignedBigInteger('features_services_id');
-            //features_service is morphmany relation 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('businesses');
     }

@@ -51,9 +51,15 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('features-services.index') }}" class="menu-link">
+                <a href="{{ route('feature-services.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Features </span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ route('business.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
+                    <span class="menu-text"> Businesses </span>
                 </a>
             </li>
 

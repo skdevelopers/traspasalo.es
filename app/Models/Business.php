@@ -10,22 +10,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\FeatureService;
 
 
 
 class Business extends Model implements HasMedia
 {
-    use HasFactory,SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
-    //relation with category
+    protected $fillable = [
+        'category_id', 'business_title', 'description', 'check_in', 'check_out',
+        'age_restriction', 'pets_permission', 'location'
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function featuresServices()
+    public function features()
     {
-        return $this->belongsTo(FeaturesService::class);
+        return $this->morphToMany(FeatureService::class, 'featureable');
     }
 
     /**

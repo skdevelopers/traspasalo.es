@@ -8,7 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UploadController;
-use App\http\Controllers\FeaturesServiceController;
+use App\Http\Controllers\FeatureServiceController;
 use App\Http\Controllers\BusinessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
@@ -46,7 +46,7 @@ Route::get('categories/{category}/subcategories', [CategoryController::class, 'g
 Route::resource('categories', CategoryController::class)->middleware('auth');
 
 Route::resource('roles', RoleController::class)->middleware('auth');
-Route::resource('features-services', FeaturesServiceController::class)->middleware('auth');
+Route::resource('feature-services',FeatureServiceController::class)->middleware('auth');
 Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::resource('cash-flows', CashFlowController::class)->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
@@ -168,7 +168,8 @@ Route::get('/forgot-password', function () {
     return view('front.forgotPassword');
 });
 Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create');
-Route::post('/business', [BusinessController::class, 'store'])->name('business.store');
+Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store');
+Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
 
 Route::get('/about', function () {
     return view('front.about');
