@@ -37,12 +37,12 @@
 
             <!-- Add your ERP menu items here -->
 
-            <li class="menu-item">
+            {{-- <li class="menu-item">
                 <a href="{{ route('cash-flows.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Cash Flow </span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="menu-item">
                 <a href="{{ route('categories.index') }}" class="menu-link">
@@ -70,7 +70,7 @@
                 </a>
             </li>
 
-            <li class="menu-item">
+            {{-- <li class="menu-item">
                 <a href="{{ route('permissions.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Permissions </span>
@@ -598,11 +598,11 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
 
         <!-- Help Box Widget -->
-        <div class="my-10 mx-5">
+        {{-- <div class="my-10 mx-5">
             <div class="help-box p-6 bg-black/5 text-center rounded-md">
                 <div class="flex justify-center mb-4">
                     <svg width="30" height="18" aria-hidden="true">
@@ -614,7 +614,7 @@
                 <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
                 <a href="javascript: void(0);" class="btn btn-sm bg-secondary text-white">Upgrade</a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <!-- Sidenav Menu End  -->

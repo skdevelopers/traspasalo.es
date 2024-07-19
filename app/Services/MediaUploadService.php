@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
-use Spatie\Image\Image as SpatieImage;
+use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -38,18 +38,15 @@ class MediaUploadService
 
     protected function optimizeImage($file)
     {
-        // Define maximum dimensions for the optimized image
-        $maxWidth = 1200;
-        $maxHeight = 800;
-
-        // Create a temporary file path
+        // Define a temporary file path
         $tempPath = tempnam(sys_get_temp_dir(), 'optimized_');
 
-        // Optimize the image using Spatie Image
-        SpatieImage::load($file->getPathname())
-            ->width($maxWidth)
-            ->height($maxHeight)
-            ->save($tempPath);
+        // Move the uploaded file to the temporary path
+        move_uploaded_file($file->getPathname(), $tempPath);
+
+        // Optimize the image using spatie/image-optimizer
+        $optimizerChain = OptimizerChainFactory::create();
+        $optimizerChain->optimize($tempPath);
 
         // Return the optimized image file
         return new UploadedFile($tempPath, $file->getClientOriginalName(), $file->getClientMimeType(), null, true);
@@ -61,3 +58,4 @@ class MediaUploadService
         return $media->delete();
     }
 }
+

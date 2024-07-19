@@ -21,6 +21,7 @@ class BusinessRequest extends FormRequest
             'age_restriction' => 'required|string|max:255',
             'pets_permission' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+            'images' => 'array',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'features' => 'array',
             'features.*' => 'exists:feature_services,id',
