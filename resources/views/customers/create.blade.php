@@ -1,4 +1,4 @@
-@extends('layouts.vertical', ['title' => 'Create Customer', 'sub_title' => 'Customers'])
+@extends('layouts.vertical', ['title' => 'Create Client', 'sub_title' => 'Clients'])
 
 @section('content')
     <div>
@@ -8,7 +8,7 @@
             @include('customers._form')
 
             <div class="form-group col-span-3">
-                <button type="submit" class="btn bg-primary text-white">Create Customer</button>
+                <button type="submit" class="btn bg-primary text-white">Create Client</button>
             </div>
         </form>
     </div>

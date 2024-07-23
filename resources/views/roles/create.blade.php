@@ -1,6 +1,6 @@
 <!-- create.blade.php -->
 
-@extends('layouts.vertical', ['title' => 'Create Role'])
+@extends('layouts.vertical', ['title' => 'Create Role', 'sub_title' => 'Roles'])
 
 @section('content')
     <div>

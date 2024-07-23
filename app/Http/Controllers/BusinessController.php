@@ -34,67 +34,67 @@ class BusinessController extends Controller
         return view('front.add-business', compact('categories', 'features'));
     }
 
-    
+
     public function store(BusinessRequest $request)
-{
-    
-    $data = $request->validated();
-    
-    if (!empty($data['features'])) {
-        //Log::info('Original Features:', $data['features']); // Log the original input
-    
-        // If features are submitted as a single string, split them into an array
-        if (is_string($data['features'][0])) {
-            $data['features'] = explode(',', $data['features'][0]);
-            //Log::info('Exploded Features:', $data['features']); // Log after explode
+    {
+
+        $data = $request->validated();
+
+        if (!empty($data['features'])) {
+            //Log::info('Original Features:', $data['features']); // Log the original input
+
+            // If features are submitted as a single string, split them into an array
+            if (is_string($data['features'][0])) {
+                $data['features'] = explode(',', $data['features'][0]);
+                //Log::info('Exploded Features:', $data['features']); // Log after explode
+            }
+
+            // Ensure the array contains only numeric values
+            $data['features'] = array_filter($data['features'], 'is_numeric');
+            //Log::info('Filtered Numeric Features:', $data['features']); // Log after filtering
+
+            // Convert feature IDs to integers
+            $data['features'] = array_map('intval', $data['features']);
+            //Log::info('Integer Features:', $data['features']); // Log the integer conversion
+        } else {
+            $data['features'] = [];
         }
-    
-        // Ensure the array contains only numeric values
-        $data['features'] = array_filter($data['features'], 'is_numeric');
-        //Log::info('Filtered Numeric Features:', $data['features']); // Log after filtering
-    
-        // Convert feature IDs to integers
-        $data['features'] = array_map('intval', $data['features']);
-        //Log::info('Integer Features:', $data['features']); // Log the integer conversion
-    } else {
-        $data['features'] = [];
-    }
 
 
-    $businessDTO = new BusinessDTO(
-        null, // Assuming this is a create operation and ID is null
-        $data['category_id'],
-        $data['business_title'],
-        $data['description'],
-        $data['check_in'],
-        $data['check_out'],
-        $data['age_restriction'],
-        $data['pets_permission'],
-        $data['location'],
-        $data['features'] ?? [],
-        $request->file('images') ?? []
-    );
+        $businessDTO = new BusinessDTO(
+            null, // Assuming this is a create operation and ID is null
+            $data['category_id'],
+            $data['business_title'],
+            $data['description'],
+            $data['check_in'],
+            $data['check_out'],
+            $data['age_restriction'],
+            $data['pets_permission'],
+            $data['location'],
+            $data['features'] ?? [],
+            $request->file('images') ?? []
+        );
 
-    $business = Business::create($businessDTO->toArray());
+        $business = Business::create($businessDTO->toArray());
 
-    if (!empty($businessDTO->images)) {
-        //dd($businessDTO->images);
-        foreach ($businessDTO->images as $image) {
-            $result = $this->mediaUploadService->uploadAndAttachMedia($image, $business);
-            if (!$result['success']) {
-                return back()->withErrors($result['message']);
+        if (!empty($businessDTO->images)) {
+            //dd($businessDTO->images);
+            foreach ($businessDTO->images as $image) {
+                $result = $this->mediaUploadService->uploadAndAttachMedia($image, $business);
+                if (!$result['success']) {
+                    return back()->withErrors($result['message']);
+                }
             }
         }
+
+        if (!empty($businessDTO->features)) {
+            //Log::info('Feature IDs:', $businessDTO->features); // Log for debugging
+
+            $business->features()->sync($businessDTO->features);
+        }
+
+        return redirect()->route('business.index')->with('success', 'Business created successfully.');
     }
-
-    if (!empty($businessDTO->features)) {
-        //Log::info('Feature IDs:', $businessDTO->features); // Log for debugging
-
-        $business->features()->sync($businessDTO->features);
-    }
-
-    return redirect()->route('business.index')->with('success', 'Business created successfully.');
-}
 
 
     public function edit(Business $business)
@@ -127,5 +127,15 @@ class BusinessController extends Controller
         $business->features()->detach();
         $business->delete();
         return redirect()->route('businesses.index')->with('success', 'Business deleted successfully.');
+    }
+
+    public function show($id)
+    {
+        try {
+            $business = Business::with(['category', 'features'])->findOrFail($id);
+            return response()->json($business);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Business not found'], 404);
+        }
     }
 }

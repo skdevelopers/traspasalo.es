@@ -13,6 +13,7 @@ use App\Http\Controllers\BusinessController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,8 @@ Route::resource('sales', SalesController::class)->middleware('auth');
 Route::resource('suppliers', SupplierController::class)->middleware('auth');
 Route::post('/upload-media', [UploadController::class, 'upload'])->name('upload-media');
 Route::delete('/delete-media/{media}', [UploadController::class, 'delete'])->name('delete-media');
+Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::delete('/users/{id}/destroy', [RegisteredUserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
 //// Define specific routes for data retrieval
 Route::prefix('/api/')->group(function () {
@@ -76,7 +79,13 @@ Route::get('/project/list', fn() => view('project.list'))->name('project.list');
 Route::get('/project/detail', fn() => view('project.detail'))->name('project.detail');
 Route::get('/project/create', fn() => view('project.create'))->name('project.create');
 Route::get('/auth/login', fn() => view('auth.login'))->name('auth.login');
-Route::get('/auth/register', fn() => view('auth.register'))->name('auth.register');
+Route::get('/auth/register/step1', [RegisteredUserController::class, 'showStep1'])->name('register.step1');
+Route::post('/auth/register/step1', [RegisteredUserController::class, 'postStep1'])->name('register.step1.post');
+
+Route::get('/auth/register/step2', [RegisteredUserController::class, 'showStep2'])->name('register.step2');
+Route::post('/auth/register/step2', [RegisteredUserController::class, 'postStep2'])->name('register.step2.post');
+
+// Route::get('/auth/register', fn() => view('auth.register'))->name('auth.register');
 Route::get('/auth/auth.recoverpw', fn() => view('auth.recoverpw'))->name('auth.recoverpw');
 Route::get('/auth/lock-screen', fn() => view('auth.lock-screen'))->name('auth.lock-screen');
 Route::get('/pages/starter', fn() => view('pages.starter'))->name('pages.starter');
@@ -164,15 +173,16 @@ Route::get('/register', function () {
 Route::get('/register-next', function () {
     return view('front.registerNext');
 });
-Route::get('/forgot-password', function () {
-    return view('front.forgotPassword');
-});
+// Route::get('/forgot-password', function () {
+//     return view('front.forgotPassword');
+// });
 Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create');
 Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store');
+Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
 Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
 
-Route::get('/about', function () {
-    return view('front.about');
+Route::get('/show_business', function () {
+    return view('front.add-property');
 });
 // Route::get('/services', function () {
 //     return view('front.services');

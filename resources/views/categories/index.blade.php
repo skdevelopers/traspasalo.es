@@ -30,7 +30,7 @@
                             <td class="border px-4 py-2 whitespace-nowrap">
                                 <button onclick="toggleSubcategories({{ $category->id }})"
                                         class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                    <i class="mgc_expand_line text-lg"></i> View Subcategories
+                                     <i class="fa fa-info-circle" aria-hidden="true"></i> View Subcategories
                                 </button>
                                 <a href="{{ route('categories.edit', $category->id) }}"
                                    class="text-blue-500 hover:text-blue-700 mx-0.5">

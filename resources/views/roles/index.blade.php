@@ -1,6 +1,13 @@
 @extends('layouts.vertical', ['title' => 'Roles Rex ERP', 'sub_title' => 'Roles', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
 @section('content')
+<div class="grid grid-cols-12">
+    <div class="mb-4">
+        <a href="{{ route('roles.create') }}" class="btn inline-flex justify-center items-center bg-primary text-white w-full ">
+            <i class="mgc_add_line text-lg me-2"></i> Create New Role
+        </a>
+    </div>
+</div>
     <div class="grid grid-cols-12">
         <div class="col-span-12">
             <!-- Table to display role records -->

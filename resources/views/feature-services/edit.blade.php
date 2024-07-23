@@ -16,3 +16,21 @@
     </form>
 </div>
 @endsection
+
+
+
+<!-- resources/views/categories/edit.blade.php -->
+@extends('layouts.vertical', ['title' => 'Create Feature Service', 'sub_title' => 'Feature'])
+
+@section('content')
+    <div class="container">
+        <h1>Edit Category</h1>
+        <form action="{{ route('feature-services.update', $featureService->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            @include('feature-services._form', ['featureService' => $featureService])
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+@endsection
+

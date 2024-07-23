@@ -9,11 +9,11 @@
 
 <div>
     <label>Permissions:</label>
-    @foreach($permissions as $permission)
+    {{-- @foreach($permissions as $permission)
         <div>
             <input type="checkbox" name="permissions[]" id="permission_{{ $permission->id }}" value="{{ $permission->id }}"
                    @if(isset($role) && $role->permissions->contains($permission->id)) checked @endif>
             <label for="permission_{{ $permission->id }}">{{ $permission->name }}</label>
         </div>
-    @endforeach
+    @endforeach --}}
 </div>

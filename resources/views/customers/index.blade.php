@@ -1,4 +1,4 @@
-@extends('layouts.vertical', ['title' => 'Customers', 'sub_title' => 'Customers'])
+@extends('layouts.vertical', ['title' => 'Clients', 'sub_title' => 'Clients'])
 
 @section('content')
     <div class="grid grid-cols-12">
@@ -28,7 +28,7 @@
                 </table>
                 <div id="noCustomersMessage" class="mt-4 text-center text-gray-500">
                     <!-- Message displayed when no customers are available -->
-                    No customers found. <a href="{{ route('customers.create') }}" class="text-blue-500 hover:underline">Create one</a>.
+                    No Client found. <a href="{{ route('customers.create') }}" class="text-blue-500 hover:underline">Create one</a>.
                 </div>
             </div>
         </div>

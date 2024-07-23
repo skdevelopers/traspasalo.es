@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->default(1);
+            $table->unsignedBigInteger('role_id')->default(0);
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-
+            
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->index('role_id'); // Index for performance
             $table->index('email'); // Index for performance

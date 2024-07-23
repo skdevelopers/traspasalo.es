@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Login Page</title>
 
     @vite('resources/scss/app.scss')
@@ -39,9 +40,23 @@
                         </div>
                     </div>
                 </div>
-
-                <form class="space-y-4" action="#" method="POST">
-
+               
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                <form class="space-y-4" method="POST" action="{{ route('register.step2.post') }}" >
+                   @csrf
                     <div class="mt-8">
                         <label for="email" class="block text-sm font-medium text-gray-700">Mobile Number</label>
 
@@ -156,9 +171,9 @@
                                 class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Phone
                                 number:</label>
                             <div class="relative w-full">
-                                <input type="text" id="phone-input"
+                                <input type="text" id="mobile_number" name="mobile_number"
                                     class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-0 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="000-0000-000" required />
+                                     placeholder="000-0000-000" required />
                             
                                     <button type="button" onclick="togglePassword()"
                                     class="absolute top-0 right-0 p-3.5 rounded-e-md">
@@ -182,6 +197,10 @@
                                             r="3"></circle>
                                     </svg>
                                 </button>
+
+                                @error('mobile_number')
+                <div style="color: red;">{{ $message }}</div>
+            @enderror
                             </div>
                         </div>
 
@@ -195,13 +214,20 @@
                                 <input id="password" name="password" type="password" autocomplete="given-name"
                                     placeholder="Password" required
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:p-2">
-                            </div>
+                            
+                                    @error('password')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
+                                </div>
                             <div class="w-full">
                                 <label for="c_password" class="block text-sm font-medium text-gray-700">Confirm
                                     Password</label>
-                                <input id="c_password" name="c_password" type="password" autocomplete="family-name"
+                                <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="family-name"
                                     placeholder="Confirm Password" required
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:p-2">
+                                    @error('password_confirmation')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -209,7 +235,7 @@
 
 
                     <div>
-                        <button type="button"
+                        <button type="submit"
                             class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-violet-950 hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-violet-950">
                             Create Account
                         </button>

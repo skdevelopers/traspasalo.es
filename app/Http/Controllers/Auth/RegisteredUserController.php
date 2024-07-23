@@ -9,45 +9,81 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Exception;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function showStep1()
     {
-        return view('auth.register');
+        return view('auth.register-step1');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    public function store(Request $request)
+    public function postStep1(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        Session::put('registration', $request->only('first_name', 'last_name', 'email'));
+
+        return redirect()->route('register.step2');
+    }
+
+    public function showStep2()
+    {
+        if (!Session::has('registration')) {
+            return redirect()->route('register.step1');
+        }
+
+        return view('auth.register-step2');
+    }
+
+    public function postStep2(Request $request)
+    {
+        
+        //dd($request->all());
+        $request->validate([
+            'mobile_number' => 'required|string|max:15',
+            'password' => 'required|string|min:8|confirmed',
         ]);
+        //try {
+        $registrationData = Session::get('registration');
+        $registrationData['mobile_number'] = $request->mobile_number;
+        $registrationData['password'] = hash::make($request->password);
+
+        // Save the user data to the database
+        $user = User::create($registrationData);
 
         event(new Registered($user));
-
+        // Log the user in
         Auth::login($user);
 
+        // Clear the session
+        Session::forget('registration');
+
         return redirect(RouteServiceProvider::HOME);
+    //} catch (Exception $e) {
+        // Log the error or handle it as needed
+      //  return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
+   // }
+
     }
+    public function index()
+    {
+        $users = User::with('role')->get();
+        //dd($users->all());
+        return view('users.index', compact('users'));
+    }
+    
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+    }
+    //event(new Registered($user));
 }

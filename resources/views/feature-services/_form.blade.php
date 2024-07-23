@@ -1,7 +1,5 @@
-<div class="form-group">
-    <label for="name">Feature Name:</label>
-    <input type="text" id="name" name="name" placeholder="Feature Name" required>
 
+<div class="form-group">
     @if ($errors->any())
         <div>
             <ul>
@@ -12,7 +10,10 @@
         </div>
     @endif
 
+    <label for="name">Feature Name:</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $featureService->name ?? '') }}" required>
 </div>
+
 {{-- <div class="form-group">
     <label for="parent_id">Parent Category</label>
     <select class="form-control" id="parent_id" name="parent_id">
