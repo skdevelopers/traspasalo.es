@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 use Exception;
 
 class RegisteredUserController extends Controller
@@ -49,7 +50,7 @@ class RegisteredUserController extends Controller
             'mobile_number' => 'required|string|max:15',
             'password' => 'required|string|min:8|confirmed',
         ]);
-        //try {
+        try {
         $registrationData = Session::get('registration');
         $registrationData['mobile_number'] = $request->mobile_number;
         $registrationData['password'] = hash::make($request->password);
@@ -65,14 +66,19 @@ class RegisteredUserController extends Controller
         Session::forget('registration');
 
         return redirect(RouteServiceProvider::HOME);
-    //} catch (Exception $e) {
+     } catch (Exception $e) {
         // Log the error or handle it as needed
-      //  return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
-   // }
+        return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
+    }
 
     }
     public function index()
     {
+         if(Gate::denies('view-users'))
+         {
+             abort(403);
+         }
+
         $users = User::with('role')->get();
         //dd($users->all());
         return view('users.index', compact('users'));

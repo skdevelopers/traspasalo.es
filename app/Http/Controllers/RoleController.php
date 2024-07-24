@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::with('permissions')->get();
         return view('roles.index', compact('roles'));
     }
 
@@ -52,6 +52,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::all();
+       // dd($permissions);
         return view('roles.edit', compact('role', 'permissions'));
     }
 

@@ -1,6 +1,6 @@
 <!-- edit.blade.php -->
 
-@extends('layouts.vertical', ['title' => 'Edit Role'])
+@extends('layouts.vertical', ['title' => 'Edit Role','sub_title' => 'Roles'])
 
 @section('content')
     <div>

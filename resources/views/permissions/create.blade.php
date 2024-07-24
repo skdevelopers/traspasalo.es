@@ -1,4 +1,4 @@
-@extends('layouts.vertical', ['title' => 'Create Permission','sub_title' => 'Permissions', , 'permissions' => $permissions])
+@extends('layouts.vertical', ['title' => 'Create Permission', 'sub_title' => 'Permissions'])
 
 @section('content')
     <div>

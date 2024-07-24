@@ -12,7 +12,7 @@
     <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
         <!-- Large Image (takes 2 columns on large screens) -->
         <div class="relative lg:col-span-3">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 1" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 1" class="w-full h-full object-cover">
         </div>
 
 <!--image grid-->
@@ -20,22 +20,22 @@
     <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
         <!-- Large Image (takes 2 columns on large screens) -->
         <div class="relative lg:col-span-3">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 1" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 1" class="w-full h-full object-cover">
         </div>
 
         <!-- Small Images -->
         <div class="relative lg:col-span-3">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool.jpg')}} alt="Image 3" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool.jpg')}} alt="Image 3" class="w-full h-full object-cover">
         </div>
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 4" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 4" class="w-full h-full object-cover">
         </div>
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa.jpg')}} alt="Image 5" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa.jpg')}} alt="Image 5" class="w-full h-full object-cover">
         </div>
         <!-- More Images Overlay -->
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical.jpg')}} alt="Image 6" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical.jpg')}} alt="Image 6" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <span class="text-white text-2xl">+6</span>
             </div>
@@ -44,17 +44,17 @@
 </div>
         <!-- Small Images -->
         <div class="relative lg:col-span-3">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool.jpg')}} alt="Image 3" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool.jpg')}} alt="Image 3" class="w-full h-full object-cover">
         </div>
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 4" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa-with-sun-bed.jpg')}} alt="Image 4" class="w-full h-full object-cover">
         </div>
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical-pool-villa.jpg')}} alt="Image 5" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical-pool-villa.jpg')}} alt="Image 5" class="w-full h-full object-cover">
         </div>
         <!-- More Images Overlay -->
         <div class="relative lg:col-span-2">
-            <img src={{asset('/assets/images/home-house-exterior-design-showing-tropical.jpg')}} alt="Image 6" class="w-full h-full object-cover">
+            <img src={{asset('/front/assets/images/home-house-exterior-design-showing-tropical.jpg')}} alt="Image 6" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                 <span class="text-white text-2xl">+6</span>
             </div>
@@ -193,67 +193,67 @@
         <p class="text-center text-gray-600 mb-8">All premium useful features are included in this service</p>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/key.svg') }}" alt="Accessibility" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/key.svg') }}" alt="Accessibility" class="mx-auto mb-4">
                 <p class="text-gray-800">Accessibility</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/hot-water.svg') }}" alt="Hot water" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/hot-water.svg') }}" alt="Hot water" class="mx-auto mb-4">
                 <p class="text-gray-800">Hot water</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/images/air-conditioning.svg') }}" alt="Air-conditioning" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/images/air-conditioning.svg') }}" alt="Air-conditioning" class="mx-auto mb-4">
                 <p class="text-gray-800">Air-conditioning</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/store.svg') }}" alt="Store" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/store.svg') }}" alt="Store" class="mx-auto mb-4">
                 <p class="text-gray-800">Store</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/heating.svg') }}" alt="Heating" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/heating.svg') }}" alt="Heating" class="mx-auto mb-4">
                 <p class="text-gray-800">Heating</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/weight.svg') }}" alt="Fully equipped" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/weight.svg') }}" alt="Fully equipped" class="mx-auto mb-4">
                 <p class="text-gray-800">Fully equipped</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/kitchen.svg') }}" alt="Kitchen" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/kitchen.svg') }}" alt="Kitchen" class="mx-auto mb-4">
                 <p class="text-gray-800">Kitchen</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/working.svg') }}" alt="Working" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/working.svg') }}" alt="Working" class="mx-auto mb-4">
                 <p class="text-gray-800">Working</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/travel.svg') }}" alt="Travel" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/travel.svg') }}" alt="Travel" class="mx-auto mb-4">
                 <p class="text-gray-800">Abroad</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/corner.svg') }}" alt="Corner" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/corner.svg') }}" alt="Corner" class="mx-auto mb-4">
                 <p class="text-gray-800">Corner</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/license.svg') }}" alt="License" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/license.svg') }}" alt="License" class="mx-auto mb-4">
                 <p class="text-gray-800">License</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/smart-door.svg') }}" alt="Security door" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/smart-door.svg') }}" alt="Security door" class="mx-auto mb-4">
                 <p class="text-gray-800">Security door</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/smoke.svg') }}" alt="smoke outlet" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/smoke.svg') }}" alt="smoke outlet" class="mx-auto mb-4">
                 <p class="text-gray-800">Smoke Outlet</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/alarm.svg') }}" alt="Alarm system" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/alarm.svg') }}" alt="Alarm system" class="mx-auto mb-4">
                 <p class="text-gray-800">Alarm System</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/umbrella.svg') }}" alt="Terrace" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/umbrella.svg') }}" alt="Terrace" class="mx-auto mb-4">
                 <p class="text-gray-800">Terrace</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/wine.svg') }}" alt="Alcohol license" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/wine.svg') }}" alt="Alcohol license" class="mx-auto mb-4">
                 <p class="text-gray-800">Alcohol License</p>
             </div>
         </div>
@@ -279,7 +279,7 @@
         <p class="text-gray-700">Check Out: Until 12:00 PM</p>
     </div>
     <div class="flex items-center space-x-2">
-        <img src={{ asset('/assets/icons/person.svg') }} class="h-5 w-2"/>
+        <img src={{ asset('/front/assets/icons/person.svg') }} class="h-5 w-2"/>
         <p class="text-gray-700">No age restriction</p>
     </div>
     <div class="flex items-center space-x-2">
@@ -299,10 +299,10 @@
         <p class="text-gray-700">Accepted payment methods</p>
     </div>
     <div class="flex items-center space-x-4 mt-4 md:mt-0">
-        <img src={{ asset('/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
     </div>
 </div>
 </div>
@@ -341,67 +341,67 @@
         <p class="text-center text-gray-600 mb-8">All premium useful features are included in this service</p>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/key.svg') }}" alt="Accessibility" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/key.svg') }}" alt="Accessibility" class="mx-auto mb-4">
                 <p class="text-gray-800">Accessibility</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/hot-water.svg') }}" alt="Hot water" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/hot-water.svg') }}" alt="Hot water" class="mx-auto mb-4">
                 <p class="text-gray-800">Hot water</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/images/air-conditioning.svg') }}" alt="Air-conditioning" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/images/air-conditioning.svg') }}" alt="Air-conditioning" class="mx-auto mb-4">
                 <p class="text-gray-800">Air-conditioning</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/store.svg') }}" alt="Store" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/store.svg') }}" alt="Store" class="mx-auto mb-4">
                 <p class="text-gray-800">Store</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/heating.svg') }}" alt="Heating" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/heating.svg') }}" alt="Heating" class="mx-auto mb-4">
                 <p class="text-gray-800">Heating</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/weight.svg') }}" alt="Fully equipped" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/weight.svg') }}" alt="Fully equipped" class="mx-auto mb-4">
                 <p class="text-gray-800">Fully equipped</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/kitchen.svg') }}" alt="Kitchen" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/kitchen.svg') }}" alt="Kitchen" class="mx-auto mb-4">
                 <p class="text-gray-800">Kitchen</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/working.svg') }}" alt="Working" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/working.svg') }}" alt="Working" class="mx-auto mb-4">
                 <p class="text-gray-800">Working</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/travel.svg') }}" alt="Travel" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/travel.svg') }}" alt="Travel" class="mx-auto mb-4">
                 <p class="text-gray-800">Abroad</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/corner.svg') }}" alt="Corner" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/corner.svg') }}" alt="Corner" class="mx-auto mb-4">
                 <p class="text-gray-800">Corner</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/license.svg') }}" alt="License" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/license.svg') }}" alt="License" class="mx-auto mb-4">
                 <p class="text-gray-800">License</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/smart-door.svg') }}" alt="Security door" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/smart-door.svg') }}" alt="Security door" class="mx-auto mb-4">
                 <p class="text-gray-800">Security door</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/smoke.svg') }}" alt="smoke outlet" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/smoke.svg') }}" alt="smoke outlet" class="mx-auto mb-4">
                 <p class="text-gray-800">Smoke Outlet</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/alarm.svg') }}" alt="Alarm system" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/alarm.svg') }}" alt="Alarm system" class="mx-auto mb-4">
                 <p class="text-gray-800">Alarm System</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/umbrella.svg') }}" alt="Terrace" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/umbrella.svg') }}" alt="Terrace" class="mx-auto mb-4">
                 <p class="text-gray-800">Terrace</p>
             </div>
             <div class="p-6 bg-white shadow rounded-lg text-center">
-                <img src="{{ asset('assets/icons/wine.svg') }}" alt="Alcohol license" class="mx-auto mb-4">
+                <img src="{{ asset('/front/assets/icons/wine.svg') }}" alt="Alcohol license" class="mx-auto mb-4">
                 <p class="text-gray-800">Alcohol License</p>
             </div>
         </div>
@@ -427,7 +427,7 @@
         <p class="text-gray-700">Check Out: Until 12:00 PM</p>
     </div>
     <div class="flex items-center space-x-2">
-        <img src={{ asset('/assets/icons/person.svg') }} class="h-5 w-2"/>
+        <img src={{ asset('/front/assets/icons/person.svg') }} class="h-5 w-2"/>
         <p class="text-gray-700">No age restriction</p>
     </div>
     <div class="flex items-center space-x-2">
@@ -447,10 +447,10 @@
         <p class="text-gray-700">Accepted payment methods</p>
     </div>
     <div class="flex items-center space-x-4 mt-4 md:mt-0">
-        <img src={{ asset('/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
-        <img src={{ asset('/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
+        <img src={{ asset('/front/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
     </div>
 </div>
 </div>
@@ -537,7 +537,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -553,7 +553,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -567,7 +567,7 @@
             </div><div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -582,7 +582,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -597,7 +597,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -612,7 +612,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -727,7 +727,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- First Search Card -->
         <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100 max-w-sm mx-auto">
-            <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
+            <img src="{{ asset('/front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
             <div class="flex flex-col justify-between px-4">
                 <div>
                     <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -745,7 +745,7 @@
         </div>
         <!-- Second Search Card -->
         <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100  max-w-sm mx-auto">
-            <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
+            <img src="{{ asset('/front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
             <div class="flex flex-col justify-between px-4">
                 <div>
                     <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -789,7 +789,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -805,7 +805,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -819,7 +819,7 @@
             </div><div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -834,7 +834,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -849,7 +849,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -864,7 +864,7 @@
             <div>
                 <div class="flex space-x-4">
                     <div class=" w-48 h-48 pt-10">
-                        <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                        <img src={{ asset('/front/assets/images/male-icon.png') }} class="" />
                     </div>
                     <div class="p-3">
                         <h4 class="font-semibold text-violet-950">Jessica G. <span class="text-gray-500 text-sm">April 8, 2024</span></h4>
@@ -979,7 +979,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- First Search Card -->
         <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100 max-w-sm mx-auto">
-            <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
+            <img src="{{ asset('/front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
             <div class="flex flex-col justify-between px-4">
                 <div>
                     <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>
@@ -997,7 +997,7 @@
         </div>
         <!-- Second Search Card -->
         <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100  max-w-sm mx-auto">
-            <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
+            <img src="{{ asset('/front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image" class="w-full md:w-1/3 max-h-max rounded-md">
             <div class="flex flex-col justify-between px-4">
                 <div>
                     <h3 class="text-lg font-semibold">Hotel Arc New York City</h3>

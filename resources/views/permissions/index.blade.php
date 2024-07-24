@@ -1,4 +1,4 @@
-@extends('layouts.vertical', ['title' => 'Permissions Rex ERP', 'sub_title' => 'Permissions', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
+@extends('layouts.vertical', ['title' => 'Permissions', 'sub_title' => 'Permissions'])
 
 @section('content')
     <div class="grid grid-cols-12">
