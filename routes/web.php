@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Models\Role;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -204,8 +206,8 @@ Route::get('/blogs', function () {
     return view('front.blog');
 });
 
-Route::get('/getCategories', [CategoryController::class, 'getCategories']);
+//Route::get('/getCategories', [CategoryController::class, 'getCategories']);
 
-Route::get('/check-api-key', function () {
-    return view('front.check-api-key');
-});
+
+
+

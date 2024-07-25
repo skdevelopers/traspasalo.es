@@ -56,7 +56,7 @@
                     @endif
                     <form method="POST" action="{{ route('register.step1.post') }}">
                         @csrf
-                        <div class="max-w-lg mx-auto mt-10">
+                        <div class="max-w-lg mx-auto mt-10 p-2">
                             <div class="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
                                 <div class="w-full">
                                     <label for="fname" class="block text-sm font-medium text-gray-700">First
@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="p-2">
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                             <input id="email" name="email" type="email" autocomplete="email"
                                 placeholder="Email Address" required
@@ -93,7 +93,7 @@
 
                         </div>
 
-                        <div>
+                        <div class="p-2">
                             <button type="submit"
                                 class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-violet-950 hover:bg-violet-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-violet-950">
                                 Next

@@ -28,5 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view-users', function ($user) {
             return in_array('view-users', $user->permissions);
         });
+
+        
     }
 }

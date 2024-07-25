@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class RoleController extends Controller
 {
@@ -33,6 +35,11 @@ class RoleController extends Controller
         // Validate the request data here
         $role = Role::create($request->only(['name']));
         $role->permissions()->sync($request->input('permissions', []));
+
+        foreach ($role->users as $user) {
+            Cache::forget('permissions_for_user_' . $user->id);
+        }
+        
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
@@ -61,9 +68,13 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        // Validate the request data here
         $role->update($request->only(['name']));
         $role->permissions()->sync($request->input('permissions', []));
+        
+        foreach ($role->users as $user) {
+            Cache::forget('permissions_for_user_' . $user->id);
+        }
+        //Log::info('Role updated in controller: ' . $role->id);
         return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
     }
 

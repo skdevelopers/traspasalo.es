@@ -7,17 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
-class Permission extends Model
+class Permission extends SpatiePermission
 {
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'permissions';
+
     protected $fillable = ['name', 'description'];
 
-    public function roles(): HasMany
+    public function roles()
     {
-        return $this->hasMany(Role::class);
+        // Your custom implementation, but keep the method signature compatible
+        return $this->belongsToMany(Role::class, 'role_has_permissions');
     }
 
     public function users(): BelongsToMany

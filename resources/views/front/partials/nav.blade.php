@@ -91,7 +91,7 @@
                     </div>
 
 
-                    <a href="{{ url('/register') }}" class="flex">
+                    <a href="{{ route('register.step1') }}" class="flex">
                         <button class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
                             Register
                         </button>
