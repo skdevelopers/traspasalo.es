@@ -16,16 +16,16 @@ class Permission extends SpatiePermission
 
     protected $table = 'permissions';
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name'];
 
-    public function roles()
+    public function roles(): BelongsToMany
     {
-        // Your custom implementation, but keep the method signature compatible
         return $this->belongsToMany(Role::class, 'role_has_permissions');
     }
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'model_has_permissions', 'permission_id', 'model_id')
+                    ->where('model_type', User::class);
     }
 }

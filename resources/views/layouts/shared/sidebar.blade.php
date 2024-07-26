@@ -43,26 +43,28 @@
                     <span class="menu-text"> Cash Flow </span>
                 </a>
             </li> --}}
-
+            @role('admin')
             <li class="menu-item">
                 <a href="{{ route('categories.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Categories </span>
                 </a>
             </li>
+            
             <li class="menu-item">
                 <a href="{{ route('feature-services.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Features </span>
                 </a>
             </li>
+            @endrole
             <li class="menu-item">
                 <a href="{{ route('business.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Businesses </span>
                 </a>
             </li>
-
+            @role('admin')
             <li class="menu-item">
                 <a href="{{ route('customers.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
@@ -88,7 +90,7 @@
                     <span class="menu-text"> Users </span>
                 </a>
             </li>
-
+            @endrole
             {{-- 
 
             <li class="menu-item">

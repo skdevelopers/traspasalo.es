@@ -1,72 +1,47 @@
-@extends('layouts.vertical', ['title' => 'Roles', 'sub_title' => 'Roles', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
+@extends('layouts.vertical', ['title' => 'Roles', 'sub_title' => 'Roles'])
 
 @section('content')
-    <div class="grid grid-cols-12">
-        <div class="mb-4">
-            <a href="{{ route('roles.create') }}"
-                class="btn inline-flex justify-center items-center bg-primary text-white w-full ">
-                <i class="mgc_add_line text-lg me-2"></i> Create New Role
-            </a>
-        </div>
+    <div class="mb-4">
+        <a href="{{ route('roles.create') }}" class="btn btn-primary">Create New Role</a>
     </div>
-    <div class="grid grid-cols-12">
-        <div class="col-span-12">
-            <!-- Table to display role records -->
-            <div class="overflow-x-auto">
-                <table class="min-w-full bg-white rounded-md shadow-md">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="px-4 py-2">#</th>
-                            <th class="px-4 py-2">Name</th>
-                            <th class="px-4 py-2">Permissions</th>
-                            <th class="px-4 py-2">Description</th>
-                            <!-- Add more columns if needed -->
-                            <th class="px-4 py-2">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($roles as $role)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $role->id }}</td>
-                                <td class="border px-4 py-2">{{ $role->name }}</td>
-
-                                <td class="border px-4 py-2">
-                                    @foreach ($role->permissions as $permission)
-                                        {{ $permission->name}}<br/>
-                                    @endforeach
-                                </td>
-                                <td class="border px-4 py-2">
-                                    @foreach ($role->permissions as $description)
-                                        {{ $description->description }}<br/>
-                                    @endforeach
-                                </td>
-
-                                <!-- Add more columns if needed -->
-                                <td class="border px-4 py-2 whitespace-nowrap">
-                                    <!-- Edit Button -->
-                                    <a href="{{ route('roles.edit', $role->id) }}"
-                                        class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                        <i class="mgc_edit_line text-lg"></i>
-                                    </a>
-                                    <!-- Delete Button -->
-                                    <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:text-red-700 mx-0.5">
-                                            <i class="mgc_delete_line text-xl"></i>
-                                        </button>
-                                    </form>
-                                    <!-- Show Button -->
-                                    <a href="{{ route('roles.show', $role->id) }}"
-                                        class="text-green-500 hover:text-green-700 mx-0.5">
-                                        <i class="mgc_display_line text-lg"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="overflow-x-auto">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Permissions</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($roles as $role)
+                    <tr>
+                        <td>{{ $role->id }}</td>
+                        <td>{{ $role->name }}</td>
+                        <td>
+                            @foreach ($role->permissions as $permission)
+                                {{ $permission->name }}<br/>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($role->permissions as $permission)
+                                {{ $permission->description }}<br/>
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                            <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info">Show</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 @endsection

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
 use Exception;
+use App\Models\Role;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -70,19 +72,36 @@ class RegisteredUserController extends Controller
         // Log the error or handle it as needed
         return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
     }
-
+        //$roles = Role::findOrFail(2);
+        //$user->syncRoles($roles->name);
     }
     public function index()
     {
-         if(Gate::denies('view-users'))
-         {
-             abort(403);
-         }
-
-        $users = User::with('role')->get();
-        //dd($users->all());
+        $users = User::with('roles')->get(); 
+        // Use 'roles' instead of 'role'
+        //dd($users);
         return view('users.index', compact('users'));
     }
+    
+
+    public function edit(User $user)
+    {
+        $roles = Role::all();
+        return view('users.edit', compact('user', 'roles'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,name', // Ensure each role exists in the roles table
+        ]);
+        
+        $user->syncRoles($request->roles);
+    
+        return redirect()->route('users.index')->with('success', 'User updated and roles assigned successfully');
+    }
+
     
     public function destroy($id)
     {

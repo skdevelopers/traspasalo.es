@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,22 +35,32 @@ require __DIR__ . '/auth.php';
 //    })->where('any', '.*');
 
 // Resource routes for managing permissions
-Route::resource('permissions', PermissionController::class)->names([
-    'index' => 'permissions.index',
-    'create' => 'permissions.create',
-    'store' => 'permissions.store',
-    'show' => 'permissions.show',
-    'edit' => 'permissions.edit', // This line is important for generating the edit route
-    'update' => 'permissions.update',
-    'destroy' => 'permissions.destroy',
-])->middleware('auth');
+
 
 Route::get('categories/{category}/subcategories', [CategoryController::class, 'getSubcategories'])
     ->name('categories.subcategories');
-Route::resource('categories', CategoryController::class)->middleware('auth');
+    //admin routes
+    Route::group(['middleware' => ['auth']], function () {
+        Route::resource('permissions', PermissionController::class)->names([
+            'index' => 'permissions.index',
+            'create' => 'permissions.create',
+            'store' => 'permissions.store',
+            'show' => 'permissions.show',
+            'edit' => 'permissions.edit', // This line is important for generating the edit route
+            'update' => 'permissions.update',
+            'destroy' => 'permissions.destroy',
+        ]);
 
-Route::resource('roles', RoleController::class)->middleware('auth');
-Route::resource('feature-services', FeatureServiceController::class)->middleware('auth');
+        Route::resource('categories', CategoryController::class);
+        Route::resource('roles', RoleController::class);
+        Route::resource('feature-services', FeatureServiceController::class);
+        Route::resource('users', RegisteredUserController::class);
+
+
+
+    });
+
+
 Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::resource('cash-flows', CashFlowController::class)->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
@@ -57,8 +68,10 @@ Route::resource('sales', SalesController::class)->middleware('auth');
 Route::resource('suppliers', SupplierController::class)->middleware('auth');
 Route::post('/upload-media', [UploadController::class, 'upload'])->name('upload-media');
 Route::delete('/delete-media/{media}', [UploadController::class, 'delete'])->name('delete-media');
-Route::get('/users', [RegisteredUserController::class, 'index'])->name('users.index')->middleware('auth');
-Route::delete('/users/{id}/destroy', [RegisteredUserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+Route::resource('/users', RegisteredUserController::class)->middleware('auth');
+// Route::delete('/users/{id}/destroy', [RegisteredUserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+// Route::get('/users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('users.edit')->middleware('auth');
+// Route::put('/users/{id}/update', [RegisteredUserController::class, 'update'])->name('users.update')->middleware('auth');
 
 //// Define specific routes for data retrieval
 Route::prefix('/api/')->group(function () {
@@ -72,9 +85,8 @@ Route::prefix('/api/')->group(function () {
 
 Route::get('/admin/login', fn () => redirect('/login'));
 
-Route::group(['middleware' => ['auth', 'cache.permissions']], function () {
-    Route::get('/home', fn () => view('index'))->name('home')->middleware('can:view-users');
-});
+
+Route::get('/home', fn () => view('index'))->name('home')->middleware('auth');
 Route::get('/charts', fn () => view('charts'))->name('charts');
 Route::get('/apps/calendar', fn () => view('apps.calender'))->name('apps.calendar');
 Route::get('/apps/tickets', fn () => view('apps.tickets'))->name('apps.tickets');
@@ -210,4 +222,15 @@ Route::get('/blogs', function () {
 
 
 
+Route::get('/test-permissions', function () {
+    $user = User::find(1); // Replace with the ID of the user you want to test
+    
+    // Check the user's roles and permissions
+    $roles = $user->getRoleNames(); // Get all roles
+    $permissions = $user->getAllPermissions(); // Get all permissions
 
+    return response()->json([
+        'roles' => $roles,
+        'permissions' => $permissions,
+    ]);
+});

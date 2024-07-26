@@ -31,10 +31,10 @@ class PermissionController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            //'description' => 'nullable|string',
         ]);
 
-        Permission::create($request->only(['name', 'description']));
+        Permission::create($request->only(['name']));
         return redirect()->route('permissions.index')->with('success', 'Permission created successfully.');
     }
 
@@ -50,33 +50,30 @@ class PermissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
         return view('permissions.edit', compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Permission $permission)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            //'description' => 'nullable|string',
         ]);
 
-        $permission = Permission::findOrFail($id);
-        $permission->update($request->only(['name', 'description']));
+        $permission->update($request->only(['name']));
         return redirect()->route('permissions.index')->with('success', 'Permission updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Permission $permission)
     {
-        $permission = Permission::findOrFail($id);
         $permission->delete();
         return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully.');
     }

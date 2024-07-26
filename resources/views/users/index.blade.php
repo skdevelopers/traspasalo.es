@@ -1,14 +1,8 @@
 <!-- resources/views/users/index.blade.php -->
-@extends('layouts.vertical', ['title' => 'Display Users', 'sub_title' => 'Users'])
+@extends('layouts.vertical', ['title' => 'Display Users', 'sub_title' => 'User Management'])
 
 @section('content')
-    <div class="grid grid-cols-12">
-        <div class="mb-4 col-span-12">
-            <a href="{{ route('login') }}" class="btn inline-flex justify-center items-center bg-primary text-white w-full">
-                <i class="mgc_add_line text-lg me-2"></i> Create New User
-            </a>
-        </div>
-    </div>
+   
     <div class="grid grid-cols-12">
         <div class="col-span-12">
             <!-- Table to display categories -->
@@ -31,11 +25,19 @@
                                 <td class="border px-4 py-2">{{ $user->first_name }}</td>
                                 <td class="border px-4 py-2">{{ $user->last_name }}</td>
                                 <td class="border px-4 py-2">{{ $user->email }}</td>
-                                <td class="border px-4 py-2">{{ $user->role->name ?? 'No Role Assigned' }}</td>
-
+                                @if($user->roles->isEmpty())
+                                    <td class="border px-4 py-2"> No Role Assigned </td>
+                                @else
+                                    @foreach($user->roles as $roles)
+                                    <td class="border px-4 py-2">{{ $roles->name ?? 'No Role Assigned' }}</td>
+                                    @endforeach
+                                @endif
+                                
                                 
                                 <td class="border px-4 py-2 whitespace-nowrap">
-
+                                    <a href="{{ route('users.edit', $user->id) }}" class="text-blue-500 hover:text-blue-700 mx-0.5">
+                                        <i class="mgc_edit_line text-lg"></i>
+                                    </a>
                                     {{-- <a href="{{ route('users.edit', $user->id) }}"
                                         class="text-blue-500 hover:text-blue-700 mx-0.5">
                                         <i class="mgc_edit_line text-lg"></i>

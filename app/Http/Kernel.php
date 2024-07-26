@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\CachePermissions::class,
+          //  \App\Http\Middleware\CachePermissions::class,
 
         ],
 
@@ -68,8 +68,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     ];
     // In app/Http/Kernel.php
-    protected $routeMiddleware = [
-        // Other middleware
-        'cache.permissions' => \App\Http\Middleware\CachePermissions::class,
-    ];
+    // protected $routeMiddleware = [
+    //     // Other middleware
+    //     'cache.permissions' => \App\Http\Middleware\CachePermissions::class,
+    // ];
 }

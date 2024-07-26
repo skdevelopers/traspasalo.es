@@ -1,11 +1,7 @@
-<!-- roles/_form.blade.php -->
-
 <div>
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="{{ old('name', $role->name ?? '') }}">
+    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $role->name ?? '') }}" required>
 </div>
-
-<!-- Add more fields as needed -->
 
 <div>
     <label>Permissions:</label>
@@ -15,5 +11,5 @@
                    @if(isset($role) && $role->permissions->contains($permission->id)) checked @endif>
             <label for="permission_{{ $permission->id }}">{{ $permission->name }}</label>
         </div>
-    @endforeach 
+    @endforeach
 </div>

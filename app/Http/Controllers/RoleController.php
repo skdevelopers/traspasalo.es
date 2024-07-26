@@ -10,80 +10,59 @@ use Illuminate\Support\Facades\Cache;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $roles = Role::with('permissions')->get();
         return view('roles.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::all();
+        return view('roles.create', compact('permissions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Validate the request data here
-        $role = Role::create($request->only(['name']));
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name',
+            'permissions' => 'array',
+        ]);
+
+        $role = Role::create($request->only('name'));
         $role->permissions()->sync($request->input('permissions', []));
 
-        foreach ($role->users as $user) {
-            Cache::forget('permissions_for_user_' . $user->id);
-        }
-        
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Role $role)
     {
         $sub_title = 'Role Details';
         return view('roles.show', compact('role', 'sub_title'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Role $role)
     {
         $permissions = Permission::all();
-       // dd($permissions);
         return view('roles.edit', compact('role', 'permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Role $role)
     {
-        $role->update($request->only(['name']));
+        $request->validate([
+            'name' => 'required|string|max:255|unique:roles,name,' . $role->id,
+            'permissions' => 'array',
+        ]);
+
+        $role->update($request->only('name'));
         $role->permissions()->sync($request->input('permissions', []));
-        
-        foreach ($role->users as $user) {
-            Cache::forget('permissions_for_user_' . $user->id);
-        }
-        //Log::info('Role updated in controller: ' . $role->id);
+
         return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Role $role)
     {
-        // Delete the role from the database
+        $role->delete();
         return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }
 }
