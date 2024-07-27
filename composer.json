@@ -10,6 +10,7 @@
         "intervention/image": "^3.7",
         "laravel/framework": "^v11.14.0",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
         "spatie/data-transfer-object": "^3.9",
         "spatie/image-optimizer": "^1.7",

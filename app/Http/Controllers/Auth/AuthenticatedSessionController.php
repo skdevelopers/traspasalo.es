@@ -53,6 +53,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        $request->session()->forget('lock-screen');
 
         return redirect('/auth/login');
     }

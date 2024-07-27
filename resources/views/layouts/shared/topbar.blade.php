@@ -38,27 +38,32 @@
                 <img src="{{ asset('/images/flags/us.jpg') }}" alt="user-image" class="h-4 w-6">
             </span>
         </button>
-        <div class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-40 z-50 mt-2 transition-[margin,opacity] duration-300 bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg p-2">
+        <div
+            class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-40 z-50 mt-2 transition-[margin,opacity] duration-300 bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg p-2">
             <!-- item-->
-            <a href="javascript:void(0);" class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+            <a href="javascript:void(0);"
+                class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                 <img src="{{ asset('/images/flags/germany.jpg') }}" alt="user-image" class="h-4">
                 <span class="align-middle">German</span>
             </a>
 
             <!-- item-->
-            <a href="javascript:void(0);" class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+            <a href="javascript:void(0);"
+                class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                 <img src="{{ asset('/images/flags/italy.jpg') }}" alt="user-image" class="h-4">
                 <span class="align-middle">Italian</span>
             </a>
 
             <!-- item-->
-            <a href="javascript:void(0);" class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+            <a href="javascript:void(0);"
+                class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                 <img src="{{ asset('/images/flags/spain.jpg') }}" alt="user-image" class="h-4">
                 <span class="align-middle">Spanish</span>
             </a>
 
             <!-- item-->
-            <a href="javascript:void(0);" class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+            <a href="javascript:void(0);"
+                class="flex items-center gap-2.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                 <img src="{{ asset('/images/flags/russia.jpg') }}" alt="user-image" class="h-4">
                 <span class="align-middle">Russian</span>
             </a>
@@ -83,7 +88,8 @@
                 <i class="mgc_notification_line text-2xl"></i>
             </span>
         </button>
-        <div class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-80 z-50 mt-2 transition-[margin,opacity] duration-300 bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg">
+        <div
+            class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-80 z-50 mt-2 transition-[margin,opacity] duration-300 bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700 rounded-lg">
 
             <div class="p-2 border-b border-dashed border-gray-200 dark:border-gray-700">
                 <div class="flex items-center justify-between">
@@ -102,12 +108,14 @@
                     <div class="card-body">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <div class="flex justify-center items-center h-9 w-9 rounded-full bg text-white bg-primary">
+                                <div
+                                    class="flex justify-center items-center h-9 w-9 rounded-full bg text-white bg-primary">
                                     <i class="mgc_message_3_line text-lg"></i>
                                 </div>
                             </div>
                             <div class="flex-grow truncate ms-2">
-                                <h5 class="text-sm font-semibold mb-1">Datacorp <small class="font-normal text-gray-500 ms-1">1 min ago</small></h5>
+                                <h5 class="text-sm font-semibold mb-1">Datacorp <small
+                                        class="font-normal text-gray-500 ms-1">1 min ago</small></h5>
                                 <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
                             </div>
                         </div>
@@ -123,7 +131,8 @@
                                 </div>
                             </div>
                             <div class="flex-grow truncate ms-2">
-                                <h5 class="text-sm font-semibold mb-1">Admin <small class="font-normal text-gray-500 ms-1">1 hr ago</small></h5>
+                                <h5 class="text-sm font-semibold mb-1">Admin <small
+                                        class="font-normal text-gray-500 ms-1">1 hr ago</small></h5>
                                 <small class="noti-item-subtitle text-muted">New user registered</small>
                             </div>
                         </div>
@@ -134,11 +143,14 @@
                     <div class="card-body">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <img src="{{ asset('/images/users/avatar-2.jpg') }}" class="rounded-full h-9 w-9" alt="">
+                                <img src="{{ asset('/images/users/avatar-2.jpg') }}" class="rounded-full h-9 w-9"
+                                    alt="">
                             </div>
                             <div class="flex-grow truncate ms-2">
-                                <h5 class="text-sm font-semibold mb-1">Cristina Pride <small class="font-normal text-gray-500 ms-1">1 day ago</small></h5>
-                                <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next meeting</small>
+                                <h5 class="text-sm font-semibold mb-1">Cristina Pride <small
+                                        class="font-normal text-gray-500 ms-1">1 day ago</small></h5>
+                                <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next
+                                    meeting</small>
                             </div>
                         </div>
                     </div>
@@ -150,7 +162,8 @@
                     <div class="card-body">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <div class="flex justify-center items-center h-9 w-9 rounded-full bg-primary text-white">
+                                <div
+                                    class="flex justify-center items-center h-9 w-9 rounded-full bg-primary text-white">
                                     <i class="mgc_message_1_line text-lg"></i>
                                 </div>
                             </div>
@@ -166,18 +179,21 @@
                     <div class="card-body">
                         <div class="flex items-center">
                             <div class="flex-shrink-0">
-                                <img src="{{ asset('/images/users/avatar-4.jpg') }}" class="rounded-full h-9 w-9" alt="">
+                                <img src="{{ asset('/images/users/avatar-4.jpg') }}" class="rounded-full h-9 w-9"
+                                    alt="">
                             </div>
                             <div class="flex-grow truncate ms-2">
                                 <h5 class="text-sm font-semibold mb-1">Karen Robinson</h5>
-                                <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and awesome design</small>
+                                <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and awesome
+                                    design</small>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
 
-            <a href="javascript:void(0);" class="p-2 border-t border-dashed border-gray-200 dark:border-gray-700 block text-center text-primary underline font-semibold">
+            <a href="javascript:void(0);"
+                class="p-2 border-t border-dashed border-gray-200 dark:border-gray-700 block text-center text-primary underline font-semibold">
                 View All
             </a>
         </div>
@@ -198,26 +214,38 @@
         <button data-fc-type="dropdown" data-fc-placement="bottom-end" type="button" class="nav-link">
             <img src="{{ asset('/images/users/user-6.jpg') }}" alt="user-image" class="rounded-full h-10">
         </button>
-        <div class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-44 z-50 transition-[margin,opacity] duration-300 mt-2 bg-white shadow-lg border rounded-lg p-2 border-gray-200 dark:border-gray-700 dark:bg-gray-800">
-            <a class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="pages-gallery.html">
-                <i class="mgc_pic_2_line  me-2"></i>
-                <span>Gallery</span>
+        <div
+            class="fc-dropdown fc-dropdown-open:opacity-100 hidden opacity-0 w-44 z-50 transition-[margin,opacity] duration-300 mt-2 bg-white shadow-lg border rounded-lg p-2 border-gray-200 dark:border-gray-700 dark:bg-gray-800">
+            <a class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
+                href="pages-gallery.html">
+                <span>
+                    @if (Auth::check())
+                        <p>Hi, {{ Auth::user()->first_name }}</p>
+                    @else
+                        <p>Welcome, Guest!</p>
+                    @endif
+
+                </span>
             </a>
-            <a class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="apps-kanban.html">
-                <i class="mgc_task_2_line  me-2"></i>
-                <span>Kanban</span>
-            </a>
-            <a class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" href="{{ route('auth.login') }}">
-                <i class="mgc_lock_line  me-2"></i>
-                <span>Lock Screen</span>
-            </a>
-            <hr class="my-2 -mx-2 border-gray-200 dark:border-gray-700">
-            <form method="POST" action="{{ route('logout')}}">
+            
+            <form method="POST" action="{{ route('lock-screen') }}">
                 @csrf
-            <button type="submit" class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300" >
-                <i class="mgc_exit_line  me-2"></i>
-                <span>Log Out</span>
-            </button>
+                <a
+                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                    <button type="submit">
+                        <i class="mgc_lock_line  me-2"></i>
+                        <span>Lock Screen</span>
+                    </button>
+                </a>
+            </form>
+            <hr class="my-2 -mx-2 border-gray-200 dark:border-gray-700">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit"
+                    class="flex items-center py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                    <i class="mgc_exit_line  me-2"></i>
+                    <span>Log Out</span>
+                </button>
             </form>
         </div>
     </div>
@@ -227,13 +255,18 @@
 <!-- Topbar Search Modal -->
 <div>
     <div id="topbar-search-modal" class="fc-modal hidden w-full h-full fixed top-0 start-0 z-50">
-        <div class="fc-modal-open:opacity-100 fc-modal-open:duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-12 sm:mx-auto">
-            <div class="mx-auto max-w-2xl overflow-hidden rounded-xl bg-white shadow-2xl transition-all dark:bg-slate-800">
+        <div
+            class="fc-modal-open:opacity-100 fc-modal-open:duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-12 sm:mx-auto">
+            <div
+                class="mx-auto max-w-2xl overflow-hidden rounded-xl bg-white shadow-2xl transition-all dark:bg-slate-800">
                 <div class="relative">
-                    <div class="pointer-events-none absolute top-3.5 start-4 text-gray-900 text-opacity-40 dark:text-gray-200">
+                    <div
+                        class="pointer-events-none absolute top-3.5 start-4 text-gray-900 text-opacity-40 dark:text-gray-200">
                         <i class="mgc_search_line text-xl"></i>
                     </div>
-                    <input type="search" class="h-12 w-full border-0 bg-transparent ps-11 pe-4 text-gray-900 placeholder-gray-500 dark:placeholder-gray-300 dark:text-gray-200 focus:ring-0 sm:text-sm" placeholder="Search...">
+                    <input type="search"
+                        class="h-12 w-full border-0 bg-transparent ps-11 pe-4 text-gray-900 placeholder-gray-500 dark:placeholder-gray-300 dark:text-gray-200 focus:ring-0 sm:text-sm"
+                        placeholder="Search...">
                 </div>
             </div>
         </div>

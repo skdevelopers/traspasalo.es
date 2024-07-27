@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
         return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
     }
         //$roles = Role::findOrFail(2);
-        //$user->syncRoles($roles->name);
+        
     }
     public function index()
     {

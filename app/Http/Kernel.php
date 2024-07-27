@@ -72,4 +72,11 @@ class Kernel extends HttpKernel
     //     // Other middleware
     //     'cache.permissions' => \App\Http\Middleware\CachePermissions::class,
     // ];
+    protected $routeMiddleware = [
+        // Other middleware
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'lock-screen' => \App\Http\Middleware\LockScreen::class,
+
+    ];
+    
 }

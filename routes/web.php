@@ -40,7 +40,7 @@ require __DIR__ . '/auth.php';
 Route::get('categories/{category}/subcategories', [CategoryController::class, 'getSubcategories'])
     ->name('categories.subcategories');
     //admin routes
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['auth','role:admin']], function () {
         Route::resource('permissions', PermissionController::class)->names([
             'index' => 'permissions.index',
             'create' => 'permissions.create',
@@ -68,7 +68,7 @@ Route::resource('sales', SalesController::class)->middleware('auth');
 Route::resource('suppliers', SupplierController::class)->middleware('auth');
 Route::post('/upload-media', [UploadController::class, 'upload'])->name('upload-media');
 Route::delete('/delete-media/{media}', [UploadController::class, 'delete'])->name('delete-media');
-Route::resource('/users', RegisteredUserController::class)->middleware('auth');
+//Route::resource('/users', RegisteredUserController::class)->middleware('auth');
 // Route::delete('/users/{id}/destroy', [RegisteredUserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 // Route::get('/users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('users.edit')->middleware('auth');
 // Route::put('/users/{id}/update', [RegisteredUserController::class, 'update'])->name('users.update')->middleware('auth');
@@ -86,7 +86,6 @@ Route::prefix('/api/')->group(function () {
 Route::get('/admin/login', fn () => redirect('/login'));
 
 
-Route::get('/home', fn () => view('index'))->name('home')->middleware('auth');
 Route::get('/charts', fn () => view('charts'))->name('charts');
 Route::get('/apps/calendar', fn () => view('apps.calender'))->name('apps.calendar');
 Route::get('/apps/tickets', fn () => view('apps.tickets'))->name('apps.tickets');
@@ -104,7 +103,7 @@ Route::post('/auth/register/step2', [RegisteredUserController::class, 'postStep2
 
 // Route::get('/auth/register', fn() => view('auth.register'))->name('auth.register');
 Route::get('/auth/auth.recoverpw', fn () => view('auth.recoverpw'))->name('auth.recoverpw');
-Route::get('/auth/lock-screen', fn () => view('auth.lock-screen'))->name('auth.lock-screen');
+//Route::get('/auth/lock-screen', fn () => view('auth.lock-screen'))->name('auth.lock-screen');
 Route::get('/pages/starter', fn () => view('pages.starter'))->name('pages.starter');
 Route::get('/pages/timeline', fn () => view('pages.timeline'))->name('pages.timeline');
 Route::get('/pages/invoice', fn () => view('pages.invoice'))->name('pages.invoice');
@@ -233,4 +232,26 @@ Route::get('/test-permissions', function () {
         'roles' => $roles,
         'permissions' => $permissions,
     ]);
+});
+
+
+// routes/web.php
+
+use App\Http\Controllers\Auth\SocialController;
+
+Route::get('login/google', [SocialController::class, 'redirectToProvider'])->name('google.login');
+Route::get('auth/google/callback', [SocialController::class, 'handleProviderCallback']);
+
+use App\Http\Controllers\LockScreenController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lock-screen', [LockScreenController::class, 'showLockScreen'])->name('lock-screen');
+    Route::post('/unlock-screen', [LockScreenController::class, 'unlockScreen'])->name('unlock-screen');
+    Route::post('/lock-screen', [LockScreenController::class, 'lockScreen'])->name('lock-screen.store');
+});
+
+// Apply lock-screen middleware to all routes that need protection
+Route::middleware(['auth', 'lock-screen'])->group(function () {
+    Route::get('/home', fn () => view('index'))->name('home');
+// Add other routes that need protection here
 });

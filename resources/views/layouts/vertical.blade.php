@@ -10,6 +10,11 @@
 </head>
 
 <body>
+    @if (session('lock-screen'))
+        <script>
+            window.location.href = '{{ route('lock-screen') }}';
+        </script>
+    @endif
 
     <div class="flex wrapper">
 
@@ -44,6 +49,38 @@
     <script>
         document.getElementById("year").innerHTML = (new Date().getFullYear());
     </script>
+    <script>
+        let inactivityTime = function () {
+            let time;
+            function resetTimer() {
+                clearTimeout(time);
+                time = setTimeout(lock, 300000); // 5 minutes of inactivity
+            }
+
+            function lock() {
+                fetch('/lock-screen', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        window.location.href = '{{ route('lock-screen') }}';
+                    }
+                });
+            }
+
+            window.onload = resetTimer;
+            document.onmousemove = resetTimer;
+            document.onkeypress = resetTimer;
+            document.onscroll = resetTimer;
+            document.onclick = resetTimer;
+        };
+
+        inactivityTime();
+
+    </script>
+
     @stack('scripts')
 </body>
 
