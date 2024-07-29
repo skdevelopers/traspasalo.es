@@ -31,7 +31,8 @@ class User extends Authenticatable
         'password',
         'provider',
         'provider_id',
-        'avatar'
+        'avatar',
+        'account_type_id',
     ];
 
     /**
@@ -77,6 +78,11 @@ class User extends Authenticatable
     public function payables(): HasMany
     {
         return $this->hasMany(Payable::class);
+    }
+
+    public function accountType(): BelongsTo
+    {
+        return $this->belongsTo(AccountType::class);
     }
 
 }

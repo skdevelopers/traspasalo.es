@@ -255,3 +255,7 @@ Route::middleware(['auth', 'lock-screen'])->group(function () {
     Route::get('/home', fn () => view('index'))->name('home');
 // Add other routes that need protection here
 });
+
+use App\Http\Controllers\AccountTypeController;
+
+Route::resource('account-types', AccountTypeController::class);
