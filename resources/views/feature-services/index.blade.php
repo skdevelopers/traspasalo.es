@@ -28,11 +28,17 @@
                             <td class="border px-4 py-2">{{ $featureService->id }}</td>
                             <td class="border px-4 py-2">{{ $featureService->name }}</td>
                             <td class="border px-4 py-2 whitespace-nowrap">
+                                @can('edit roles')
+                                    
                                 
                                 <a href="{{ route('feature-services.edit', $featureService->id) }}"
                                    class="text-blue-500 hover:text-blue-700 mx-0.5">
                                     <i class="mgc_edit_line text-lg"></i>
                                 </a>
+                                @endcan
+                                @can('delete roles')
+                                    
+                                
                                 <form action="{{ route('feature-services.destroy', $featureService->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -41,6 +47,7 @@
                                         <i class="mgc_delete_line text-xl"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         

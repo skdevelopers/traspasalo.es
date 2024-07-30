@@ -49,6 +49,6 @@ class SocialController extends Controller
         Auth::login($user, true);
 
         // Redirect to the intended URL or default to the dashboard
-        return redirect()->intended('dashboard');
+        return redirect()->intended('home');
     }
 }

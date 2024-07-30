@@ -16,6 +16,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\AccountTypeController;
 
 
 /*
@@ -51,17 +52,18 @@ Route::get('categories/{category}/subcategories', [CategoryController::class, 'g
             'destroy' => 'permissions.destroy',
         ]);
 
-        Route::resource('categories', CategoryController::class);
-        Route::resource('roles', RoleController::class);
-        Route::resource('feature-services', FeatureServiceController::class);
+        Route::resource('roles', RoleController::class);    
         Route::resource('users', RegisteredUserController::class);
-
-
 
     });
 
+    Route::group(['middleware' => ['auth']], function () {
+    Route::resource('categories', CategoryController::class);
+    Route::resource('feature-services', FeatureServiceController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('account-types', AccountTypeController::class);
+    });
 
-Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::resource('cash-flows', CashFlowController::class)->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
 Route::resource('sales', SalesController::class)->middleware('auth');
@@ -192,8 +194,8 @@ Route::get('/register-next', function () {
 // Route::get('/forgot-password', function () {
 //     return view('front.forgotPassword');
 // });
-Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create');
-Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store');
+Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create')->middleware('auth');
+Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store')->middleware('auth');
 Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
 Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
 
@@ -256,6 +258,6 @@ Route::middleware(['auth', 'lock-screen'])->group(function () {
 // Add other routes that need protection here
 });
 
-use App\Http\Controllers\AccountTypeController;
 
-Route::resource('account-types', AccountTypeController::class);
+
+

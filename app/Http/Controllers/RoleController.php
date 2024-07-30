@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:view roles')->only(['index']);
+        $this->middleware('can:create roles')->only(['create', 'store']);
+        $this->middleware('can:edit roles')->only(['edit', 'update']);
+        $this->middleware('can:delete roles')->only(['destroy']);
+        $this->middleware('can:Allow_Categories');
+        $this->middleware('can:Allow_Features');
+        $this->middleware('can:Allow_Packages');
+        $this->middleware('can:Allow_Clients');
+    }
+
     public function index()
     {
         $roles = Role::with('permissions')->get();

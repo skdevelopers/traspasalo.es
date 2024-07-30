@@ -67,6 +67,11 @@
                                             r="3"></circle>
                                     </svg>
                                 </button>
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <span class="text-red-600">User or Password are incorrect </span>
+                                    </div>
+                                @endif
                             </div>
                             <div class="text-right mt-2">
                                 <a href="{{ route('auth.recoverpw') }}"
@@ -101,8 +106,34 @@
         </div>
     </div>
 
+    <script>
+        function togglePassword() {
+            console.log('hello');
+            const passwordField = document.getElementById('password');
+            const phoneField = document.getElementById('phone-input');
+            const svgPaths = document.querySelectorAll('svg path, svg line, svg circle');
 
-    @vite('resources/js/app.js')
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+
+
+
+            svgPaths.forEach(path => {
+                if (path.classList.contains('hs-password-active:hidden')) {
+                    path.classList.toggle('hidden');
+                    path.classList.toggle('block');
+                } else if (path.classList.contains('hs-password-active:block')) {
+                    path.classList.toggle('block');
+                    path.classList.toggle('hidden');
+                }
+            });
+        }
+
+        window.togglePassword = togglePassword;
+    </script>
 </body>
 
 </html>

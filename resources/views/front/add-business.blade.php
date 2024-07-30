@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 <!-- services.blade.php -->
 @section('content')
-
+<h3 class="text-center text-3xl p-5"> Add Business</h3>
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -12,22 +12,36 @@
     </div>
 @endif
 
-<div class="mx-auto bg-white p-4 rounded-lg shadow-md">
+<div class="mx-auto bg-white p-4 rounded-lg shadow-md container xl:container-xl my-10">
     <form action="{{ route('business.store') }}" id="business-form" method="POST" enctype="multipart/form-data" x-data="featuresForm()">
         @csrf
 
         <!-- Business Category -->
-        <div class="mb-4">
-            <label for="category_id" class="block text-gray-700">Business Category</label>
-            <select id="category_id" name="category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
-                <option value="">Select</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            @error('category_id')
-                <p class="text-red-500 mt-1">{{ $message }}</p>
-            @enderror
+        <div class="mb-4 flex gap-5">
+            <div class="w-1/2">
+                <label for="category_id" class="block text-gray-700">Business Category</label>
+                <select id="category_id" name="category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
+                    <option value="">Select</option>
+                     @foreach ($categories as $category)
+                        <option value={{ $category->id }} > {{ $category->name }}</option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="w-1/2">
+                <label for="sub_category_id" class="block text-gray-700">Sub Category</label>
+                <select id="sub_category_id" name="sub_category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
+                    <option value="">Select</option>
+                    {{-- @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach --}}
+                </select>
+                @error('sub_category_id')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                @enderror
+            </div>
         </div>
 
         <!-- Business Title -->
@@ -113,6 +127,7 @@
 
         <!-- Hidden input to store files -->
         <input type="file" id="hiddenImagesInput" name="images[]" multiple style="display: none;">
+        
         <!-- Property Location (Map integration) -->
         <div x-data="locationApp()" x-init="initMap">
             <div class="mb-4">
@@ -129,14 +144,14 @@
         <div class="mb-4">
             <label for="features-services" class="block text-gray-700">Select Features Services</label>
             <div class="flex flex-wrap gap-2">
-                @foreach ($features as $feature)
+                 @foreach ($features as $feature)
                     <button type="button"
                         class="px-4 py-2 border border-purple-500 text-purple-500 rounded-full hover:bg-purple-100 focus:outline-none"
                         :class="selectedFeatures.includes({{ $feature->id }}) ? 'bg-purple-500 text-white' : 'text-purple-500'"
                         @click="toggleFeature({{ $feature->id }})">
                         {{ $feature->name }} +
                     </button>
-                @endforeach
+                @endforeach 
             </div>
         </div>
 
@@ -151,64 +166,63 @@
         </div>
     </form>
 </div>
-
 @endsection
 
 @push('scripts')
     <script>
 function imageUploader() {
-            return {
-                files: [],
-                fileId: 0,
-                get imageCountText() {
-                    return `(${this.files.length}/10)`;
-                },
-                handleFileUpload(event) {
-                    const selectedFiles = Array.from(event.target.files);
+    return {
+        files: [],
+        fileId: 0,
+        get imageCountText() {
+            return `(${this.files.length}/10)`;
+        },
+        handleFileUpload(event) {
+            const selectedFiles = Array.from(event.target.files);
 
-                    // Prevent uploading more than 10 images
-                    if (this.files.length + selectedFiles.length > 10) {
-                        alert('You can upload a maximum of 10 images.');
-                        return;
-                    }
+            // Prevent uploading more than 10 images
+            if (this.files.length + selectedFiles.length > 10) {
+                alert('You can upload a maximum of 10 images.');
+                return;
+            }
 
-                    selectedFiles.forEach(file => {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            const fileId = this.fileId++;
-                            this.files.push({
-                                id: fileId,
-                                url: e.target.result,
-                                name: file.name,
-                                file: file
-                            });
-
-                            // Update the hidden input field with file data
-                            this.updateHiddenInput();
-                        };
-                        reader.readAsDataURL(file);
+            selectedFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const fileId = this.fileId++;
+                    this.files.push({
+                        id: fileId,
+                        url: e.target.result,
+                        name: file.name,
+                        file: file
                     });
 
-                    // Clear the input to allow uploading the same file again
-                    event.target.value = '';
-                },
-                removeFile(index) {
-                    this.files.splice(index, 1);
-                    // Update the hidden input field after removing a file
+                    // Update the hidden input field with file data
                     this.updateHiddenInput();
-                },
-                updateHiddenInput() {
-                    const dataTransfer = new DataTransfer();
-                    this.files.forEach(file => {
-                        dataTransfer.items.add(file.file);
-                    });
+                };
+                reader.readAsDataURL(file);
+            });
 
-                    // Update the hidden input element
-                    const inputElement = document.getElementById('hiddenImagesInput');
-                    inputElement.files = dataTransfer.files;
-                }
-            };
+            // Clear the input to allow uploading the same file again
+            event.target.value = '';
+        },
+        removeFile(index) {
+            this.files.splice(index, 1);
+            // Update the hidden input field after removing a file
+            this.updateHiddenInput();
+        },
+        updateHiddenInput() {
+            const dataTransfer = new DataTransfer();
+            this.files.forEach(file => {
+                dataTransfer.items.add(file.file);
+            });
+
+            // Update the hidden input element
+            const inputElement = document.getElementById('hiddenImagesInput');
+            inputElement.files = dataTransfer.files;
         }
+    };
+}
 
 function locationApp() {
     return {
@@ -247,21 +261,20 @@ function locationApp() {
 }
 
 // Load Google Maps script dynamically with async and defer
-const script = document.createElement('script');
-script.src = "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places";
-script.async = true;
-script.defer = true;
-document.head.appendChild(script);
+function loadGoogleMapsScript() {
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initMap`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadGoogleMapsScript();
+});
 
 window.initMap = function() {
-    // Initialize Alpine.js if not already initialized
-    if (!window.Alpine) {
-        document.addEventListener('alpine:init', () => {
-            locationApp().initMap();
-        });
-    } else {
-        locationApp().initMap();
-    }
+    locationApp().initMap();
 }
 
 function featuresForm() {
@@ -281,4 +294,3 @@ function featuresForm() {
 }
     </script>
 @endpush
-

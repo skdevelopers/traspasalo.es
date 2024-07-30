@@ -28,14 +28,17 @@
                             <td class="border px-4 py-2">{{ $category->id }}</td>
                             <td class="border px-4 py-2">{{ $category->name }}</td>
                             <td class="border px-4 py-2 whitespace-nowrap">
-                                <button onclick="toggleSubcategories({{ $category->id }})"
+                                {{-- <button onclick="toggleSubcategories({{ $category->id }})"
                                         class="text-blue-500 hover:text-blue-700 mx-0.5">
                                      <i class="fa fa-info-circle" aria-hidden="true"></i> View Subcategories
-                                </button>
+                                </button> --}}
+                                @can('edit roles')
                                 <a href="{{ route('categories.edit', $category->id) }}"
                                    class="text-blue-500 hover:text-blue-700 mx-0.5">
                                     <i class="mgc_edit_line text-lg"></i>
                                 </a>
+                                @endcan
+                                @can('delete roles')
                                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -44,6 +47,7 @@
                                         <i class="mgc_delete_line text-xl"></i>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                         <tr>

@@ -43,34 +43,39 @@
                     <span class="menu-text"> Cash Flow </span>
                 </a>
             </li> --}}
-            @role('admin')
+            @can('Allow_Categories')
             <li class="menu-item">
                 <a href="{{ route('categories.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Categories </span>
                 </a>
             </li>
-            
+            @endcan
+            @can('Allow_Features')
             <li class="menu-item">
                 <a href="{{ route('feature-services.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Features </span>
                 </a>
             </li>
-            @endrole
+            @endcan
             <li class="menu-item">
                 <a href="{{ route('business.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Businesses </span>
                 </a>
             </li>
-            @role('admin')
+            
+            @can('Allow_Clients')
             <li class="menu-item">
                 <a href="{{ route('customers.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Clients </span>
                 </a>
             </li>
+            @endcan
+
+            @role('admin')
             <li class="menu-item">
                 <a href="{{ route('roles.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
@@ -90,13 +95,16 @@
                     <span class="menu-text"> Users </span>
                 </a>
             </li>
+            @endrole
+
+            @can('Allow_Packages')
             <li class="menu-item">
                 <a href="{{ route('account-types.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
-                    <span class="menu-text"> Account Types </span>
+                    <span class="menu-text"> Packages </span>
                 </a>
             </li>
-            @endrole
+            @endcan
             {{-- 
 
             <li class="menu-item">

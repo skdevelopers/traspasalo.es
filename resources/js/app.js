@@ -429,6 +429,7 @@ class ThemeCustomizer {
 }
 
 function togglePassword() {
+    console.log('hello');
     const passwordField = document.getElementById('password');
     const phoneField = document.getElementById('phone-input');
     const svgPaths = document.querySelectorAll('svg path, svg line, svg circle');

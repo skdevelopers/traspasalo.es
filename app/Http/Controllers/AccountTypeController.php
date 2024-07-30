@@ -82,6 +82,10 @@ class AccountTypeController extends Controller
     // Show the form for editing the specified resource.
     public function edit(AccountType $accountType)
     {
+        // Check if the descriptions property is a JSON string and decode it
+        if (is_string($accountType->descriptions)) {
+            $accountType->descriptions = json_decode($accountType->descriptions, true);
+        }
         return view('account-type.edit', compact('accountType'));
     }
 

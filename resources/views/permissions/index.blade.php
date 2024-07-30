@@ -1,13 +1,14 @@
 @extends('layouts.vertical', ['title' => 'Permissions', 'sub_title' => 'Permissions'])
 
 @section('content')
-    <div class="grid grid-cols-12">
-        <div class="mb-4">
-            <a href="{{ route('permissions.create') }}" class="btn inline-flex justify-center items-center bg-primary text-white w-full">
-                <i class="mgc_add_line text-lg me-2"></i> Create New
-            </a>
-        </div>
+<div class="grid grid-cols-12">
+    <div class="mb-4 col-span-12">
+        <a href="{{ route('permissions.create')}}"
+           class="btn inline-flex justify-center items-center bg-primary text-white w-full">
+            <i class="mgc_add_line text-lg me-2"></i> Create New Permissions
+        </a>
     </div>
+</div>
     <div class="col-span-12">
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white rounded-md shadow-md">
