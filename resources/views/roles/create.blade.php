@@ -10,6 +10,5 @@
                 <button type="submit" class="mt-4 px-4 py-2 bg-green-600 text-white rounded">Create Role</button>
             </form>
         
-            <p class="text-red-500">You do not have permission to create roles.</p>
     </div>
 @endsection
