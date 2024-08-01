@@ -19,8 +19,8 @@ class Business extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
-        'category_id', 'business_title', 'description', 'check_in', 'check_out',
-        'age_restriction', 'pets_permission', 'location'
+        'category_id','subcategory_id', 'business_title', 'description', 'check_in', 'check_out',
+        'age_restriction', 'pets_permission', 'location', 'user_id'
     ];
 
     public function category()
@@ -47,5 +47,15 @@ class Business extends Model implements HasMedia
     public function media(): MorphMany
     {
         return $this->morphMany(Media::class, 'model');
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function subcategory(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'subcategory_id');
     }
 }

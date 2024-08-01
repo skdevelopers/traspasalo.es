@@ -4,9 +4,17 @@
 @section('content')
     <div class="grid grid-cols-12">
         <div class="mb-4 col-span-12">
-            <a href="{{ route('categories.create') }}"
+            <a href="{{ route('category') }}"
                class="btn inline-flex justify-center items-center bg-primary text-white w-full">
                 <i class="mgc_add_line text-lg me-2"></i> Create New Category
+            </a>
+        </div>
+    </div>
+    <div class="grid grid-cols-12">
+        <div class="mb-4 col-span-12">
+            <a href="{{ route('categories.create') }}"
+               class="btn inline-flex justify-center items-center bg-primary text-white w-full">
+                <i class="mgc_add_line text-lg me-2"></i> Create New SubCategory
             </a>
         </div>
     </div>
@@ -28,10 +36,10 @@
                             <td class="border px-4 py-2">{{ $category->id }}</td>
                             <td class="border px-4 py-2">{{ $category->name }}</td>
                             <td class="border px-4 py-2 whitespace-nowrap">
-                                {{-- <button onclick="toggleSubcategories({{ $category->id }})"
+                                <button onclick="toggleSubcategories({{ $category->id }})"
                                         class="text-blue-500 hover:text-blue-700 mx-0.5">
                                      <i class="fa fa-info-circle" aria-hidden="true"></i> View Subcategories
-                                </button> --}}
+                                </button>
                                 @can('edit roles')
                                 <a href="{{ route('categories.edit', $category->id) }}"
                                    class="text-blue-500 hover:text-blue-700 mx-0.5">
@@ -75,16 +83,18 @@
 @push('scripts')
     <script>
         function toggleSubcategories(categoryId) {
+            
             const subcategoriesList = document.getElementById(`subcategories-${categoryId}`);
-
-            if (subcategoriesList.innerHTML.trim() !== '') {
-                subcategoriesList.classList.toggle('hidden');
-                return;
+           //console.log(subcategoriesList.innerHTML.trim());
+             if (subcategoriesList.children.length !== 0) {
+                 subcategoriesList.classList.toggle('hidden');
+                 return;
             }
-
+              
             axios.get(`/categories/${categoryId}/subcategories`)
                     .then(response => {
                         const subcategories = response.data;
+                        console.log(response.data);
                         subcategoriesList.innerHTML = '';
 
                         if (subcategories.length > 0) {
@@ -107,4 +117,6 @@
                     });
         }
     </script>
+
+
 @endpush

@@ -15,6 +15,7 @@
                     <th class="px-4 py-2">#</th>
                     <th class="px-4 py-2">Title</th>
                     <th class="px-4 py-2">Category</th>
+                    <th class="px-4 py-2">SubCategory</th>
                     <th class="px-4 py-2">Description</th>
                     <th class="px-4 py-2">Age Restriction</th>
                     <th class="px-4 py-2">Pets Permission</th>
@@ -23,11 +24,15 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $count=0;
+                @endphp
                 @forelse($businesses as $business)
                     <tr>
-                        <td class="border px-4 py-2">{{ $business->id }}</td>
+                        <td class="border px-4 py-2">{{ ++$count }}</td>
                         <td class="border px-4 py-2">{{ $business->business_title }}</td>
                         <td class="border px-4 py-2">{{ $business->category->name }}</td>
+                        <td class="border px-4 py-2">{{ $business->subcategory->name }}</td>
                         <td class="border px-4 py-2">{{ Str::limit($business->description, 50) }}</td>
                         <td class="border px-4 py-2">{{ $business->age_restriction }}</td>
                         <td class="border px-4 py-2">{{ $business->pets_permission }}</td>

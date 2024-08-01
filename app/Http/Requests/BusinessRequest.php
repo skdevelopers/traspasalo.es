@@ -14,6 +14,7 @@ class BusinessRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:categories,id|different:category_id',
             'business_title' => 'required|string|max:255',
             'description' => 'required',
             'check_in' => 'required',

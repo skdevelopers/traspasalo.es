@@ -19,7 +19,11 @@ class BusinessDTO
     /**
      * @var int The ID of the category the business belongs to.
      */
+    public int $user_id;
+
     public int $category_id;
+
+    public int $subcategory_id;
 
     /**
      * @var string The title of the business.
@@ -84,6 +88,7 @@ class BusinessDTO
     public function __construct(
         ?int $id,
         int $category_id,
+        int $subcategory_id,
         string $business_title,
         string $description,
         string $check_in,
@@ -95,7 +100,9 @@ class BusinessDTO
         array $images
     ) {
         $this->id = $id;
+        $this->user_id = auth()->id();
         $this->category_id = $category_id;
+        $this->subcategory_id = $subcategory_id;
         $this->business_title = $business_title;
         $this->description = $description;
         $this->check_in = $check_in;
@@ -115,7 +122,9 @@ class BusinessDTO
     public function toArray(): array
     {
         return [
+            'user_id' => $this->user_id,
             'category_id' => $this->category_id,
+            'subcategory_id' => $this->subcategory_id,
             'business_title' => $this->business_title,
             'description' => $this->description,
             'check_in' => $this->check_in,

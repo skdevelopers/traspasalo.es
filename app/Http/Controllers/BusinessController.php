@@ -22,10 +22,25 @@ class BusinessController extends Controller
     }
 
     public function index()
-    {
-        $businesses = Business::all();
-        return view('business.index', compact('businesses'));
+{
+    if (auth()->user()->hasRole('admin')) {
+        // Admin user, show all businesses
+        $businesses = Business::with('category', 'subcategory', 'user')->paginate(10);
+        // Debugging
+        //dd("heelo");
+        //dd($businesses);
+    } else {
+        // Regular user, show only their own businesses
+        $businesses = Business::where('user_id', auth()->id())
+            ->with('category', 'subcategory', 'user')
+            ->paginate(10);
+        // Debugging
+        //dd($businesses);
     }
+
+    // Pass the businesses to the view
+    return view('business.index', compact('businesses'));
+}
 
     public function create()
     {
@@ -37,8 +52,14 @@ class BusinessController extends Controller
 
     public function store(BusinessRequest $request)
     {
-
+        // dd(auth()->id());   
         $data = $request->validated();
+       // dd($data); 
+
+        $subcategory = Category::find($request->subcategory_id);
+        if ($subcategory->parent_id != $request->category_id) {
+            return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
+        }
 
         if (!empty($data['features'])) {
             //Log::info('Original Features:', $data['features']); // Log the original input
@@ -60,10 +81,11 @@ class BusinessController extends Controller
             $data['features'] = [];
         }
 
-
+        $data['user_id']=auth()->id();
         $businessDTO = new BusinessDTO(
             null, // Assuming this is a create operation and ID is null
-            $data['category_id'],
+            $data['user_id'],
+            $data['subcategory_id'],
             $data['business_title'],
             $data['description'],
             $data['check_in'],

@@ -32,13 +32,13 @@
             </div>
             <div class="w-1/2">
                 <label for="sub_category_id" class="block text-gray-700">Sub Category</label>
-                <select id="sub_category_id" name="sub_category_id" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
+                <select id="subcategory_id" name="subcategory_id" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
                     <option value="">Select</option>
                     {{-- @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach --}}
                 </select>
-                @error('sub_category_id')
+                @error('subcategory_id')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
@@ -292,5 +292,36 @@ function featuresForm() {
         }
     };
 }
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const categorySelect = document.getElementById('category_id');
+        const subCategorySelect = document.getElementById('subcategory_id');
+    
+        categorySelect.addEventListener('change', function () {
+            const categoryId = this.value;
+    
+            // Clear previous subcategories
+            subCategorySelect.innerHTML = '<option value="">Select</option>';
+    
+            if (categoryId) {
+                // Fetch subcategories for the selected category
+                axios.get(`/categories/${categoryId}/subcategories`)
+                    .then(response => {
+                        const subcategories = response.data;
+                        subcategories.forEach(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            subCategorySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching subcategories:', error);
+                    });
+            }
+        });
+    });
     </script>
 @endpush

@@ -59,6 +59,11 @@ Route::get('categories/{category}/subcategories', [CategoryController::class, 'g
 
     Route::group(['middleware' => ['auth']], function () {
     Route::resource('categories', CategoryController::class);
+    
+    Route::get('/category', function () {
+        return view('categories.category');
+    })->name('category');
+
     Route::resource('feature-services', FeatureServiceController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('account-types', AccountTypeController::class);
