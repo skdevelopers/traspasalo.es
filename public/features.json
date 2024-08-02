@@ -1,0 +1,102 @@
+[
+    {
+        "feature": "Accessibility",
+        "icon": "accessibility_new"
+    },
+    {
+        "feature": "Hot water",
+        "icon": "hot_tub"
+    },
+    {
+        "feature": "Air-conditioning",
+        "icon": "ac_unit"
+    },
+    {
+        "feature": "Store",
+        "icon": "storefront"
+    },
+    {
+        "feature": "Heating",
+        "icon": "whatshot"
+    },
+    {
+        "feature": "Fully equipped",
+        "icon": "kitchen"
+    },
+    {
+        "feature": "Kitchen",
+        "icon": "kitchen"
+    },
+    {
+        "feature": "Working",
+        "icon": "work"
+    },
+    {
+        "feature": "Travel",
+        "icon": "flight"
+    },
+    {
+        "feature": "Corner",
+        "icon": "rounded_corner"
+    },
+    {
+        "feature": "License",
+        "icon": "verified_user"
+    },
+    {
+        "feature": "Security door",
+        "icon": "security"
+    },
+    {
+        "feature": "Smoke outlet",
+        "icon": "smoke_free"
+    },
+    {
+        "feature": "Alarm system",
+        "icon": "alarm"
+    },
+    {
+        "feature": "Terrace",
+        "icon": "roofing"
+    },
+    {
+        "feature": "Alcohol license",
+        "icon": "local_bar"
+    },
+    {
+        "feature": "Real Estate",
+        "icon": "home_work"
+    },
+    {
+        "feature": "Beauty Salon",
+        "icon": "spa"
+    },
+    {
+        "feature": "Car Washer",
+        "icon": "local_car_wash"
+    },
+    {
+        "feature": "Fitness Centre",
+        "icon": "fitness_center"
+    },
+    {
+        "feature": "Swimming Pool",
+        "icon": "pool"
+    },
+    {
+        "feature": "Roof",
+        "icon": "roofing"
+    },
+    {
+        "feature": "Wi-Fi",
+        "icon": "wifi"
+    },
+    {
+        "feature": "Electricity",
+        "icon": "electrical_services"
+    },
+    {
+        "feature": "Gas",
+        "icon": "local_gas_station"
+    }
+]

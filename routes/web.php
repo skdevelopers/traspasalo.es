@@ -201,12 +201,10 @@ Route::get('/register-next', function () {
 // });
 Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create')->middleware('auth');
 Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store')->middleware('auth');
-Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
+//Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
 Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
 
-Route::get('/show_business', function () {
-    return view('front.add-property');
-});
+Route::get('/business/{id}', [BusinessController::class, 'getBusiness'])->name('business.show');
 // Route::get('/services', function () {
 //     return view('front.services');
 // });
@@ -228,17 +226,10 @@ Route::get('/blogs', function () {
 
 
 
-Route::get('/test-permissions', function () {
-    $user = User::find(1); // Replace with the ID of the user you want to test
-    
-    // Check the user's roles and permissions
-    $roles = $user->getRoleNames(); // Get all roles
-    $permissions = $user->getAllPermissions(); // Get all permissions
+Route::get('/test', function () {
 
-    return response()->json([
-        'roles' => $roles,
-        'permissions' => $permissions,
-    ]);
+    return view('front.test');
+
 });
 
 

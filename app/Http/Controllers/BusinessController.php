@@ -25,10 +25,10 @@ class BusinessController extends Controller
 {
     if (auth()->user()->hasRole('admin')) {
         // Admin user, show all businesses
-        $businesses = Business::with('category', 'subcategory', 'user')->paginate(10);
+        $businesses = Business::with('category', 'subcategory', 'user','media')->paginate(10);
         // Debugging
         //dd("heelo");
-        //dd($businesses);
+       // dd($businesses);
     } else {
         // Regular user, show only their own businesses
         $businesses = Business::where('user_id', auth()->id())
@@ -154,10 +154,27 @@ class BusinessController extends Controller
     public function show($id)
     {
         try {
-            $business = Business::with(['category', 'features'])->findOrFail($id);
+            $business = Business::with(['category', 'features','subcategory', 'user','media'])->findOrFail($id);
             return response()->json($business);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Business not found'], 404);
         }
     }
+
+    public function getBusiness($id)
+    {
+        try {
+            $business = Business::with(['category', 'features','subcategory', 'user','media'])->findOrFail($id);
+            $media=$business->media->map(function ($item) {
+                $item['original_url'] = $item->getFullUrl(); // Use getFullUrl() to generate the correct URL
+                return $item->only(['original_url', 'name']);
+            })->toArray();
+            // dd($business);
+            return view('front.add-property', compact('business', 'media'));
+        } catch (\Exception $e) {
+            return view('front.add-property', ['business' => null]);
+        } 
+    }
+
+
 }
