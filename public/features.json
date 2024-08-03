@@ -98,5 +98,13 @@
     {
         "feature": "Gas",
         "icon": "local_gas_station"
+    },
+    {
+        "feature": "Parking",
+        "icon": "local_parking"
+    },
+    {
+        "feature": "Business",
+        "icon": "business_center"
     }
 ]

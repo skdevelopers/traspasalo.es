@@ -176,5 +176,55 @@ class BusinessController extends Controller
         } 
     }
 
+    public function getLocations(){
 
+        $locations = Business::pluck('id','location');
+        return response()->json([
+            'locations' => $locations,
+            'status' => 1,
+        ], 200);
+
+
+    }
+
+    public function showBusinesses(Request $request)
+    {
+        $query = Business::with(['category', 'subcategory', 'media']);
+
+        $hasFilters = false;
+
+        if ($request->has('category_id') && !is_null($request->input('category_id'))) {
+            $query->where('category_id', $request->input('category_id'));
+            $hasFilters = true;
+            
+        }
+
+        if ($request->has('subcategory_id') && !is_null($request->input('subcategory_id'))) {
+            $query->where('subcategory_id', $request->input('subcategory_id'));
+            $hasFilters = true;
+            //dd("heelo");
+        }
+
+        if ($request->has('location') && !is_null($request->input('location'))) {
+            $location = strtoupper($request->input('location'));
+            $query->whereRaw('UPPER(location) LIKE ?', ["%{$location}%"]);
+            $hasFilters = true;
+        }
+
+        if ($request->has('keyword') && !is_null($request->input('keyword'))) {
+            $query->where('business_title', 'like', '%' . $request->input('keyword') . '%');
+            $hasFilters = true;
+        }
+
+        // If no filters are applied, get all businesses
+        if (!$hasFilters) {
+            $businesses = Business::with(['category', 'subcategory', 'media'])->get();
+            
+        } else {
+            $businesses = $query->get();
+           // dd($businesses);
+        }
+
+        return view('business.show', compact('businesses'));
+    }
 }

@@ -39,8 +39,8 @@
                         <td class="border px-4 py-2">{{ $business->location }}</td>
 
                         <td class="border px-4 py-2 whitespace-nowrap">
-                            <button class="text-blue-500 hover:text-blue-700 mx-0.5" @click="fetchBusiness({{ $business->id }})">
-                                <i class="mgc_expand_line text-lg"></i> View Details
+                            <button class="text-blue-500 hover:text-blue-700 mx-0.5">
+                                <i class="mgc_expand_line text-lg"></i><a href={{ route('business.show', $business->id) }}> View Details
                             </button>
                         </td>
                     </tr>

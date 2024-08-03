@@ -5,66 +5,75 @@
 @section('header-subtitle', '')
 
 @push('styles')
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 @endpush
 @push('styles')
-<style>
-    .custom-grid-5 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, auto);
-      gap: 1rem;
-    }
-    .custom-grid-5 > div:nth-child(1),
-    .custom-grid-5 > div:nth-child(2) {
-      grid-column: span 2;
-    }
-    .custom-grid-5 > div:nth-child(3),
-    .custom-grid-5 > div:nth-child(4),
-    .custom-grid-5 > div:nth-child(5) {
-      /* grid-column: span 1; */
-      grid-row: 2;
-    }
-  </style>
+    <style>
+        .custom-grid-5 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 1rem;
+        }
+
+        .custom-grid-5>div:nth-child(1),
+        .custom-grid-5>div:nth-child(2) {
+            grid-column: span 2;
+        }
+
+        .custom-grid-5>div:nth-child(3),
+        .custom-grid-5>div:nth-child(4),
+        .custom-grid-5>div:nth-child(5) {
+            /* grid-column: span 1; */
+            grid-row: 2;
+        }
+    </style>
 @endpush
 
 @section('content')
 
     <!--image grid-->
-     <!-- Image Grid -->
-     <div class="container-fluid mx-auto p-0">
+    <!-- Image Grid -->
+    <div class="container-fluid mx-auto p-0">
         <div class="container mx-auto p-4" x-data="gallery()" x-init="initializeImages()">
             <!-- Grid layout -->
             <div :class="gridClass">
-              <template x-for="(image, index) in visibleImages" :key="index">
-                <div class="relative bg-gray-300 cursor-pointer" @click="openModal(index)">
-                  <img :src="image.src" :alt="image.alt" class="w-full"
-                       :class="{'blur-md': index === 3 && images.length > 4, 'opacity-50': index === 3 && images.length > 4}">
-                  <span x-show="index === 3 && images.length > 4" class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">4+</span>
-                </div>
-              </template>
+                <template x-for="(image, index) in visibleImages" :key="index">
+                    <div class="relative bg-gray-300 cursor-pointer" @click="openModal(index)">
+                        <img :src="image.src" :alt="image.alt" class="w-full"
+                            :class="{
+                                'blur-md': index === 3 && images.length > 4,
+                                'opacity-50': index === 3 && images.length >
+                                    4
+                            }">
+                        <span x-show="index === 3 && images.length > 4"
+                            class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold">4+</span>
+                    </div>
+                </template>
             </div>
-        
+
             <!-- Modal -->
-            <div x-show="isModalOpen" @click.away="isModalOpen = false" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-              <div class="bg-white p-4 rounded-lg w-full md:w-3/4 relative">
-                <button @click="isModalOpen = false" class="absolute top-0 right-0 m-2 text-black">X</button>
-                <div class="overflow-hidden">
-                  <div class="flex transition-transform duration-500" :style="'transform: translateX(-' + modalIndex * 100 + '%)'">
-                    <template x-for="(image, index) in images" :key="index">
-                      <div class="min-w-full flex justify-center">
-                        <img :src="image.src" :alt="image.alt" class="modal-image">
-                      </div>
-                    </template>
-                  </div>
+            <div x-show="isModalOpen" @click.away="isModalOpen = false"
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="bg-white p-4 rounded-lg w-full md:w-3/4 relative">
+                    <button @click="isModalOpen = false" class="absolute top-0 right-0 m-2 text-black">X</button>
+                    <div class="overflow-hidden">
+                        <div class="flex transition-transform duration-500"
+                            :style="'transform: translateX(-' + modalIndex * 100 + '%)'">
+                            <template x-for="(image, index) in images" :key="index">
+                                <div class="min-w-full flex justify-center">
+                                    <img :src="image.src" :alt="image.alt" class="modal-image">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="flex justify-between mt-4">
+                        <button @click="prev" class="bg-gray-800 text-white px-4 py-2 rounded">Previous</button>
+                        <button @click="next" class="bg-gray-800 text-white px-4 py-2 rounded">Next</button>
+                    </div>
                 </div>
-                <div class="flex justify-between mt-4">
-                  <button @click="prev" class="bg-gray-800 text-white px-4 py-2 rounded">Previous</button>
-                  <button @click="next" class="bg-gray-800 text-white px-4 py-2 rounded">Next</button>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
     <!--description and host contact-->
     <div class="bg-white">
@@ -124,7 +133,7 @@
 
             <!-- Description Section -->
             <div class="bg-white p-6 rounded-lg">
-            {{ $business['description'] }}
+                {{ $business['description'] }}
             </div>
         </div>
     </div>
@@ -133,10 +142,10 @@
 
         <div class="container mx-auto px-4" x-data="featureDisplay()" x-init="fetchFeatures">
             <h2 class="text-2xl font-bold text-center mb-2">Best Featured Amenities</h2>
-        <p class="text-center text-gray-600 mb-8">All premium useful features are included in this service</p>
-            
+            <p class="text-center text-gray-600 mb-8">All premium useful features are included in this service</p>
+
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                <template x-for="feature in features" :key="feature.feature">
+                <template x-for="feature in matchedFeatures" :key="feature.feature">
                     <div class="text-center bg-white w-full border border-gray-300 p-4 rounded-lg">
                         <div class="flex justify-center items-center h-12 w-12 bg-gray-100 rounded-full mb-2 mx-auto">
                             <span class="material-icons-round" x-text="feature.icon"></span>
@@ -145,8 +154,8 @@
                     </div>
                 </template>
             </div>
-          </div>
-          <hr class="border-t-4  border-gray-300 m-14">
+        </div>
+        <hr class="border-t-4  border-gray-300 m-14">
 
         <!-- Property Rules / Information -->
         <div class="container mx-auto max-w-5xl mt-8 p-6">
@@ -158,7 +167,7 @@
                         <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3.5 2.1a.5.5 0 1 1-.5.866L8 8.417V4a.5.5 0 0 1 .5-.5z" />
                         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
                     </svg>
-                    <p class="text-gray-700">Check in: 02PM</p>
+                    <p class="text-gray-700">{{ $business['check_in'] }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
@@ -166,11 +175,17 @@
                         <path d="M8 3.5a.5.5 0 0 1 .5.5v4.25l3.5 2.1a.5.5 0 1 1-.5.866L8 8.417V4a.5.5 0 0 1 .5-.5z" />
                         <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14z" />
                     </svg>
-                    <p class="text-gray-700">Check Out: Until 12:00 PM</p>
+                    <p class="text-gray-700">{{ $business['check_out'] }}</p>
                 </div>
                 <div class="flex items-center space-x-2">
-                    <img src={{ asset('/assets/icons/person.svg') }} class="h-5 w-2" />
-                    <p class="text-gray-700">No age restriction</p>
+                    <img src={{ asset('front/assets/icons/person.svg') }} class="h-5 w-2" />
+                    <p class="text-gray-700">
+                        @if (!empty($business['age_restriction']))
+                            {{ $business['age_restriction'] }}
+                        @else
+                            No age restriction
+                        @endif
+                    </p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <svg width="28" height="22" viewBox="0 0 32 29" fill="none"
@@ -179,7 +194,13 @@
                             d="M24.7491 7.56298L21.0291 2.18998C20.7534 1.79271 20.387 1.46684 19.9602 1.23938C19.5335 1.01192 19.0587 0.889401 18.5751 0.881982L11.5161 0.781982H11.5011C7.85714 0.781982 5.06114 1.39198 3.26014 4.36698C1.58414 7.13398 0.869141 11.851 0.869141 20.137V21.15H3.18314L1.69414 28.75H3.75714L5.24614 21.15H5.93214C7.58643 21.1648 9.18017 20.5283 10.3691 19.378C11.4911 18.265 12.2693 16.8529 12.6111 15.31V15.295L14.3481 6.97198H12.2821L10.6381 14.851C10.1381 16.919 8.63814 19.124 5.93814 19.124H2.89814C2.95314 11.955 3.60614 7.70498 4.99814 5.41298C6.15814 3.48898 7.86014 2.80198 11.4951 2.80198L18.5461 2.90198C18.7085 2.90406 18.868 2.94511 19.0113 3.02168C19.1545 3.09825 19.2772 3.2081 19.3691 3.34198L23.5691 9.41998L29.2211 10.362V11.435L28.2781 16.462C28.0001 17.946 27.5241 18.693 25.5781 18.927L17.5841 20.295L17.5311 28.745H19.5561L19.5981 22.005L25.8451 20.935C27.04 20.8604 28.1703 20.3668 29.0371 19.541C29.7116 18.7841 30.1411 17.8407 30.2691 16.835L31.2461 11.623V8.64598L24.7491 7.56298Z"
                             fill="black" />
                     </svg>
-                    <p class="text-gray-700">Pets are not allowed</p>
+                    <p class="text-gray-700">
+                        @if ($business['pets_permission'] == 'YES')
+                            Pets are allowed
+                        @else
+                            Pets are not allowed
+                        @endif
+                    </p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <svg width="33" height="27" viewBox="0 0 33 27" fill="none"
@@ -197,10 +218,10 @@
                     <p class="text-gray-700">Accepted payment methods</p>
                 </div>
                 <div class="flex items-center space-x-4 mt-4 md:mt-0">
-                    <img src={{ asset('/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
-                    <img src={{ asset('/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
-                    <img src={{ asset('/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
-                    <img src={{ asset('/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
+                    <img src={{ asset('front/assets/icons/visa-card.svg') }} alt="Visa" class="w-10 h-6">
+                    <img src={{ asset('front/assets/icons/master-card.svg') }} alt="MasterCard" class="w-10 h-6">
+                    <img src={{ asset('front/assets/icons/amex.svg') }} alt="Amex" class="w-10 h-6">
+                    <img src={{ asset('front/assets/icons/paypal.svg') }} alt="PayPal" class="w-10 h-6">
                 </div>
             </div>
         </div>
@@ -273,7 +294,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -291,7 +312,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -308,7 +329,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -325,7 +346,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -342,7 +363,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -359,7 +380,7 @@
                     <div>
                         <div class="flex space-x-4">
                             <div class=" w-48 h-48 pt-10">
-                                <img src={{ asset('/assets/images/male-icon.png') }} class="" />
+                                <img src={{ asset('front/assets/images/male-icon.png') }} class="" />
                             </div>
                             <div class="p-3">
                                 <h4 class="font-semibold text-violet-950">Jessica G. <span
@@ -526,7 +547,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- First Search Card -->
                 <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100 max-w-sm mx-auto">
-                    <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image"
+                    <img src="{{ asset('front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image"
                         class="w-full md:w-1/3 max-h-max rounded-md">
                     <div class="flex flex-col justify-between px-4">
                         <div>
@@ -547,7 +568,7 @@
                 </div>
                 <!-- Second Search Card -->
                 <div class="flex flex-col md:flex-row rounded-lg border-2 border-gray-100  max-w-sm mx-auto">
-                    <img src="{{ asset('/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image"
+                    <img src="{{ asset('front/assets/images/hotel-Newyork.svg') }}" alt="Hotel Image"
                         class="w-full md:w-1/3 max-h-max rounded-md">
                     <div class="flex flex-col justify-between px-4">
                         <div>
@@ -584,94 +605,99 @@
         }
     </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             console.log("Setting mediaData");
             window.mediaData = @json($media);
             console.log(window.mediaData);
         });
-    
+
         function gallery() {
-          return {
-            images: [],
-            isModalOpen: false,
-            modalIndex: 0,
-            initializeImages() {
-                console.log("Initializing gallery component");
-                this.waitForMediaData(() => {
-                    if (window.mediaData && Array.isArray(window.mediaData)) {
-                        console.log("Media data found, initializing images");
-                        this.images = window.mediaData.map(media => ({
-                            src: media.original_url,
-                            alt: media.name,
-                        }));
-                        console.log(this.images);
-                    } else {
-                        console.error('mediaData is not available or not an array');
+            return {
+                images: [],
+                isModalOpen: false,
+                modalIndex: 0,
+                initializeImages() {
+                    console.log("Initializing gallery component");
+                    this.waitForMediaData(() => {
+                        if (window.mediaData && Array.isArray(window.mediaData)) {
+                            console.log("Media data found, initializing images");
+                            this.images = window.mediaData.map(media => ({
+                                src: media.original_url,
+                                alt: media.name,
+                            }));
+                            console.log(this.images);
+                        } else {
+                            console.error('mediaData is not available or not an array');
+                        }
+                    });
+                },
+                waitForMediaData(callback) {
+                    const checkMediaData = () => {
+                        if (window.mediaData && Array.isArray(window.mediaData)) {
+                            callback();
+                        } else {
+                            setTimeout(checkMediaData, 50);
+                        }
+                    };
+                    checkMediaData();
+                },
+                get visibleImages() {
+                    return this.images.slice(0, 4);
+                },
+                get gridClass() {
+                    switch (this.images.length) {
+                        case 1:
+                            return 'grid grid-cols-1 gap-2';
+                        case 2:
+                            return 'grid grid-cols-2 gap-2';
+                        case 3:
+                            return 'grid grid-cols-3 gap-2';
+                        case 4:
+                            return 'grid grid-cols-2 gap-2';
+                        default:
+                            return 'grid grid-cols-2 gap-2';
                     }
-                });
-            },
-            waitForMediaData(callback) {
-                const checkMediaData = () => {
-                    if (window.mediaData && Array.isArray(window.mediaData)) {
-                        callback();
-                    } else {
-                        setTimeout(checkMediaData, 50);
+                },
+                openModal(index) {
+                    this.modalIndex = index;
+                    this.isModalOpen = true;
+                },
+                next() {
+                    if (this.modalIndex < this.images.length - 1) {
+                        this.modalIndex++;
                     }
-                };
-                checkMediaData();
-            },
-            get visibleImages() {
-              return this.images.slice(0, 4);
-            },
-            get gridClass() {
-              switch (this.images.length) {
-                case 1:
-                  return 'grid grid-cols-1 gap-2';
-                case 2:
-                  return 'grid grid-cols-2 gap-2';
-                case 3:
-                  return 'grid grid-cols-3 gap-2';
-                case 4:
-                  return 'grid grid-cols-2 gap-2';
-                default:
-                  return 'grid grid-cols-2 gap-2';
-              }
-            },
-            openModal(index) {
-              this.modalIndex = index;
-              this.isModalOpen = true;
-            },
-            next() {
-              if (this.modalIndex < this.images.length - 1) {
-                this.modalIndex++;
-              }
-            },
-            prev() {
-              if (this.modalIndex > 0) {
-                this.modalIndex--;
-              }
-            }
-          };
+                },
+                prev() {
+                    if (this.modalIndex > 0) {
+                        this.modalIndex--;
+                    }
+                }
+            };
         }
 
 
-//get features from json files
+        //get features from json files
         function featureDisplay() {
             return {
                 features: [],
+                databaseFeatures: @json($business['features']), // Assuming $business['features'] contains the features from the database
+                matchedFeatures: [],
                 fetchFeatures() {
                     fetch('/features.json')
                         .then(response => response.json())
                         .then(data => {
                             this.features = data;
+                            this.matchFeatures();
                         })
                         .catch(error => console.error('Error fetching features:', error));
+                },
+                matchFeatures() {
+                    const dbFeatureNames = this.databaseFeatures.map(dbFeature => dbFeature.name);
+                    this.matchedFeatures = this.features.filter(feature =>
+                        dbFeatureNames.includes(feature.feature)
+                    );
                 }
             }
         }
     </script>
-    
-
-
-
 @endpush

@@ -20,7 +20,7 @@
 </div>
 
 <div class="p-4 grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4">
-    @foreach($businesses as $business)
+    @forelse($businesses as $business)
     <div class="bg-white p-4 rounded-lg shadow-md">
         <div class="mb-4">
             <img src="{{ $business->media[0]->original_url ?? 'https://via.placeholder.com/150' }}" alt="{{ $business->media[0]->name }}" class="w-full h-48 object-cover rounded-lg">
@@ -30,7 +30,9 @@
         <p class="text-gray-500">{{ $business->location }}</p>
         <p class="text-gray-500">250 €</p>
     </div>
-    @endforeach
+    @empty
+       No Business Found
+    @endforelse
 </div>
 
 @endsection

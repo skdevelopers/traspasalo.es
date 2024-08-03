@@ -212,6 +212,10 @@ Route::get('/contact', function () {
     return view('front.contact-us');
 });
 
+Route::get('/about', function () {
+    return view('front.about');
+});
+
 Route::get('/price', function () {
     return view('front.price');
 });
@@ -222,8 +226,8 @@ Route::get('/blogs', function () {
     return view('front.blog');
 });
 
-//Route::get('/getCategories', [CategoryController::class, 'getCategories']);
-
+Route::get('/getCategories', [CategoryController::class, 'getCategories']);
+Route::get('/businesses', [BusinessController::class, 'showBusinesses']);
 
 
 Route::get('/test', function () {
