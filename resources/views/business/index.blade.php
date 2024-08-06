@@ -54,6 +54,7 @@
                 @endforelse
             </tbody>
         </table>
+        {{ $businesses->links() }}
     </div>
 
 

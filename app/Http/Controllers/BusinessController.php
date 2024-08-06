@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BusinessRequest;
@@ -10,7 +9,6 @@ use App\Models\FeatureService;
 use Illuminate\Http\Request;
 use App\Services\MediaUploadService;
 use App\DTO\BusinessDTO;
-use Illuminate\Support\Facades\Log;
 
 class BusinessController extends Controller
 {
@@ -22,25 +20,17 @@ class BusinessController extends Controller
     }
 
     public function index()
-{
-    if (auth()->user()->hasRole('admin')) {
-        // Admin user, show all businesses
-        $businesses = Business::with('category', 'subcategory', 'user','media')->paginate(10);
-        // Debugging
-        //dd("heelo");
-       // dd($businesses);
-    } else {
-        // Regular user, show only their own businesses
-        $businesses = Business::where('user_id', auth()->id())
-            ->with('category', 'subcategory', 'user')
-            ->paginate(10);
-        // Debugging
-        //dd($businesses);
-    }
+    {
+        if (auth()->user()->hasRole('admin')) {
+            $businesses = Business::with('category', 'subcategory', 'user', 'media')->paginate(10);
+        } else {
+            $businesses = Business::where('user_id', auth()->id())
+                ->with('category', 'subcategory', 'user')
+                ->paginate(10);
+        }
 
-    // Pass the businesses to the view
-    return view('business.index', compact('businesses'));
-}
+        return view('business.index', compact('businesses'));
+    }
 
     public function create()
     {
@@ -49,41 +39,20 @@ class BusinessController extends Controller
         return view('front.add-business', compact('categories', 'features'));
     }
 
-
     public function store(BusinessRequest $request)
     {
-        // dd(auth()->id());   
         $data = $request->validated();
-       // dd($data); 
 
         $subcategory = Category::find($request->subcategory_id);
         if ($subcategory->parent_id != $request->category_id) {
             return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
         }
 
-        if (!empty($data['features'])) {
-            //Log::info('Original Features:', $data['features']); // Log the original input
+        $data['features'] = $this->processFeatures($data['features']);
+        $data['user_id'] = auth()->id();
 
-            // If features are submitted as a single string, split them into an array
-            if (is_string($data['features'][0])) {
-                $data['features'] = explode(',', $data['features'][0]);
-                //Log::info('Exploded Features:', $data['features']); // Log after explode
-            }
-
-            // Ensure the array contains only numeric values
-            $data['features'] = array_filter($data['features'], 'is_numeric');
-            //Log::info('Filtered Numeric Features:', $data['features']); // Log after filtering
-
-            // Convert feature IDs to integers
-            $data['features'] = array_map('intval', $data['features']);
-            //Log::info('Integer Features:', $data['features']); // Log the integer conversion
-        } else {
-            $data['features'] = [];
-        }
-
-        $data['user_id']=auth()->id();
         $businessDTO = new BusinessDTO(
-            null, // Assuming this is a create operation and ID is null
+            null,
             $data['user_id'],
             $data['subcategory_id'],
             $data['business_title'],
@@ -99,25 +68,16 @@ class BusinessController extends Controller
 
         $business = Business::create($businessDTO->toArray());
 
-        if (!empty($businessDTO->images)) {
-            //dd($businessDTO->images);
-            foreach ($businessDTO->images as $image) {
-                $result = $this->mediaUploadService->uploadAndAttachMedia($image, $business);
-                if (!$result['success']) {
-                    return back()->withErrors($result['message']);
-                }
-            }
-        }
+        $this->handleImages($businessDTO->images, $business);
 
         if (!empty($businessDTO->features)) {
-            //Log::info('Feature IDs:', $businessDTO->features); // Log for debugging
-
             $business->features()->sync($businessDTO->features);
         }
+        
+        $business->generateQrCode();
 
         return redirect()->route('business.index')->with('success', 'Business created successfully.');
     }
-
 
     public function edit(Business $business)
     {
@@ -154,7 +114,7 @@ class BusinessController extends Controller
     public function show($id)
     {
         try {
-            $business = Business::with(['category', 'features','subcategory', 'user','media'])->findOrFail($id);
+            $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
             return response()->json($business);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Business not found'], 404);
@@ -164,45 +124,74 @@ class BusinessController extends Controller
     public function getBusiness($id)
     {
         try {
-            $business = Business::with(['category', 'features','subcategory', 'user','media'])->findOrFail($id);
-            $media=$business->media->map(function ($item) {
-                $item['original_url'] = $item->getFullUrl(); // Use getFullUrl() to generate the correct URL
+            $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+            $media = $business->media->map(function ($item) {
+                $item['original_url'] = $item->getFullUrl();
                 return $item->only(['original_url', 'name']);
             })->toArray();
-            // dd($business);
             return view('front.add-property', compact('business', 'media'));
         } catch (\Exception $e) {
             return view('front.add-property', ['business' => null]);
-        } 
+        }
     }
 
-    public function getLocations(){
-
-        $locations = Business::pluck('id','location');
+    public function getLocations()
+    {
+        $locations = Business::pluck('id', 'location');
         return response()->json([
             'locations' => $locations,
             'status' => 1,
         ], 200);
-
-
     }
 
     public function showBusinesses(Request $request)
     {
         $query = Business::with(['category', 'subcategory', 'media']);
+        $hasFilters = $this->applyFilters($query, $request);
+        
+        $businesses = $hasFilters ? $query->get() : Business::with(['category', 'subcategory', 'media'])->get();
 
+        return view('business.show', compact('businesses'));
+    }
+
+    private function processFeatures($features)
+    {
+        if (!empty($features)) {
+            if (is_string($features[0])) {
+                $features = explode(',', $features[0]);
+            }
+            $features = array_filter($features, 'is_numeric');
+            $features = array_map('intval', $features);
+        } else {
+            $features = [];
+        }
+        return $features;
+    }
+
+    private function handleImages($images, $business)
+    {
+        if (!empty($images)) {
+            foreach ($images as $image) {
+                $result = $this->mediaUploadService->uploadAndAttachMedia($image, $business);
+                if (!$result['success']) {
+                    return back()->withErrors($result['message']);
+                }
+            }
+        }
+    }
+
+    private function applyFilters($query, Request $request)
+    {
         $hasFilters = false;
 
         if ($request->has('category_id') && !is_null($request->input('category_id'))) {
             $query->where('category_id', $request->input('category_id'));
             $hasFilters = true;
-            
         }
 
         if ($request->has('subcategory_id') && !is_null($request->input('subcategory_id'))) {
             $query->where('subcategory_id', $request->input('subcategory_id'));
             $hasFilters = true;
-            //dd("heelo");
         }
 
         if ($request->has('location') && !is_null($request->input('location'))) {
@@ -216,15 +205,6 @@ class BusinessController extends Controller
             $hasFilters = true;
         }
 
-        // If no filters are applied, get all businesses
-        if (!$hasFilters) {
-            $businesses = Business::with(['category', 'subcategory', 'media'])->get();
-            
-        } else {
-            $businesses = $query->get();
-           // dd($businesses);
-        }
-
-        return view('business.show', compact('businesses'));
+        return $hasFilters;
     }
 }

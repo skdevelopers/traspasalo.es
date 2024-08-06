@@ -23,12 +23,20 @@
     @forelse($businesses as $business)
     <div class="bg-white p-4 rounded-lg shadow-md">
         <div class="mb-4">
-            <img src="{{ $business->media[0]->original_url ?? 'https://via.placeholder.com/150' }}" alt="{{ $business->media[0]->name }}" class="w-full h-48 object-cover rounded-lg">
+            <img src="{{ $business->getFirstMediaUrl('default', 'thumb') ?? 'https://via.placeholder.com/150' }}" alt="{{ $business->business_title }}" class="w-full h-48 object-cover rounded-lg">
         </div>
         <h3 class="text-lg font-bold mb-2"><a href={{ route('business.show', $business->id ) }}>{{ $business->business_title }}</a></h3>
         <p class="text-gray-700 mb-2">{{ $business->description }}</p>
         <p class="text-gray-500">{{ $business->location }}</p>
+        <p class="text-gray-500">Status: {{ ucfirst($business->status) }}</p>
         <p class="text-gray-500">250 €</p>
+        <div class="mt-4">
+             @if ($business->qr_code_path)
+                            <img src="{{ Storage::url($business->qr_code_path) }}" alt="QR Code" width="50">
+                        @else
+                            No QR Code
+                        @endif
+        </div>
     </div>
     @empty
        No Business Found

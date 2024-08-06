@@ -12,6 +12,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.9",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "spatie/data-transfer-object": "^3.9",
         "spatie/image-optimizer": "^1.7",
         "spatie/laravel-medialibrary": "^11.7",
