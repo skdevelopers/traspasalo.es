@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
-use Spatie\Image\Image as SpatieImage;
+use Spatie\Image\Image;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -45,7 +45,7 @@ class MediaUploadService
         $tempPath = tempnam(sys_get_temp_dir(), 'resized_') . '.' . $file->getClientOriginalExtension();
 
         // Resize and optimize the image using Spatie Image
-        SpatieImage::load($file->getPathname())
+        Image::load($file->getPathname())
             ->width($targetWidth)
             ->height($targetHeight)
             ->optimize()
