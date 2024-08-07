@@ -622,7 +622,7 @@
                         if (window.mediaData && Array.isArray(window.mediaData)) {
                             console.log("Media data found, initializing images");
                             this.images = window.mediaData.map(media => ({
-                                src: media.original_url,
+                                src: media.org_url,
                                 alt: media.name,
                             }));
                             console.log(this.images);

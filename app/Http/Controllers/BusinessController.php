@@ -73,7 +73,7 @@ class BusinessController extends Controller
         if (!empty($businessDTO->features)) {
             $business->features()->sync($businessDTO->features);
         }
-        
+
         $business->generateQrCode();
 
         return redirect()->route('business.index')->with('success', 'Business created successfully.');
@@ -125,10 +125,16 @@ class BusinessController extends Controller
     {
         try {
             $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
-            $media = $business->media->map(function ($item) {
-                $item['original_url'] = $item->getFullUrl();
-                return $item->only(['original_url', 'name']);
+            
+            // Filter media to only include business images
+            $media = $business->getMedia('images')->map(function ($item) {
+                $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+                //dd($relativePath);
+                $item['org_url'] = url($relativePath);
+                //dd($item);
+                return $item->only(['org_url', 'name']);
             })->toArray();
+               //dd($media);
             return view('front.add-property', compact('business', 'media'));
         } catch (\Exception $e) {
             return view('front.add-property', ['business' => null]);
@@ -148,9 +154,10 @@ class BusinessController extends Controller
     {
         $query = Business::with(['category', 'subcategory', 'media']);
         $hasFilters = $this->applyFilters($query, $request);
-        
+
         $businesses = $hasFilters ? $query->get() : Business::with(['category', 'subcategory', 'media'])->get();
 
+      //  dd($businesses);
         return view('business.show', compact('businesses'));
     }
 
@@ -179,6 +186,7 @@ class BusinessController extends Controller
             }
         }
     }
+
 
     private function applyFilters($query, Request $request)
     {

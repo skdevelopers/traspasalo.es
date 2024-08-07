@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\Image\Enums\Fit; 
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,7 @@ class Business extends Model implements HasMedia
         parent::boot();
 
         static::created(function ($business) {
-          //s  $business->generateQrCode();
+            //s  $business->generateQrCode();
         });
     }
 
@@ -43,10 +44,19 @@ class Business extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('default')
-            ->useDisk('public');
+        $this->addMediaCollection('images')
+            ->useDisk('public_images');
+
         $this->addMediaCollection('qr_codes')
-            ->useDisk('public');
+            ->useDisk('public_qrcodes');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('resized')
+             ->fit(Fit::Crop, 800, 600)
+            ->optimize()
+            ->nonQueued(); // You can remove this if you want the conversion to be queued
     }
 
     public function media(): MorphMany
@@ -73,16 +83,44 @@ class Business extends Model implements HasMedia
             ->generate(route('business.show', $this->id));
 
         $qrCodePath = 'qrcodes/business_' . $this->id . '.png';
-        Storage::disk('public')->put($qrCodePath, $qrCodeContent);
+        $absoluteQrCodePath = storage_path('app/public/' . $qrCodePath);
 
-        // Log the paths for debugging
-       // \Log::info('QR Code Path: ' . $qrCodePath);
+        // Ensure the directory exists
+        if (!file_exists(dirname($absoluteQrCodePath))) {
+            mkdir(dirname($absoluteQrCodePath), 0755, true);
+        }
+
+        // Save the QR code to the specified path
+        file_put_contents($absoluteQrCodePath, $qrCodeContent);
 
         // Save the QR code path to the database
         $this->update(['qr_code_path' => $qrCodePath]);
 
-        $this->addMedia(storage_path('app/public/' . $qrCodePath))
-        ->preservingOriginal()
-        ->toMediaCollection('qr_codes');
+        // Add the media file to the collection, avoiding duplicate save
+        $this->addMedia($absoluteQrCodePath)
+            ->preservingOriginal()
+            ->toMediaCollection('qr_codes');
+    }
+
+    public function getImageUrl()
+    {
+        $media = $this->getFirstMedia('images');
+       // dd($media);
+        if ($media) {
+            $imageUrl = $media->getPathRelativeToRoot('resized');
+            $imageUrl= asset('/storage/images/'. $imageUrl);
+        } else {
+            $imageUrl = 'https://via.placeholder.com/150';
+        }
+
+      //  echo 'Generated Image URL: ' . $imageUrl . '<br>'; // Print URL for debugging
+        return $imageUrl;
+    }
+
+
+    public function getQrCodeUrl()
+    {
+        $media = $this->getFirstMedia('qr_codes');
+        return $media ? asset('storage/qrcodes/' . $media->file_name) : null;
     }
 }
