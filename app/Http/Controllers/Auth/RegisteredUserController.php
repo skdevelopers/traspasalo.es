@@ -97,9 +97,9 @@ class RegisteredUserController extends Controller
             'roles' => 'required|array',
             'roles.*' => 'exists:roles,name', // Ensure each role exists in the roles table
         ]);
-        dd($request->all());
+        
         $user->syncRoles($request->roles);
-    
+        dd($request->all());
         return redirect()->route('users.index')->with('success', 'User updated and roles assigned successfully');
     }
 
