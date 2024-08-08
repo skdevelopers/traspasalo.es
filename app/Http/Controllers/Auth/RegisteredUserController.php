@@ -92,6 +92,7 @@ class RegisteredUserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        dd($request->all());
         $request->validate([
             'roles' => 'required|array',
             'roles.*' => 'exists:roles,name', // Ensure each role exists in the roles table

@@ -1,6 +1,9 @@
 <div class="mb-4">
     <label for="name" class="block text-gray-700 text-sm font-medium mb-2">Name:</label>
     <input type="text" name="name" id="name" class="w-full mt-1 p-2 border border-gray-300 rounded" value="{{ old('name', $role->name ?? '') }}" required>
+    @error('name')
+        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="mb-4">
@@ -15,4 +18,7 @@
             </div>
         @endforeach
     </div>
+    @error('permissions')
+        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+    @enderror
 </div>
