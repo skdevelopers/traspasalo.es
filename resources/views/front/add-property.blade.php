@@ -94,8 +94,25 @@
                                 d="M4 0C2.34 0 1 1.34 1 3c0 2 3 5 3 5s3-3 3-5c0-1.66-1.34-3-3-3m0 1a2 2 0 0 1 2 2c0 1.11-.89 2-2 2a2 2 0 1 1 0-4" />
                         </svg>
                         <span class="text-gray-700">{{ $business['location'] }}</span>
-                        <span class="text-red-500 ml-1 underline underline-offset-4 md:text-sm text-xs cursor-pointer">Show
-                            On Map</span>
+                        <!-- Trigger Button -->
+                        <div x-data="mapModal('{{ $business['location'] }}')" x-init="init">
+                            <span class="text-red-500 ml-1 underline underline-offset-4 md:text-sm text-xs cursor-pointer" @click="open = true">Show On Map</span>
+                        
+                            <!-- Modal -->
+                            <div x-show="open" class="fixed inset-0 flex items-center justify-center z-50">
+                                <div class="fixed inset-0 bg-black bg-opacity-50"></div>
+                                <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all max-w-lg w-full">
+                                    <div class="p-4">
+                                        <div id="map" class="h-64 w-full"></div>
+                                    </div>
+                                    <div class="p-4 flex justify-end">
+                                        <button @click="open = false" class="bg-red-500 text-white px-4 py-2 rounded">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+    
                     </div>
                     <div class="text-xl text-gray-800 font-semibold mb-4">From $243.00</div>
                 </div>
@@ -123,7 +140,7 @@
                                 <path fill="currentColor"
                                     d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z" />
                             </svg>
-                            Host Contact
+                            <a href="tel:{{ $business['user']->mobile_number }}">Host Contact</a>
                         </button>
                     </div>
                 </div>
@@ -700,4 +717,39 @@
             }
         }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places" defer></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('mapModal', (location) => ({
+                open: false,
+                location: location,
+                init() {
+                    this.$watch('open', (value) => {
+                        if (value) {
+                            this.initMap();
+                        }
+                    });
+                },
+                initMap() {
+                    const geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ address: this.location }, (results, status) => {
+                        if (status === 'OK') {
+                            const loc = results[0].geometry.location;
+                            const map = new google.maps.Map(document.getElementById('map'), {
+                                center: loc,
+                                zoom: 14,
+                            });
+                            new google.maps.Marker({
+                                position: loc,
+                                map: map,
+                            });
+                        } else {
+                            alert('Geocode was not successful for the following reason: ' + status);
+                        }
+                    });
+                }
+            }));
+        });
+    </script>
+
 @endpush
