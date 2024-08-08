@@ -99,7 +99,7 @@ class RegisteredUserController extends Controller
         ]);
         
         $user->syncRoles($request->roles);
-        dd($request->all());
+        dd($user->syncRoles($request->roles));
         return redirect()->route('users.index')->with('success', 'User updated and roles assigned successfully');
     }
 
