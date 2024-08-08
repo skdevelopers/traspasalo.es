@@ -53,14 +53,38 @@
                         </button>
                     </a>
                     </div>
-
-
+                  
+                   @guest
+                       
                     <a href="{{ route('register.step1') }}" class="flex">
                         <button class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
                             Register
                         </button>
                     </a>
+
+                    <a href="{{ route('auth.login') }}" class="flex">
+                        <button class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
+                            Login
+                        </button>
+                    </a>
+                    @endguest
+                    @auth
+                    <a href="{{ route('home') }}" class="flex">
+                        <button class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
+                            Dashboard
+                        </button>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                    <a href="{{ route('logout') }}" class="flex">
+                        <button  type="submit" class="px-6 py-2 bg-orange-500 text-white hover:bg-orange-600 rounded">
+                            Logout
+                        </button>
+                    </a>
+                </form>
+                    @endauth
                 </li>
+                
             </ul>
         </div>
     </div>

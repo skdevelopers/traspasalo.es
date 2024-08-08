@@ -186,7 +186,7 @@ Route::get('/maps/google', fn () => view('maps.google'))->name('maps.google');
 
 Route::get('/', function () {
     return view('front.home');
-});
+})->name('homepage');
 // Route::get('/login', function () {
 //     return view('front.login');
 //});
