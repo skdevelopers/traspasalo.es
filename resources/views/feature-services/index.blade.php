@@ -31,10 +31,10 @@
                                 @can('edit roles')
                                     
                                 
-                                <a href="{{ route('feature-services.edit', $featureService->id) }}"
+                                {{-- <a href="{{ route('feature-services.edit', $featureService->id) }}"
                                    class="text-blue-500 hover:text-blue-700 mx-0.5">
                                     <i class="mgc_edit_line text-lg"></i>
-                                </a>
+                                </a> --}}
                                 @endcan
                                 @can('delete roles')
                                     

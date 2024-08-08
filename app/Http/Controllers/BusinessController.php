@@ -125,16 +125,33 @@ class BusinessController extends Controller
     {
         try {
             $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
-            
+
             // Filter media to only include business images
             $media = $business->getMedia('images')->map(function ($item) {
-                $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
-                //dd($relativePath);
-                $item['org_url'] = url($relativePath);
-                //dd($item);
+
+                $convertedUrl = $item->getPathRelativeToRoot('resized');
+                //dd($convertedUrl);
+                // If there's no conversion, fallback to the original URL
+                if (!$convertedUrl) {
+                    dd("hello");
+                    $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+                    $item['org_url'] = url($relativePath);
+                }
+                else
+                {
+                    $item['org_url'] = asset('/storage/images/'. $convertedUrl);
+                }
+
+                // Add the URL to the item
+                
+                
+                //$relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+
+                //$item['org_url'] = url($relativePath);
+
                 return $item->only(['org_url', 'name']);
             })->toArray();
-               //dd($media);
+            //dd($media);
             return view('front.add-property', compact('business', 'media'));
         } catch (\Exception $e) {
             return view('front.add-property', ['business' => null]);
@@ -157,7 +174,7 @@ class BusinessController extends Controller
 
         $businesses = $hasFilters ? $query->get() : Business::with(['category', 'subcategory', 'media'])->get();
 
-      //  dd($businesses);
+        //  dd($businesses);
         return view('business.show', compact('businesses'));
     }
 
