@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('model_has_roles', function (Blueprint $table) {
             // Set default value for model_type column
-            $table->string('model_type')->default('App\Models\User')->change();
+            $table->string('model_type')->default('App\\Models\\User')->change();
         });
     }
 
