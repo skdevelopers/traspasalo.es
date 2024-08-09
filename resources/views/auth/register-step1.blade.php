@@ -16,7 +16,7 @@
         <!-- Back to Home Button -->
         <div class="absolute top-0 left-0 m-4 flex items-center space-x-2 text-white z-10">
             <a href="{{ route('homepage') }}" class="flex items-center space-x-2">
-                <img src="{{ asset('/front/assets/images/back.svg') }}" alt="Back button" class="w-12 h-12">
+                <img src="{{ asset('/front/assets/images/back.svg') }}" alt="Back button" class="w-12 h-12"/>
                 <span class="opacity-85">Back to home</span>
             </a>
         </div>
