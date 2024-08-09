@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
+use App\Models\User;
+use App\Models\Customer;
 use App\Models\Category;
 use App\Models\FeatureService;
 use Illuminate\Http\Request;
@@ -17,6 +19,14 @@ class BusinessController extends Controller
     public function __construct(MediaUploadService $mediaUploadService)
     {
         $this->mediaUploadService = $mediaUploadService;
+    }
+    public function allCount()
+    {
+        $totalBusinesses = Business::count(); // Assuming you have a Business model
+        $totalUsers = User::count(); // Assuming you have a User model
+        $totalCustomers = Customer::count(); // Assuming you have a Customer model
+
+        return view('/index', compact('totalBusinesses', 'totalUsers', 'totalCustomers'));
     }
 
     public function index()
@@ -136,15 +146,13 @@ class BusinessController extends Controller
                     dd("hello");
                     $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
                     $item['org_url'] = url($relativePath);
-                }
-                else
-                {
-                    $item['org_url'] = asset('/storage/images/'. $convertedUrl);
+                } else {
+                    $item['org_url'] = asset('/storage/images/' . $convertedUrl);
                 }
 
                 // Add the URL to the item
-                
-                
+
+
                 //$relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
 
                 //$item['org_url'] = url($relativePath);

@@ -204,6 +204,8 @@ Route::post('/add-business', [BusinessController::class, 'store'])->name('busine
 //Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
 Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
 
+Route::get('/index', [BusinessController::class, 'allCount'])->middleware('auth');
+
 Route::get('/business/{id}', [BusinessController::class, 'getBusiness'])->name('business.show');
 // Route::get('/services', function () {
 //     return view('front.services');
@@ -254,7 +256,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Apply lock-screen middleware to all routes that need protection
 Route::middleware(['auth', 'lock-screen'])->group(function () {
-    Route::get('/home', fn () => view('index'))->name('home');
+    Route::get('/home', [BusinessController::class, 'allCount'])->name('home');
 // Add other routes that need protection here
 });
 
