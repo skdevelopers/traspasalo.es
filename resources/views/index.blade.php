@@ -2,8 +2,10 @@
 
 @section('content')
     <div class="grid 2xl:grid-cols-4 gap-6 mb-6">
-
+      
         <div class="2xl:col-span-3">
+
+        @role('admin')
             <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-6 mb-6">
                 <div class="card">
                     <div class="p-6 flex flex-col items-center justify-center text-center">
@@ -47,6 +49,7 @@
                     </div>
                 </div>
             </div>
+        @endrole
             
             
 
