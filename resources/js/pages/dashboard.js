@@ -40,7 +40,7 @@ var options = {
     },
     colors: colors,
     series: [{
-        name: 'Projects',
+        name: 'Businesses',
         data: [56, 38, 85, 72, 28, 69, 55, 52, 69]
     }, {
         name: 'Working Hours',

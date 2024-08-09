@@ -12,15 +12,15 @@
     <a href="{{ route('home') }}" class="logo-box">
         <!-- Light Brand Logo -->
         <div class="logo-light">
-            <img src="{{ asset('/images/logo-light.png') }}" class="logo-lg h-6" alt="Light logo">
-            <img src="{{ asset('/images/logo-sm.png') }}" class="logo-sm" alt="Small logo">
+            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-lg h-6" alt="Light logo">
+            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
         </div>
 
         <!-- Dark Brand Logo -->
-        <div class="logo-dark">
+        {{-- <div class="logo-dark">
             <img src="{{ asset('/images/logo-dark.png') }}" class="logo-lg h-6" alt="Dark logo">
             <img src="{{ asset('/images/logo-sm.png') }}" class="logo-sm" alt="Small logo">
-        </div>
+        </div> --}}
     </a>
 
     <!-- Topbar Search Modal Button -->
@@ -32,7 +32,7 @@
     </button>
 
     <!-- Language Dropdown Button -->
-    <div class="relative">
+    {{-- <div class="relative">
         <button data-fc-type="dropdown" data-fc-placement="bottom-end" type="button" class="nav-link p-2 fc-dropdown">
             <span class="flex items-center justify-center h-6 w-6">
                 <img src="{{ asset('/images/flags/us.jpg') }}" alt="user-image" class="h-4 w-6">
@@ -68,7 +68,7 @@
                 <span class="align-middle">Russian</span>
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Fullscreen Toggle Button -->
     <div class="md:flex hidden">
@@ -81,7 +81,7 @@
     </div>
 
     <!-- Notification Bell Button -->
-    <div class="relative md:flex hidden">
+    {{-- <div class="relative md:flex hidden">
         <button data-fc-type="dropdown" data-fc-placement="bottom-end" type="button" class="nav-link p-2">
             <span class="sr-only">View notifications</span>
             <span class="flex items-center justify-center h-6 w-6">
@@ -197,17 +197,17 @@
                 View All
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Light/Dark Toggle Button -->
-    <div class="flex">
+    {{-- <div class="flex">
         <button id="light-dark-mode" type="button" class="nav-link p-2">
             <span class="sr-only">Light/Dark Mode</span>
             <span class="flex items-center justify-center h-6 w-6">
                 <i class="mgc_moon_line text-2xl"></i>
             </span>
         </button>
-    </div>
+    </div> --}}
 
     <!-- Profile Dropdown Button -->
     <div class="relative">

@@ -1,8 +1,8 @@
 @extends('front.layouts.app')
 <!-- services.blade.php -->
 @section('content')
-<h3 class="text-center text-3xl p-5"> Add Business</h3>
-@if ($errors->any())
+
+{{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -10,9 +10,10 @@
             @endforeach
         </ul>
     </div>
-@endif
+@endif --}}
 
-<div class="mx-auto bg-white p-4 rounded-lg shadow-md container xl:container-xl my-10">
+<div class="mx-auto bg-white p-5 rounded-lg shadow-md container xl:container-xl my-10">
+    <h3 class="text-center text-3xl p-4"> Add Business</h3>
     <form action="{{ route('business.store') }}" id="business-form" method="POST" enctype="multipart/form-data" x-data="featuresForm()">
         @csrf
 
@@ -160,7 +161,7 @@
 
         <!-- Submit Button -->
         <div class="flex justify-center">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" @click="submitForm">
+            <button type="submit" class="bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" @click="submitForm">
                 Add Business
             </button>
         </div>

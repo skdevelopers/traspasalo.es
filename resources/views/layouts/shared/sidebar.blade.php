@@ -4,14 +4,14 @@
     <a href="{{ url('/') }}" class="logo-box">
         <!-- Light Brand Logo -->
         <div class="logo-light">
-            <img src="{{ asset('/images/logo-light.png') }}" class="logo-lg h-6" alt="Light logo">
-            <img src="{{ asset('/images/logo-sm.png') }}" class="logo-sm" alt="Small logo">
+            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-lg h-6" alt="Light logo">
+            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
         </div>
 
         <!-- Dark Brand Logo -->
         <div class="logo-dark">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="h-20 w-20" alt="Dark logo">
-            <img src="{{ asset('/images/logo-sm.png') }}" class="logo-sm" alt="Small logo">
+            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
         </div>
     </a>
 

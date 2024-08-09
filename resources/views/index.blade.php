@@ -63,15 +63,15 @@
 
                             <div class="flex justify-center">
                                 <div class="w-1/2 text-center">
-                                    <h5>Pending</h5>
+                                    <h5>Inactive</h5>
                                     <p class="fw-semibold text-muted">
-                                        <i class="mgc_round_fill text-primary"></i> Projects
+                                        <i class="mgc_round_fill text-primary"></i> Business
                                     </p>
                                 </div>
                                 <div class="w-1/2 text-center">
-                                    <h5>Done</h5>
+                                    <h5>Active</h5>
                                     <p class="fw-semibold text-muted">
-                                        <i class="mgc_round_fill text-success"></i> Projects
+                                        <i class="mgc_round_fill text-success"></i> Business
                                     </p>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                     <div class="card">
                         <div class="p-6">
                             <div class="flex justify-between items-center">
-                                <h4 class="card-title">Project Statistics</h4>
+                                <h4 class="card-title">Business Statistics</h4>
                                 <div class="flex gap-2">
                                     <button type="button" class="btn btn-sm bg-primary/25 text-primary hover:bg-primary hover:text-white">
                                         All
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <div class="col-span-1">
+        {{-- <div class="col-span-1">
             <div class="card mb-6">
                 <div class="px-6 py-5 flex justify-between items-center">
                     <h4 class="header-title">Project Summary</h4>
@@ -228,10 +228,10 @@
                     <div class="flex flex-col justify-center overflow-hidden bg-primary w-1/4" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div> <!-- Grid End -->
 
-    <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mb-6">
+    {{-- <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mb-6">
         <div class="col-span-1">
             <div class="card">
                 <div class="p-6">
@@ -383,9 +383,9 @@
                 </div>
             </div>
         </div>
-    </div> <!-- Grid End -->
+    </div> <!-- Grid End --> --}}
 
-    <div class="grid 2xl:grid-cols-4 md:grid-cols-2 gap-6">
+    {{-- <div class="grid 2xl:grid-cols-4 md:grid-cols-2 gap-6">
         <div class="2xl:col-span-2 md:col-span-2">
             <div class="card">
                 <div class="p-6">
@@ -650,7 +650,7 @@
                 </div>
             </div>
         </div>
-    </div> <!-- Grid End -->
+    </div> <!-- Grid End --> --}}
 @endsection
 
 @section('script')
