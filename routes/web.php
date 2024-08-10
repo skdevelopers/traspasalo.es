@@ -203,6 +203,10 @@ Route::get('/add-business', [BusinessController::class, 'create'])->name('busine
 Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store')->middleware('auth');
 //Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');
 Route::get('/business', [BusinessController::class, 'index'])->name('business.index')->middleware('auth');
+Route::get('/business/edit/{id}', [BusinessController::class, 'edit'])->name('business.edit')->middleware('auth');
+Route::put('/business/update/{id}', [BusinessController::class, 'update'])->name('business.update')->middleware('auth');
+Route::delete('/business/delete/{id}', [BusinessController::class, 'destroy'])->name('business.delete')->middleware('auth');
+
 
 Route::get('/index', [BusinessController::class, 'allCount'])->middleware('auth');
 

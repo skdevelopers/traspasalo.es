@@ -39,9 +39,25 @@
                         <td class="border px-4 py-2">{{ $business->location }}</td>
 
                         <td class="border px-4 py-2 whitespace-nowrap">
-                            <button class="text-blue-500 hover:text-blue-700 mx-0.5">
+                            {{-- <button class="text-blue-500 hover:text-blue-700 mx-0.5">
                                 <i class="mgc_expand_line text-lg"></i><a href={{ route('business.show', $business->id) }}> View Details
-                            </button>
+                            </button> --}}
+                            <a href="{{ route('business.show', $business->id) }}" class="text-green-500 hover:text-green-700 mx-0.5">
+                                <i class="mgc_display_line text-lg"></i>
+                            </a>
+                            <a href="{{ route('business.edit', $business->id) }}"
+                               class="text-blue-500 hover:text-blue-700 mx-0.5">
+                                <i class="mgc_edit_line text-lg"></i>
+                            </a>
+                            <form action="{{ route('business.delete', $business->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700 mx-0.5"
+                                        onclick="return confirm('Are you sure you want to delete this business?')">
+                                    <i class="mgc_delete_line text-xl"></i>
+                                </button>
+                            </form>
+                        
                         </td>
                     </tr>
                     

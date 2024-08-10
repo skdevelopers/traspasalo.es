@@ -89,36 +89,91 @@ class BusinessController extends Controller
         return redirect()->route('business.index')->with('success', 'Business created successfully.');
     }
 
-    public function edit(Business $business)
-    {
-        $categories = Category::all();
-        $features = FeatureService::all();
-        return view('businesses.edit', compact('business', 'categories', 'features'));
+    public function edit($id)
+{
+    // Retrieve the business with its relationships
+    $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+
+    // Retrieve all categories for the dropdown
+    $categories = Category::all();
+
+    // Retrieve all features for the features section
+    $features = FeatureService::all();
+
+    // Get the IDs of the features already associated with the business
+    $selectedFeatures = $business->features->pluck('id')->toArray();
+
+    // Get the media associated with the business
+    $media = $business->getMedia('images')->map(function ($item) {
+        $convertedUrl = $item->getPathRelativeToRoot('resized');
+    
+        // If the conversion does not exist, use the original URL
+        if (!$convertedUrl) {
+            $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+            $item['org_url'] = url($relativePath);
+        } else {
+            $item['org_url'] = asset('storage/images/' . $convertedUrl);
+        }
+    
+        return [
+            'url' => $item['org_url'],
+            'name' => $item->file_name,
+        ];
+    })->toArray();
+
+    // Pass the data to the edit view
+    return view('business.edit', compact('business', 'categories', 'features', 'media', 'selectedFeatures'));
+}
+
+    public function update(BusinessRequest $request,$id)
+{
+    $business = Business::findOrFail($id);
+    $data = $request->validated();
+
+    // Validate that the selected subcategory belongs to the selected category
+    $subcategory = Category::find($request->subcategory_id);
+    if ($subcategory->parent_id != $request->category_id) {
+        return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
     }
 
-    public function update(BusinessRequest $request, Business $business)
-    {
-        $business->update($request->validated());
+    // Process features
+    $data['features'] = $this->processFeatures($data['features'] ?? []);
 
-        if ($request->has('images')) {
-            $business->clearMediaCollection('images');
-            foreach ($request->file('images') as $image) {
-                $business->addMedia($image)->toMediaCollection('images');
-            }
-        }
+    // Update the business data
+    $business->update([
+        'subcategory_id' => $data['subcategory_id'],
+        'business_title' => $data['business_title'],
+        'description' => $data['description'],
+        'check_in' => $data['check_in'],
+        'check_out' => $data['check_out'],
+        'age_restriction' => $data['age_restriction'],
+        'pets_permission' => $data['pets_permission'],
+        'location' => $data['location'],
+    ]);
 
-        if ($request->has('features')) {
-            $business->features()->sync($request->features);
-        }
-
-        return redirect()->route('businesses.index')->with('success', 'Business updated successfully.');
+    // Handle image updates
+    if ($request->hasFile('images')) {
+        $this->handleImages($request->file('images'), $business);
     }
 
-    public function destroy(Business $business)
+    // Sync features
+    if (!empty($data['features'])) {
+        $business->features()->sync($data['features']);
+    }
+
+    return redirect()->route('business.index')->with('success', 'Business updated successfully.');
+}
+
+
+
+
+    public function destroy($id)
     {
+        $business = Business::findOrFail($id);
+       // $business->media()->detach();
         $business->features()->detach();
         $business->delete();
-        return redirect()->route('businesses.index')->with('success', 'Business deleted successfully.');
+        return redirect()->route('business.index')->with('success', 'Business deleted successfully.');
     }
 
     public function show($id)
