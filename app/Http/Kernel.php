@@ -38,6 +38,9 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
           //  \App\Http\Middleware\CachePermissions::class,
+                // other middleware
+                \App\Http\Middleware\LanguageSwitcher::class,
+        
 
         ],
 

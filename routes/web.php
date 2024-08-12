@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\AccountTypeController;
+use Illuminate\Support\Facades\Session;
 
 
 /*
@@ -263,6 +264,15 @@ Route::middleware(['auth', 'lock-screen'])->group(function () {
     Route::get('/home', [BusinessController::class, 'allCount'])->name('home');
 // Add other routes that need protection here
 });
+
+Route::get('/lang/{lang}', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->back();
+});
+
+
+
+Route::resource('translations', TranslationController::class)->middleware('auth');
 
 
 

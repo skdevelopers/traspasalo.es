@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use TranslationsTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersTableSeeder::class);
         $this->call(ModelHasRolesTableSeeder::class);
         //$this->call(RoleHasPermissionsSeeder::class);
+        //$this->call(TranslationsTableSeeder::class);
     }
 }
