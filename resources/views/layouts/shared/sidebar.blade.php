@@ -101,6 +101,12 @@
                     <span class="menu-text"> Translations </span>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('blogs.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
+                    <span class="menu-text"> Blogs </span>
+                </a>
+            </li>
             @endrole
 
             @can('Allow_Packages')
