@@ -1,36 +1,42 @@
-<!-- resources/views/categories/edit.blade.php -->
-@extends('layouts.vertical', ['title' => 'Create Features Services', 'sub_title' => 'Features'])
+<!-- resources/views/feature-services/feature.blade.php -->
+@extends('layouts.vertical', ['title' => 'Create Features Service', 'sub_title' => 'Features'])
 
 @section('content')
-<div class="container">
-    <h1>Edit Feature Service</h1>
-
-    <form action="{{ route('feature-services.update', $featureService) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $featureService->name }}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
-</div>
-@endsection
-
-
-
-<!-- resources/views/categories/edit.blade.php -->
-@extends('layouts.vertical', ['title' => 'Create Feature Service', 'sub_title' => 'Feature'])
-
-@section('content')
-    <div class="container">
-        <h1>Edit Category</h1>
-        <form action="{{ route('feature-services.update', $featureService->id) }}" method="POST">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Add Feature Service</h1>
+        <form action="{{ route('feature-services.store') }}" method="POST" class="space-y-6">
             @csrf
-            @method('PUT')
-            @include('feature-services._form', ['featureService' => $featureService])
-            <button type="submit" class="btn btn-primary">Update</button>
+            @include('feature-services._form')
+            <div class="col-span-12">
+                <button type="submit" class="w-full inline-flex justify-center items-center bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <i class="mgc_save_line text-lg me-2"></i> Save
+                </button>
+            </div>
         </form>
     </div>
 @endsection
 
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('/features.json')
+            .then(response => response.json())
+            .then(data => {
+                const featureSelect = document.getElementById('name');
+                data.forEach(feature => {
+                    const option = document.createElement('option');
+                    option.value = feature.feature;
+                    option.textContent = feature.feature;
+                    featureSelect.appendChild(option);
+                });
+
+                // Set the old value if available
+                const oldFeature = '{{ old('name', $featureService->name ?? '') }}';
+                if (oldFeature) {
+                    featureSelect.value = oldFeature;
+                }
+            })
+            .catch(error => console.error('Error loading features:', error));
+    });
+</script>
+@endpush

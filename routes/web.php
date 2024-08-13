@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CategoryController;
@@ -229,9 +230,8 @@ Route::get('/price', function () {
 
 
 
-Route::get('/blogs', function () {
-    return view('front.blog');
-});
+Route::get('/blog', [BlogController::class,'showAll']);
+//Route::get('/blogs/{id}', [BlogController::class,'show'])->name('blog.show');
 
 Route::get('/getCategories', [CategoryController::class, 'getCategories']);
 Route::get('/businesses', [BusinessController::class, 'showBusinesses']);
@@ -273,6 +273,8 @@ Route::get('/lang/{lang}', function ($lang) {
 
 
 Route::resource('translations', TranslationController::class)->middleware('auth');
+Route::resource('blogs', BlogController::class);
+
 
 
 

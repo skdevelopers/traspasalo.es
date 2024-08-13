@@ -1,154 +1,91 @@
-@extends('front.layouts.app')
+@extends('layouts.vertical', ['title' => 'Form Editor', 'sub_title' => 'Forms', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
-@section('title', 'Businesses')
-@section('header-title', 'Businesses')
-@section('header-subtitle', '')
-
-
-@section('content')
-
-<div class="p-10  shadow-md">
-    <form method="GET" action="/businesses" class="flex space-x-4">
-        <select id="category_id" name="category_id" class="w-full p-2 border border-gray-300 rounded-lg" value="{{ request('category_id') }}"></select>
-        <select id="subcategory_id" name="subcategory_id" class="w-full p-2 border border-gray-300 rounded-lg" value="{{ request('subcategory_id') }}">
-            <option value="">Sub Type</option>
-        </select>
-        <input type="text" id="autocomplete" name="location" placeholder="Location" class="w-full p-2 border border-gray-300 rounded-lg" value="{{ request('location') }}">
-        <input type="text" name="keyword" placeholder="Keyword" class="w-full p-2 border border-gray-300 rounded-lg" value="{{ request('keyword') }}">
-        <button type="submit" class="p-2 bg-violet-900 text-white rounded-lg">Search</button>
-    </form>
-</div>
-
-<div class="p-4 grid grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4">
-    @foreach($businesses as $business)
-    <div class="bg-white p-4 rounded-lg shadow-md">
-        <div class="mb-4">
-            <img src="{{ $business->media[0]->original_url ?? 'https://via.placeholder.com/150' }}" alt="{{ $business->media[0]->name }}" class="w-full h-48 object-cover rounded-lg">
-        </div>
-        <h3 class="text-lg font-bold mb-2"><a href={{ route('business.show', $business->id ) }}>{{ $business->business_title }}</a></h3>
-        <p class="text-gray-700 mb-2">{{ $business->description }}</p>
-        <p class="text-gray-500">{{ $business->location }}</p>
-        <p class="text-gray-500">250 €</p>
-    </div>
-    @endforeach
-</div>
-
+@section('css')
+    @vite([
+    'node_modules/quill/dist/quill.core.css',
+    'node_modules/quill/dist/quill.bubble.css',
+    'node_modules/quill/dist/quill.snow.css',
+    ])
 @endsection
 
-@push('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-      axios.get('/getCategories')
-          .then(function (response) {
-              if(response.data.status === 1) {
-                  var categories = response.data.categories;
-                  var categorySelect = document.getElementById('category_id');
-                  categorySelect.innerHTML = '<option value="">Business Type</option>';
-                  for (var name in categories) {
-                      var option = document.createElement('option');
-                      option.value = categories[name];
-                      option.textContent = name;
-                      categorySelect.appendChild(option);
-                  }
-              }
-          })
-          .catch(function (error) {
-              console.error('Error fetching categories:', error);
-              alert('Failed to fetch categories.');
-          });
-  });
+@section('content')
+    <div class="flex flex-col gap-6">
+        <div class="card">
+            <div class="card-header">
+                <div class="flex justify-between items-center">
+                    <h4 class="card-title">Description</h4>
+                </div>
+            </div>
 
+            <div class="p-6">
+                <!-- Quill Editors -->
+                <div id="snow-editor" style="height: 300px;">
+                    
+                </div>
 
-  document.addEventListener('DOMContentLoaded', function () {
-      const categorySelect = document.getElementById('category_id');
-      const subCategorySelect = document.getElementById('subcategory_id');
-  
-      categorySelect.addEventListener('change', function () {
-          const categoryId = this.value;
-  
-          // Clear previous subcategories
-          subCategorySelect.innerHTML = '<option value="">Sub Type</option>';
-  
-          if (categoryId) {
-              // Fetch subcategories for the selected category
-              axios.get(`/categories/${categoryId}/subcategories`)
-                  .then(response => {
-                      const subcategories = response.data;
-                      subcategories.forEach(subcategory => {
-                          const option = document.createElement('option');
-                          option.value = subcategory.id;
-                          option.textContent = subcategory.name;
-                          subCategorySelect.appendChild(option);
-                      });
-                  })
-                  .catch(error => {
-                      console.error('Error fetching subcategories:', error);
-                  });
-          }
-      });
-  });
+             
+            </div>
 
-  </script>
-  
+        </div>
 
-  
-  <script>
-          //dropdown list
+        {{-- <div class="card">
+            <div class="card-header">
+                <div class="flex justify-between items-center">
+                    <h4 class="card-title">Bubble Editor</h4>
+                    <div class="flex items-center gap-2">
+                        <button type="button" class="btn-code" data-fc-type="collapse" data-fc-target="BubbleEditorHtml">
+                            <i class="mgc_eye_line text-lg"></i>
+                            <span class="ms-2">Code</span>
+                        </button>
 
+                        <button class="btn-code" data-clipboard-action="copy">
+                            <i class="mgc_copy_line text-lg"></i>
+                            <span class="ms-2">Copy</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-      function locationApp() {
-  return {
-      initMap() {
-          // const map = new google.maps.Map(document.getElementById('map'), {
-          //     center: {
-          //         lat: -34.397,
-          //         lng: 150.644
-          //     },
-          //     zoom: 8
-          // });
+            <div class="p-6">
+                <!-- Bubble Editors -->
+                <div id="bubble-editor" style="height: 300px;">
+                    <h3>
+                        <span class="ql-size-large">Hello World!</span>
+                    </h3>
+                    <p><br></p>
+                    <h3>This is a simple editable area.</h3>
+                    <p><br></p>
+                    <ul>
+                        <li>Select a text to reveal the toolbar.</li>
+                        <li>Edit rich document on-the-fly, so elastic!</li>
+                    </ul>
+                    <p><br></p>
+                    <p>End of simple area</p>
+                </div>
+                <div id="BubbleEditorHtml" class="hidden w-full overflow-hidden transition-[height] duration-300">
+                    <pre class="language-html h-56">
+								<code>
+									&lt;div id=&quot;snow-editor&quot; style=&quot;height: 300px;&quot;&gt;
+										&lt;h3&gt;&lt;span class=&quot;ql-size-large&quot;&gt;Hello World!&lt;/span&gt;&lt;/h3&gt;
+										&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+										&lt;h3&gt;This is a simple editable area.&lt;/h3&gt;
+										&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+										&lt;ul&gt;
+											&lt;li&gt;Select a text to reveal the toolbar.&lt;/li&gt;
+											&lt;li&gt;Edit rich document on-the-fly, so elastic!&lt;/li&gt;
+										&lt;/ul&gt;
+										&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+										&lt;p&gt;End of simple area&lt;/p&gt;
+									&lt;/div&gt;
+								</code>
+							</pre>
+                </div>
+            </div>
 
-          const input = document.getElementById('autocomplete');
-          const autocomplete = new google.maps.places.Autocomplete(input);
+        </div> --}}
+    </div>
+@endsection
 
-          autocomplete.addListener('place_changed', function() {
-              const place = autocomplete.getPlace();
-              if (!place.geometry) {
-                  return;
-              }
-
-              // if (place.geometry.viewport) {
-              //     map.fitBounds(place.geometry.viewport);
-              // } else {
-              //     map.setCenter(place.geometry.location);
-              //     map.setZoom(17);
-              // }
-
-              // new google.maps.Marker({
-              //     position: place.geometry.location,
-              //     map: map
-              // });
-          });
-      }
-  };
-}
-
-// Load Google Maps script dynamically with async and defer
-function loadGoogleMapsScript() {
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initMap`;
-  script.async = true;
-  script.defer = true;
-  document.head.appendChild(script);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  loadGoogleMapsScript();
-});
-
-window.initMap = function() {
-  locationApp().initMap();
-}
-
-  </script>
-    
-@endpush
+@section('script')
+    @vite(['resources/js/pages/highlight.js', 'resources/js/pages/form-editor.js'])
+@endsection

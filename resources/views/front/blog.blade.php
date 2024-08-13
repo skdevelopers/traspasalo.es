@@ -57,26 +57,18 @@
     <div class="bg-white flex items-center justify-center min-h-screen">
         <div class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
             <!-- Card 1 -->
+            @foreach($blogs as $blog)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src={{asset('front/assets/images/building.svg')}} alt="News Image 1" class="w-full h-64 object-cover">
+              <img src="{{ url($blog->getFirstMediaUrl('blogs')) }}" alt="{{ $blog->title }}" class="w-full h-64 object-cover">
                 <div class="p-6">
-                    <span class="block text-blue-500 text-sm mb-2">25-06-2024</span>
-                    <h3 class="text-xl font-bold mb-2">Average S. Rental Price Hits a Two-Year High</h3>
-                    <p class="text-gray-600 mb-4">Help people get to know you by list your business. Showcase your business with your outstanding media gallery.</p>
-                    <a href="#" class="text-orange-500 hover:underline">Read More &rarr;</a>
+                    <span class="block text-blue-500 text-sm mb-2">{{ $blog->date }}</span>
+                    <h3 class="text-xl font-bold mb-2">{{ $blog->title }}</h3>
+                    <p class="text-gray-600 mb-4">{!! $blog->description !!}.</p>
+                    <a href="{{ route('blogs.show', $blog->id) }}" class="text-orange-500 hover:underline">Read More &rarr;</a>
                 </div>
             </div>
-
-            <!-- Card 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src={{asset('front/assets/images/static-report.svg')}} alt="News Image 2" class="w-full h-64 object-cover">
-                <div class="p-6">
-                    <span class="block text-blue-500 text-sm mb-2">25-06-2024</span>
-                    <h3 class="text-xl font-bold mb-2">Average S. Rental Price Hits a Two-Year High</h3>
-                    <p class="text-gray-600 mb-4">Help people get to know you by list your business. Showcase your business with your outstanding media gallery.</p>
-                    <a href="#" class="text-orange-500 hover:underline">Read More &rarr;</a>
-                </div>
-            </div>
+            @endforeach
+            
         </div>
     </div>
 
