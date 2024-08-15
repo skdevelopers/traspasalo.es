@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
 @section('title', 'Newsletter')
-@section('header-title', 'Newletter')
+@section('header-title', 'Newsletter')
 @section('header-subtitle', '')
 
 
@@ -27,12 +27,12 @@
                         environment where your business can thrive.
                     </p>
                    
-                    <form action="{{ route('subscribe') }}" method="POST">
+                    <form action="{{ route('subscribe') }}" method="POST" class="mt-2">
                         @csrf
-                        <input type="email" class="mt-4 px-6 py-3 text-black text-2xl rounded" name="email"
-                            placeholder="Enter your email" required>
+                        <input type="email" class=" p-4 text-black text-xl rounded" name="email"
+                            placeholder="Enter your email" required />
                         <button type="submit"
-                            class="w-[200px] h-[60px] mt-2 px-6 py-3 bg-purple-700 text-white rounded">Join Us Now</button>
+                            class="p-3.5 bg-violet-700 text-white rounded">Join Us Now</button>
                     </form>
                     @if (session('success'))
                     <div class="alert alert-success text-green-400">

@@ -180,7 +180,18 @@
                         business success is clear and achievable. Let us help you find not just a place, but the ideal
                         environment where your business can thrive.
                     </p>
-                    <button class="w-[200px] h-[60px] mt-6 px-6 py-3 bg-purple-700 text-white rounded">Join Us Now</button>
+                    <form action="{{ route('subscribe') }}" method="POST" class="mt-2">
+                        @csrf
+                        <input type="email" class=" p-4 text-black text-xl rounded" name="email"
+                            placeholder="Enter your email" required />
+                        <button type="submit"
+                            class="p-3.5 bg-violet-700 text-white rounded">Join Us Now</button>
+                    </form>
+                    @if (session('success'))
+                    <div class="alert alert-success text-green-400">
+                        {{ session('success') }}
+                    </div>
+                @endif
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
                         <div class="flex w-[280px] h-[180px] gap-4">
