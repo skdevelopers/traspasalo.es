@@ -68,7 +68,7 @@
                             <button class="w-32 bg-orange-500 text-white p-2 rounded">Find Now</button>
                         </div>
                     </div>
-                </from>
+                </form>
                 </div>
             </div>
         </div>
@@ -156,7 +156,7 @@
             <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center  md:rounded-r-3xl">
                 <img src="{{ asset('/front/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
                 <h2 class="text-lg md:text-3xl mb-4">We Don’t Just Find Premises, We Discover Your Business Success</h2>
-                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded">Find Now</button>
+                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded"><a href="{{  url('/about') }}">Find Now</a></button>
             </div>
         </div>
     </div>
@@ -581,12 +581,13 @@
             .then(function (response) {
                 if(response.data.status === 1) {
                     var categories = response.data.categories;
+                    console.log(categories);
                     var categorySelect = document.getElementById('category_id');
                     categorySelect.innerHTML = '<option value="">Business Type</option>';
                     for (var name in categories) {
                         var option = document.createElement('option');
-                        option.value = categories[name];
-                        option.textContent = name;
+                        option.value = name;
+                        option.textContent = categories[name];
                         categorySelect.appendChild(option);
                     }
                 }

@@ -55,8 +55,8 @@
                     categorySelect.innerHTML = '<option value="">Business Type</option>';
                     for (var name in categories) {
                         var option = document.createElement('option');
-                        option.value = categories[name];
-                        option.textContent = name;
+                        option.value = name;
+                        option.textContent = categories[name];
                         categorySelect.appendChild(option);
                     }
                 }

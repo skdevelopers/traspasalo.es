@@ -22,5 +22,5 @@
             <p class="text-gray-600 mb-4">{!! $blog->description !!}.</p>
         </div>
     </div>
-
+    @include('front.partials.footer')
 @endsection

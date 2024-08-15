@@ -113,7 +113,7 @@
                     <a href="{{ url('/about') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">About Us</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Newsletter</a>
+                    <a href="{{ url('/newsletter') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Newsletter</a>
                 </li>
                 <li>
                     <a href="{{ url('/price') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Pricing</a>

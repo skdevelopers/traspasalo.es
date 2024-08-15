@@ -98,7 +98,8 @@ class CategoryController extends Controller
     public function getCategories()
     {
 
-        $categories = Category::pluck('id','name');
+        $categories = Category::where('parent_id', null)->pluck('name', 'id');
+       // dd($categories);
         return response()->json([
             'categories' => $categories,
             'status' => 1,

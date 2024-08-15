@@ -19,6 +19,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\AccountTypeController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\NewsletterController;
 
 
 /*
@@ -220,6 +221,10 @@ Route::get('/contact', function () {
     return view('front.contact-us');
 });
 
+Route::get('/newsletter', function () {
+    return view('front.newsletter');
+});
+
 Route::get('/about', function () {
     return view('front.about');
 });
@@ -274,6 +279,12 @@ Route::get('/lang/{lang}', function ($lang) {
 
 Route::resource('translations', TranslationController::class)->middleware('auth');
 Route::resource('blogs', BlogController::class);
+
+
+
+
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
+
 
 
 
