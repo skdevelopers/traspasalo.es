@@ -16,12 +16,12 @@
                     </svg>
                 </button>
                 <div x-show="open" @mouseenter="open = true" @mouseleave="open = false" @click.away="open = false" 
-                     class="origin-top-right top-10 absolute right-0 md:right-0 md:transform md:-translate-x-0 mt-2 w-25 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+                     class="origin-top-right top-0 absolute right-4 md:right-0 md:transform md:-translate-x-0 mt-10 w-25 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
                      role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                     <div class="py-1" role="none">
-                        <a href="{{ url('lang/es') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">Español</a>
-                        <a href="{{ url('lang/en') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">English</a>
-                        <a href="{{ url('lang/ca') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">Catalan</a>
+                        <a href="{{ url('lang/es') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">Español</a>
+                        <a href="{{ url('lang/en') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">English</a>
+                        <a href="{{ url('lang/ca') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">Catalan</a>
                     </div>
                 </div>
             </div>
@@ -34,11 +34,11 @@
                         </svg>
                     </button>
                     <div x-show="open" @mouseenter="open = true" @mouseleave="open = false" @click.away="open = false" 
-                        class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+                        class="origin-top-right absolute right-4 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
                         role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                         <div class="py-1">
-                            <a href="{{ route('register.step1') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white">Register</a>
-                            <a href="{{ route('auth.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white">Login</a>
+                            <a href="{{ route('register.step1') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-600 hover:text-white">Register</a>
+                            <a href="{{ route('auth.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-violet-600 hover:text-white">Login</a>
                         </div>
                     </div>
                 </div>
@@ -107,19 +107,19 @@
         <div class="hidden w-full md:flex md:w-auto items-center" id="navbar-default">
             <ul class="flex flex-col md:flex-row md:items-center md:space-x-6 mt-4 md:mt-0 text-sm md:text-base text-white space-y-2 md:space-y-0">
                 <li>
-                    <a href="{{ url('/') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded md:p-0">{{ translate('home') }}</a>
+                    <a href="{{ url('/') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded ">{{ translate('home') }}</a>
                 </li>
                 <li>
-                    <a href="{{ url('/about') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded md:p-0">About Us</a>
+                    <a href="{{ url('/about') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">About Us</a>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded md:p-0">Newsletter</a>
+                    <a href="#" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Newsletter</a>
                 </li>
                 <li>
-                    <a href="{{ url('/price') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded md:p-0">Pricing</a>
+                    <a href="{{ url('/price') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Pricing</a>
                 </li>
                 <li>
-                    <a href="{{ url('/blog') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded md:p-0">Blogs</a>
+                    <a href="{{ url('/blog') }}" class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Blogs</a>
                 </li>
                 <li class="block md:hidden">
                     <a href="{{ url('/add-business') }}" class="inline-block text-gray-300 border-2 border-gray-300 rounded px-6 py-2 hover:bg-gray-300 hover:text-violet-950">Add Business</a>
@@ -143,12 +143,12 @@
                                     </svg>
                                 </button>
                                 <div x-show="open" @mouseenter="open = true" @mouseleave="open = false" @click.away="open = false" 
-                                     class="origin-top-right top-10 absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+                                     class="origin-top-right top-0 absolute right-4 mt-12 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
                                      role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                                     <div class="py-1" role="none">
-                                        <a href="{{ url('lang/es') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">Español</a>
-                                        <a href="{{ url('lang/en') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">English</a>
-                                        <a href="{{ url('lang/ca') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-purple-600 hover:text-white" role="menuitem">Catalan</a>
+                                        <a href="{{ url('lang/es') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">Español</a>
+                                        <a href="{{ url('lang/en') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">English</a>
+                                        <a href="{{ url('lang/ca') }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-violet-600 hover:text-white" role="menuitem">Catalan</a>
                                     </div>
                                 </div>
                             </div>
@@ -162,11 +162,11 @@
                                     </svg>
                                 </button>
                                 <div x-show="open" @mouseenter="open = true" @mouseleave="open = false" @click.away="open = false" 
-                                    class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
+                                    class="origin-top-right absolute right-4 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" 
                                     role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                                     <div class="py-1">
-                                        <a href="{{ route('register.step1') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white">Register</a>
-                                        <a href="{{ route('auth.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-600 hover:text-white">Login</a>
+                                        <a href="{{ route('register.step1') }}" class="block px-4 py-2 text-sm text-gray-700  hover:text-white hover:bg-violet-600">Register</a>
+                                        <a href="{{ route('auth.login') }}" class="block px-4 py-2 text-sm text-gray-700  hover:text-white hover:bg-violet-600 ">Login</a>
                                     </div>
                                 </div>
                             </div>
