@@ -182,10 +182,10 @@
                     </p>
                     <form action="{{ route('subscribe') }}" method="POST" class="mt-2">
                         @csrf
-                        <input type="email" class=" p-4 text-black text-xl rounded" name="email"
+                        <input type="email" class=" p-2 text-black text-xl rounded" name="email"
                             placeholder="Enter your email" required />
                         <button type="submit"
-                            class="p-3.5 bg-violet-700 text-white rounded">Join Us Now</button>
+                            class="p-2.5 bg-black text-white rounded">Join Us Now</button>
                     </form>
                     @if (session('success'))
                     <div class="alert alert-success text-green-400">
