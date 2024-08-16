@@ -47,6 +47,16 @@ File: Main Css File
 @import "plugins/choices";
 @import "plugins/quilljs";
 
+@import "../node_modules/@fortawesome/fontawesome-free/scss/fontawesome";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/solid";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/brands";
+@import "../node_modules/@fortawesome/fontawesome-free/scss/regular";
+
+
+
+
+
+
 // Data Table
 @import "plugins/gridjs";
 

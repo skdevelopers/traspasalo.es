@@ -6,6 +6,7 @@
 import Dropzone from 'dropzone';
 import 'dropzone/dist/dropzone.css';
 import axios from "axios";
+import '@fortawesome/fontawesome-free/js/all.js';
 import "@frostui/tailwindcss"
 import feather from 'feather-icons';
 import Alpine from 'alpinejs';

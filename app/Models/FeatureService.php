@@ -10,7 +10,7 @@ class FeatureService extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','icon_class'];
 
     public function businesses()
     {

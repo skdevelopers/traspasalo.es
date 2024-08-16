@@ -9,8 +9,12 @@
         </div>
     @endif
 
-    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Feature Name:</label>
-    <select class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" id="name" name="name" required>
-        <option value="">Select a Feature</option>
-    </select>
+    <div class="col-span-12">
+        <label for="name" class="block text-sm font-medium text-gray-700">name</label>
+        <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" id="name" name="name" value="{{ old('name', $featureService->name ?? '') }}" required>
+    </div>
+    <div class="col-span-12">
+        <label for="name" class="block text-sm font-medium text-gray-700">Icon Class</label>
+        <input type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" id="icon_class" name="icon_class" value="{{ old('name', $featureService->icon_class ?? '') }}" required>
+    </div>
 </div>

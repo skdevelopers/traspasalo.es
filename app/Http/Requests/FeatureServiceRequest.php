@@ -15,6 +15,7 @@ class FeatureServiceRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'icon_class' => 'required|string|max:255'
         ];
     }
 }

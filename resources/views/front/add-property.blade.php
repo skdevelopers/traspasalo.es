@@ -162,14 +162,14 @@
             <p class="text-center text-gray-600 mb-8">All premium useful features are included in this service</p>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                <template x-for="feature in matchedFeatures" :key="feature.feature">
-                    <div class="text-center bg-white w-full border border-gray-300 p-4 rounded-lg">
-                        <div class="flex justify-center items-center h-12 w-12 bg-gray-100 rounded-full mb-2 mx-auto">
-                            <span class="material-icons-round" x-text="feature.icon"></span>
-                        </div>
-                        <p class=" text-black" x-text="feature.feature"></p>
+                @foreach($business['features'] as $feature)
+                <div class="text-center bg-white w-full border border-gray-300 p-4 rounded-lg">
+                    <div class="flex justify-center items-center h-12 w-12 bg-gray-100 rounded-full mb-2 mx-auto">
+                        {!! $feature->icon_class !!}
                     </div>
-                </template>
+                    <p class="text-black">{{ $feature->name }}</p>
+                </div>
+            @endforeach
             </div>
         </div>
         <hr class="border-t-4  border-gray-300 m-14">
