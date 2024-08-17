@@ -90,79 +90,79 @@ class BusinessController extends Controller
     }
 
     public function edit($id)
-{
-    // Retrieve the business with its relationships
-    $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+    {
+        // Retrieve the business with its relationships
+        $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
 
-    // Retrieve all categories for the dropdown
-    $categories = Category::all();
+        // Retrieve all categories for the dropdown
+        $categories = Category::all();
 
-    // Retrieve all features for the features section
-    $features = FeatureService::all();
+        // Retrieve all features for the features section
+        $features = FeatureService::all();
 
-    // Get the IDs of the features already associated with the business
-    $selectedFeatures = $business->features->pluck('id')->toArray();
+        // Get the IDs of the features already associated with the business
+        $selectedFeatures = $business->features->pluck('id')->toArray();
 
-    // Get the media associated with the business
-    $media = $business->getMedia('images')->map(function ($item) {
-        $convertedUrl = $item->getPathRelativeToRoot('resized');
-    
-        // If the conversion does not exist, use the original URL
-        if (!$convertedUrl) {
-            $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
-            $item['org_url'] = url($relativePath);
-        } else {
-            $item['org_url'] = asset('storage/images/' . $convertedUrl);
+        // Get the media associated with the business
+        $media = $business->getMedia('images')->map(function ($item) {
+            $convertedUrl = $item->getPathRelativeToRoot('resized');
+
+            // If the conversion does not exist, use the original URL
+            if (!$convertedUrl) {
+                $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+                $item['org_url'] = url($relativePath);
+            } else {
+                $item['org_url'] = asset('storage/images/' . $convertedUrl);
+            }
+
+            return [
+                'url' => $item['org_url'],
+                'name' => $item->file_name,
+            ];
+        })->toArray();
+
+        // Pass the data to the edit view
+        return view('business.edit', compact('business', 'categories', 'features', 'media', 'selectedFeatures'));
+    }
+
+    public function update(BusinessRequest $request, $id)
+    {
+        $business = Business::findOrFail($id);
+        $data = $request->validated();
+
+        // Validate that the selected subcategory belongs to the selected category
+        $subcategory = Category::find($request->subcategory_id);
+        if ($subcategory->parent_id != $request->category_id) {
+            return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
         }
-    
-        return [
-            'url' => $item['org_url'],
-            'name' => $item->file_name,
-        ];
-    })->toArray();
 
-    // Pass the data to the edit view
-    return view('business.edit', compact('business', 'categories', 'features', 'media', 'selectedFeatures'));
-}
+        // Process features
+        $data['features'] = $this->processFeatures($data['features'] ?? []);
 
-    public function update(BusinessRequest $request,$id)
-{
-    $business = Business::findOrFail($id);
-    $data = $request->validated();
+        // Update the business data
+        $business->update([
+            'subcategory_id' => $data['subcategory_id'],
+            'business_title' => $data['business_title'],
+            'description' => $data['description'],
+            'check_in' => $data['check_in'],
+            'check_out' => $data['check_out'],
+            'age_restriction' => $data['age_restriction'],
+            'pets_permission' => $data['pets_permission'],
+            'location' => $data['location'],
+        ]);
 
-    // Validate that the selected subcategory belongs to the selected category
-    $subcategory = Category::find($request->subcategory_id);
-    if ($subcategory->parent_id != $request->category_id) {
-        return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
+        // Handle image updates
+        if ($request->hasFile('images')) {
+            $this->handleImages($request->file('images'), $business);
+        }
+
+        // Sync features
+        if (!empty($data['features'])) {
+            $business->features()->sync($data['features']);
+        }
+
+        return redirect()->route('business.index')->with('success', 'Business updated successfully.');
     }
-
-    // Process features
-    $data['features'] = $this->processFeatures($data['features'] ?? []);
-
-    // Update the business data
-    $business->update([
-        'subcategory_id' => $data['subcategory_id'],
-        'business_title' => $data['business_title'],
-        'description' => $data['description'],
-        'check_in' => $data['check_in'],
-        'check_out' => $data['check_out'],
-        'age_restriction' => $data['age_restriction'],
-        'pets_permission' => $data['pets_permission'],
-        'location' => $data['location'],
-    ]);
-
-    // Handle image updates
-    if ($request->hasFile('images')) {
-        $this->handleImages($request->file('images'), $business);
-    }
-
-    // Sync features
-    if (!empty($data['features'])) {
-        $business->features()->sync($data['features']);
-    }
-
-    return redirect()->route('business.index')->with('success', 'Business updated successfully.');
-}
 
 
 
@@ -170,7 +170,7 @@ class BusinessController extends Controller
     public function destroy($id)
     {
         $business = Business::findOrFail($id);
-       // $business->media()->detach();
+        // $business->media()->detach();
         $business->features()->detach();
         $business->delete();
         return redirect()->route('business.index')->with('success', 'Business deleted successfully.');
@@ -198,7 +198,7 @@ class BusinessController extends Controller
                 //dd($convertedUrl);
                 // If there's no conversion, fallback to the original URL
                 if (!$convertedUrl) {
-                    dd("hello");
+                    //  dd("hello");
                     $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
                     $item['org_url'] = url($relativePath);
                 } else {
@@ -294,5 +294,40 @@ class BusinessController extends Controller
         }
 
         return $hasFilters;
+    }
+
+    public function getJsonBusinesses()
+    {
+        // Fetch all businesses with their related category, subcategory, and media
+        $businesses = Business::with(['category', 'subcategory', 'media'])->get();
+
+        // Iterate over each business and fetch its media
+
+        
+        $businesses->each(function ($business) {
+            // Get media for this specific business
+            $media = $business->getMedia('images')->map(function ($item) {
+                $convertedUrl = $item->getPathRelativeToRoot('resized');
+
+                // If there's no conversion, fallback to the original URL
+                if (!$convertedUrl) {
+                    $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+                    $item['org_url'] = url($relativePath);
+                } else {
+                    $item['org_url'] = asset('/storage/images/' . $convertedUrl);
+                }
+
+                return $item->only(['org_url', 'name']);
+            });
+
+            // Attach the media to the business model
+            $business->media = $media;
+        });
+
+        // Return the JSON response with the businesses and their media
+        return response()->json([
+            'businesses' => $businesses,
+            'status' => 1,
+        ], 200);
     }
 }

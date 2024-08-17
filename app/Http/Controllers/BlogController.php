@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
@@ -7,10 +7,30 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function showAll(){
+    public function showAll()
+    {
         $blogs = Blog::all();
         return view('front.blog', compact('blogs'));
     }
+    public function blogsAllJson()
+{
+    $blogs = Blog::all()->map(function($blog) {
+        return [
+            'id' => $blog->id,
+            'title' => $blog->title,
+            'description' => $blog->description,
+            'date' => $blog->date,
+            'image_url' => $blog->getFirstMediaUrl('blogs'), // Assuming 'blogs' is the collection name
+        ];
+    });
+
+    return response()->json([
+        'blogs' => $blogs,
+        'status' => 1,
+    ], 200);
+}
+
+
     public function index()
     {
         $blogs = Blog::all();

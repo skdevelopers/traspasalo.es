@@ -25,8 +25,7 @@
             height: 100%;
             z-index: 0;
         }
-
-</style>
+    </style>
 @endpush
 
 @section('content')
@@ -43,37 +42,44 @@
                 </div>
                 <!-- Search Area -->
                 <div class="mx-auto mt-8 position-relative">
-                  <form method="GET" action="/businesses" class="flex space-x-4">
-                    <div class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
-                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
-                            <input type="text" name="keyword" placeholder="Search By Keyword" class="w-full p-2 border-1 rounded-lg border-gray-300">
-                        </div>
-                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
-                            <select id="category_id" name="category_id" class="w-full p-2 border-1 rounded-lg border-gray-300" >
-                            </select>
-                        </div>
-                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
-                            <select id="subcategory_id" name="subcategory_id" class="w-full p-2 border-1 rounded-lg border-gray-300">
-                                <option value="">Sub Type</option>
-                            </select>
-                        </div>
-                        <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1 relative" x-data="locationApp()" x-init="initMap">
-                            <input type="text" id="autocomplete" name="location" class="w-full p-2 border rounded-lg border-gray-300" placeholder="Type to search location">
-                            {{-- <div id="dropdown_list" class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto hidden">
+                    <form method="GET" action="/businesses" class="flex space-x-4">
+                        <div
+                            class="bg-white rounded px-4 py-4 flex flex-wrap justify-start items-start mx-auto w-full md:max-w-max lg:max-w-max">
+                            <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
+                                <input type="text" name="keyword" placeholder="Search By Keyword"
+                                    class="w-full p-2 border-1 rounded-lg border-gray-300">
+                            </div>
+                            <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
+                                <select id="category_id" name="category_id"
+                                    class="w-full p-2 border-1 rounded-lg border-gray-300">
+                                </select>
+                            </div>
+                            <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
+                                <select id="subcategory_id" name="subcategory_id"
+                                    class="w-full p-2 border-1 rounded-lg border-gray-300">
+                                    <option value="">Sub Type</option>
+                                </select>
+                            </div>
+                            <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1 relative">
+                                <input type="text" id="autocomplete" name="location"
+                                    class="w-full p-2 border rounded-lg border-gray-300"
+                                    placeholder="Type to search location">
+                                {{-- <div id="dropdown_list" class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto hidden">
                                 <!-- Suggestions will be inserted here -->
                             </div> --}}
+                            </div>
+
+                            <div class="flex-1 p-1">
+                                <button class="w-32 bg-orange-500 text-white p-2 rounded">Find Now</button>
+                            </div>
                         </div>
-                        
-                        <div class="flex-1 p-1">
-                            <button class="w-32 bg-orange-500 text-white p-2 rounded">Find Now</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
         <div class="container xl:container-xl">
-            <div x-data="carousel()" class="relative flex items-center justify-center w-full h-full lg:py-16 py-y mt-10">
+            <div x-data="carousel()"
+                class="relative flex items-center justify-center w-full h-full lg:py-16 py-y mt-10">
                 <button @click="prev"
                     class="w-8 h-8 absolute -left-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
                     &lt;
@@ -83,7 +89,8 @@
                         :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%); width: ${slides.length * (100 / slidesToShow)}%`">
                         <template x-for="(slide, index) in slides" :key="index">
                             <div class="flex-shrink-0 p-1.5">
-                                <div class="bg-white md:w-44 h-44 w-96  rounded-lg shadow-sm flex flex-col justify-center items-center">
+                                <div
+                                    class="bg-white md:w-44 h-44 w-96  rounded-lg shadow-sm flex flex-col justify-center items-center">
                                     <div class="flex flex-col justify-center items-center">
                                         <img :src="slide.image" alt="" class="w-12 h-12 mx-auto mb-2">
                                         <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
@@ -107,27 +114,34 @@
             <h2 class="text-[28px] font-bold">Explore Profitable Business Ventures</h2>
             <p class="mt-2 text-lg text-gray-600">We Discover Your Business Success</p>
         </div>
-        <div class=" flex justify-center items-center py-8 relative" x-data="sliderData()">
+        <div class="flex justify-center items-center py-8 relative" x-data="sliderData()">
             <button @click="prev()" class="prev1 absolute left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
             </button>
-            <div class="container xl:container-xl w-3/4 md:w-full  px-0 mx-0 overflow-hidden">
-                <div class="slider flex transition-transform duration-500" :style="`transform: translateX(-${currentIndex * 100 / visibleSlides}%)`">
-                    <template x-for="(hotel, index) in hotels" :key="index">
+            <div class="container xl:container-xl w-3/4 md:w-full px-0 mx-0 overflow-hidden">
+                <div class="slider flex transition-transform duration-500"
+                    :style="`transform: translateX(-${currentIndex * 100 / visibleSlides}%)`">
+                    <template x-for="(busines, index) in business" :key="index">
                         <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-3">
                             <div class="bg-white rounded-lg shadow-lg">
-                                <img :src="hotel.image" alt="Hotel" class="w-full h-44 object-cover">
+                                <img :src="busines.media[0]?.org_url" alt="Business" class="w-full h-44 object-cover">
                                 <div class="p-4">
-                                    <h3 class="text-md" x-text="hotel.name"></h3>
+                                    <h3 class="text-md truncate whitespace-nowrap line-clamp-1"
+                                        x-text="busines.business_title"></h3>
                                     <p class="text-gray-600 text-sm">
-                                        <img src="front/assets/images/location-filled.svg" alt="location icon"/> <span x-text="hotel.location"></span>
+                                        <img src="front/assets/images/location-filled.svg" alt="location icon" />
+                                        <span class="truncate whitespace-nowrap line-clamp-1"
+                                            x-text="busines.location"></span>
                                     </p>
-                                    <p class="text-yellow-500 mt-1" x-text="'⭐ ' + hotel.rating + ' (' + hotel.reviews + ' reviews)'"></p>
+                                    <p class="text-yellow-500 mt-1" x-text="'⭐ ' + 4 + ' (' + 48 + ' reviews)'"></p>
                                     <div class="flex p-2 justify-between">
-                                        <p class="font-bold mt-2 text-sm" x-text="hotel.price"></p>
-                                        <button class="mt-2 text-violet-800 px-2 py-1 border-2 border-violet-800 rounded">View &rarr;</button>
+                                        <p class="font-bold mt-2 text-sm">234$</p>
+                                        <button class="mt-2 text-violet-800 px-2 py-1 border-2 border-violet-800 rounded">
+                                            <a :href="`/business/${busines.id}`">View &rarr;</a>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -136,11 +150,13 @@
                 </div>
             </div>
             <button @click="next()" class="next1 absolute right-6 z-10 bg-violet-950 text-white p-2 rounded-full">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
             </button>
         </div>
+
     </section>
     <!-- End Business Ventures Section -->
 
@@ -153,10 +169,12 @@
                     class="w-full h-full object-cover md:rounded-l-3xl">
             </div>
             <!-- Text Part -->
-            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center  md:rounded-r-3xl">
+            <div
+                class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center  md:rounded-r-3xl">
                 <img src="{{ asset('/front/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
                 <h2 class="text-lg md:text-3xl mb-4">We Don’t Just Find Premises, We Discover Your Business Success</h2>
-                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded"><a href="{{  url('/about') }}">Find Now</a></button>
+                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded"><a
+                        href="{{ url('/about') }}">Find Now</a></button>
             </div>
         </div>
     </div>
@@ -168,7 +186,8 @@
             <div class="grid grid-cols-12">
                 <!-- Main image on the left -->
                 <div class="col-span-12 lg:col-span-6">
-                    <img src="{{ asset('/front/assets/images/dream-business.jpg') }}" alt="Main Image" class="w-full h-auto object-cover rounded-lg">
+                    <img src="{{ asset('/front/assets/images/dream-business.jpg') }}" alt="Main Image"
+                        class="w-full h-auto object-cover rounded-lg">
                 </div>
                 <!-- Text and smaller images on the right -->
                 <div class="col-span-12 lg:col-span-6 pr-10">
@@ -182,16 +201,20 @@
                     </p>
                     <form action="{{ route('subscribe') }}" method="POST" class="mt-2">
                         @csrf
-                        <input type="email" class=" p-2 text-black text-xl rounded" name="email"
-                            placeholder="Enter your email" required />
-                        <button type="submit"
-                            class="p-2.5 bg-black text-white rounded">Join Us Now</button>
+                        <div class="flex">
+                            <input type="email"
+                                class="p-2 text-violet-900 text-lg rounded-l-md border border-gray-300   w-1/2"
+                                name="email" placeholder="Enter your email" required />
+                            <button type="submit"
+                                class="p-2 text-lg bg-violet-900 text-white rounded-r-md border border-violet-950 hover:bg-violet-600 transition duration-300 ease-in-out">Join
+                                Us Now</button>
+                        </div>
                     </form>
                     @if (session('success'))
-                    <div class="alert alert-success text-green-400">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                        <div class="alert alert-success text-green-400">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
                         <div class="flex w-[280px] h-[180px] gap-4">
@@ -207,13 +230,15 @@
 
     <div class="container-fluid relative bg-violet-950 h-auto lg:h-[450px] pb-5 md-pb-0">
         <div class="container xl:container-xl relative px-4">
-            <div class="block text-center md:text-left md:flex justify-between items-center text-white pt-10 md:pt-20 rounded-lg">
+            <div
+                class="block text-center md:text-left md:flex justify-between items-center text-white pt-10 md:pt-20 rounded-lg">
                 <div>
                     <h2 class="text-xl md:text-2xl lg:text-4xl font-bold">Explore top Business</h2>
                     <p class="mt-2 mb-7 md:mb-0 text-lg">Our team’s business for consumers behind</p>
                 </div>
-                <button class="bg-orange-500 text-white font-semibold py-2 px-4 rounded hover:bg-orange-600 transition duration-300">
-                    View All Business
+                <button
+                    class="bg-orange-500 text-white font-semibold py-2 px-4 rounded hover:bg-orange-600 transition duration-300">
+                    <a href="{{ url('/businesses') }}"> View All Business</a>
                 </button>
             </div>
         </div>
@@ -221,7 +246,8 @@
         <div class="container xl:container-xl px-4 bottom-0 lg:-bottom-1/3">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-20">
                 <div class="relative w-full">
-                    <img src="{{ asset('/front/assets/images/business1.jpg') }}" alt="Real Estate" class="w-full h-5/6 object-cover rounded-lg">
+                    <img src="{{ asset('/front/assets/images/business1.jpg') }}" alt="Real Estate"
+                        class="w-full h-5/6 object-cover rounded-lg">
                     <div class="absolute inset-0 flex justify-center items-end pb-24">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Real Estate &rarr;
@@ -229,7 +255,8 @@
                     </div>
                 </div>
                 <div class="relative w-full">
-                    <img src="{{ asset('/front/assets/images/business2.jpg') }}" alt="Real Estate" class="w-full h-5/6 object-cover rounded-lg">
+                    <img src="{{ asset('/front/assets/images/business2.jpg') }}" alt="Real Estate"
+                        class="w-full h-5/6 object-cover rounded-lg">
                     <div class="absolute inset-0 flex justify-center items-end pb-24">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Business Consulting &rarr;
@@ -237,7 +264,8 @@
                     </div>
                 </div>
                 <div class="relative w-full">
-                    <img src="{{ asset('/front/assets/images/business3.jpg') }}" alt="Real Estate" class="w-full  h-5/6 object-cover rounded-lg">
+                    <img src="{{ asset('/front/assets/images/business3.jpg') }}" alt="Real Estate"
+                        class="w-full  h-5/6 object-cover rounded-lg">
                     <div class="absolute inset-0 flex justify-center items-end pb-24">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Cars Washer &rarr;
@@ -346,18 +374,21 @@
     <div class="bg-violet-950 p-10">
         <div x-data="slider()" class="relative container xl:container-xl px-4">
             <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
-            <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
+            <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with
+                us</p>
 
             <div class="relative overflow-hidden py-20">
-                <div id="slider" class="flex transition-transform duration-500 space-x-8" :style="{'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)`}">
+                <div id="slider" class="flex transition-transform duration-500 space-x-8"
+                    :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
                     <template x-for="(item, index) in items" :key="index">
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
-                            <p class="mb-4">Choosing was an excellent decision! Their team's professionalism and dedication ensured outstanding results. We're thrilled with the seamless process and incredible transformation. Highly recommend!</p>
+                        <div
+                            class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
+                            <p class="mb-4" x-text="item.description"> </p>
                             <div class="flex items-center pt-5">
-                                <img :src="item.img" alt="User Image" class="w-10 h-10 rounded-full mr-3">
+                                <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
                                 <div>
-                                    <h3 class="font-semibold">Jonathan Barkl</h3>
-                                    <p class="text-gray-600">Co-Founder and CEO</p>
+                                    <h3 class="font-semibold" x-text="item.name"></h3>
+                                    <p class="text-gray-600" x-text="item.job_position"></p>
                                 </div>
                             </div>
                         </div>
@@ -384,36 +415,18 @@
         <div class="container xl:container-xl px-4">
             <div class="text-center">
                 <h2 class="text-3xl font-bold">Latest Blogs For You</h2>
-                <p class="text-gray-600 mt-2 pb-14">Embrace the advantages of property listing and become a part of our community
+                <p class="text-gray-600 mt-2 pb-14">Embrace the advantages of property listing and become a part of our
+                    community
                     today.</p>
             </div>
-            <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src={{ asset('front/assets/images/building.svg') }} alt="News Image 1"
-                        class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <span class="block text-blue-500 text-sm mb-2">25-06-2024</span>
-                        <h3 class="text-xl font-bold mb-2">Average S. Rental Price Hits a Two-Year High</h3>
-                        <p class="text-gray-600 mb-4">Help people get to know you by list your business. Showcase your
-                            business with your outstanding media gallery.</p>
-                        <a href="#" class="text-orange-500 hover:underline">Read More &rarr;</a>
-                    </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <img src={{ asset('front/assets/images/static-report.svg') }} alt="News Image 2"
-                        class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <span class="block text-blue-500 text-sm mb-2">25-06-2024</span>
-                        <h3 class="text-xl font-bold mb-2">Average S. Rental Price Hits a Two-Year High</h3>
-                        <p class="text-gray-600 mb-4">Help people get to know you by list your business. Showcase your
-                            business with your outstanding media gallery.</p>
-                        <a href="#" class="text-orange-500 hover:underline">Read More &rarr;</a>
-                    </div>
-                </div>
+            <div id="blogs-container"
+                class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+                <!-- Card 1 -->
+
+
             </div>
+
         </div>
     </section>
     <!-- End Latest Blogs Section -->
@@ -422,24 +435,62 @@
 @endsection
 
 @push('scripts')
-
     {{-- Top banner carousel Start --}}
     <script>
         function carousel() {
             return {
                 currentSlide: 0,
-                slides: [
-                    { id: 1, text: 'Real Estate', image: '{{ asset('front/assets/icons/real-state.svg') }}' },
-                    { id: 2, text: 'Business Consulting', image: '{{ asset('front/assets/icons/business.svg') }}' },
-                    { id: 3, text: 'Car Washer', image: '{{ asset('front/assets/icons/car-washer.svg') }}' },
-                    { id: 4, text: 'Beauty Salon', image: '{{ asset('front/assets/icons/beauty-salon.svg') }}' },
-                    { id: 5, text: 'Fitness Center', image: '{{ asset('front/assets/icons/fitness-center.svg') }}' },
-                    { id: 6, text: 'Real Estate', image: '{{ asset('front/assets/icons/real-state.svg') }}' },
-                    { id: 7, text: 'Business Consulting', image: '{{ asset('front/assets/icons/business.svg') }}' },
-                    { id: 8, text: 'Car Washer', image: '{{ asset('front/assets/icons/car-washer.svg') }}' },
-                    { id: 9, text: 'Beauty Salon', image: '{{ asset('front/assets/icons/beauty-salon.svg') }}' },
-                    { id: 10, text: 'Fitness Center', image: '{{ asset('front/assets/icons/fitness-center.svg') }}' },
-                        ],
+                slides: [{
+                        id: 1,
+                        text: 'Real Estate',
+                        image: '{{ asset('front/assets/icons/real-state.svg') }}'
+                    },
+                    {
+                        id: 2,
+                        text: 'Business Consulting',
+                        image: '{{ asset('front/assets/icons/business.svg') }}'
+                    },
+                    {
+                        id: 3,
+                        text: 'Car Washer',
+                        image: '{{ asset('front/assets/icons/car-washer.svg') }}'
+                    },
+                    {
+                        id: 4,
+                        text: 'Beauty Salon',
+                        image: '{{ asset('front/assets/icons/beauty-salon.svg') }}'
+                    },
+                    {
+                        id: 5,
+                        text: 'Fitness Center',
+                        image: '{{ asset('front/assets/icons/fitness-center.svg') }}'
+                    },
+                    {
+                        id: 6,
+                        text: 'Real Estate',
+                        image: '{{ asset('front/assets/icons/real-state.svg') }}'
+                    },
+                    {
+                        id: 7,
+                        text: 'Business Consulting',
+                        image: '{{ asset('front/assets/icons/business.svg') }}'
+                    },
+                    {
+                        id: 8,
+                        text: 'Car Washer',
+                        image: '{{ asset('front/assets/icons/car-washer.svg') }}'
+                    },
+                    {
+                        id: 9,
+                        text: 'Beauty Salon',
+                        image: '{{ asset('front/assets/icons/beauty-salon.svg') }}'
+                    },
+                    {
+                        id: 10,
+                        text: 'Fitness Center',
+                        image: '{{ asset('front/assets/icons/fitness-center.svg') }}'
+                    },
+                ],
                 get slidesToShow() {
                     return window.innerWidth >= 1024 ? 6 : 3;
                 },
@@ -475,232 +526,197 @@
     {{-- Business Ventures carousel --}}
     <script>
         function sliderData() {
-                return {
-                    currentIndex: 0,
-                    hotels: [
-                        {
-                            name: 'Hotel Arc New York City',
-                            location: 'New York, United States',
-                            rating: '4.5',
-                            reviews: '228',
-                            price: '$243.00',
-                            image: 'front/assets/images/hotel.svg',
-                        },
-                        {
-                            name: 'Hotel Arc New York City',
-                            location: 'New York, United States',
-                            rating: '4.5',
-                            reviews: '228',
-                            price: '$243.00',
-                            image: 'front/assets/images/hotel.svg',
-                        },
-                        {
-                            name: 'Hotel Arc New York City',
-                            location: 'New York, United States',
-                            rating: '4.5',
-                            reviews: '228',
-                            price: '$243.00',
-                            image: 'front/assets/images/hotel.svg',
-                        },
-                        {
-                            name: 'Hotel Arc New York City',
-                            location: 'New York, United States',
-                            rating: '4.5',
-                            reviews: '228',
-                            price: '$243.00',
-                            image: 'front/assets/images/hotel.svg',
-                        },
-                        {
-                            name: 'Hotel Arc New York City',
-                            location: 'New York, United States',
-                            rating: '4.5',
-                            reviews: '228',
-                            price: '$243.00',
-                            image: 'front/assets/images/hotel.svg',
-                        },
-                        // Add more hotel objects as needed
-                    ],
-                    get visibleSlides() {
-                        if (window.innerWidth >= 1024) {
-                            return 4;
-                        } else if (window.innerWidth >= 768) {
-                            return 3;
-                        } else if (window.innerWidth >= 640) {
-                            return 2;
-                        } else {
-                            return 1;
+            return {
+                currentIndex: 0,
+                business: [],
+                //media:[],
+                async fetchbusiness() {
+                    try {
+
+                        const response = await fetch('/getJsonBusinesses');
+                        if (!response.ok) {
+                            //console.log(response);
+                            throw new Error('Network response was not ok');
                         }
-                    },
-                    prev() {
-                        if (this.currentIndex > 0) {
-                            this.currentIndex--;
-                        }
-                    },
-                    next() {
-                        if (this.currentIndex < Math.ceil(this.hotels.length / this.visibleSlides) - 1) {
-                            this.currentIndex++;
-                        }
-                    },
-                    updateSlider() {
-                        this.currentIndex = 0; // Reset to the first slide on resize
-                    },
-                    init() {
-                        window.addEventListener('resize', () => {
-                            this.updateSlider();
-                        });
+                        const data = await response.json();
+                        this.business = data.businesses;
+                        //
+                        // console.log(this.business.[media]);
+                    } catch (error) {
+                        console.error('There was a problem with the fetch operation:', error);
                     }
-                };
-            }
+                },
+                get visibleSlides() {
+                    if (window.innerWidth >= 1024) {
+                        return 4;
+                    } else if (window.innerWidth >= 768) {
+                        return 3;
+                    } else if (window.innerWidth >= 640) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                },
+                prev() {
+                    if (this.currentIndex > 0) {
+                        this.currentIndex--;
+                    }
+                },
+                next() {
+                    if (this.currentIndex < Math.ceil(this.business.length / this.visibleSlides) - 1) {
+                        this.currentIndex++;
+                    }
+                },
+                updateSlider() {
+                    this.currentIndex = 0; // Reset to the first slide on resize
+                },
+                init() {
+                    this.fetchbusiness(); // Fetch the data when initializing
+                    window.addEventListener('resize', () => {
+                        this.updateSlider();
+                    });
+                }
+            };
+        }
 
 
-    function slider() {
-        return {
-            currentIndex: 0,
-            items: [
-                { img: 'front/assets/images/janathan-barkri.png' },
-                { img: 'front/assets/images/janathan-barkri.png' },
-                { img: 'front/assets/images/janathan-barkri.png' },
-                { img: 'front/assets/images/janathan-barkri.png' },
-                { img: 'front/assets/images/janathan-barkri.png' }
-            ],
-            prev() {
-                if (this.currentIndex > 0) {
-                    this.currentIndex--;
-                }
-            },
-            next() {
-                if (this.currentIndex < this.totalSlides - 1) {
-                    this.currentIndex++;
-                }
-            },
-            get itemsPerPage() {
-                if (window.innerWidth >= 1024) return 3;
-                if (window.innerWidth >= 640) return 2;
-                return 1;
-            },
-            get totalSlides() {
-                return Math.ceil(this.items.length / this.itemsPerPage);
+        function slider() {
+    return {
+        currentIndex: 0,
+        items: [],
+        prev() {
+            if (this.currentIndex > 0) {
+                this.currentIndex--;
             }
+        },
+        next() {
+            if (this.currentIndex < this.totalSlides - 1) {
+                this.currentIndex++;
+            }
+        },
+        get itemsPerPage() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        },
+        get totalSlides() {
+            return Math.ceil(this.items.length / this.itemsPerPage);
+        },
+        init() {
+            fetch('/api/customers')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    this.items = data;
+                    console.log(this.items);
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
     }
-        </script>
+}
 
-
-<script>
-      document.addEventListener('DOMContentLoaded', function() {
-        axios.get('/getCategories')
-            .then(function (response) {
-                if(response.data.status === 1) {
-                    var categories = response.data.categories;
-                    console.log(categories);
-                    var categorySelect = document.getElementById('category_id');
-                    categorySelect.innerHTML = '<option value="">Business Type</option>';
-                    for (var name in categories) {
-                        var option = document.createElement('option');
-                        option.value = name;
-                        option.textContent = categories[name];
-                        categorySelect.appendChild(option);
-                    }
-                }
-            })
-            .catch(function (error) {
-                console.error('Error fetching categories:', error);
-                alert('Failed to fetch categories.');
-            });
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const categorySelect = document.getElementById('category_id');
-        const subCategorySelect = document.getElementById('subcategory_id');
-    
-        categorySelect.addEventListener('change', function () {
-            const categoryId = this.value;
-    
-            // Clear previous subcategories
-            subCategorySelect.innerHTML = '<option value="">Sub Type</option>';
-    
-            if (categoryId) {
-                // Fetch subcategories for the selected category
-                axios.get(`/categories/${categoryId}/subcategories`)
-                    .then(response => {
-                        const subcategories = response.data;
-                        subcategories.forEach(subcategory => {
-                            const option = document.createElement('option');
-                            option.value = subcategory.id;
-                            option.textContent = subcategory.name;
-                            subCategorySelect.appendChild(option);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching subcategories:', error);
-                    });
-            }
-        });
-    });
 
     </script>
-    
 
-    
+
     <script>
-            //dropdown list
+        document.addEventListener('DOMContentLoaded', function() {
+            axios.get('/getCategories')
+                .then(function(response) {
+                    if (response.data.status === 1) {
+                        var categories = response.data.categories;
+                        console.log(categories);
+                        var categorySelect = document.getElementById('category_id');
+                        categorySelect.innerHTML = '<option value="">Business Type</option>';
+                        for (var name in categories) {
+                            var option = document.createElement('option');
+                            option.value = name;
+                            option.textContent = categories[name];
+                            categorySelect.appendChild(option);
+                        }
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error fetching categories:', error);
+                    alert('Failed to fetch categories.');
+                });
+        });
 
 
-        function locationApp() {
-    return {
-        initMap() {
-            // const map = new google.maps.Map(document.getElementById('map'), {
-            //     center: {
-            //         lat: -34.397,
-            //         lng: 150.644
-            //     },
-            //     zoom: 8
-            // });
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('category_id');
+            const subCategorySelect = document.getElementById('subcategory_id');
 
-            const input = document.getElementById('autocomplete');
-            const autocomplete = new google.maps.places.Autocomplete(input);
+            categorySelect.addEventListener('change', function() {
+                const categoryId = this.value;
 
-            autocomplete.addListener('place_changed', function() {
-                const place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    return;
+                // Clear previous subcategories
+                subCategorySelect.innerHTML = '<option value="">Sub Type</option>';
+
+                if (categoryId) {
+                    // Fetch subcategories for the selected category
+                    axios.get(`/categories/${categoryId}/subcategories`)
+                        .then(response => {
+                            const subcategories = response.data;
+                            subcategories.forEach(subcategory => {
+                                const option = document.createElement('option');
+                                option.value = subcategory.id;
+                                option.textContent = subcategory.name;
+                                subCategorySelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching subcategories:', error);
+                        });
                 }
-
-                // if (place.geometry.viewport) {
-                //     map.fitBounds(place.geometry.viewport);
-                // } else {
-                //     map.setCenter(place.geometry.location);
-                //     map.setZoom(17);
-                // }
-
-                // new google.maps.Marker({
-                //     position: place.geometry.location,
-                //     map: map
-                // });
             });
-        }
-    };
-}
-
-// Load Google Maps script dynamically with async and defer
-function loadGoogleMapsScript() {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initMap`;
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    loadGoogleMapsScript();
-});
-
-window.initMap = function() {
-    locationApp().initMap();
-}
-
+        });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const blogsContainer = document.getElementById('blogs-container');
 
+            // Fetch the blog data from the JSON file
+            fetch('/blogsAlljson')
+                .then(response => response.json())
+                .then(data => {
+                    blogs = data.blogs;
+                    if (Array.isArray(blogs)) {
+                        blogs.forEach(blog => {
+                            // Create a blog post element
+                            const blogElement = document.createElement('div');
+                            blogElement.classList.add('bg-white', 'rounded-lg', 'shadow-lg',
+                                'overflow-hidden');
+
+                            // Set the blog post content
+                            blogElement.innerHTML = `
+                    <img src="${blog.image_url}" alt="${blog.title}" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="block text-blue-500 text-sm mb-2">${blog.date}</span>
+                        <h3 class="text-xl font-bold mb-2">${blog.title}</h3>
+                        <p class="text-gray-600 mb-4 line-clamp-2 whitespace-nowrap">${blog.description}</p>
+                        <a href="/blogs/${blog.id}" class="text-orange-500 hover:underline">Read More &rarr;</a>
+                    </div>
+                `;
+
+                            // Append the blog post to the container
+                            blogsContainer.appendChild(blogElement);
+                        });
+                    } else {
+                        console.error('Expected an array but received:', data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching blog data:', error);
+                });
+
+        });
+    </script>
 @endpush

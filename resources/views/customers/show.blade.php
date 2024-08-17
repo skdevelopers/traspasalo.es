@@ -1,4 +1,3 @@
-<!-- resources/views/customers/show.blade.php -->
 @extends('layouts.vertical', ['title' => 'Clients Details', 'sub_title' => 'Clients'])
 
 @section('content')
@@ -8,7 +7,10 @@
             <div class="mt-4">
                 <p><strong>Name:</strong> {{ $customer->name }}</p>
                 <p><strong>Email:</strong> {{ $customer->email }}</p>
-                <p><strong>Address:</strong> {{ $customer->address }}</p>
+                <p><strong>Job:</strong> {{ $customer->job_position }}</p>
+                <p><strong>Description:</strong> {{ $customer->description }}</p>
+                <p><strong>Image:</strong></p>
+                <img src="{{ $customer->getFirstMediaUrl('customers') }}" alt="{{ $customer->name }}" class="h-32 w-32 object-cover rounded">
                 <!-- Add more details as needed -->
             </div>
         </div>

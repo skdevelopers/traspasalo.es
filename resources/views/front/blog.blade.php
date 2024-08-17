@@ -63,7 +63,7 @@
                 <div class="p-6">
                     <span class="block text-blue-500 text-sm mb-2">{{ $blog->date }}</span>
                     <h3 class="text-xl font-bold mb-2">{{ $blog->title }}</h3>
-                    <p class="text-gray-600 mb-4">{!! $blog->description !!}.</p>
+                    <p class="text-gray-600 mb-4 line-clamp-2 whitespace-nowrap">{!! $blog->description !!}.</p>
                     <a href="{{ route('blogs.show', $blog->id) }}" class="text-orange-500 hover:underline">Read More &rarr;</a>
                 </div>
             </div>

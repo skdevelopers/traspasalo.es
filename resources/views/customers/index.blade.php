@@ -15,18 +15,21 @@
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white rounded-md shadow-md">
                     <thead>
-                    <tr class="bg-gray-200">
-                        <th class="px-4 py-2">#</th>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Address</th>
-                        <th class="px-4 py-2">Actions</th>
-                    </tr>
+                        <tr class="bg-gray-200">
+                            <th class="px-4 py-2">#</th>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Job</th>
+                            <th class="px-4 py-2">Description</th> <!-- New Description Column -->
+                            <th class="px-4 py-2">Image</th> <!-- New Image Column -->
+                            <th class="px-4 py-2">Actions</th>
+                        </tr>
                     </thead>
                     <tbody id="customerTableBody">
-                    <!-- Customer rows will be populated here -->
+                        <!-- Customer rows will be populated here -->
                     </tbody>
                 </table>
+                
                 <div id="noCustomersMessage" class="mt-4 text-center text-gray-500">
                     <!-- Message displayed when no customers are available -->
                     No Client found. <a href="{{ route('customers.create') }}" class="text-blue-500 hover:underline">Create one</a>.
@@ -44,6 +47,7 @@
 
             axios.get('/api/customers')
                 .then(response => {
+                    console.log(response);
                     console.log('Axios Response:', response); // Log the entire Axios response
                     const customers = response.data;
                     console.log('Customers:', customers); // Log the parsed customers data
@@ -63,36 +67,33 @@
 
                             // Construct HTML row for the customer
                             const row = `
-                        <tr>
-                            <td class="border px-4 py-2">${customer.id}</td>
-                            <td class="border px-4 py-2">${customer.name}</td>
-                            <td class="border px-4 py-2">${customer.email}</td>
-                            <td class="border px-4 py-2">${customer.address}</td>
-                            <td class="border px-4 py-2 whitespace-nowrap">
-                            @can('edit roles')
-                                
-                            
-                                <a href="/customers/${customer.id}/edit" class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                    <i class="mgc_edit_line text-lg"></i>
-                                </a>
-                                @endcan
-                                @can('delete roles')
-                                    
-                                
-                                <form action="/customers/${customer.id}" method="POST" class="inline">
-                                    @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700 mx-0.5" onclick="return confirm('Are you sure you want to delete this customer?')">
-                                <i class="mgc_delete_line text-xl"></i>
-                            </button>
-                        </form>
-                        @endcan
-                        <a href="/customers/${customer.id}" class="text-green-500 hover:text-green-700 mx-0.5">
-                                    <i class="mgc_display_line text-lg"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    `;
+    <tr>
+        <td class="border px-4 py-2">${customer.id}</td>
+        <td class="border px-4 py-2">${customer.name}</td>
+        <td class="border px-4 py-2">${customer.email}</td>
+        <td class="border px-4 py-2">${customer.job_position}</td>
+        <td class="border px-4 py-2">${customer.description ?? 'N/A'}</td>
+        <td class="border px-4 py-2">
+            <img src="${customer.image_url}" alt="${customer.name}" class="h-16 w-16 object-cover rounded">
+        </td>
+        <td class="border px-4 py-2 whitespace-nowrap">
+            <a href="/customers/${customer.id}/edit" class="text-blue-500 hover:text-blue-700 mx-0.5">
+                <i class="mgc_edit_line text-lg"></i>
+            </a>
+            <form action="/customers/${customer.id}" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-red-500 hover:text-red-700 mx-0.5" onclick="return confirm('Are you sure you want to delete this customer?')">
+                    <i class="mgc_delete_line text-xl"></i>
+                </button>
+            </form>
+            <a href="/customers/${customer.id}" class="text-green-500 hover:text-green-700 mx-0.5">
+                <i class="mgc_display_line text-lg"></i>
+            </a>
+        </td>
+    </tr>
+`;
+
 
                             // Insert the row into the table body
                             customerTableBody.insertAdjacentHTML('beforeend', row);

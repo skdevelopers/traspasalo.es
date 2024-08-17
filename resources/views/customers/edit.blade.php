@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <h1>Edit Client</h1>
-        <form method="post" class="valid-form grid lg:grid-cols-3 gap-6" action="{{ route('customers.update', $customer->id) }}">
+        <form method="post" class="valid-form grid lg:grid-cols-3 gap-6" action="{{ route('customers.update', $customer->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

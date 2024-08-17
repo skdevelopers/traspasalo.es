@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <h1>Create Customer</h1>
-        <form method="post" class="valid-form grid lg:grid-cols-3 gap-6" action="{{ route('customers.store') }}">
+        <form method="post" class="valid-form grid lg:grid-cols-3 gap-6" action="{{ route('customers.store') }}" enctype="multipart/form-data">
             @csrf
             @include('customers._form')
 
