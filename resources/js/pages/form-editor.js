@@ -17,4 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
         },
     });
+      
+    var descriptionInput = document.querySelector('input[name=description]');
+
+    var form = document.querySelector('#form');
+    form.onsubmit = function(event) {
+        descriptionInput.value = quill.root.innerHTML;
+        console.log("Quill Content:", descriptionInput.value);
+    }
+
 });

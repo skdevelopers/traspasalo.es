@@ -240,6 +240,7 @@ Route::get('/blog', [BlogController::class,'showAll']);
 
 Route::get('/getCategories', [CategoryController::class, 'getCategories']);
 Route::get('/businesses', [BusinessController::class, 'showBusinesses']);
+Route::get('/businesses/location', [BusinessController::class, 'showBusinesses']);
 Route::get('/getJsonBusinesses',[BusinessController::class, 'getJsonBusinesses']);
 
 

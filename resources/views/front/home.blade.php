@@ -131,9 +131,9 @@
                                 <div class="p-4">
                                     <h3 class="text-md truncate whitespace-nowrap line-clamp-1"
                                         x-text="busines.business_title"></h3>
-                                    <p class="text-gray-600 text-sm">
+                                    <p class="text-gray-600 text-sm truncate">
                                         <img src="front/assets/images/location-filled.svg" alt="location icon" />
-                                        <span class="truncate whitespace-nowrap line-clamp-1"
+                                        <span class=""
                                             x-text="busines.location"></span>
                                     </p>
                                     <p class="text-yellow-500 mt-1" x-text="'⭐ ' + 4 + ' (' + 48 + ' reviews)'"></p>
@@ -366,7 +366,7 @@
                 class="absolute inset-0 flex flex-col items-center justify-center bg-black opacity-65 rounded-lg text-white">
                 <h2 class="text-lg text-center md:text-3xl md:text-left font-bold">Find Best Places in Your City</h2>
                 <p class="mt-2 text-center md:text-left">We Help You Turn Your Ideas Into Reality</p>
-                <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md">Know More</button>
+                <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md"><a href="{{ url('/businesses/location') }}">Know More</a></button>
             </div>
         </div>
     </div>

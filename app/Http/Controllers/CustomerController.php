@@ -55,6 +55,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
+       // dd($request);
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:customers',
