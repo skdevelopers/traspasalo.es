@@ -107,6 +107,12 @@
                     <span class="menu-text"> Blogs </span>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('faqs.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
+                    <span class="menu-text"> FAQs </span>
+                </a>
+            </li>
             @endrole
 
             @can('Allow_Packages')

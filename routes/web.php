@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FAQController;
 use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\CashFlowController;
 use App\Http\Controllers\CategoryController;
@@ -70,7 +71,11 @@ Route::get('categories/{category}/subcategories', [CategoryController::class, 'g
     Route::resource('feature-services', FeatureServiceController::class);
     Route::resource('customers', CustomerController::class);
     Route::resource('account-types', AccountTypeController::class);
+    Route::resource('faqs', FAQController::class);
+
     });
+
+    Route::get('/faqsJson', [FAQController::class,'indexJson']);
 
 Route::resource('cash-flows', CashFlowController::class)->middleware('auth');
 Route::resource('products', ProductController::class)->middleware('auth');
