@@ -6,8 +6,13 @@
     <p>Monthly Price: {{ $accountType->monthly_price }}</p>
     <p>Yearly Price: {{ $accountType->yearly_price }}</p>
     <ul>
-        @foreach($accountType->descriptions as $description)
-        <li>{{ $description }}</li>
+        @foreach ($accountType->monthly_description as $monthlyDescription)
+                    <li>{{ $monthlyDescription }}</li>
+         @endforeach
+    </ul>
+    <ul>
+        @foreach ($accountType->yearly_description as $yearlyDescription)
+                    <li>{{ $yearlyDescription }}</li>
         @endforeach
     </ul>
     <a href="{{ route('account-types.edit', $accountType->id) }}" class="btn btn-warning">Edit</a>

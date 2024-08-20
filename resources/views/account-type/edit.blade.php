@@ -19,18 +19,35 @@
             <label for="yearly_price" class="block text-gray-700">Yearly Price</label>
             <input type="number" name="yearly_price" class="w-full mt-1 p-2 border border-gray-300 rounded" value="{{ $accountType->yearly_price }}" required>
         </div>
+
+        <!-- Monthly Descriptions -->
         <div class="mb-4">
-            <label for="descriptions" class="block text-gray-700">Descriptions</label>
-            <div id="descriptionFields" class="space-y-2">
-                @foreach(($accountType->descriptions) as $description)
+            <label for="monthly_description" class="block text-gray-700">Monthly Descriptions</label>
+            <div id="monthlyDescriptionFields" class="space-y-2">
+                @foreach($accountType->monthly_description as $monthlyDescription)
                     <div class="description-field flex items-center">
-                        <input type="text" name="descriptions[]" class="w-full mt-1 p-2 border border-gray-300 rounded" value="{{ $description }}" required>
+                        <input type="text" name="monthly_description[]" class="w-full mt-1 p-2 border border-gray-300 rounded" value="{{ $monthlyDescription }}" required>
                         <button type="button" class="removeDescription ml-2 px-2 py-1 bg-red-600 text-white rounded">-</button>
                     </div>
                 @endforeach
             </div>
-            <button type="button" id="addDescription" class="mt-2 px-4 py-2 bg-gray-600 text-white rounded">+</button>
+            <button type="button" id="addMonthlyDescription" class="mt-2 px-4 py-2 bg-gray-600 text-white rounded">+</button>
         </div>
+
+        <!-- Yearly Descriptions -->
+        <div class="mb-4">
+            <label for="yearly_description" class="block text-gray-700">Yearly Descriptions</label>
+            <div id="yearlyDescriptionFields" class="space-y-2">
+                @foreach($accountType->yearly_description as $yearlyDescription)
+                    <div class="description-field flex items-center">
+                        <input type="text" name="yearly_description[]" class="w-full mt-1 p-2 border border-gray-300 rounded" value="{{ $yearlyDescription }}" required>
+                        <button type="button" class="removeDescription ml-2 px-2 py-1 bg-red-600 text-white rounded">-</button>
+                    </div>
+                @endforeach
+            </div>
+            <button type="button" id="addYearlyDescription" class="mt-2 px-4 py-2 bg-gray-600 text-white rounded">+</button>
+        </div>
+
         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Update</button>
     </form>
 </div>
@@ -38,17 +55,29 @@
 
 @push('scripts')
 <script>
-    document.getElementById('addDescription').addEventListener('click', function () {
+    // Monthly Descriptions
+    document.getElementById('addMonthlyDescription').addEventListener('click', function () {
         var div = document.createElement('div');
         div.className = 'description-field flex items-center';
-        div.innerHTML = '<input type="text" name="descriptions[]" class="w-full mt-1 p-2 border border-gray-300 rounded" required><button type="button" class="removeDescription ml-2 px-2 py-1 bg-red-600 text-white rounded">-</button>';
-        document.getElementById('descriptionFields').appendChild(div);
+        div.innerHTML = '<input type="text" name="monthly_description[]" class="w-full mt-1 p-2 border border-gray-300 rounded" required><button type="button" class="removeDescription ml-2 px-2 py-1 bg-red-600 text-white rounded">-</button>';
+        document.getElementById('monthlyDescriptionFields').appendChild(div);
     });
 
-    document.getElementById('descriptionFields').addEventListener('click', function (e) {
-        if (e.target && e.target.matches("button.removeDescription")) {
-            e.target.parentNode.remove();
-        }
+    // Yearly Descriptions
+    document.getElementById('addYearlyDescription').addEventListener('click', function () {
+        var div = document.createElement('div');
+        div.className = 'description-field flex items-center';
+        div.innerHTML = '<input type="text" name="yearly_description[]" class="w-full mt-1 p-2 border border-gray-300 rounded" required><button type="button" class="removeDescription ml-2 px-2 py-1 bg-red-600 text-white rounded">-</button>';
+        document.getElementById('yearlyDescriptionFields').appendChild(div);
+    });
+
+    // Remove Description Fields
+    document.querySelectorAll('#monthlyDescriptionFields, #yearlyDescriptionFields').forEach(function (container) {
+        container.addEventListener('click', function (e) {
+            if (e.target && e.target.matches("button.removeDescription")) {
+                e.target.parentNode.remove();
+            }
+        });
     });
 </script>
 @endpush

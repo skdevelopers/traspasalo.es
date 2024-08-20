@@ -234,9 +234,7 @@ Route::get('/about', function () {
     return view('front.about');
 });
 
-Route::get('/price', function () {
-    return view('front.price');
-});
+Route::get('/price', [AccountTypeController::class,'getPackage'])->name('price');
 
 
 

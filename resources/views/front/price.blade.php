@@ -13,67 +13,37 @@
             <!-- Tab Switcher -->
             <div class="text-center mb-8">
                 <div class="inline-block bg-gray-200 rounded-full p-1">
-                    <button class="px-4 py-2 bg-orange-500 text-white rounded-full focus:outline-none">Monthly</button>
-                    <button class="px-4 py-2 text-gray-600 rounded-full focus:outline-none">Yearly</button>
+                    <button id="monthly-btn"
+                        class="tab-button active px-3 py-2 bg-orange-500 text-white rounded-full focus:outline-none"
+                        onclick="toggleTab('monthly')">Monthly</button>
+                    <button id="yearly-btn" class="tab-button px-3 py-2 text-gray-600 rounded-full focus:outline-none"
+                        onclick="toggleTab('yearly')">Yearly</button>
                 </div>
             </div>
 
             <!-- Pricing Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Free Account -->
+            <div id="packages-container" class="grid grid-cols-1 gap-6 md:grid-cols-3">
+                @foreach($packages as $package)
                 <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
-                    <h3 class="text-xl font-bold mb-4">Free Account</h3>
+                    <h3 class="text-xl font-bold mb-4">{{ $package->name }}</h3>
                     <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
-                    <div class=" p-2 align-super text-superscript text-xl text-gray-600 font-bold">$<span class="text-5xl">00</span><span class="align-super text-superscript text-gray-600 text-sm"> per month</span></div>
+                    <div class="p-2 align-super text-superscript text-xl text-gray-600 font-bold">
+                        $<span class="text-5xl">{{ $package->getPrice($billingCycle) }}</span>
+                        <span class="align-super text-superscript text-gray-600 text-sm"> per {{ $billingCycle }}</span>
+                    </div>
                     <button class="bg-white text-gray-600 py-2 px-12 rounded-lg mb-6 border-2" disabled>You are here</button>
                     <div class="text-left">
                         <h1 class="text-md font-semibold">All plan Include:</h1>
                         <ul class="space-y-2 pt-2">
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Post 1 Business</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Contact Details (2 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Search Alerts</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Highlight Ads (5 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Get More Eyes</li>
+                            @foreach($package->getDescription($billingCycle) as $description)
+                            <li class="flex items-center"><span class="text-black mr-2">✔</span>{{ $description }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
-
-
-                <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
-                    <h3 class="text-xl font-bold mb-4">Silver Account</h3>
-                    <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
-                    <div class=" p-2 align-super text-superscript text-xl text-violet-950 font-bold">$<span class="text-5xl">10</span><span class="align-super text-superscript text-gray-600 text-sm"> per month</span></div>
-                    <button class="bg-violet-950 text-white py-2 px-14 rounded-lg mb-6 border-2" disabled>Buy Now</button>
-                    <div class="text-left">
-                        <h1 class="text-md font-semibold">All plan Include:</h1>
-                        <ul class="space-y-2 pt-2">
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Post 1 Business</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Contact Details (2 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Search Alerts</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Highlight Ads (5 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Get More Eyes</li>
-                        </ul>
-                    </div>
-                </div>
-
-
-                <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
-                    <h3 class="text-xl font-bold mb-4">Pro Account</h3>
-                    <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
-                    <div class=" p-2 align-super text-superscript text-xl text-orange-500 font-bold">$<span class="text-5xl">10</span><span class="align-super text-superscript text-gray-600 text-sm"> per month</span></div>
-                    <button class="text-white bg-orange-500 py-2 px-14 rounded-lg mb-6 border-2" disabled>Buy Now</button>
-                    <div class="text-left">
-                        <h1 class="text-md font-semibold">All plan Include:</h1>
-                        <ul class="space-y-2 pt-2">
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Post 1 Business</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Contact Details (2 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Search Alerts</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Highlight Ads (5 euro)</li>
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>Get More Eyes</li>
-                        </ul>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            
         </div>
     </div>
 
@@ -105,7 +75,8 @@
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('front/assets/icons/secure-booking.png') }}" alt="Secure Booking" class="mx-auto">
+                        <img src="{{ asset('front/assets/icons/secure-booking.png') }}" alt="Secure Booking"
+                            class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Secure Booking</h3>
                     <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
@@ -127,3 +98,64 @@
 
     @include('front.partials.footer')
 @endsection
+@push('scripts')
+    <script>
+        function toggleTab(selected) {
+    const monthlyBtn = document.getElementById('monthly-btn');
+    const yearlyBtn = document.getElementById('yearly-btn');
+
+    if (selected === 'monthly') {
+        monthlyBtn.classList.add('bg-orange-500', 'text-white');
+        monthlyBtn.classList.remove('text-gray-600');
+        yearlyBtn.classList.remove('bg-orange-500', 'text-white');
+        yearlyBtn.classList.add('text-gray-600');
+    } else if (selected === 'yearly') {
+        yearlyBtn.classList.add('bg-orange-500', 'text-white');
+        yearlyBtn.classList.remove('text-gray-600');
+        monthlyBtn.classList.remove('bg-orange-500', 'text-white');
+        monthlyBtn.classList.add('text-gray-600');
+    }
+
+    // Make an AJAX request to fetch the packages
+    fetch(`{{ route('price') }}?billing_cycle=${selected}`, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const packagesContainer = document.getElementById('packages-container');
+        packagesContainer.innerHTML = ''; // Clear the current packages
+
+        data.packages.forEach(package => {
+            const packageHtml = `
+                <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
+                    <h3 class="text-xl font-bold mb-4">${package.name}</h3>
+                    <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
+                    <div class="p-2 align-super text-superscript text-xl text-gray-600 font-bold">
+                        $<span class="text-5xl">${package[`${data.billingCycle}_price`]}</span>
+                        <span class="align-super text-superscript text-gray-600 text-sm"> per ${data.billingCycle}</span>
+                    </div>
+                    <button class="bg-white text-gray-600 py-2 px-12 rounded-lg mb-6 border-2" disabled>You are here</button>
+                    <div class="text-left">
+                        <h1 class="text-md font-semibold">All plan Include:</h1>
+                        <ul class="space-y-2 pt-2">
+                            ${package[`${data.billingCycle}_description`].map(description => `
+                                <li class="flex items-center"><span class="text-black mr-2">✔</span>${description}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            packagesContainer.insertAdjacentHTML('beforeend', packageHtml);
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const billingCycle = '{{ $billingCycle }}';
+    toggleTab(billingCycle); // Initialize the correct tab on page load
+});
+
+    </script>
+@endpush

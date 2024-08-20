@@ -12,8 +12,12 @@ class AccountTypeController extends Controller
     {
         $accountTypes = AccountType::all();
         foreach ($accountTypes as $accountType) {
-            if (is_string($accountType->descriptions)) {
-                $accountType->descriptions = json_decode($accountType->descriptions, true);
+            // Decode JSON strings to arrays for monthly and yearly descriptions
+            if (is_string($accountType->monthly_description)) {
+                $accountType->monthly_description = json_decode($accountType->monthly_description, true);
+            }
+            if (is_string($accountType->yearly_description)) {
+                $accountType->yearly_description = json_decode($accountType->yearly_description, true);
             }
         }
         return view('account-type.index', compact('accountTypes'));
@@ -28,50 +32,62 @@ class AccountTypeController extends Controller
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        // try {
         $request->validate([
             'name' => 'required|string|max:255',
             'monthly_price' => 'required|numeric',
             'yearly_price' => 'required|numeric',
-            'descriptions' => 'required|array',
+            'monthly_description' => 'required|array',
+            'yearly_description' => 'required|array',
         ]);
 
         $data = $request->all();
-        $data['descriptions'] = json_encode($request->descriptions);
+        // Encode descriptions as JSON strings
+        $data['monthly_description'] = json_encode($request->monthly_description);
+        $data['yearly_description'] = json_encode($request->yearly_description);
 
         AccountType::create($data);
 
         return redirect()->route('account-types.index')->with('success', 'Account type created successfully.');
-        // } catch (\Exception $e) {
-        //   return redirect()->back()->withErrors(['error' => 'An error occurred while creating the account type. Please try again.']);
-        // }
     }
 
+    // Show the form for editing the specified resource.
+    public function edit(AccountType $accountType)
+    {
+        // Decode JSON strings to arrays for monthly and yearly descriptions
+        if (is_string($accountType->monthly_description)) {
+            $accountType->monthly_description = json_decode($accountType->monthly_description, true);
+        }
+        if (is_string($accountType->yearly_description)) {
+            $accountType->yearly_description = json_decode($accountType->yearly_description, true);
+        }
+
+        return view('account-type.edit', compact('accountType'));
+    }
+
+    // Update the specified resource in storage.
     public function update(Request $request, AccountType $accountType)
     {
-        //dd($request->all());
         try {
-
             $request->validate([
                 'name' => 'required|string|max:255',
                 'monthly_price' => 'required|numeric',
                 'yearly_price' => 'required|numeric',
-                'descriptions' => 'required|array',
+                'monthly_description' => 'required|array',
+                'yearly_description' => 'required|array',
             ]);
-            //dd("hello");
 
             $data = $request->all();
-
-            $data['descriptions'] = json_encode($request->descriptions);
+            // Encode descriptions as JSON strings
+            $data['monthly_description'] = json_encode($request->monthly_description);
+            $data['yearly_description'] = json_encode($request->yearly_description);
 
             $accountType->update($data);
 
-            return redirect()->route('account-types.index', 'Account type updated successfully.');
+            return redirect()->route('account-types.index')->with('success', 'Account type updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'An error occurred while updating the account type. Please try again.']);
         }
     }
-
 
     // Display the specified resource.
     public function show(AccountType $accountType)
@@ -79,23 +95,41 @@ class AccountTypeController extends Controller
         return view('account-type.show', compact('accountType'));
     }
 
-    // Show the form for editing the specified resource.
-    public function edit(AccountType $accountType)
-    {
-        // Check if the descriptions property is a JSON string and decode it
-        if (is_string($accountType->descriptions)) {
-            $accountType->descriptions = json_decode($accountType->descriptions, true);
-        }
-        return view('account-type.edit', compact('accountType'));
-    }
-
-    // Update the specified resource in storage.
-
     // Remove the specified resource from storage.
     public function destroy(AccountType $accountType)
     {
         $accountType->delete();
 
-        return redirect()->route('account-types.index', 'Account type deleted successfully.');
+        return redirect()->route('account-types.index')->with('success', 'Account type deleted successfully.');
     }
+
+    public function getPackage(Request $request)
+    {
+        $billingCycle = $request->input('billing_cycle', 'monthly'); // Default to 'monthly'
+    
+        // Fetch packages with the relevant price
+        $packages = AccountType::whereNotNull("{$billingCycle}_price")->get();
+    
+        // If the request is AJAX, return a JSON response
+        if ($request->ajax()) {
+            return response()->json([
+                'billingCycle' => $billingCycle,
+                'packages' => $packages->map(function($package) {
+                    return [
+                        'name' => $package->name,
+                        'monthly_price' => $package->monthly_price,
+                        'yearly_price' => $package->yearly_price,
+                        'monthly_description' => json_decode($package->monthly_description, true),
+                        'yearly_description' => json_decode($package->yearly_description, true),
+                    ];
+                })
+            ]);
+        }
+    
+        // Otherwise, return the full view
+        return view('front.price', compact('packages', 'billingCycle'));
+    }
+    
+    
+    
 }
