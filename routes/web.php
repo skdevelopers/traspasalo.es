@@ -292,6 +292,9 @@ Route::get('/blogsAlljson', [BlogController::class,'blogsAllJson']);
 
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 
+Route::resource('subscribers', NewsletterController::class);
+
+
 
 
 

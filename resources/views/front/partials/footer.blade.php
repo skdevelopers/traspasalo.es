@@ -8,16 +8,12 @@
             <div class="p-2 md:w-1/2 w-full md:flex md:justify-end">
                 <div>
                     <h3 class="text-lg mb-4 md:mb-0 md:mr-4 text-gray-300 pb-3">Join Our Newsletter</h3>
-                    <form action="{{ route('subscribe') }}" method="POST" class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <form id="subscribeForm" class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         @csrf
-                        <input type="email" name="email" placeholder="Your Email" class="w-full md:w-80 p-2 rounded-sm focus:outline-none text-gray-800">
+                        <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-2 rounded-sm focus:outline-none text-gray-800">
                         <button type="submit" class="bg-orange-500 rounded-sm px-4 py-2">Subscribe</button>
                     </form>
-                    @if (session('success'))
-                    <div class="alert alert-success text-green-400">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                    <div id="message" class="mt-4 text-green-400"></div>
                 </div>
             </div>
         </div>
@@ -119,3 +115,39 @@
         </div>
     </div>
 </footer>
+
+@push('scripts')
+<script>
+    document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        let form = this;
+        let email = document.getElementById('email').value;
+        let messageDiv = document.getElementById('message');
+
+        fetch("{{ route('subscribe') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.errors) {
+                messageDiv.innerHTML = `<span class="text-red-500">${data.errors.email[0]}</span>`;
+            } else {
+                messageDiv.innerHTML = `<span class="text-green-500">${data.success}</span>`;
+                form.reset();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            messageDiv.innerHTML = `<span class="text-red-500">Email Already subscribed.</span>`;
+        });
+    });
+</script>
+@endpush
