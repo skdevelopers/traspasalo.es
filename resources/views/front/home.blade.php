@@ -199,13 +199,13 @@
                         business success is clear and achievable. Let us help you find not just a place, but the ideal
                         environment where your business can thrive.
                     </p>
-                    <form id="subscribeForm2" class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <form id="subscribeForm3" class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         @csrf
                         <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
                         <button type="submit" class="bg-violet-900 text-white rounded-md px-6 py-3 font-semibold shadow-md hover:bg-violet-700 transition-colors duration-300">Subscribe</button>
                     </form>
                     
-                    <div id="message2" class="mt-4 text-green-400"></div>
+                    <div id="message3" class="mt-4 text-green-400"></div>
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
                         <div class="flex w-[280px] h-[180px] gap-4">
@@ -708,6 +708,39 @@
                     console.error('Error fetching blog data:', error);
                 });
 
+        });
+    </script>
+    <script>
+        document.getElementById('subscribeForm3').addEventListener('submit', function(e) {
+            e.preventDefault();
+    
+            let form = this;
+            let email = document.getElementById('email').value;
+            let messageDiv = document.getElementById('message3');
+    
+            fetch("{{ route('subscribe') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    email: email
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.errors) {
+                    messageDiv.innerHTML = `<span class="text-red-500">${data.errors.email[0]}</span>`;
+                } else {
+                    messageDiv.innerHTML = `<span class="text-green-500">${data.success}</span>`;
+                    form.reset();
+                }
+            })
+            .catch(error => {
+                //console.error('Error:', error);
+                messageDiv.innerHTML = `<span class="text-red-500">Email Already subscribed.</span>`;
+            });
         });
     </script>
 @endpush
