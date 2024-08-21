@@ -44,7 +44,7 @@ class BusinessController extends Controller
 
     public function create()
     {
-        $categories = Category::where('parent_id', null)->get();
+        $categories = Category::whereNull('parent_id')->select('id', 'name')->get();
         $features = FeatureService::all();
         return view('front.add-business', compact('categories', 'features'));
     }

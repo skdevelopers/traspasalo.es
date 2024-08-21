@@ -10,7 +10,7 @@
                 @endforeach
             </ul>
         </div>
-    @endif 
+    @endif
 
     <div class="mx-auto bg-white p-5 rounded-lg shadow-md container xl:container-xl my-10">
         <h3 class="text-center text-3xl p-4"> Add Business</h3>
@@ -26,9 +26,10 @@
                         class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring focus:ring-blue-500">
                         <option value="">Select</option>
                         @foreach ($categories as $category)
-                            <option value={{ $category->id }}> {{ $category->name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
+
                     @error('category_id')
                         <p class="text-red-500 mt-1">{{ $message }}</p>
                     @enderror
@@ -140,11 +141,11 @@
 
             <!-- Hidden input to store files -->
             <input type="file" id="hiddenImagesInput" name="images[]" multiple style="display: none;">
-            
-                @error('images')
-                    <p class="text-red-500 mt-1">{{ $message }}</p>
-                @enderror
-           
+
+            @error('images')
+                <p class="text-red-500 mt-1">{{ $message }}</p>
+            @enderror
+
             <!-- Property Location (Map integration) -->
             <div x-data="locationApp()" x-init="initMap">
                 <div class="mb-4">
