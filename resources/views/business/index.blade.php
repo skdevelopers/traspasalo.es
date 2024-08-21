@@ -31,7 +31,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ ++$count }}</td>
                         <td class="border px-4 py-2">{{ $business->business_title }}</td>
-                        <td class="border px-4 py-2">{{ $business->category->name }}</td>
+                        <td class="border px-4 py-2">{{ $business->category->name ?? 'N/A' }}</td>
                         <td class="border px-4 py-2">{{ $business->subcategory->name }}</td>
                         <td class="border px-4 py-2">{{ Str::limit($business->description, 50) }}</td>
                         <td class="border px-4 py-2">{{ $business->age_restriction }}</td>
