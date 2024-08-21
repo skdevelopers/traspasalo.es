@@ -32,11 +32,11 @@
                         <td class="border px-4 py-2">{{ ++$count }}</td>
                         <td class="border px-4 py-2">{{ $business->business_title }}</td>
                         <td class="border px-4 py-2">{{ $business->category->name ?? 'N/A' }}</td>
-                        <td class="border px-4 py-2">{{ $business->subcategory->name }}</td>
-                        <td class="border px-4 py-2">{{ Str::limit($business->description, 50) }}</td>
-                        <td class="border px-4 py-2">{{ $business->age_restriction }}</td>
-                        <td class="border px-4 py-2">{{ $business->pets_permission }}</td>
-                        <td class="border px-4 py-2">{{ $business->location }}</td>
+                        <td class="border px-4 py-2">{{ $business->subcategory->name ?? 'N/A' }}</td>
+                        <td class="border px-4 py-2">{{ Str::limit($business->description, 50) ?? 'N/A'}}</td>
+                        <td class="border px-4 py-2">{{ $business->age_restriction ?? 'N/A' }}</td>
+                        <td class="border px-4 py-2">{{ $business->pets_permission ?? 'N/A'}}</td>
+                        <td class="border px-4 py-2">{{ $business->location ?? 'N/A' }}</td>
 
                         <td class="border px-4 py-2 whitespace-nowrap">
                             {{-- <button class="text-blue-500 hover:text-blue-700 mx-0.5">
