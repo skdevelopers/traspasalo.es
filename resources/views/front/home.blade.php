@@ -199,22 +199,13 @@
                         business success is clear and achievable. Let us help you find not just a place, but the ideal
                         environment where your business can thrive.
                     </p>
-                    <form action="{{ route('subscribe') }}" method="POST" class="mt-2">
+                    <form id="subscribeForm2" class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         @csrf
-                        <div class="flex">
-                            <input type="email"
-                                class="p-2 text-violet-900 text-lg rounded-l-md border border-gray-300   w-1/2"
-                                name="email" placeholder="Enter your email" required />
-                            <button type="submit"
-                                class="p-2 text-lg bg-violet-900 text-white rounded-r-md border border-violet-950 hover:bg-violet-600 transition duration-300 ease-in-out">Join
-                                Us Now</button>
-                        </div>
+                        <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
+                        <button type="submit" class="bg-violet-900 text-white rounded-md px-6 py-3 font-semibold shadow-md hover:bg-violet-700 transition-colors duration-300">Subscribe</button>
                     </form>
-                    @if (session('success'))
-                        <div class="alert alert-success text-green-400">
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    
+                    <div id="message2" class="mt-4 text-green-400"></div>
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
                         <div class="flex w-[280px] h-[180px] gap-4">
