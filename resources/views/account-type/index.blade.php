@@ -2,7 +2,7 @@
 @extends('layouts.vertical', ['title' => 'Display Packages', 'sub_title' => 'Packages'])
 
 @section('content')
-{{-- @can('create_users') --}}
+    {{-- @can('create_users') --}}
     <div class="grid grid-cols-12">
         <div class="mb-4 col-span-12">
             <a href="{{ route('account-types.create') }}"
@@ -11,7 +11,7 @@
             </a>
         </div>
     </div>
-{{-- @endcan --}}
+    {{-- @endcan --}}
     <div class="grid grid-cols-12">
         <div class="col-span-12">
             <!-- Table to display packages -->
@@ -37,16 +37,30 @@
                                 <td class="border px-4 py-2">{{ $accountType->yearly_price }}</td>
                                 <td class="border px-4 py-2">
                                     <ul>
-                                        @foreach ($accountType->monthly_description as $monthlyDescription)
+                                        @if (is_array($accountType->monthly_description) || is_object($accountType->monthly_description))
+                                            @foreach ($accountType->monthly_description as $monthlyDescription)
                                             <li>{{ $monthlyDescription }}</li>
-                                        @endforeach
+                                            @endforeach
+                                        @else
+                                            {{-- Handle the case where monthly_description is not an array or object --}}
+                                            <p>No monthly descriptions available.</p>
+                                        @endif
+
                                     </ul>
                                 </td>
                                 <td class="border px-4 py-2">
                                     <ul>
-                                        @foreach ($accountType->yearly_description as $yearlyDescription)
+                                       
+
+                                        @if (is_array($accountType->yearly_description) || is_object($accountType->yearly_description))
+                                            @foreach ($accountType->yearly_description as $yearlyDescription)
                                             <li>{{ $yearlyDescription }}</li>
-                                        @endforeach
+                                            @endforeach
+                                        @else
+                                            {{-- Handle the case where monthly_description is not an array or object --}}
+                                            <p>No monthly descriptions available.</p>
+                                        @endif
+
                                     </ul>
                                 </td>
                                 <td class="border px-4 py-2 whitespace-nowrap">
