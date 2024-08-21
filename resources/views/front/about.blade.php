@@ -151,9 +151,9 @@
 </div> 
     
     <!-- Frequently Asked Questions -->
-    <section class="text-black py-10 md:py-24 min-h-screen">
+    <section class="text-black py-16">
         <div class="container flex flex-col justify-center mx-auto">
-            <h2 class=" text-xl font-bold leadi text-center sm:text-xl">Frequently Asked Questions</h2>
+            <h2 class=" text-2xl font-bold leadi text-center sm:text-xl">Frequently Asked Questions</h2>
             <h2 class="mb-12 text-sm  text-center sm:text-sm">Discover the experiences of those who have achieved success
                 with us</h2>
             <div class="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 divide-gray-700">

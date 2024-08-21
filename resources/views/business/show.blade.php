@@ -148,19 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
             loadGoogleMapsScript('initAutocomplete');
         });
 
-
-
-        const originalWarn = console.warn;
-
-        // Override the console.warn function
-        console.warn = function(message) {
-            if (message.includes('Google Maps JavaScript API has been loaded directly')) {
-                // Ignore this specific warning
-                return;
-            }
-
-            // Call the original console.warn for other warnings
-            originalWarn.apply(console, arguments);
-        };
     </script>
 @endpush
