@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\AccountTypeController;
@@ -117,7 +118,10 @@ Route::get('/auth/register/step2', [RegisteredUserController::class, 'showStep2'
 Route::post('/auth/register/step2', [RegisteredUserController::class, 'postStep2'])->name('register.step2.post');
 
 // Route::get('/auth/register', fn() => view('auth.register'))->name('auth.register');
-Route::get('/auth/auth.recoverpw', fn () => view('auth.recoverpw'))->name('auth.recoverpw');
+Route::get('/auth/auth.recoverpw', [PasswordResetLinkController::class,'create'])->name('auth.recoverpw');
+Route::Post('/auth/auth.recoverpw', [PasswordResetLinkController::class,'store'])->name('auth.recoverpw');
+//Route::Post('/reset-password/{token}', [PasswordResetLinkController::class,'resetpwd'])->name('password.reset');
+
 //Route::get('/auth/lock-screen', fn () => view('auth.lock-screen'))->name('auth.lock-screen');
 Route::get('/pages/starter', fn () => view('pages.starter'))->name('pages.starter');
 Route::get('/pages/timeline', fn () => view('pages.timeline'))->name('pages.timeline');
@@ -204,9 +208,9 @@ Route::get('/register', function () {
 Route::get('/register-next', function () {
     return view('front.registerNext');
 });
-// Route::get('/forgot-password', function () {
-//     return view('front.forgotPassword');
-// });
+//  Route::get('/forgot-password', function () {
+//      return view('front.forgotPassword');
+//  });
 Route::get('/add-business', [BusinessController::class, 'create'])->name('business.create')->middleware('auth');
 Route::post('/add-business', [BusinessController::class, 'store'])->name('business.store')->middleware('auth');
 //Route::get('/business/{id}', [BusinessController::class, 'show'])->name('business.show')->middleware('auth');

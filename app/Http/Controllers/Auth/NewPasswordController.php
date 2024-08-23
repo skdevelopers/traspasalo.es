@@ -16,9 +16,11 @@ class NewPasswordController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create(Request $request)
+    public function create(Request $request, $token)
     {
-        return view('auth.reset-password', ['request' => $request]);
+        //dd("hello");
+        return view('auth.reset-password')->with(
+            ['token' => $token, 'email' => $request->email]);
     }
 
     /**
@@ -31,12 +33,13 @@ class NewPasswordController extends Controller
      */
     public function store(Request $request)
     {
+       // dd("hello");
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|string|confirmed|min:8',
         ]);
-
+      //  dd('helli');
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
@@ -47,16 +50,16 @@ class NewPasswordController extends Controller
                     'password' => Hash::make($request->password),
                     'remember_token' => Str::random(60),
                 ])->save();
-
+                
                 event(new PasswordReset($user));
             }
         );
-
+     //  dd($status);
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
+                    ? redirect()->route('auth.login')->with('status', __($status))
                     : back()->withInput($request->only('email'))
                             ->withErrors(['email' => __($status)]);
     }
