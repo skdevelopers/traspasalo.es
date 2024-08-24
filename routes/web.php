@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\TranslationController;
 use App\Http\Controllers\CashFlowController;
@@ -297,6 +298,11 @@ Route::get('/blogsAlljson', [BlogController::class,'blogsAllJson']);
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 
 Route::resource('subscribers', NewsletterController::class);
+
+
+Route::post('/create-checkout-session', [SubscriptionController::class, 'createCheckoutSession'])->name('subscription.checkout');
+Route::get('/subscription/success', [SubscriptionController::class, 'success'])->name('subscription.success');
+Route::get('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 
 
 

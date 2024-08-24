@@ -49,12 +49,12 @@ class RegisteredUserController extends Controller
         
         //dd($request->all());
         $request->validate([
-            'mobile_number' => 'required|string|max:15',
+            'mobile_number' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
         try {
         $registrationData = Session::get('registration');
-        $registrationData['mobile_number'] = $request->mobile_number;
+        $registrationData['mobile_number'] = $request->mobile_number ?? null;
         $registrationData['password'] = hash::make($request->password);
 
         // Save the user data to the database

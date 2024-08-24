@@ -33,6 +33,7 @@ class User extends Authenticatable
         'provider_id',
         'avatar',
         'account_type_id',
+        'business_limit',
     ];
 
     /**
@@ -58,7 +59,7 @@ class User extends Authenticatable
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id')
-                    ->where('model_type', self::class);
+            ->where('model_type', self::class);
     }
 
     /**
@@ -67,7 +68,7 @@ class User extends Authenticatable
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class, 'model_has_permissions', 'model_id', 'permission_id')
-                    ->where('model_type', self::class);
+            ->where('model_type', self::class);
     }
 
     public function receivables(): HasMany
@@ -90,4 +91,8 @@ class User extends Authenticatable
         return $this->hasMany(Business::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
 }

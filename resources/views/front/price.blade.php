@@ -8,8 +8,15 @@
 @section('content')
     @include('front.partials.banner')
 
+
+
+
+
     <div class="min-h-screen bg-white">
         <div class="container xl:container-xl px-4 mx-auto py-10 md:py-20">
+            @if (session('plan_msg'))
+                <span class="text-red-600 text-2xl">{{ session('plan_msg') }}</span>
+            @endif
             <!-- Tab Switcher -->
             <div class="text-center mb-8">
                 <div class="inline-block bg-gray-200 rounded-full p-1">
@@ -23,27 +30,29 @@
 
             <!-- Pricing Cards -->
             <div id="packages-container" class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                @foreach($packages as $package)
-                <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
-                    <h3 class="text-xl font-bold mb-4">{{ $package->name }}</h3>
-                    <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
-                    <div class="p-2 align-super text-superscript text-xl text-gray-600 font-bold">
-                        $<span class="text-5xl">{{ $package->getPrice($billingCycle) }}</span>
-                        <span class="align-super text-superscript text-gray-600 text-sm"> per {{ $billingCycle }}</span>
+                @foreach ($packages as $package)
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
+                        <h3 class="text-xl font-bold mb-4">{{ $package->name }}</h3>
+                        <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
+                        <div class="p-2 align-super text-superscript text-xl text-gray-600 font-bold">
+                            $<span class="text-5xl">{{ $package->getPrice($billingCycle) }}</span>
+                            <span class="align-super text-superscript text-gray-600 text-sm"> per {{ $billingCycle }}</span>
+                        </div>
+                        <button class="bg-white text-gray-600 py-2 px-12 rounded-lg mb-6 border-2" disabled>You are
+                            here</button>
+                        <div class="text-left">
+                            <h1 class="text-md font-semibold">All plan Include:</h1>
+                            <ul class="space-y-2 pt-2">
+                                @foreach ($package->getDescription($billingCycle) as $description)
+                                    <li class="flex items-center"><span class="text-black mr-2">✔</span>{{ $description }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                    <button class="bg-white text-gray-600 py-2 px-12 rounded-lg mb-6 border-2" disabled>You are here</button>
-                    <div class="text-left">
-                        <h1 class="text-md font-semibold">All plan Include:</h1>
-                        <ul class="space-y-2 pt-2">
-                            @foreach($package->getDescription($billingCycle) as $description)
-                            <li class="flex items-center"><span class="text-black mr-2">✔</span>{{ $description }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
                 @endforeach
             </div>
-            
+
         </div>
     </div>
 
@@ -101,61 +110,92 @@
 @push('scripts')
     <script>
         function toggleTab(selected) {
-    const monthlyBtn = document.getElementById('monthly-btn');
-    const yearlyBtn = document.getElementById('yearly-btn');
+            const monthlyBtn = document.getElementById('monthly-btn');
+            const yearlyBtn = document.getElementById('yearly-btn');
 
-    if (selected === 'monthly') {
-        monthlyBtn.classList.add('bg-orange-500', 'text-white');
-        monthlyBtn.classList.remove('text-gray-600');
-        yearlyBtn.classList.remove('bg-orange-500', 'text-white');
-        yearlyBtn.classList.add('text-gray-600');
-    } else if (selected === 'yearly') {
-        yearlyBtn.classList.add('bg-orange-500', 'text-white');
-        yearlyBtn.classList.remove('text-gray-600');
-        monthlyBtn.classList.remove('bg-orange-500', 'text-white');
-        monthlyBtn.classList.add('text-gray-600');
-    }
+            if (selected === 'monthly') {
+                monthlyBtn.classList.add('bg-orange-500', 'text-white');
+                monthlyBtn.classList.remove('text-gray-600');
+                yearlyBtn.classList.remove('bg-orange-500', 'text-white');
+                yearlyBtn.classList.add('text-gray-600');
+            } else if (selected === 'yearly') {
+                yearlyBtn.classList.add('bg-orange-500', 'text-white');
+                yearlyBtn.classList.remove('text-gray-600');
+                monthlyBtn.classList.remove('bg-orange-500', 'text-white');
+                monthlyBtn.classList.add('text-gray-600');
+            }
 
-    // Make an AJAX request to fetch the packages
-    fetch(`{{ route('price') }}?billing_cycle=${selected}`, {
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        const packagesContainer = document.getElementById('packages-container');
-        packagesContainer.innerHTML = ''; // Clear the current packages
+            // Make an AJAX request to fetch the packages
+            fetch(`{{ route('price') }}?billing_cycle=${selected}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const packagesContainer = document.getElementById('packages-container');
 
-        data.packages.forEach(package => {
-            const packageHtml = `
-                <div class="bg-white p-8 rounded-lg shadow-lg text-left border-2">
+                    let buttonHtml = '';
+
+
+
+
+                    packagesContainer.innerHTML = ''; // Clear the current packages
+
+                    data.packages.forEach(package => {
+
+                        switch (package.name) {
+                            case 'Free Account':
+                                buttonHtml =
+                                    '<button class="w-3/4 bg-gray-500 text-white text-xl py-2 px-12 rounded-lg mb-6 border-2" disabled>You are here</button>';
+                                break;
+                            case 'Silver Account':
+                                buttonHtml =
+                                    '<button class="w-3/4 bg-violet-900 text-white text-xl py-2 px-12 rounded-lg mb-6 border-2">Buy</button>';
+                                break;
+                            default:
+                                buttonHtml =
+                                    '<button class="w-3/4 bg-orange-600 text-white text-xl py-2 px-12 rounded-lg mb-6 border-2">Buy</button>';
+                                break;
+                        }
+
+
+
+                        const packageHtml = `
+                <div class="bg-white p-8 rounded-lg shadow-lg text-center border-2">
                     <h3 class="text-xl font-bold mb-4">${package.name}</h3>
                     <p class="text-gray-600 mb-6">The essentials to get you and your team up and running</p>
                     <div class="p-2 align-super text-superscript text-xl text-gray-600 font-bold">
                         $<span class="text-5xl">${package[`${data.billingCycle}_price`]}</span>
                         <span class="align-super text-superscript text-gray-600 text-sm"> per ${data.billingCycle}</span>
                     </div>
-                    <button class="bg-white text-gray-600 py-2 px-12 rounded-lg mb-6 border-2" disabled>You are here</button>
+                    <form action="{{ route('subscription.checkout') }}" method="POST" id="plan-form">
+                        @csrf
+                        <input type="hidden" name="plan" value="${package.name} ${data.billingCycle}">
+                        <input type="hidden" name="amount" value="${package[`${data.billingCycle}_price`]}">
+
+                        ${buttonHtml}
+                   </form>
+
+                   
                     <div class="text-left">
                         <h1 class="text-md font-semibold">All plan Include:</h1>
                         <ul class="space-y-2 pt-2">
                             ${package[`${data.billingCycle}_description`].map(description => `
-                                <li class="flex items-center"><span class="text-black mr-2">✔</span>${description}</li>
-                            `).join('')}
+                                                                    <li class="flex items-center"><span class="text-black mr-2">✔</span>${description}</li>
+                                                                `).join('')}
                         </ul>
                     </div>
                 </div>
             `;
-            packagesContainer.insertAdjacentHTML('beforeend', packageHtml);
+                        packagesContainer.insertAdjacentHTML('beforeend', packageHtml);
+                    });
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const billingCycle = '{{ $billingCycle }}';
+            toggleTab(billingCycle); // Initialize the correct tab on page load
         });
-    });
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const billingCycle = '{{ $billingCycle }}';
-    toggleTab(billingCycle); // Initialize the correct tab on page load
-});
-
     </script>
 @endpush
