@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Illuminate\Support\Str;
+
 
 class SocialController extends Controller
 {
@@ -42,6 +44,7 @@ class SocialController extends Controller
                 'mobile_number' => $socialUser->user['phone_number'] ?? 'N/A',
                 'provider_id' => $socialUser->getId(),
                 'avatar' => $socialUser->getAvatar(),
+                'password' => bcrypt(Str::random(16)),
                 'provider' => 'google',
             ]
         );
