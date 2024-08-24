@@ -39,6 +39,7 @@ class SocialController extends Controller
             [
                 'first_name' => $socialUser->user['given_name'] ?? $socialUser->getName(),
                 'last_name' => $socialUser->user['family_name'] ?? '',
+                'mobile_number' => $socialUser->user['phone_number'] ?? 'N/A',
                 'provider_id' => $socialUser->getId(),
                 'avatar' => $socialUser->getAvatar(),
                 'provider' => 'google',
