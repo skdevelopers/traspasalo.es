@@ -27,7 +27,6 @@ export default defineConfig({
                 'node_modules/@simonwep/pickr/dist/themes/nano.min.css',
                 'node_modules/nouislider/dist/nouislider.min.css',
                 'node_modules/nice-select2/dist/css/nice-select2.css',
-                'node_modules/jsvectormap/dist/css/jsvectormap.min.css',
                 'node_modules/glightbox/dist/css/glightbox.min.css',
                 'node_modules/gridjs/dist/theme/mermaid.min.css',
 
@@ -59,7 +58,6 @@ export default defineConfig({
                 'resources/js/pages/icons-material-symbols.js',
                 'resources/js/pages/icons-mingcute.js',
                 'resources/js/pages/maps-google.js',
-                'resources/js/pages/maps-vector.js',
                 'resources/js/pages/gallery.js',
                 'resources/js/pages/table-gridjs.js',
                 'resources/js/pages/charts-apex.js',
