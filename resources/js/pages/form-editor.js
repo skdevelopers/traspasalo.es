@@ -1,6 +1,7 @@
 import Quill from 'quill';
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the Quill editor
     var quill = new Quill('#snow-editor', {
         theme: 'snow',
         modules: {
@@ -17,13 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
         },
     });
-      
+
+
+   
+
+    // Reference to the hidden input field
     var descriptionInput = document.querySelector('input[name=description]');
 
-    var form = document.querySelector('#form');
+    // On form submission, copy the Quill content into the hidden input field
+    var form = document.querySelector('#form-blog');
     form.onsubmit = function(event) {
         descriptionInput.value = quill.root.innerHTML;
-        console.log("Quill Content:", descriptionInput.value);
     }
-
 });

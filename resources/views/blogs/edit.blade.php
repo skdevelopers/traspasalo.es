@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Blog</h2>
         <form id="form"  name="form" action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
