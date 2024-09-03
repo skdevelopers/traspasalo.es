@@ -12,7 +12,7 @@
 @section('content')
     <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md mt-5">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Blog</h2>
-        <form id="form"  name="form" action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        <form id="form-blog"  name="form" action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
             <div>
@@ -26,8 +26,8 @@
 
                 <div id="snow-editor" style="height: 300px;"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    {!! old('description', $customer->description ?? '') !!}</div>
-                <input type="hidden" name="description" id="description">
+                </div>
+                <input type="hidden" name="description" id="description" value="{{ old('description', $blog->description) }}">
 
                 @error('description')
                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>

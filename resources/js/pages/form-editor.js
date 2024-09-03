@@ -20,14 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-   
-
-    // Reference to the hidden input field
-    var descriptionInput = document.querySelector('input[name=description]');
+    var existingDescription = document.querySelector('input[name=description]').value;
+    quill.root.innerHTML = existingDescription;
 
     // On form submission, copy the Quill content into the hidden input field
     var form = document.querySelector('#form-blog');
     form.onsubmit = function(event) {
+        var descriptionInput = document.querySelector('input[name=description]');
         descriptionInput.value = quill.root.innerHTML;
     }
+
+    
 });
