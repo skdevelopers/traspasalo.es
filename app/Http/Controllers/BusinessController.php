@@ -44,13 +44,13 @@ class BusinessController extends Controller
 
     public function create()
     {
-        $user = auth()->user();
+        // $user = auth()->user();
 
-        // Check if the user has reached their business limit
-        if ($user->businesses()->count() >= $user->business_limit) {
-            return redirect()->route('price') // Change 'some.route' to the route you want to redirect to
-                ->with('plan_msg', 'You have reached your business limit. Please upgrade your plan to add more businesses.');
-        }
+        // // Check if the user has reached their business limit
+        // if ($user->businesses()->count() >= $user->business_limit) {
+        //     return redirect()->route('price') // Change 'some.route' to the route you want to redirect to
+        //         ->with('plan_msg', 'You have reached your business limit. Please upgrade your plan to add more businesses.');
+        // }
 
         $categories = Category::whereNull('parent_id')->select('id', 'name')->get();
         $features = FeatureService::all();
