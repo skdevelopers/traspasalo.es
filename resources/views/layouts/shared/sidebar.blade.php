@@ -3,16 +3,16 @@
     <!-- Sidenav Brand Logo -->
     <a href="{{ url('/') }}" class="logo-box">
         <!-- Light Brand Logo -->
-        <div class="logo-light">
+        {{-- <div class="logo-light">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-lg h-6" alt="Light logo">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
-        </div>
+        </div>--}}
 
         <!-- Dark Brand Logo -->
-        <div class="logo-dark">
+        <div class="logo-dark p-2">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="h-20 w-20" alt="Dark logo">
-            <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
-        </div>
+            {{-- <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo"> --}}
+        </div> 
     </a>
 
     <!-- Sidenav Menu Toggle Button -->
@@ -33,7 +33,7 @@
                 </a>
             </li>
 
-            <li class="menu-title">ERP</li>
+            {{-- <li class="menu-title">ERP</li> --}}
 
             <!-- Add your ERP menu items here -->
 

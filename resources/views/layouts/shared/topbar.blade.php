@@ -11,10 +11,10 @@
     <!-- Topbar Brand Logo -->
     <a href="{{ route('home') }}" class="logo-box">
         <!-- Light Brand Logo -->
-        <div class="logo-light">
+        {{-- <div class="logo-light">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-lg h-6" alt="Light logo">
             <img src="{{ asset('/front/assets/images/logo.svg') }}" class="logo-sm" alt="Small logo">
-        </div>
+        </div> --}}
 
         <!-- Dark Brand Logo -->
         {{-- <div class="logo-dark">

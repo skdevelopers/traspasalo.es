@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BusinessRequest;
 use App\Models\Business;
 use App\Models\User;
+use App\Models\Blog;
 use App\Models\Customer;
 use App\Models\Category;
 use App\Models\FeatureService;
@@ -25,8 +26,9 @@ class BusinessController extends Controller
         $totalBusinesses = Business::count(); // Assuming you have a Business model
         $totalUsers = User::count(); // Assuming you have a User model
         $totalCustomers = Customer::count(); // Assuming you have a Customer model
+        $totalBlogs = Blog::count(); // Assuming you have a Blog model
 
-        return view('/index', compact('totalBusinesses', 'totalUsers', 'totalCustomers'));
+        return view('/index', compact('totalBusinesses', 'totalUsers', 'totalCustomers','totalBlogs'));
     }
 
     public function index()

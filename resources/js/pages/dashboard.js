@@ -121,11 +121,11 @@ chart.render();
 
 
 //
-var colors = ["#3073F1", "#0acf97", "#fa5c7c", "#ffbc00"];
-var dataColors = document.querySelector("#project-overview-chart").dataset.colors;
-if (dataColors) {
-    colors = dataColors.split(",");
-}
+// var colors = ["#3073F1", "#0acf97", "#fa5c7c", "#ffbc00"];
+// var dataColors = document.querySelector("#project-overview-chart").dataset.colors;
+// if (dataColors) {
+//     colors = dataColors.split(",");
+// }
 var options = {
     chart: {
         height: 350,
@@ -143,9 +143,9 @@ var options = {
     }
 }
 
-var chart = new ApexCharts(
-    document.querySelector("#project-overview-chart"),
-    options
-);
+// var chart = new ApexCharts(
+//     document.querySelector("#project-overview-chart"),
+//     options
+// );
 
-chart.render();
+// chart.render();

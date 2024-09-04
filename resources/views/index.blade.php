@@ -48,6 +48,20 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="p-6 flex flex-col items-center justify-center text-center">
+                        <div>
+                            <h4 class="text-lg font-medium text-gray-600 dark:text-gray-400 mb-1">Blogs</h4>
+                            <p class="text-3xl font-bold text-gray-800 dark:text-gray-100">{{ $totalBlogs }}</p>
+                        </div>
+                        <div class="mt-4">
+                            <a href="javascript:void(0);">
+                                <img src="{{ asset('/images/users/blog.png') }}" class="rounded-full h-12 w-12 border-2 border-gray-300 dark:border-gray-700" alt="clients">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         @endrole
             
