@@ -1,15 +1,20 @@
-/**
- * Theme: Bricklays - Responsive Rex Dashboard
- * Author: Mian Salman - Software Engineer
-* Module/App: App js
-*/
+// Your existing imports
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 import Dropzone from 'dropzone';
 import 'dropzone/dist/dropzone.css';
 import axios from "axios";
+import '@fortawesome/fontawesome-free/js/all.js';
 import "@frostui/tailwindcss"
 import feather from 'feather-icons';
+import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
 
+Alpine.plugin(focus);
 
+window.Alpine = Alpine;
+
+Alpine.start();
 // Make Axios available globally (optional)
 window.axios = axios;
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -20,8 +25,29 @@ class App {
     initComponents() {
 
         // Feather Icons
-        feather.replace()
+        feather.replace();
+        
+        var quillEditor = document.querySelector('#quill-editor');
 
+        if (quillEditor) {
+            var quill = new Quill('#quill-editor', {
+                theme: 'snow'
+            });
+
+            // Reference to the hidden input field
+            var descriptionInput = document.querySelector('input[name=description]');
+
+            // Update the hidden input field with Quill content on form submission
+            var form = document.querySelector('form');
+            form.onsubmit = function(event) {
+                event.preventDefault();
+
+            // Create a FormData object
+            var formData = new FormData(form);
+            formData.append('description', quill.root.innerHTML);
+            };
+        }
+        
         // Back To Top
         const mybutton = document.querySelector('[data-toggle="back-to-top"]');
 
@@ -33,7 +59,6 @@ class App {
             } else {
                 mybutton.classList.remove('flex');
                 mybutton.classList.add('hidden');
-
             }
         });
 
@@ -73,12 +98,19 @@ class App {
         }
     }
 
+    initPasswordIcon(){
+        window.addEventListener('toggle', function(){
+
+        });
+    }
+    
     init() {
         this.initComponents();
         this.initfullScreenListener();
     }
 }
 
+// Rest of your ThemeCustomizer class and other code remains the same
 class ThemeCustomizer {
 
     constructor() {
@@ -415,6 +447,6 @@ class ThemeCustomizer {
     }
 }
 
+// Initialize the App and ThemeCustomizer
 new App().init();
 new ThemeCustomizer().init();
-
