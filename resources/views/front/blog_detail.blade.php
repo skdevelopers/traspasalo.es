@@ -1,12 +1,9 @@
 @extends('front.layouts.app')
 
-@section('title', 'Blog')
-@section('header-title',  $blog->title )
-@section('header-subtitle', '')
+
 
 
 @section('content')
-    @include('front.partials.banner')
     
     <div class="bg-white flex items-center justify-center min-h-screen">
         <div class="container xl:container-xl px-4 mx-auto grid grid-cols-1  gap-8 p-8">

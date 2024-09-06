@@ -133,8 +133,7 @@
                                         x-text="busines.business_title"></h3>
                                     <p class="text-gray-600 text-sm truncate">
                                         <img src="front/assets/images/location-filled.svg" alt="location icon" />
-                                        <span class=""
-                                            x-text="busines.location"></span>
+                                        <span class="" x-text="busines.location"></span>
                                     </p>
                                     <p class="text-yellow-500 mt-1" x-text="'⭐ ' + 4 + ' (' + 48 + ' reviews)'"></p>
                                     <div class="flex p-2 justify-between">
@@ -199,12 +198,15 @@
                         business success is clear and achievable. Let us help you find not just a place, but the ideal
                         environment where your business can thrive.
                     </p>
-                    <form id="subscribeForm3" class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <form id="subscribeForm3"
+                        class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         @csrf
-                        <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
-                        <button type="submit" class="bg-violet-900 text-white rounded-md px-6 py-3 font-semibold shadow-md hover:bg-violet-700 transition-colors duration-300">Subscribe</button>
+                        <input type="email" name="email" id="email" placeholder="Your Email"
+                            class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
+                        <button type="submit"
+                            class="bg-violet-900 text-white rounded-md px-6 py-3 font-semibold shadow-md hover:bg-violet-700 transition-colors duration-300">Subscribe</button>
                     </form>
-                    
+
                     <div id="message3" class="mt-4 text-green-400"></div>
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
@@ -357,7 +359,8 @@
                 class="absolute inset-0 flex flex-col items-center justify-center bg-black opacity-65 rounded-lg text-white">
                 <h2 class="text-lg text-center md:text-3xl md:text-left font-bold">Find Best Places in Your City</h2>
                 <p class="mt-2 text-center md:text-left">We Help You Turn Your Ideas Into Reality</p>
-                <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md"><a href="{{ url('/businesses/location') }}">Know More</a></button>
+                <button class="mt-4 bg-orange-500 px-4 py-2 rounded-md"><a href="{{ url('/businesses/location') }}">Know
+                        More</a></button>
             </div>
         </div>
     </div>
@@ -414,7 +417,6 @@
             <div id="blogs-container"
                 class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
                 <!-- Card 1 -->
-
 
             </div>
 
@@ -572,47 +574,45 @@
 
 
         function slider() {
-    return {
-        currentIndex: 0,
-        items: [],
-        prev() {
-            if (this.currentIndex > 0) {
-                this.currentIndex--;
-            }
-        },
-        next() {
-            if (this.currentIndex < this.totalSlides - 1) {
-                this.currentIndex++;
-            }
-        },
-        get itemsPerPage() {
-            if (window.innerWidth >= 1024) return 3;
-            if (window.innerWidth >= 640) return 2;
-            return 1;
-        },
-        get totalSlides() {
-            return Math.ceil(this.items.length / this.itemsPerPage);
-        },
-        init() {
-            fetch('/api/customers')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
+            return {
+                currentIndex: 0,
+                items: [],
+                prev() {
+                    if (this.currentIndex > 0) {
+                        this.currentIndex--;
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    this.items = data;
-                    console.log(this.items);
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
+                },
+                next() {
+                    if (this.currentIndex < this.totalSlides - 1) {
+                        this.currentIndex++;
+                    }
+                },
+                get itemsPerPage() {
+                    if (window.innerWidth >= 1024) return 3;
+                    if (window.innerWidth >= 640) return 2;
+                    return 1;
+                },
+                get totalSlides() {
+                    return Math.ceil(this.items.length / this.itemsPerPage);
+                },
+                init() {
+                    fetch('/api/customers')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            this.items = data;
+                            console.log(this.items);
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+                        });
+                }
+            }
         }
-    }
-}
-
-
     </script>
 
 
@@ -688,14 +688,15 @@
 
                             // Set the blog post content
                             blogElement.innerHTML = `
-                    <img src="${blog.image_url}" alt="${blog.title}" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <span class="block text-blue-500 text-sm mb-2">${blog.date}</span>
-                        <h3 class="text-xl font-bold mb-2">${blog.title}</h3>
-                        <p class="text-gray-600 mb-4 line-clamp-2 whitespace-nowrap">${blog.description}</p>
-                        <a href="/blogs/${blog.id}" class="text-orange-500 hover:underline">Read More &rarr;</a>
-                    </div>
-                `;
+  <img src="${blog.image_url}" alt="${blog.title}" class="w-full h-64 object-cover">
+  <div class="p-6">
+    <span class="block text-blue-500 text-sm mb-2">${blog.date}</span>
+    <h3 class="text-xl font-bold mb-2">${blog.title}</h3>
+    <span class="text-gray-600 mb-4 line-clamp-2 text-nowrap">${blog.description}</span>
+    <a href="/blogs/${blog.id}" class="text-orange-500 hover:underline">Read More &rarr;</a>
+  </div>
+`;
+
 
                             // Append the blog post to the container
                             blogsContainer.appendChild(blogElement);
@@ -713,34 +714,34 @@
     <script>
         document.getElementById('subscribeForm3').addEventListener('submit', function(e) {
             e.preventDefault();
-    
+
             let form = this;
             let email = document.getElementById('email').value;
             let messageDiv = document.getElementById('message3');
-    
+
             fetch("{{ route('subscribe') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                body: JSON.stringify({
-                    email: email
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        email: email
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.errors) {
-                    messageDiv.innerHTML = `<span class="text-red-500">${data.errors.email[0]}</span>`;
-                } else {
-                    messageDiv.innerHTML = `<span class="text-green-500">${data.success}</span>`;
-                    form.reset();
-                }
-            })
-            .catch(error => {
-                //console.error('Error:', error);
-                messageDiv.innerHTML = `<span class="text-red-500">Email Already subscribed.</span>`;
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.errors) {
+                        messageDiv.innerHTML = `<span class="text-red-500">${data.errors.email[0]}</span>`;
+                    } else {
+                        messageDiv.innerHTML = `<span class="text-green-500">${data.success}</span>`;
+                        form.reset();
+                    }
+                })
+                .catch(error => {
+                    //console.error('Error:', error);
+                    messageDiv.innerHTML = `<span class="text-red-500">Email Already subscribed.</span>`;
+                });
         });
     </script>
 @endpush
