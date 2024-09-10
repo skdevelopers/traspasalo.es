@@ -35,7 +35,7 @@
             <div class="container xl:container-xl xl:pt-24 pt-5 xl:px-[50px] px-4">
                 <!-- Heading Content -->
                 <div class="w-100">
-                    <div class="flex flex-col lg:pt-20 pt-4">
+                    <div class="flex flex-col lg:pt-36 xl:pt-20 pt-4">
                         <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
                         <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
                     </div>
@@ -89,8 +89,7 @@
                         :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%); width: ${slides.length * (100 / slidesToShow)}%`">
                         <template x-for="(slide, index) in slides" :key="index">
                             <div class="flex-shrink-0 p-1.5">
-                                <div
-                                    class="bg-white md:w-44 h-44 w-96  rounded-lg shadow-sm flex flex-col justify-center items-center">
+                                <div class="bg-white md:w-44 h-44 w-60 rounded-lg shadow-sm flex flex-col justify-center items-center">
                                     <div class="flex flex-col justify-center items-center">
                                         <img :src="slide.image" alt="" class="w-12 h-12 mx-auto mb-2">
                                         <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
@@ -109,13 +108,13 @@
     </section>
     <!-- End Business Banner Section -->
 
-    <section class="pt-28 py-10">
-        <div class="text-center pb-16">
-            <h2 class="text-[28px] font-bold">Explore Profitable Business Ventures</h2>
-            <p class="mt-2 text-lg text-gray-600">We Discover Your Business Success</p>
+    <section class="container xl:container-xl pt-10 md:pt-28 py-5 md:py-10">
+        <div class="text-center pb-8 md:pb-16">
+            <h2 class="text-2xl md:text-[28px] font-bold">Explore Profitable Business Ventures</h2>
+            <p class="mt-2 text-base md:text-lg text-gray-600">We Discover Your Business Success</p>
         </div>
         <div class="flex justify-center items-center py-8 relative" x-data="sliderData()">
-            <button @click="prev()" class="prev1 absolute left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
+            <button @click="prev()" class="prev1 absolute -left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -126,7 +125,7 @@
                     :style="`transform: translateX(-${currentIndex * 100 / visibleSlides}%)`">
                     <template x-for="(busines, index) in business" :key="index">
                         <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-3">
-                            <div class="bg-white rounded-lg shadow-lg">
+                            <div class="bg-white rounded-lg shadow-md shadow-gray-300">
                                 <img :src="busines.media[0]?.org_url" alt="Business" class="w-full h-44 object-cover">
                                 <div class="p-4">
                                     <h3 class="text-md truncate whitespace-nowrap line-clamp-1"
@@ -148,7 +147,7 @@
                     </template>
                 </div>
             </div>
-            <button @click="next()" class="next1 absolute right-6 z-10 bg-violet-950 text-white p-2 rounded-full">
+            <button @click="next()" class="next1 absolute -right-6 z-10 bg-violet-950 text-white p-2 rounded-full">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -164,15 +163,14 @@
         <div class="block md:flex lg:flex overflow-hidden">
             <!-- Image Part -->
             <div class="w-full md:w-1/3 lg:w-2/5">
-                <img src="{{ asset('/front/assets/images/18516.png') }}" alt="Business Image"
-                    class="w-full h-full object-cover md:rounded-l-3xl">
+                <img src="{{ asset('/front/assets/images/success.jpg') }}" alt="Business Image"
+                    class="w-full h-full object-cover md:rounded-tr-none md:rounded-l-3xl rounded-bl-none rounded-tl-2xl rounded-tr-2xl">
             </div>
             <!-- Text Part -->
-            <div
-                class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center  md:rounded-r-3xl">
+            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center md:rounded-bl-none  md:rounded-r-3xl rounded-bl-3xl rounded-br-3xl">
                 <img src="{{ asset('/front/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
                 <h2 class="text-lg md:text-3xl mb-4">We Don’t Just Find Premises, We Discover Your Business Success</h2>
-                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded"><a
+                <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded mb-5 md:mb-0"><a
                         href="{{ url('/about') }}">Find Now</a></button>
             </div>
         </div>
@@ -365,14 +363,14 @@
         </div>
     </div>
     <!-- Success Stories Section --->
-    <div class="bg-violet-950 p-10">
-        <div x-data="slider()" class="relative container xl:container-xl px-4">
-            <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
+    <div class="bg-violet-950 md:p-10 p-5">
+        <div x-data="slider()" class="relative container xl:container-xl md:px-4 px-1">
+            <h2 class="text-2xl md:text-3xl font-bold text-white text-center pt-10 mb-1">Our Clients Success Stories</h2>
             <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with
                 us</p>
 
             <div class="relative overflow-hidden py-20">
-                <div id="slider" class="flex transition-transform duration-500 space-x-8"
+                <div id="slider" class="flex transition-transform duration-500 md:space-x-8 space-x-4"
                     :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
                     <template x-for="(item, index) in items" :key="index">
                         <div
@@ -389,7 +387,7 @@
                     </template>
                 </div>
 
-                <div class="absolute top-0 right-0 flex space-x-2 mt-4 mr-4">
+                <div class="absolute top-0 right-0 flex space-x-2 mt-4 md:mr-4 mr-1">
                     <button @click="prev" class=" text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
                         &larr;
                     </button>

@@ -1,25 +1,25 @@
 <!-- Footer Section -->
-<footer class="bg-violet-950 text-white py-12">
+<footer class="bg-violet-950 text-white md:py-12 py-5">
     <div class="container xl:container-xl mx-auto px-4">
-        <div class="md:flex md:justify-between ">
-            <div class="py-6 md:w-1/2 w-full">
-                <h2 class="text-2xl md:text-4xl mb-4 text-gray-100 border-r-2 lg:pr-32 md:pr-20 pr-5">Let's Start to find Best Business</h2>
+        <div class="lg:flex lg:justify-between ">
+            <div class="lg:py-6 lg:w-1/2 w-full">
+                <h2 class="text-2xl md:text-4xl mb-0 md:mb-4 text-gray-100 lg:border-r-2 lg:pr-32 md:pr-20 pr-5">Let's Start to find Best Business</h2>
             </div>
-            <div class="p-2 md:w-1/2 w-full md:flex md:justify-end">
+            <div class="mb-6 lg:mb-0 p-0 lg:p-2 lg:w-1/2 w-full lg:flex lg:justify-end">
                 <div>
-                    <h3 class="text-lg mb-4 md:mb-0 md:mr-4 text-gray-300 pb-3">Join Our Newsletter</h3>
-                    <form id="subscribeForm" class="flex flex-col md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                    <h3 class="text-lg md:mb-0 md:mr-4 text-gray-300 lg:pb-3">Join Our Newsletter</h3>
+                    <form id="subscribeForm" class="flex flex-col md:flex-row items-start md:items-center space-y-2 lg:space-y-0">
                         @csrf
-                        <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-2 rounded-sm focus:outline-none text-gray-800">
-                        <button type="submit" class="bg-orange-500 rounded-sm px-4 py-2">Subscribe</button>
+                        <input type="email" name="email" id="email" placeholder="Your Email" class="w-full md:w-80 p-2 rounded-sm focus:outline-none text-gray-800 md:mr-4">
+                        <button type="submit" class="bg-orange-500 rounded-sm px-4 py-2  md:ml-5 lg:ml-0">Subscribe</button>
                     </form>
                     <div id="message" class="mt-4 text-green-400"></div>
                 </div>
             </div>
         </div>
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
             <!-- First Column -->
-            <div class="col-span-1 md:col-span-3 lg:col-span-5 md:pr-16 lg:pr-16">
+            <div class="col-span-1 md:col-span-4 lg:col-span-5 md:pr-16 lg:pr-16">
                 <div class="relative">
                     <img src="{{ asset('front/assets/images/footer-logo.svg') }}" alt="Logo" class="mb-4 w-10 h-12">
                     <p class="text-sm">Nullo eleifend pulvinar purus, malesuada euismod odio imperdiet. Ut sit amet erat nec nibh rhoncus varius in non lorem. Donec interdum, lectus in convallis.</p>
@@ -27,19 +27,21 @@
             </div>
 
             <!-- Second Column -->
-            <div class="col-span-1 md:col-span-1 lg:col-span-2">
-                <ul class="lg:pl-5 pl-0">
-                    <li class="mb-2">Countries</li>
-                    <li class="mb-2">Regions</li>
-                    <li class="mb-2">Cities</li>
-                    <li class="mb-2">Districts</li>
-                    <li class="mb-2">Hotels</li>
-                </ul>
+            <div class="col-span-1 md:col-span-2 lg:col-span-2">
+                <div class="flex md:justify-center justify-start">
+                    <ul class="lg:pl-0 pl-0">
+                        <li class="mb-2">Countries</li>
+                        <li class="mb-2">Regions</li>
+                        <li class="mb-2">Cities</li>
+                        <li class="mb-2">Districts</li>
+                        <li class="mb-2">Hotels</li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Third Column -->
-            <div class="col-span-1 md:col-span-4 lg:col-span-5">
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8">
+            <div class="col-span-1 md:col-span-6 lg:col-span-5">
+                <div class="flex flex-col md:flex-row justify-end space-y-4 md:space-y-0 md:space-x-8">
                     <div class="relative">
                         <ul>
                             <li class="mb-2">Unique places to stay</li>
@@ -68,10 +70,10 @@
 
         <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-700 py-4 mt-8">
             <p class="text-sm">Copyright &copy; 2024, All rights reserved.</p>
-            <div class="flex space-x-4 mt-4 md:mt-0">
-                <a href="#" class="hover:underline">Terms of Use</a>
-                <a href="#" class="hover:underline">Privacy Policy</a>
-                <a href="#" class="hover:underline">Help Center</a>
+            <div class="flex w-full md:w-auto justify-between md:justify-normal md:space-x-4 space-x-2 mt-4 md:mt-0">
+                <a href="#" class="text-xs md:text-base hover:underline">Terms of Use</a>
+                <a href="#" class="text-xs md:text-base hover:underline">Privacy Policy</a>
+                <a href="#" class="text-xs md:text-base hover:underline">Help Center</a>
             </div>
             <div class="flex space-x-4 p-4 md:mt-0">
                 <ul class="flex justify-center space-x-5">

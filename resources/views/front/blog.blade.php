@@ -48,6 +48,12 @@
     .slider-button-next {
       right: 1rem;
     }
+    @media screen and (max-width: 540px){
+      .slider-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+    }
   </style>
 @endpush
 
@@ -127,7 +133,7 @@
     <div class="bg-white flex items-center justify-center min-h-screen">
         <div class="w-full  max-w-full mx-auto grid grid-cols-1 md:grid-cols-2  bg-white">
             <!-- Text Section -->
-            <div class="bg-pink-100 px-20 flex flex-col justify-center">
+            <div class="bg-pink-100 px-4 md:px-20 py-10 md:py-0 flex flex-col justify-center">
                 <span class="text-red-500 font-semibold mb-2">Featured topic</span>
                 <h1 class="text-4xl font-bold mb-4">Productivity</h1>
                 <p class="text-gray-700 mb-6">Discover insights, tips, and strategies to boost your professional productivity and efficiency. From cutting down emails to automating your team's workflow.</p>
@@ -192,15 +198,15 @@
 
 
     <div class="bg-white container-fluid">
-      <div class="container mx-auto py-14 justify-center">
-        <div class="flex items-center justify-center space-x-4">
-          <h3 class="text-xl font-bold text-orange-500">Other Topics:</h3>
-          <div class="flex space-x-2">
-            <div class="bg-violet-950 text-white rounded px-4 py-2">Comparisons</div>
-            <div class="bg-violet-950 text-white rounded px-4 py-2">Small business</div>
-            <div class="bg-violet-950 text-white rounded px-4 py-2">VoIP</div>
-            <div class="bg-violet-950 text-white rounded px-4 py-2">Productivity</div>
-            <div class="bg-violet-950 text-white rounded px-4 py-2">Best practices</div>
+      <div class="container mx-auto py-14 md:justify-center justify-start">
+        <div class="md:flex items-center justify-center space-x-4">
+          <h3 class="block text-xl font-bold text-orange-500 mb-2 md:mb-0">Other Topics:</h3>
+          <div class="grid grid-cols-2 md:flex md:space-x-2 m-0">
+            <div class="bg-violet-950 text-white rounded text-center md:text-left mt-1 md:mt-0 md:px-4 py-2 whitespace-nowrap ml-1 md:ml-0">Comparisons</div>
+            <div class="bg-violet-950 text-white rounded text-center md:text-left mt-1 md:mt-0 md:px-4 py-2 whitespace-nowrap ml-1 md:ml-0">Small business</div>
+            <div class="bg-violet-950 text-white rounded text-center md:text-left mt-1 md:mt-0 md:px-4 py-2 whitespace-nowrap ml-1 md:ml-0">VoIP</div>
+            <div class="bg-violet-950 text-white rounded text-center md:text-left mt-1 md:mt-0 md:px-4 py-2 whitespace-nowrap ml-1 md:ml-0">Productivity</div>
+            <div class="bg-violet-950 text-white rounded text-center md:text-left mt-1 md:mt-0 md:px-4 py-2 whitespace-nowrap ml-1 md:ml-0">Best practices</div>
           </div>
         </div>
       </div>
@@ -218,7 +224,7 @@
     const nextButton = document.querySelector('.slider-button-next');
     const prevButton = document.querySelector('.slider-button-prev');
     let index = 0;
-
+  
     function updateSlider() {
       const width = items[0].clientWidth;
       track.style.transform = `translateX(-${index * width}px)`;

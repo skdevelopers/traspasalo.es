@@ -8,11 +8,7 @@
 @section('content')
     @include('front.partials.banner')
 
-
-
-
-
-    <div class="min-h-screen bg-white">
+    <div class="bg-white">
         <div class="container xl:container-xl px-4 mx-auto py-10 md:py-20">
             @if (session('plan_msg'))
                 <span class="text-red-600 text-2xl">{{ session('plan_msg') }}</span>
@@ -57,7 +53,7 @@
     </div>
 
     {{-- we offer  --}}
-    <div class="container ">
+    <div class="container xl:container-xl">
         <div class="flex-col items-center justify-center flex px-3 md:px-20 py-10">
             <div class="text-center mb-12 w-full md:w-2/3">
                 <h2 class="text-3xl font-bold mb-4">What We Offers</h2>

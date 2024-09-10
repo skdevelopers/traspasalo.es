@@ -1,12 +1,11 @@
 <nav class="bg-violet-950 border-violet-900 dark:bg-gray-900 px-4 md:px-20">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
+    <div class="container xl:container-xl px-0 flex flex-wrap items-center justify-between mx-auto py-2">
         <!-- Logo -->
-        <a href="{{ url('/') }}" class="flex items-center space-x-5 rtl:space-x-reverse">
-            <img src="{{ asset('/front/assets/images/logo-white.png') }}" class="h-16" alt="Logo" />
+        <a href="{{ url('/') }}" class="flex items-center space-x-5 md:space-x-0 rtl:space-x-reverse">
+            <img src="{{ asset('/front/assets/images/logo-white.png') }}" class="h-10 md:h-12 xl:h-16" alt="Logo" />
         </a>
-        <div class="flex md:hidden justify-center items-center space-x-3 p-3">
+        <div class="flex lg:hidden justify-center items-center space-x-3 md:p-3 py-3">
 
-            <!-- Language Dropdown -->
             <!-- Language Dropdown -->
             <div class="relative flex place-content-center place-items-center text-center">
                 <button id="languageDropdownButton" type="button"
@@ -114,7 +113,7 @@
 
             <!-- Mobile menu button -->
             <button type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg lg:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 data-collapse-toggle="navbar-default" aria-controls="navbar-default" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -126,31 +125,31 @@
         </div>
 
         <!-- Navbar links -->
-        <div class="hidden w-full md:flex md:w-auto items-center" id="navbar-default">
+        <div class="hidden w-full lg:flex lg:w-auto items-center" id="navbar-default">
             <ul
-                class="flex flex-col md:flex-row md:items-center md:space-x-6 mt-4 md:mt-0 text-sm md:text-base text-white space-y-2 md:space-y-0">
+                class="flex flex-col lg:flex-row lg:items-center lg:space-x-6 mt-4 lg:mt-0 text-sm lg:text-base text-white space-y-2 lg:space-y-0">
                 <li>
                     <a href="{{ url('/') }}"
-                        class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded ">{{ translate('home') }}</a>
+                        class="block py-2 px-3 hover:bg-violet-600 lg:hover:bg-transparent lg:hover:text-violet-400 rounded ">{{ translate('home') }}</a>
                 </li>
                 <li>
                     <a href="{{ url('/about') }}"
-                        class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">About
+                        class="block py-2 px-3 hover:bg-violet-600 lg:hover:bg-transparent lg:hover:text-violet-400 rounded">About
                         Us</a>
                 </li>
                 <li>
                     <a href="{{ url('/newsletter') }}"
-                        class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Newsletter</a>
+                        class="block py-2 px-3 hover:bg-violet-600 lg:hover:bg-transparent lg:hover:text-violet-400 rounded">Newsletter</a>
                 </li>
                 <li>
                     <a href="{{ url('/price') }}"
-                        class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Pricing</a>
+                        class="block py-2 px-3 hover:bg-violet-600 lg:hover:bg-transparent lg:hover:text-violet-400 rounded">Pricing</a>
                 </li>
                 <li>
                     <a href="{{ url('/blog') }}"
-                        class="block py-2 px-3 hover:bg-violet-600 md:hover:bg-transparent md:hover:text-violet-400 rounded">Blogs</a>
+                        class="block py-2 px-3 hover:bg-violet-600 lg:hover:bg-transparent lg:hover:text-violet-400 rounded">Blogs</a>
                 </li>
-                <li class="block md:hidden">
+                <li class="block lg:hidden">
                     <a href="{{ url('/add-business') }}"
                         class="inline-block text-gray-300 border-2 border-gray-300 rounded px-6 py-2 hover:bg-gray-300 hover:text-violet-950">Add
                         Business</a>
@@ -158,7 +157,7 @@
             </ul>
 
             <!-- Right-aligned buttons -->
-            <div class="hidden md:flex justify-center items-center space-x-3 p-3">
+            <div class="hidden lg:flex justify-center items-center space-x-3 p-3">
                 <a href="{{ url('/add-business') }}"
                     class="text-gray-300 border-2 border-gray-300 rounded px-6 py-2 hover:bg-gray-300 hover:text-violet-950">Add
                     Business</a>

@@ -20,8 +20,8 @@
 @section('content')
     @include('front.partials.banner')
 
-    <div class="bg-white min-h-screen max-w-full">
-        <div class="container xl:container-xl px-4">
+    <div class="bg-white w-full">
+        <div class="container xl:container-xl mx-auto px-4">
             <div class="grid grid-cols-12 py-5 md:py-20 items-center gap-4">
                 <!-- Text Section -->
                 <div class="py-10 col-span-12 md:col-span-6 lg:col-span-5 pl-3">
@@ -65,7 +65,7 @@
     </div>
 
     {{-- we offer  --}}
-    <div class="container ">
+    <div class="container xl:container-xl">
         <div class="flex-col items-center justify-center flex px-3 md:px-20 py-10">
             <div class="text-center mb-12 w-full md:w-2/3">
                 <h2 class="text-3xl font-bold mb-4">What We Offers</h2>
@@ -113,42 +113,41 @@
 
     {{-- silder for clients --}}
     <div class="bg-violet-950 p-10">
-    <div x-data="slider()" class="relative container xl:container-xl max-w-5xl mx-auto px-4">
-        <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
-        <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
-        
-        <div class="relative overflow-hidden py-20">
-            <div id="slider" class="flex transition-transform duration-500 space-x-8"
-                :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
-                <template x-for="(item, index) in items" :key="index">
-                    <div
-                        class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
-                        <p class="mb-4" x-text="item.description"> </p>
-                        <div class="flex items-center pt-5">
-                            <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <h3 class="font-semibold" x-text="item.name"></h3>
-                                <p class="text-gray-600" x-text="item.job_position"></p>
+        <div class="container xl:container-xl mx-auto px-4">
+            <div x-data="slider()" class="relative">
+                <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
+                <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
+                
+                <div class="relative overflow-hidden py-20">
+                    <div id="slider" class="flex transition-transform duration-500 space-x-8"
+                        :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
+                        <template x-for="(item, index) in items" :key="index">
+                            <div
+                                class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
+                                <p class="mb-4" x-text="item.description"> </p>
+                                <div class="flex items-center pt-5">
+                                    <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <h3 class="font-semibold" x-text="item.name"></h3>
+                                        <p class="text-gray-600" x-text="item.job_position"></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
-                </template>
-            </div>
-
-            <div class="absolute top-0 right-0 flex space-x-2 mt-4 mr-4">
-                <button @click="prev" class=" text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
-                    &larr;
-                </button>
-                <button @click="next" class="text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
-                    &rarr;
-                </button>
-            </div>
-
-        </div>
     
-       
-    </div>
-</div> 
+                    <div class="absolute top-0 right-0 flex space-x-2 mt-4 mr-4">
+                        <button @click="prev" class=" text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
+                            &larr;
+                        </button>
+                        <button @click="next" class="text-gray-300 border-gray-300 border-2 rounded-lg p-2 shadow-lg z-10">
+                            &rarr;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
     
     <!-- Frequently Asked Questions -->
     <section class="text-black py-16">

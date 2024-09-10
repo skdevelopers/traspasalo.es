@@ -12,6 +12,7 @@ use App\Models\FeatureService;
 use Illuminate\Http\Request;
 use App\Services\MediaUploadService;
 use App\DTO\BusinessDTO;
+use Illuminate\Support\Facades\DB;
 
 class BusinessController extends Controller
 {
@@ -59,45 +60,125 @@ class BusinessController extends Controller
         return view('front.add-business', compact('categories', 'features'));
     }
 
-    public function store(BusinessRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        // Validate the basic business data
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
 
-        $subcategory = Category::find($request->subcategory_id);
-        if ($subcategory->parent_id != $request->category_id) {
-            return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
-        }
+        // Use a transaction to ensure atomicity of operations
+        DB::transaction(function () use ($request) {
+            // Create the business
+            $business = Business::create($request->only(['title', 'description', 'category_id', 'subcategory_id']));
 
-        $data['features'] = $this->processFeatures($data['features']);
-        $data['user_id'] = auth()->id();
+            // Save related data only if necessary
+            $this->saveRelatedData($business, $request);
+        });
 
-        $businessDTO = new BusinessDTO(
-            null,
-            $data['user_id'],
-            $data['subcategory_id'],
-            $data['business_title'],
-            $data['description'],
-            $data['check_in'],
-            $data['check_out'],
-            $data['age_restriction'],
-            $data['pets_permission'],
-            $data['location'],
-            $data['features'] ?? [],
-            $request->file('images') ?? []
-        );
-
-        $business = Business::create($businessDTO->toArray());
-
-        $this->handleImages($businessDTO->images, $business);
-
-        if (!empty($businessDTO->features)) {
-            $business->features()->sync($businessDTO->features);
-        }
-
-        $business->generateQrCode();
-
-        return redirect()->route('business.index')->with('success', 'Business created successfully.');
+        return redirect()->back()->with('success', 'Business and related data saved successfully');
     }
+    // Function to handle saving related data
+    private function saveRelatedData($business, Request $request)
+    {
+        // Save or delete facility data
+        if ($this->hasAtLeastOneValue($request->facility)) {
+            $business->facility()->updateOrCreate(
+                ['business_id' => $business->id],
+                $request->facility
+            );
+        } else {
+            $business->facility()->delete();
+        }
+
+        // Save or delete financial data
+        if ($this->hasAtLeastOneValue($request->financial)) {
+            $business->financial()->updateOrCreate(
+                ['business_id' => $business->id],
+                $request->financial
+            );
+        } else {
+            $business->financial()->delete();
+        }
+
+        // Save or delete vehicle data
+        if ($this->hasAtLeastOneValue($request->vehicle)) {
+            $business->vehicle()->updateOrCreate(
+                ['business_id' => $business->id],
+                $request->vehicle
+            );
+        } else {
+            $business->vehicle()->delete();
+        }
+
+        // Save or delete business employee data
+        if ($this->hasAtLeastOneValue($request->business_employee)) {
+            $business->businessEmployee()->updateOrCreate(
+                ['business_id' => $business->id],
+                $request->business_employee
+            );
+        } else {
+            $business->businessEmployee()->delete();
+        }
+    }
+
+    // Helper function to check if at least one value in the array is provided
+    private function hasAtLeastOneValue($input)
+    {
+        if (!is_array($input)) {
+            return false;
+        }
+
+        // Filter the array to check for any non-empty values
+        foreach ($input as $value) {
+            if (!is_null($value) && $value !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // public function store(BusinessRequest $request)
+    // {
+    //     $data = $request->validated();
+
+    //     $subcategory = Category::find($request->subcategory_id);
+    //     if ($subcategory->parent_id != $request->category_id) {
+    //         return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
+    //     }
+
+    //     $data['features'] = $this->processFeatures($data['features']);
+    //     $data['user_id'] = auth()->id();
+
+    //     $businessDTO = new BusinessDTO(
+    //         null,
+    //         $data['user_id'],
+    //         $data['subcategory_id'],
+    //         $data['business_title'],
+    //         $data['description'],
+    //         $data['check_in'],
+    //         $data['check_out'],
+    //         $data['age_restriction'],
+    //         $data['pets_permission'],
+    //         $data['location'],
+    //         $data['features'] ?? [],
+    //         $request->file('images') ?? []
+    //     );
+
+    //     $business = Business::create($businessDTO->toArray());
+
+    //     $this->handleImages($businessDTO->images, $business);
+
+    //     if (!empty($businessDTO->features)) {
+    //         $business->features()->sync($businessDTO->features);
+    //     }
+
+    //     $business->generateQrCode();
+
+    //     return redirect()->route('business.index')->with('success', 'Business created successfully.');
+    // }
 
     public function edit($id)
     {

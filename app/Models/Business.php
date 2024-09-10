@@ -123,4 +123,21 @@ class Business extends Model implements HasMedia
         $media = $this->getFirstMedia('qr_codes');
         return $media ? asset('storage/qrcodes/' . $media->file_name) : null;
     }
+
+    public function financial()
+    {
+        return $this->hasOne(Financial::class);
+    }
+
+    // One business has one vehicle
+    public function vehicle()
+    {
+        return $this->hasOne(Vehicle::class);
+    }
+
+    // One business has one employee record (business employees)
+    public function businessEmployee()
+    {
+        return $this->hasOne(BusinessEmployee::class);
+    }
 }
