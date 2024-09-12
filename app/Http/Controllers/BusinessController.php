@@ -64,81 +64,112 @@ class BusinessController extends Controller
     {
         // Validate the basic business data
         $request->validate([
-            'title' => 'required|string',
+            'business_title' => 'required|string',
             'description' => 'required|string',
+            'location' => 'required|string',
         ]);
-
+    
+        $request['features'] = $this->processFeatures($request['features']);
         // Use a transaction to ensure atomicity of operations
         DB::transaction(function () use ($request) {
             // Create the business
-            $business = Business::create($request->only(['title', 'description', 'category_id', 'subcategory_id']));
-
+            $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location']));
+    
+            // Handle images (Ensure this function is defined properly to handle image uploads)
+            $this->handleImages($request->images, $business);
+            
+           //dd($request->features);
+            if (!empty($request->features)) {
+                       $business->features()->sync($request->features);
+                     }
+            
+                 $business->generateQrCode();
+    
             // Save related data only if necessary
             $this->saveRelatedData($business, $request);
         });
 
-        return redirect()->back()->with('success', 'Business and related data saved successfully');
+    
+        return redirect()->route('business.index')->with('success', 'Business and related data saved successfully');
     }
+    
     // Function to handle saving related data
     private function saveRelatedData($business, Request $request)
     {
         // Save or delete facility data
-        if ($this->hasAtLeastOneValue($request->facility)) {
+        $facilityData = $request->input('facility') ?? [];
+        if ($this->hasAtLeastOneValue($facilityData)) {
             $business->facility()->updateOrCreate(
                 ['business_id' => $business->id],
-                $request->facility
+                $facilityData
             );
-        } else {
+        } elseif ($business->facility) {
             $business->facility()->delete();
         }
-
+    
         // Save or delete financial data
-        if ($this->hasAtLeastOneValue($request->financial)) {
+        $financialData = $request->input('financial') ?? [];
+        if ($this->hasAtLeastOneValue($financialData)) {
             $business->financial()->updateOrCreate(
                 ['business_id' => $business->id],
-                $request->financial
+                $financialData
             );
-        } else {
+        } elseif ($business->financial) {
             $business->financial()->delete();
         }
-
+    
         // Save or delete vehicle data
-        if ($this->hasAtLeastOneValue($request->vehicle)) {
+        $vehicleData = $request->input('vehicle') ?? [];
+        if ($this->hasAtLeastOneValue($vehicleData)) {
             $business->vehicle()->updateOrCreate(
                 ['business_id' => $business->id],
-                $request->vehicle
+                $vehicleData
             );
-        } else {
+        } elseif ($business->vehicle) {
             $business->vehicle()->delete();
         }
-
+    
         // Save or delete business employee data
-        if ($this->hasAtLeastOneValue($request->business_employee)) {
+        $employeeData = $request->input('business_employee') ?? [];
+        if ($this->hasAtLeastOneValue($employeeData)) {
             $business->businessEmployee()->updateOrCreate(
                 ['business_id' => $business->id],
-                $request->business_employee
+                $employeeData
             );
-        } else {
+        } elseif ($business->businessEmployee) {
             $business->businessEmployee()->delete();
         }
+    
+        // Save or delete FfAndE data
+        $ffAndEData = $request->input('FfAndE') ?? [];
+        if ($this->hasAtLeastOneValue($ffAndEData)) {
+            $business->ffAndE()->updateOrCreate(
+                ['business_id' => $business->id],
+                $ffAndEData
+            );
+        } elseif ($business->ffAndE) {
+            $business->ffAndE()->delete();
+        }
     }
-
+    
+    
     // Helper function to check if at least one value in the array is provided
     private function hasAtLeastOneValue($input)
     {
         if (!is_array($input)) {
             return false;
         }
-
+    
         // Filter the array to check for any non-empty values
         foreach ($input as $value) {
             if (!is_null($value) && $value !== '') {
                 return true;
             }
         }
-
+    
         return false;
     }
+    
 
     // public function store(BusinessRequest $request)
     // {

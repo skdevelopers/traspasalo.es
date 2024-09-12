@@ -140,4 +140,14 @@ class Business extends Model implements HasMedia
     {
         return $this->hasOne(BusinessEmployee::class);
     }
+
+    public function facility()
+    {
+        return $this->hasOne(Facility::class);
+    }
+
+    public function ffAndE()
+    {
+        return $this->hasOne(FfAndE::class);
+    }
 }

@@ -69,7 +69,7 @@
         <div class="flex-col items-center justify-center flex px-3 md:px-20 py-10">
             <div class="text-center mb-12 w-full md:w-2/3">
                 <h2 class="text-3xl font-bold mb-4">What We Offers</h2>
-                <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel
+                <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel
                     malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -78,7 +78,7 @@
                         <img src="{{ asset('front/assets/icons/low-rate.png') }}" alt="Low Rates" class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Low Rates</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
                         vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -87,7 +87,7 @@
                             class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">No Reservation Fees</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
                         vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -95,7 +95,7 @@
                         <img src="{{ asset('front/assets/icons/secure-booking.png') }}" alt="Secure Booking" class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Secure Booking</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
                         vel malesuada velit.</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
@@ -104,7 +104,7 @@
                             class="mx-auto">
                     </div>
                     <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
-                    <p class="text-gray-600">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
                         vel malesuada velit.</p>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                                     <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
                                     <div>
                                         <h3 class="font-semibold" x-text="item.name"></h3>
-                                        <p class="text-gray-600" x-text="item.job_position"></p>
+                                        <p class="text-gray-600 text-sm" x-text="item.job_position"></p>
                                     </div>
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ff_and_es', function (Blueprint $table) {
+        Schema::create('ff_and_e_s', function (Blueprint $table) {
             $table->id();
 
             // Relationship to businesses

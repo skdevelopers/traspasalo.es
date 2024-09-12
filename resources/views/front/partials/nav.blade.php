@@ -289,55 +289,74 @@
             const target = document.getElementById(this.getAttribute('data-collapse-toggle'));
             target.classList.toggle('hidden');
         });
-    </script>
-    <!-- JavaScript for handling dropdown -->
-    <script>
+   
         document.addEventListener('DOMContentLoaded', function() {
-            var languageDropdownButton = document.getElementById('languageDropdownButton');
-            var languageDropdownMenu = document.getElementById('languageDropdownMenu');
-            var authDropdownButton = document.getElementById('authDropdownButton');
-            var authDropdownMenu = document.getElementById('authDropdownMenu');
+    // Dropdown buttons and menus
+    var languageDropdownButton = document.getElementById('languageDropdownButton');
+    var languageDropdownMenu = document.getElementById('languageDropdownMenu');
+    var authDropdownButton = document.getElementById('authDropdownButton');
+    var authDropdownMenu = document.getElementById('authDropdownMenu');
 
-            languageDropdownButton.addEventListener('click', function() {
-                languageDropdownMenu.classList.toggle('hidden');
-            });
-
-            authDropdownButton.addEventListener('click', function() {
-                authDropdownMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!languageDropdownButton.contains(event.target)) {
-                    languageDropdownMenu.classList.add('hidden');
-                }
-                if (!authDropdownButton.contains(event.target)) {
-                    authDropdownMenu.classList.add('hidden');
-                }
-            });
+    // Check if language dropdown elements exist
+    if (languageDropdownButton && languageDropdownMenu) {
+        languageDropdownButton.addEventListener('click', function() {
+            languageDropdownMenu.classList.toggle('hidden');
         });
+    }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var languageDropdownButton = document.getElementById('languageDropdownButton1');
-            var languageDropdownMenu = document.getElementById('languageDropdownMenu1');
-            var authDropdownButton = document.getElementById('authDropdownButton1');
-            var authDropdownMenu = document.getElementById('authDropdownMenu1');
-
-            languageDropdownButton.addEventListener('click', function() {
-                languageDropdownMenu.classList.toggle('hidden');
-            });
-
-            authDropdownButton.addEventListener('click', function() {
-                authDropdownMenu.classList.toggle('hidden');
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!languageDropdownButton.contains(event.target)) {
-                    languageDropdownMenu.classList.add('hidden');
-                }
-                if (!authDropdownButton.contains(event.target)) {
-                    authDropdownMenu.classList.add('hidden');
-                }
-            });
+    // Check if auth dropdown elements exist
+    if (authDropdownButton && authDropdownMenu) {
+        authDropdownButton.addEventListener('click', function() {
+            authDropdownMenu.classList.toggle('hidden');
         });
+    }
+
+    // Hide dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        // Hide language dropdown if clicked outside
+        if (languageDropdownButton && !languageDropdownButton.contains(event.target)) {
+            languageDropdownMenu?.classList.add('hidden');
+        }
+
+        // Hide auth dropdown if clicked outside
+        if (authDropdownButton && !authDropdownButton.contains(event.target)) {
+            authDropdownMenu?.classList.add('hidden');
+        }
+    });
+});
+
+// Repeat the same for your second set of dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+    var languageDropdownButton1 = document.getElementById('languageDropdownButton1');
+    var languageDropdownMenu1 = document.getElementById('languageDropdownMenu1');
+    var authDropdownButton1 = document.getElementById('authDropdownButton1');
+    var authDropdownMenu1 = document.getElementById('authDropdownMenu1');
+
+    // Check if language dropdown 1 exists
+    if (languageDropdownButton1 && languageDropdownMenu1) {
+        languageDropdownButton1.addEventListener('click', function() {
+            languageDropdownMenu1.classList.toggle('hidden');
+        });
+    }
+
+    // Check if auth dropdown 1 exists
+    if (authDropdownButton1 && authDropdownMenu1) {
+        authDropdownButton1.addEventListener('click', function() {
+            authDropdownMenu1.classList.toggle('hidden');
+        });
+    }
+
+    // Hide dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        if (languageDropdownButton1 && !languageDropdownButton1.contains(event.target)) {
+            languageDropdownMenu1?.classList.add('hidden');
+        }
+
+        if (authDropdownButton1 && !authDropdownButton1.contains(event.target)) {
+            authDropdownMenu1?.classList.add('hidden');
+        }
+    });
+});
+
     </script>
 @endpush

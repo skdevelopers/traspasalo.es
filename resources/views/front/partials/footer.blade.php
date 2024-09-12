@@ -17,7 +17,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mt-7">
             <!-- First Column -->
             <div class="col-span-1 md:col-span-4 lg:col-span-5 md:pr-16 lg:pr-16">
                 <div class="relative">

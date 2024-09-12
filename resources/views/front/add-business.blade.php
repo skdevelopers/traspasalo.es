@@ -17,7 +17,8 @@
 @endif
 
 <div class="container mx-auto bg-white px-4 py-10 rounded-lg shadow-md my-10">
-    <form action="">
+    <form action="{{ route('business.store') }}" id="business-form" method="POST" enctype="multipart/form-data"
+    x-data="featuresForm()">
         @csrf
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
             <h3 class="text-2xl font-semibold mb-6 text-center">Add New Business</h3>
@@ -29,9 +30,9 @@
                     <select id="category_id" name="category_id"
                         class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
                         <option value="">Select</option>
-                        {{-- @foreach ($categories as $category)
+                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach --}}
+                        @endforeach 
                     </select>
                     @error('category_id')
                         <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -40,7 +41,7 @@
                 <div>
                     <label for="subcategory_id" class="block text-base font-semibold mb-2 text-gray-700">Sub Category</label>
                     <select id="subcategory_id" name="subcategory_id"
-                        class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
                         <option value="">Select</option>
                     </select>
                     @error('subcategory_id')
@@ -138,37 +139,37 @@
                     <tr class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Gross Revenue</label>
-                            <input type="number" name="gross_revenue"
+                            <input type="number" name="financial[gross_revenue]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Gross Revenue">
                         </td>
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">EBITDA</label>
-                            <input type="number" name="ebitda"
+                            <input type="number" name="financial[ebitda]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter EBITDA">
                         </td>
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Asking Price</label>
-                            <input type="number" name="asking_price"
+                            <input type="number" name="financial[asking_price]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Asking Price">
                         </td>
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">FF&E</label>
-                            <input type="number" name="ffe"
+                            <input type="number" name="financial[ffe]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter FF&E">
                         </td>
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Inventory</label>
-                            <input type="number" name="inventory"
+                            <input type="number" name="financial[inventory]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Inventory">
                         </td>
                         <td class="border px-4 py-2">
                             <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Established</label>
-                            <input type="text" name="established"
+                            <input type="text" name="financial[established]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Established Year">
                         </td>
@@ -181,62 +182,64 @@
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
             <h3 class="text-lg font-semibold mb-4">FACILITIES</h3>
             <table class="min-w-full text-left text-base font-semibold mb-1 text-gray-700 border-collapse">
-                <thead>
-                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <th class="border-b px-4 py-2">Rent</th>
-                        <th class="border-b px-4 py-2">Duration (months)</th>
-                        <th class="border-b px-4 py-2">Supplies</th>
-                    </tr>
-                </thead>
                 <tbody>
-                    <tr class="grid grid-cols-3 gap-4">
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
                         <td class="border px-4 py-2">
-                            <input type="number" name="rent"
+                            <label for="" class="border-b px-4 py-2">Rent</label>
+                            <input type="number" name="facility[rent]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Rent">
                         </td>
                         <td class="border px-4 py-2">
-                            <input type="number" name="duration"
+                            <label for="" class="border-b px-4 py-2">Duration (months)</label>
+                            <input type="number" name="facility[duration_months]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Duration in Months">
                         </td>
                         <td class="border px-4 py-2">
-                            <select name="supplies"
+                            <label for="" class="border-b px-4 py-2">Supplies</label>
+                            <select name="facility[rent_Supplies]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                                <option value="Option 1">Option 1</option>
-                                <option value="Option 2">Option 2</option>
-                                <option value="Option 3">Option 3</option>
+                                <option value="">Select</>
+                                <option value="1"> Air Conditioning</option>
+                                <option value="2">Gas</option>
+                                <option value="3">Gasoil</option>
+                                <option value="4">Buthane</option>
+                                <option value="5">Electricity</option>
+                                <option value="6">3 Phase Electricity</option>
+                                
                             </select>
                         </td>
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <th class="border-b px-4 py-2">Property (Price)</th>
-                        <th class="border-b px-4 py-2">Pending Mortgage</th>
-                        <th class="border-b px-4 py-2">State (Conditions)</th>
-                        <th class="border-b px-4 py-2">Supplies</th>
-                    </tr>
-                    <tr class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <td class="border px-4 py-2">
-                            <input type="number" name="property_price"
+                            <label for="" class="border-b px-4 py-2">Property (Price)</label>
+                            <input type="number" name="facility[property_price]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Property Price">
                         </td>
                         <td class="border px-4 py-2">
-                            <input type="number" name="pending_mortgage"
+                            <label for="" class="border-b px-4 py-2">Pending Mortgage</label>
+                            <input type="number" name="facility[pending_mortgage]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Pending Mortgage">
                         </td>
                         <td class="border px-4 py-2">
-                            <input type="text" name="state_conditions"
+                            <label for="" class="border-b px-4 py-2">State (Conditions)</label>
+                            <input type="text" name="facility[state_conditions]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter State Conditions">
                         </td>
                         <td class="border px-4 py-2">
-                            <select name="supplies"
+                            <label for="" class="border-b px-4 py-2">Supplies</label>
+                            <select name="facility[state_Supplies]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                                <option value="Option 1">Option 1</option>
-                                <option value="Option 2">Option 2</option>
-                                <option value="Option 3">Option 3</option>
+                                <option value="">Select</option>
+                                <option value="1">New</option>
+                                <option value="2">Good</option>
+                                <option value="3">Used</option>
+                                <option value="4">Acceptable</option>
+                                <option value="5">Bad</option>
                             </select>
                         </td>
                     </tr>
@@ -254,19 +257,19 @@
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <td class="border px-4 py-2">
                             <label for="price_new" class="block text-base font-semibold mb-1 text-gray-700">Price (New)</label>
-                            <input type="number" name="price_new"
+                            <input type="number" name="FfAndE[price_new]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Price">
                         </td>
                         <td class="border px-4 py-2">
                             <label for="pending_payments" class="block text-base font-semibold mb-1 text-gray-700">Pending Payments</label>
-                            <input type="number" name="pending_payments"
+                            <input type="number" name="FfAndE[pending_payments]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Pending Payments">
                         </td>
                         <td class="border px-4 py-2">
                             <label for="year" class="block text-base font-semibold mb-1 text-gray-700">Year</label>
-                            <input type="number" name="year"
+                            <input type="number" name="FfAndE[year]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Year">
                         </td>
@@ -279,19 +282,19 @@
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <td class="border px-4 py-2">
                             <label for="make_model" class="block text-base font-semibold mb-1 text-gray-700">Make and Model</label>
-                            <input type="text" name="make_model"
+                            <input type="text" name="vehicle[make_and_model]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Make and Model">
                         </td>
                         <td class="border px-4 py-2">
                             <label for="vehicle_year" class="block text-base font-semibold mb-1 text-gray-700">Year</label>
-                            <input type="number" name="vehicle_year"
+                            <input type="number" name="vehicle[year]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Year">
                         </td>
                         <td class="border px-4 py-2">
                             <label for="km" class="block text-base font-semibold mb-1 text-gray-700">Km</label>
-                            <input type="number" name="km"
+                            <input type="number" name="vehicle[km]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Km">
                         </td>
@@ -304,13 +307,13 @@
                     <tr class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <td class="border px-4 py-2">
                             <label for="number_employees" class="block text-base font-semibold mb-1 text-gray-700">Number of employees</label>
-                            <input type="number" name="number_employees"
+                            <input type="number" name="business_employee[number_employees]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Number of Employees">
                         </td>
                         <td class="border px-4 py-2">
                             <label for="employee_cost" class="block text-base font-semibold mb-1 text-gray-700">Employee cost (company cost)</label>
-                            <input type="number" name="employee_cost"
+                            <input type="number" name="business_employee[employee_cost]"
                                 class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Employee Cost">
                         </td>
@@ -404,59 +407,79 @@
 //             };
 //         }
 
-// function locationApp() {
-//     return {
-//         initMap() {
-//             const map = new google.maps.Map(document.getElementById('map'), {
-//                 center: {
-//                     lat: -34.397,
-//                     lng: 150.644
-//                 },
-//                 zoom: 8
-//             });
+function locationApp() {
+    return {
+        initMap() {
+            // Check if Google Maps API is available before initializing the map
+            if (typeof google !== 'undefined' && google.maps) {
+                const map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8,
+                });
 
-//             const input = document.getElementById('autocomplete');
-//             const autocomplete = new google.maps.places.Autocomplete(input);
+                const input = document.getElementById('autocomplete');
+                const autocomplete = new google.maps.places.Autocomplete(input);
 
-//             autocomplete.addListener('place_changed', function() {
-//                 const place = autocomplete.getPlace();
-//                 if (!place.geometry) {
-//                     return;
-//                 }
+                autocomplete.addListener('place_changed', function() {
+                    const place = autocomplete.getPlace();
+                    if (!place.geometry) return;
 
-//                 if (place.geometry.viewport) {
-//                     map.fitBounds(place.geometry.viewport);
-//                 } else {
-//                     map.setCenter(place.geometry.location);
-//                     map.setZoom(17);
-//                 }
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
 
-//                 new google.maps.Marker({
-//                     position: place.geometry.location,
-//                     map: map
-//                 });
-//             });
-//         }
-//     };
-// }
+                    new google.maps.Marker({
+                        position: place.geometry.location,
+                        map: map,
+                    });
+                });
+            } else {
+                console.error('Google Maps API is not loaded.');
+            }
+        },
+    };
+}
 
-// // Load Google Maps script dynamically with async and defer
-// const script = document.createElement('script');
-// script.src = "https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places";
-// script.async = true;
-// script.defer = true;
-// document.head.appendChild(script);
+// Dynamically load Google Maps script
+function loadGoogleMapsScript(callback) {
+    const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
+    if (existingScript) {
+        callback(); // Script already loaded, call the callback immediately
+        return;
+    }
 
-// window.initMap = function() {
-//     // Initialize Alpine.js if not already initialized
-//     if (!window.Alpine) {
-//         document.addEventListener('alpine:init', () => {
-//             locationApp().initMap();
-//         });
-//     } else {
-//         locationApp().initMap();
-//     }
-// }
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key={{ config('services.google_maps.key') }}&libraries=places&callback=initMap`;
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    script.onload = callback;
+}
+
+// Initialize the map when the script is ready
+window.initMap = function() {
+    locationApp().initMap();
+}
+
+// Load the Google Maps script after the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    loadGoogleMapsScript(function() {
+        // If Alpine is already initialized, run the initMap directly
+        if (window.Alpine) {
+            locationApp().initMap();
+        } else {
+            // Wait for Alpine.js to initialize
+            document.addEventListener('alpine:init', () => {
+                locationApp().initMap();
+            });
+        }
+    });
+});
+
 
  function featuresForm() {
     return {
@@ -517,7 +540,36 @@ document.getElementById('hiddenImagesInput').addEventListener('change', function
     }
 });
 
-
-
     </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const categorySelect = document.getElementById('category_id');
+        const subCategorySelect = document.getElementById('subcategory_id');
+
+        categorySelect.addEventListener('change', function() {
+            const categoryId = this.value;
+
+            // Clear previous subcategories
+            subCategorySelect.innerHTML = '<option value="">Select</option>';
+
+            if (categoryId) {
+                // Fetch subcategories for the selected category
+                axios.get(`/categories/${categoryId}/subcategories`)
+                    .then(response => {
+                        const subcategories = response.data;
+                        subcategories.forEach(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            subCategorySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching subcategories:', error);
+                    });
+            }
+        });
+    });
+</script>
 @endpush

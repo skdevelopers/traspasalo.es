@@ -111,7 +111,7 @@
     <section class="container xl:container-xl pt-10 md:pt-28 py-5 md:py-10">
         <div class="text-center pb-8 md:pb-16">
             <h2 class="text-2xl md:text-[28px] font-bold">Explore Profitable Business Ventures</h2>
-            <p class="mt-2 text-base md:text-lg text-gray-600">We Discover Your Business Success</p>
+            <p class="mt-2 text-sm md:text-lg text-gray-600">We Discover Your Business Success</p>
         </div>
         <div class="flex justify-center items-center py-8 relative" x-data="sliderData()">
             <button @click="prev()" class="prev1 absolute -left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
@@ -167,9 +167,9 @@
                     class="w-full h-full object-cover md:rounded-tr-none md:rounded-l-3xl rounded-bl-none rounded-tl-2xl rounded-tr-2xl">
             </div>
             <!-- Text Part -->
-            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:p-10 flex flex-col justify-center md:rounded-bl-none  md:rounded-r-3xl rounded-bl-3xl rounded-br-3xl">
+            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:px-10 lg:py-12 flex flex-col justify-center md:rounded-bl-none  md:rounded-r-3xl rounded-bl-3xl rounded-br-3xl">
                 <img src="{{ asset('/front/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
-                <h2 class="text-lg md:text-3xl mb-4">We Don’t Just Find Premises, We Discover Your Business Success</h2>
+                <h2 class="text-lg md:text-3xl mb-6">We Don’t Just Find Premises, We Discover Your Business Success</h2>
                 <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded mb-5 md:mb-0"><a
                         href="{{ url('/about') }}">Find Now</a></button>
             </div>
@@ -187,7 +187,7 @@
                         class="w-full h-auto object-cover rounded-lg">
                 </div>
                 <!-- Text and smaller images on the right -->
-                <div class="col-span-12 lg:col-span-6 pr-10">
+                <div class="col-span-12 lg:col-span-6 pr-10 relative">
                     <h2 class="text-5xl font-bold text-orange-500">5 </h2><span class="text-base text-black">STARS</span>
                     <h3 class="text-4xl font-semibold mt-4">Your Dream Business, Our Commitment to Find</h3>
                     <p class="mt-4 text-sm">
@@ -208,7 +208,7 @@
                     <div id="message3" class="mt-4 text-green-400"></div>
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
-                        <div class="flex w-[280px] h-[180px] gap-4">
+                        <div class="flex w-auto h-auto lg:w-[340px] lg:h-[180px] gap-4 lg:absolute lg:right-0 lg:bottom-7">
                             <img src="{{ asset('/front/assets/images/image.png') }}" alt="Small Image 2"
                                 class="w-full h-full object-cover rounded-lg">
                         </div>
@@ -225,7 +225,7 @@
                 class="block text-center md:text-left md:flex justify-between items-center text-white pt-10 md:pt-20 rounded-lg">
                 <div>
                     <h2 class="text-xl md:text-2xl lg:text-4xl font-bold">Explore top Business</h2>
-                    <p class="mt-2 mb-7 md:mb-0 text-lg">Our team’s business for consumers behind</p>
+                    <p class="mt-2 mb-7 md:mb-0 text-sm">Our team’s business for consumers behind</p>
                 </div>
                 <button
                     class="bg-orange-500 text-white font-semibold py-2 px-4 rounded hover:bg-orange-600 transition duration-300">
@@ -273,7 +273,7 @@
         <div class="max-w-xs md:max-w-5xl mx-auto">
             <div class="text-center mb-10">
                 <h1 class="text-2xl font-bold">Easy Steps to join Us!</h1>
-                <p class="text-gray-600 mt-2">Embrace the advantages of property listing and become a part of our community
+                <p class="text-gray-600 mt-2 text-sm">Embrace the advantages of property listing and become a part of our community
                     today!</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -289,7 +289,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Easy registration</h3>
-                        <p class="text-gray-500">Help people get to know you by listing your business. Showcase your
+                        <p class="text-gray-500 text-sm">Help people get to know you by listing your business. Showcase your
                             business with your outstanding media gallery.</p>
                     </div>
                 </div>
@@ -305,7 +305,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Promote property listing</h3>
-                        <p class="text-gray-500">Reach 3x more customers by featuring your listing on top of search
+                        <p class="text-gray-500 text-sm">Reach 3x more customers by featuring your listing on top of search
                             results. This will help you grow fast with us.</p>
                     </div>
                 </div>
@@ -322,7 +322,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Get on the map</h3>
-                        <p class="text-gray-500">We will show results on the map so your customers can easily find you.</p>
+                        <p class="text-gray-500 text-sm">We will show results on the map so your customers can easily find you.</p>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center md:text-left block md:flex items-center">
@@ -337,7 +337,7 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Great sales benefits</h3>
-                        <p class="text-gray-500">With the help of standout on the top of result by showing your ads as
+                        <p class="text-gray-500 text-sm">With the help of standout on the top of result by showing your ads as
                             featured.</p>
                     </div>
                 </div>
@@ -366,21 +366,20 @@
     <div class="bg-violet-950 md:p-10 p-5">
         <div x-data="slider()" class="relative container xl:container-xl md:px-4 px-1">
             <h2 class="text-2xl md:text-3xl font-bold text-white text-center pt-10 mb-1">Our Clients Success Stories</h2>
-            <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with
+            <p class="text-center text-white mb-4 pb-10 text-sm">Discover the experiences of those who have achieved success with
                 us</p>
 
             <div class="relative overflow-hidden py-20">
-                <div id="slider" class="flex transition-transform duration-500 md:space-x-8 space-x-4"
+                <div id="slider" class="flex transition-transform duration-500"
                     :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
                     <template x-for="(item, index) in items" :key="index">
-                        <div
-                            class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
-                            <p class="mb-4" x-text="item.description"> </p>
+                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[31.5%]  flex-shrink-0 mr-6">
+                            <p class="mb-4 text-sm" x-text="item.description"> </p>
                             <div class="flex items-center pt-5">
                                 <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
                                 <div>
                                     <h3 class="font-semibold" x-text="item.name"></h3>
-                                    <p class="text-gray-600" x-text="item.job_position"></p>
+                                    <p class="text-gray-600 text-sm" x-text="item.job_position"></p>
                                 </div>
                             </div>
                         </div>
@@ -413,9 +412,8 @@
             </div>
 
             <div id="blogs-container"
-                class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+                class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
                 <!-- Card 1 -->
-
             </div>
 
         </div>

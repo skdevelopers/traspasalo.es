@@ -36,7 +36,7 @@
                     <div id="message2" class="mt-4 text-green-400"></div>
                     <div class="flex justify-end mt-4">
                         <!-- Two smaller images below -->
-                        <div class="flex w-[280px] h-[180px] gap-4">
+                        <div class="flex w-auto h-auto lg:w-[340px] lg:h-[180px] gap-4 lg:absolute lg:right-0 lg:bottom-7">
                             <img src="{{ asset('/front/assets/images/image.png') }}" alt="Small Image 2"
                                 class="w-full h-full object-cover rounded-lg">
                         </div>
