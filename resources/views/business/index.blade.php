@@ -1,164 +1,85 @@
-
-<!-- resources/views/business/index.blade.php -->
-
-@extends('layouts.vertical', ['title' => 'Display Businesses', 'sub_title' => 'Busienss'])
-
+@extends('front.layouts.app')
+@section('title', 'Business List')
+@section('header-title', 'Business List')
 @section('content')
-<div class="container" x-data="businessModal()">
-    <div class="grid grid-cols-12">
-        <div class="col-span-12">
 
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white rounded-md shadow-md">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="px-4 py-2">#</th>
-                    <th class="px-4 py-2">Title</th>
-                    <th class="px-4 py-2">Category</th>
-                    <th class="px-4 py-2">SubCategory</th>
-                    <th class="px-4 py-2">Description</th>
-                    <th class="px-4 py-2">Age Restriction</th>
-                    <th class="px-4 py-2">Pets Permission</th>
-                    <th class="px-4 py-2">Location</th>
-                    <th class="px-4 py-2">Actions</th>
+<div class="container mx-auto bg-white px-4 py-10 rounded-lg shadow-md my-10">
+    <div class="mb-6">
+        <h3 class="text-2xl font-semibold mb-6">Business List</h3>
+        <a href="{{ route('business.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add New Business
+        </a>
+    </div>
+
+    <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700">
+                <th class="py-3 px-6 text-left">Title</th>
+                <th class="py-3 px-6 text-left">Category</th>
+                <th class="py-3 px-6 text-left">Subcategory</th>
+                <th class="py-3 px-6 text-left">Description</th>
+                <th class="py-3 px-6 text-left">Location</th>
+                <th class="py-3 px-6 text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($businesses as $business)
+                <tr class="border-b border-gray-200">
+                    <!-- Title -->
+                    <td class="py-3 px-6">
+                        {{ $business->business_title }}
+                    </td>
+
+                    <!-- Category -->
+                    <td class="py-3 px-6">
+                        {{ $business->category->name ?? 'N/A' }}
+                    </td>
+
+                    <!-- Subcategory -->
+                    <td class="py-3 px-6">
+                        {{ $business->subcategory->name ?? 'N/A' }}
+                    </td>
+
+                    <!-- Description -->
+                    <td class="py-3 px-6">
+                        {{ Str::limit($business->description, 50) }} <!-- Shorten the description -->
+                    </td>
+
+                    <!-- Location -->
+                    <td class="py-3 px-6">
+                        {{ $business->location }}
+                    </td>
+
+                    <!-- Actions: Show, Edit, Delete -->
+                    <td class="py-3 px-6 text-center">
+                        <!-- Show -->
+                        <a href="{{ route('business.show', $business->id) }}" class="text-green-500 hover:text-green-700 mx-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 3a7 7 0 100 14A7 7 0 0010 3zM9 8h2v3H9V8zm0 4h2v2H9v-2z" />
+                            </svg>
+                        </a>
+
+                        <!-- Edit -->
+                        <a href="{{ route('business.edit', $business->id) }}" class="text-blue-500 hover:text-blue-700 mx-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M17.414 2.586a2 2 0 00-2.828 0L6 11.172V14h2.828l8.586-8.586a2 2 0 000-2.828zM5 12v3h3l9-9-3-3-9 9z"/>
+                            </svg>
+                        </a>
+
+                        <!-- Delete (with confirmation) -->
+                        <form action="{{ route('business.delete', $business->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this business?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700 mx-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H3a1 1 0 100 2h1v10a2 2 0 002 2h8a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-2 0v1H7V3a1 1 0 00-2 0v1H3a1 1 0 000 2h1v10a2 2 0 002 2h8a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @php
-                    $count=0;
-                @endphp
-                @forelse($businesses as $business)
-                    <tr>
-                        <td class="border px-4 py-2">{{ ++$count }}</td>
-                        <td class="border px-4 py-2">{{ $business->business_title }}</td>
-                        <td class="border px-4 py-2">{{ $business->category->name ?? 'N/A' }}</td>
-                        <td class="border px-4 py-2">{{ $business->subcategory->name ?? 'N/A' }}</td>
-                        <td class="border px-4 py-2">{{ Str::limit($business->description, 50) ?? 'N/A'}}</td>
-                        <td class="border px-4 py-2">{{ $business->age_restriction ?? 'N/A' }}</td>
-                        <td class="border px-4 py-2">{{ $business->pets_permission ?? 'N/A'}}</td>
-                        <td class="border px-4 py-2">{{ $business->location ?? 'N/A' }}</td>
-
-                        <td class="border px-4 py-2 whitespace-nowrap">
-                            {{-- <button class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                <i class="mgc_expand_line text-lg"></i><a href={{ route('business.show', $business->id) }}> View Details
-                            </button> --}}
-                            <a href="{{ route('business.show', $business->id) }}" class="text-green-500 hover:text-green-700 mx-0.5">
-                                <i class="mgc_display_line text-lg"></i>
-                            </a>
-                            <a href="{{ route('business.edit', $business->id) }}"
-                               class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                <i class="mgc_edit_line text-lg"></i>
-                            </a>
-                            <form action="{{ route('business.delete', $business->id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700 mx-0.5"
-                                        onclick="return confirm('Are you sure you want to delete this business?')">
-                                    <i class="mgc_delete_line text-xl"></i>
-                                </button>
-                            </form>
-                        
-                        </td>
-                    </tr>
-                    
-                @empty
-                    <tr>
-                        <td colspan="3" class="text-center text-gray-500">
-                            No Business found.
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        {{ $businesses->links() }}
-    </div>
-
-
-    <!-- Modal -->
-    <div x-show="showModal" style="display: none;" class="fixed z-10 inset-0 overflow-y-auto">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline" x-text="business.business_title"></h3>
-                    <div class="mt-2">
-                        <p><strong>Business Description:</strong><span x-text="business.description"></span></p>
-                        <p><strong>Business Category:</strong> <span x-text="business.category.name"></span></p>
-                        <p><strong>Age Restriction:</strong> <span x-text="business.age_restriction"></span></p>
-                        <p><strong>Pets Permission:</strong> <span x-text="business.pets_permission"></span></p>
-                        <p><strong>Location:</strong> <span x-text="business.location"></span></p>
-                        
-                        <p><strong>Feature Services:</strong></p>
-                        <ul>
-                            <template x-for="feature in business.features" :key="feature.id">
-                                <li x-text="feature.name"></li>
-                            </template>
-                        </ul>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button @click="showModal = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Error Modal -->
-    <div x-show="showError" style="display: none;" class="fixed z-10 inset-0 overflow-y-auto">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-error-headline">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-error-headline">Error</h3>
-                    <div class="mt-2">
-                        <p class="text-sm text-gray-500" x-text="errorMessage"></p>
-                    </div>
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button @click="showError = false" type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Close
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
 </div>
-</div></div>
 @endsection
-
-<script>
-function businessModal() {
-    return {
-        showModal: false,
-        showError: false,
-        business: {},
-        errorMessage: '',
-        fetchBusiness(id) {
-            fetch(`/business/${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.error) {
-                        this.errorMessage = data.error;
-                        this.showError = true;
-                    } else {
-                        this.business = data;
-                        this.showModal = true;
-                    }
-                })
-                .catch(error => {
-                    this.errorMessage = 'An error occurred while fetching the business data.';
-                    this.showError = true;
-                });
-        }
-    }
-}
-</script>

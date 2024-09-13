@@ -61,7 +61,7 @@
     @include('front.partials.banner')
 
     <div class="bg-white flex items-center justify-center min-h-screen">
-        <div class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
+        <div class="container xl:container-xl px-4 mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 pt-12 pb-5">
             <!-- Card 1 -->
             @foreach($blogs as $blog)
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">

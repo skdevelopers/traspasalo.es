@@ -4,18 +4,18 @@
 
 @push('styles')
     <style>
-        .bg-banner {
+        /* .bg-banner {
             background: url('/front/assets/images/bg-banner.svg') no-repeat center center;
             background-size: cover;
             position: relative;
-            /* height: 445px; */
+            height: 445px; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
+        }*/
 
-        .bg-banner::before {
+        /*.bg-banner::before {
             position: absolute;
             content: "";
             top: 0;
@@ -24,18 +24,53 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+        } */
+        .bg-banner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 10;
+            width: 100%;
+            padding: 20px;
+            background: url('/front/assets/images/bg-banner.svg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .bg-banner::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            background: rgba(39, 11, 121, 0.80); /* Adjust color to match */
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        input, select {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
     </style>
 @endpush
 
 @section('content')
     <!-- Start Business Banner Section -->
-    <section class="bg-banner lg:h-[445px] h-auto">
-        <div class=" text-center z-0">
-            <div class="container xl:container-xl xl:pt-24 pt-5 xl:px-[50px] px-4">
+    <section class="bg-banner">
+        <div class="text-center z-0">
+            <div class="container xl:container-xl xl:pt-20 pt-5 xl:px-[50px] px-4 z-20">
                 <!-- Heading Content -->
                 <div class="w-100">
-                    <div class="flex flex-col lg:pt-36 xl:pt-20 pt-4">
+                    <div class="flex flex-col">
                         <h1 class="text-4xl text-white font-bold">Find Your Business</h1>
                         <p class="mt-2 text-sm text-gray-300">WE HELP YOU FIND YOUR IDEAL TRANSFER</p>
                     </div>
@@ -65,8 +100,8 @@
                                     class="w-full p-2 border rounded-lg border-gray-300"
                                     placeholder="Type to search location">
                                 {{-- <div id="dropdown_list" class="absolute z-10 w-full bg-white border border-gray-300 rounded-lg mt-1 max-h-40 overflow-y-auto hidden">
-                                <!-- Suggestions will be inserted here -->
-                            </div> --}}
+                                    <!-- Suggestions will be inserted here -->
+                                </div> --}}
                             </div>
 
                             <div class="flex-1 p-1">
@@ -78,8 +113,7 @@
             </div>
         </div>
         <div class="container xl:container-xl">
-            <div x-data="carousel()"
-                class="relative flex items-center justify-center w-full h-full lg:py-16 py-y mt-10">
+            <div x-data="carousel()" class="relative flex items-center justify-center w-full h-full lg:pt-16 mt-10 -mb-28">
                 <button @click="prev"
                     class="w-8 h-8 absolute -left-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
                     &lt;
@@ -106,14 +140,19 @@
             </div>
         </div>
     </section>
+    <!-- Start Business Banner Section -->
+
+
+
+
     <!-- End Business Banner Section -->
 
-    <section class="container xl:container-xl pt-10 md:pt-28 py-5 md:py-10">
+    <section class="container xl:container-xl pt-28 md:pt-40 pb-5">
         <div class="text-center pb-8 md:pb-16">
             <h2 class="text-2xl md:text-[28px] font-bold">Explore Profitable Business Ventures</h2>
             <p class="mt-2 text-sm md:text-lg text-gray-600">We Discover Your Business Success</p>
         </div>
-        <div class="flex justify-center items-center py-8 relative" x-data="sliderData()">
+        <div class="flex justify-center items-center pb-8 relative" x-data="sliderData()">
             <button @click="prev()" class="prev1 absolute -left-6 z-10 bg-violet-950 text-white p-2 rounded-full">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -182,14 +221,14 @@
         <div class="relative container xl:container-xl px-4 mx-auto bg-white">
             <div class="grid grid-cols-12">
                 <!-- Main image on the left -->
-                <div class="col-span-12 lg:col-span-6">
+                <div class="col-span-12 lg:col-span-7">
                     <img src="{{ asset('/front/assets/images/dream-business.jpg') }}" alt="Main Image"
                         class="w-full h-auto object-cover rounded-lg">
                 </div>
                 <!-- Text and smaller images on the right -->
-                <div class="col-span-12 lg:col-span-6 pr-10 relative">
+                <div class="col-span-12 lg:col-span-5 pr-10 relative">
                     <h2 class="text-5xl font-bold text-orange-500">5 </h2><span class="text-base text-black">STARS</span>
-                    <h3 class="text-4xl font-semibold mt-4">Your Dream Business, Our Commitment to Find</h3>
+                    <h3 class="text-4xl font-semibold mt-4 text-black">Your Dream Business, Our Commitment to Find</h3>
                     <p class="mt-4 text-sm">
                         We go beyond simply locating premises. We are dedicated to uncovering and securing the perfect
                         business opportunities tailored to your needs. Our expertise and commitment ensure that your path to
@@ -197,7 +236,7 @@
                         environment where your business can thrive.
                     </p>
                     <form id="subscribeForm3"
-                        class="flex flex-col p-2 md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                        class="flex flex-col py-2 md:flex-row items-start md:items-center mt-5">
                         @csrf
                         <input type="email" name="email" id="email" placeholder="Your Email"
                             class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
@@ -239,7 +278,7 @@
                 <div class="relative w-full">
                     <img src="{{ asset('/front/assets/images/business1.jpg') }}" alt="Real Estate"
                         class="w-full h-5/6 object-cover rounded-lg">
-                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24 2xl:pb-28">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Real Estate &rarr;
                         </a>
@@ -248,7 +287,7 @@
                 <div class="relative w-full">
                     <img src="{{ asset('/front/assets/images/business2.jpg') }}" alt="Real Estate"
                         class="w-full h-5/6 object-cover rounded-lg">
-                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24 2xl:pb-28">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Business Consulting &rarr;
                         </a>
@@ -257,7 +296,7 @@
                 <div class="relative w-full">
                     <img src="{{ asset('/front/assets/images/business3.jpg') }}" alt="Real Estate"
                         class="w-full  h-5/6 object-cover rounded-lg">
-                    <div class="absolute inset-0 flex justify-center items-end pb-24">
+                    <div class="absolute inset-0 flex justify-center items-end pb-24 2xl:pb-28">
                         <a href="#" class="px-4 py-2 bg-white text-black rounded-lg shadow-lg whitespace-nowrap">
                             Cars Washer &rarr;
                         </a>

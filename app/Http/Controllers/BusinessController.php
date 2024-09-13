@@ -35,10 +35,10 @@ class BusinessController extends Controller
     public function index()
     {
         if (auth()->user()->hasRole('admin')) {
-            $businesses = Business::with('category', 'subcategory', 'user', 'media')->paginate(10);
+            $businesses = Business::with('category', 'subcategory')->paginate(10);
         } else {
             $businesses = Business::where('user_id', auth()->id())
-                ->with('category', 'subcategory', 'user')
+                ->with('category', 'subcategory')
                 ->paginate(10);
         }
 
@@ -211,103 +211,191 @@ class BusinessController extends Controller
     //     return redirect()->route('business.index')->with('success', 'Business created successfully.');
     // }
 
+    // public function edit($id)
+    // {
+    //     // Retrieve the business with its relationships
+    //     $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+
+    //     // Retrieve all categories for the dropdown
+    //     $categories = Category::all();
+
+    //     // Retrieve all features for the features section
+    //     $features = FeatureService::all();
+
+    //     // Get the IDs of the features already associated with the business
+    //     $selectedFeatures = $business->features->pluck('id')->toArray();
+
+    //     // Get the media associated with the business
+    //     $media = $business->getMedia('images')->map(function ($item) {
+    //         $convertedUrl = $item->getPathRelativeToRoot('resized');
+
+    //         // If the conversion does not exist, use the original URL
+    //         if (!$convertedUrl) {
+    //             $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+    //             $item['org_url'] = url($relativePath);
+    //         } else {
+    //             $item['org_url'] = asset('storage/images/' . $convertedUrl);
+    //         }
+
+    //         return [
+    //             'url' => $item['org_url'],
+    //             'name' => $item->file_name,
+    //         ];
+    //     })->toArray();
+
+    //     // Pass the data to the edit view
+    //     return view('business.edit', compact('business', 'categories', 'features', 'media', 'selectedFeatures'));
+    // }
+
     public function edit($id)
-    {
-        // Retrieve the business with its relationships
-        $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+{
+    // Find the business by ID, including related models such as features, facility, financial, etc.
+    $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
 
-        // Retrieve all categories for the dropdown
-        $categories = Category::all();
+    // Fetch all categories and subcategories
+    $categories = Category::all();
+    $subcategories = $business->category ? $business->category->subcategories : [];
 
-        // Retrieve all features for the features section
-        $features = FeatureService::all();
+    // Fetch all available features
+    $features = FeatureService::all();
 
-        // Get the IDs of the features already associated with the business
-        $selectedFeatures = $business->features->pluck('id')->toArray();
+    // Return the edit view, passing the necessary data
+    return view('business.edit', compact('business', 'categories', 'subcategories', 'features'));
+}
 
-        // Get the media associated with the business
-        $media = $business->getMedia('images')->map(function ($item) {
-            $convertedUrl = $item->getPathRelativeToRoot('resized');
 
-            // If the conversion does not exist, use the original URL
-            if (!$convertedUrl) {
-                $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
-                $item['org_url'] = url($relativePath);
-            } else {
-                $item['org_url'] = asset('storage/images/' . $convertedUrl);
-            }
+    // public function update(BusinessRequest $request, $id)
+    // {
+    //     $business = Business::findOrFail($id);
+    //     $data = $request->validated();
 
-            return [
-                'url' => $item['org_url'],
-                'name' => $item->file_name,
-            ];
-        })->toArray();
+    //     // Validate that the selected subcategory belongs to the selected category
+    //     $subcategory = Category::find($request->subcategory_id);
+    //     if ($subcategory->parent_id != $request->category_id) {
+    //         return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
+    //     }
 
-        // Pass the data to the edit view
-        return view('business.edit', compact('business', 'categories', 'features', 'media', 'selectedFeatures'));
-    }
+    //     // Process features
+    //     $data['features'] = $this->processFeatures($data['features'] ?? []);
 
-    public function update(BusinessRequest $request, $id)
-    {
-        $business = Business::findOrFail($id);
-        $data = $request->validated();
+    //     // Update the business data
+    //     $business->update([
+    //         'subcategory_id' => $data['subcategory_id'],
+    //         'business_title' => $data['business_title'],
+    //         'description' => $data['description'],
+    //         'check_in' => $data['check_in'],
+    //         'check_out' => $data['check_out'],
+    //         'age_restriction' => $data['age_restriction'],
+    //         'pets_permission' => $data['pets_permission'],
+    //         'location' => $data['location'],
+    //     ]);
 
-        // Validate that the selected subcategory belongs to the selected category
-        $subcategory = Category::find($request->subcategory_id);
-        if ($subcategory->parent_id != $request->category_id) {
-            return redirect()->back()->withErrors(['subcategory_id' => 'The selected subcategory does not belong to the selected category.']);
+    //     // Handle image updates
+    //     if ($request->hasFile('images')) {
+    //         $this->handleImages($request->file('images'), $business);
+    //     }
+
+    //     // Sync features
+    //     if (!empty($data['features'])) {
+    //         $business->features()->sync($data['features']);
+    //     }
+
+    //     return redirect()->route('business.index')->with('success', 'Business updated successfully.');
+    // }
+
+    public function update(Request $request, Business $business)
+{
+    // Validate the basic business data
+    $request->validate([
+        'business_title' => 'required|string',
+        'description' => 'required|string',
+        'location' => 'required|string',
+    ]);
+
+    $request['features'] = $this->processFeatures($request['features']);
+    
+    // Use a transaction to ensure atomicity of operations
+    DB::transaction(function () use ($request, $business) {
+        // Update the business
+        $business->update($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location']));
+
+        // Handle images (Ensure this function is defined properly to handle image uploads)
+        $this->handleImages($request->images, $business);
+
+        if (!empty($request->features)) {
+            // Sync the features
+            $business->features()->sync($request->features);
         }
 
-        // Process features
-        $data['features'] = $this->processFeatures($data['features'] ?? []);
+        // Regenerate QR code if necessary
+        $business->generateQrCode();
 
-        // Update the business data
-        $business->update([
-            'subcategory_id' => $data['subcategory_id'],
-            'business_title' => $data['business_title'],
-            'description' => $data['description'],
-            'check_in' => $data['check_in'],
-            'check_out' => $data['check_out'],
-            'age_restriction' => $data['age_restriction'],
-            'pets_permission' => $data['pets_permission'],
-            'location' => $data['location'],
-        ]);
+        // Save related data only if necessary
+        $this->saveRelatedData($business, $request);
+    });
 
-        // Handle image updates
-        if ($request->hasFile('images')) {
-            $this->handleImages($request->file('images'), $business);
-        }
-
-        // Sync features
-        if (!empty($data['features'])) {
-            $business->features()->sync($data['features']);
-        }
-
-        return redirect()->route('business.index')->with('success', 'Business updated successfully.');
-    }
+    return redirect()->route('business.index')->with('success', 'Business and related data updated successfully');
+}
 
 
 
-
+    // public function destroy($id)
+    // {
+    //     $business = Business::findOrFail($id);
+    //     // $business->media()->detach();
+    //     $business->features()->detach();
+    //     $business->delete();
+    //     return redirect()->route('business.index')->with('success', 'Business deleted successfully.');
+    // }
     public function destroy($id)
     {
+        // Find the business by ID
         $business = Business::findOrFail($id);
-        // $business->media()->detach();
-        $business->features()->detach();
-        $business->delete();
-        return redirect()->route('business.index')->with('success', 'Business deleted successfully.');
+    
+        // Start a transaction to ensure data integrity
+        DB::transaction(function () use ($business) {
+            // If business has images, delete them
+            if ($business->media) {
+                foreach ($business->media as $media) {
+                    // Assuming there's a service or logic to delete media files
+                    $this->mediaUploadService->deleteMedia($media);
+                }
+            }
+    
+            // Delete the related data if necessary (features, facility, etc.)
+            $business->features()->detach();
+            $business->facility()->delete();
+            $business->financial()->delete();
+            $business->vehicle()->delete();
+            $business->businessEmployee()->delete();
+            $business->ffAndE()->delete();
+    
+            // Finally, delete the business itself
+            $business->delete();
+        });
+    
+        // Redirect to the business index page with a success message
+        return redirect()->route('business.index')->with('success', 'Business deleted successfully');
     }
-
+    
+    // public function show($id)
+    // {
+    //     try {
+    //         $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
+    //         return response()->json($business);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Business not found'], 404);
+    //     }
+    // }
     public function show($id)
     {
-        try {
-            $business = Business::with(['category', 'features', 'subcategory', 'user', 'media'])->findOrFail($id);
-            return response()->json($business);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Business not found'], 404);
-        }
+        // Find the business by ID, including related models like features, facility, etc.
+        $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
+    
+        // Return the show view, passing the business data to the view
+        return view('business.show', compact('business'));
     }
-
+    
     public function getBusiness($id)
     {
         try {

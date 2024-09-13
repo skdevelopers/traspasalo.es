@@ -353,59 +353,6 @@
 
 @push('scripts')
     <script>
-// function imageUploader() {
-//             return {
-//                 files: [],
-//                 fileId: 0,
-//                 get imageCountText() {
-//                     return (${this.files.length}/10);
-//                 },
-//                 handleFileUpload(event) {
-//                     const selectedFiles = Array.from(event.target.files);
-
-//                     // Prevent uploading more than 10 images
-//                     if (this.files.length + selectedFiles.length > 10) {
-//                         alert('You can upload a maximum of 10 images.');
-//                         return;
-//                     }
-
-//                     selectedFiles.forEach(file => {
-//                         const reader = new FileReader();
-//                         reader.onload = (e) => {
-//                             const fileId = this.fileId++;
-//                             this.files.push({
-//                                 id: fileId,
-//                                 url: e.target.result,
-//                                 name: file.name,
-//                                 file: file
-//                             });
-
-//                             // Update the hidden input field with file data
-//                             this.updateHiddenInput();
-//                         };
-//                         reader.readAsDataURL(file);
-//                     });
-
-//                     // Clear the input to allow uploading the same file again
-//                     event.target.value = '';
-//                 },
-//                 removeFile(index) {
-//                     this.files.splice(index, 1);
-//                     // Update the hidden input field after removing a file
-//                     this.updateHiddenInput();
-//                 },
-//                 updateHiddenInput() {
-//                     const dataTransfer = new DataTransfer();
-//                     this.files.forEach(file => {
-//                         dataTransfer.items.add(file.file);
-//                     });
-
-//                     // Update the hidden input element
-//                     const inputElement = document.getElementById('hiddenImagesInput');
-//                     inputElement.files = dataTransfer.files;
-//                 }
-//             };
-//         }
 
 function locationApp() {
     return {
