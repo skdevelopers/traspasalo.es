@@ -119,8 +119,8 @@ Route::get('/auth/register/step2', [RegisteredUserController::class, 'showStep2'
 Route::post('/auth/register/step2', [RegisteredUserController::class, 'postStep2'])->name('register.step2.post');
 
 // Route::get('/auth/register', fn() => view('auth.register'))->name('auth.register');
-// Route::get('/auth/auth.recoverpw', [PasswordResetLinkController::class,'create'])->name('auth.recoverpw');
-// Route::Post('/auth/auth.recoverpw', [PasswordResetLinkController::class,'store'])->name('auth.recoverpw');
+ Route::get('/auth/auth.recoverpw', [PasswordResetLinkController::class,'create'])->name('auth.recoverpw');
+ Route::Post('/auth/auth.recoverpw', [PasswordResetLinkController::class,'store'])->name('auth.recoverpw.post');
 //Route::Post('/reset-password/{token}', [PasswordResetLinkController::class,'resetpwd'])->name('password.reset');
 
 //Route::get('/auth/lock-screen', fn () => view('auth.lock-screen'))->name('auth.lock-screen');

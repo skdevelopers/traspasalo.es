@@ -31,7 +31,7 @@
                     <h2 class="text-sm sm:text-base md:text-lg font-bold text-left uppercase text-black">FORGOT PASSWORD</h2>
                     <h2 class="text-xs sm:text-sm md:text-base text-black mb-6">Enter your email that associated with your account</h2>
     
-                    <form method="POST" action="{{ route('auth.recoverpw') }}">
+                    <form method="POST" action="{{ route('auth.recoverpw.post') }}">
                         @csrf
                         <div class="p-2">
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
