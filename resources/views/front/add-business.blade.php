@@ -16,19 +16,20 @@
     </div>
 @endif
 
-<div class="container mx-auto bg-white px-4 py-10 rounded-lg shadow-md my-10">
+<div class="container mx-auto bg-white px-6 py-10 rounded-lg shadow-md my-10">
+    
+    <h3 class="text-2xl font-bold mb-6 text-center text-gray-900">Add New Business</h3>
+
     <form action="{{ route('business.store') }}" id="business-form" method="POST" enctype="multipart/form-data"
     x-data="featuresForm()">
         @csrf
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <h3 class="text-2xl font-semibold mb-6 text-center">Add New Business</h3>
-
             <!-- Business Category -->
             <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                    <label for="category_id" class="block text-base font-semibold mb-1 text-gray-700">Business Category</label>
+                    <label for="category_id" class="text-lg font-semibold mb-2 text-gray-700">Business Category</label>
                     <select id="category_id" name="category_id"
-                        class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
+                        class="w-full mt-1 placeholder:text-base placeholder:text-gray-500 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
                         <option value="">Select</option>
                          @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -39,9 +40,9 @@
                     @enderror
                 </div>
                 <div>
-                    <label for="subcategory_id" class="block text-base font-semibold mb-2 text-gray-700">Sub Category</label>
+                    <label for="subcategory_id" class="text-lg font-semibold mb-2 text-gray-700">Sub Category</label>
                     <select id="subcategory_id" name="subcategory_id"
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
+                        class="w-full mt-1 placeholder:text-base placeholder:text-gray-500 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500">
                         <option value="">Select</option>
                     </select>
                     @error('subcategory_id')
@@ -52,9 +53,9 @@
 
             <!-- Business Title -->
             <div class="mb-4">
-                <label for="business_title" class="block text-base font-semibold mb-1 text-gray-700">Business Title</label>
+                <label for="business_title" class="text-lg font-semibold mb-2 text-gray-700">Business Title</label>
                 <input type="text" id="business_title" name="business_title"
-                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+                    class="w-full mt-1 placeholder:text-base placeholder:text-gray-500 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
                     placeholder="Business title">
                 @error('business_title')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -63,25 +64,36 @@
 
             <!-- Description -->
             <div class="mb-4">
-                <label for="description" class="block text-base font-semibold mb-1 text-gray-700">Description</label>
+                <label for="description" class="text-lg font-semibold mb-2 text-gray-700">Description</label>
                 <textarea id="description" name="description" rows="4"
-                    class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+                    class="w-full mt-1 placeholder:text-base placeholder:text-gray-500 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
                     placeholder="Write here..."></textarea>
                 @error('description')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
+            <!-- Business Number -->
+            <div class="mb-4">
+                <label for="business_number" class="text-lg font-semibold mb-2 text-gray-700">Add Business Number</label>
+                <input type="number" id="business_number" name="business_number"
+                    class="w-full mt-1 placeholder:text-base placeholder:text-gray-500 p-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500"
+                    placeholder="Add business number">
+                @error('business_number')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Property Location (Map integration) -->
-            <div x-data="locationApp()" x-init="initMap()" class="mb-4">
+            <div x-data="locationApp()" x-init="initMap()" class="mb-6">
                 <div class="mb-4">
-                    <label for="autocomplete" class="block text-base font-semibold mb-1 text-gray-700">Property Locations</label>
+                    <label for="autocomplete" class="text-lg font-semibold mb-2 text-gray-700">Business Locations</label>
                     <input type="text" id="autocomplete" name="location" placeholder="Search Location"
-                        class="w-full p-2 border border-gray-300 rounded">
+                        class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border border-gray-300 rounded">
                 </div>
                 <div class="mb-4">
-                    <label for="map" class="block text-base font-semibold mb-1 text-gray-700">Add On Map</label>
-                    <div id="map" class="w-full h-64 bg-gray-200 rounded"></div>
+                    <label for="map" class="text-lg font-semibold mb-2 text-gray-700">Add On Map</label>
+                    <div id="map" class="w-full h-64 bg-gray-200 rounded mt-1"></div>
                 </div>
             </div>
 
@@ -90,7 +102,7 @@
                 <label for="images" class="block text-gray-700">
                     Add property images* <span x-text="imageCountText" class="text-gray-500 text-sm"></span>
                 </label>
-                <input type="file" id="imagesInput" accept="image/*" multiple @change="handleFileUpload" class="w-full">
+                <input type="file" id="imagesInput" accept="image/*" multiple @change="handleFileUpload" class="w-full ">
                 <div id="imagePreviewContainer" class="flex flex-wrap gap-4 mt-4">
                     <template x-for="(file, index) in files" :key="file.id">
                         <div class="relative inline-block">
@@ -104,7 +116,7 @@
             <!-- Hidden input to store files -->
             {{-- <input type="file" id="hiddenImagesInput" name="images[]" multiple style="display: none;"> --}}
             <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-                <h3 class="text-base font-semibold mb-2 text-gray-700">Business Images</h3>
+                <h3 class="text-lg font-semibold mb-2 text-gray-700">Business Images</h3>
 
                 <!-- Upload Box -->
                 <label for="hiddenImagesInput" class="flex flex-col place-items-center place-content-center w-28 h-28 bg-gray-100 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-200">
@@ -123,54 +135,54 @@
 
         <!-- Financials Section -->
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <h3 class="text-base font-semibold mb-1 text-gray-700">FINANCIALS</h3>
+            <h3 class="text-lg font-semibold mb-2 text-gray-700">FINANCIALS</h3>
             <table class="min-w-full text-sm text-left text-gray-700 border-collapse">
                 <thead>
-                    <tr class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {{-- <tr class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <th class="border-b px-4 py-2">Gross Revenue</th>
                         <th class="border-b px-4 py-2">EBITDA</th>
                         <th class="border-b px-4 py-2">Asking Price</th>
                         <th class="border-b px-4 py-2">FF&E</th>
                         <th class="border-b px-4 py-2">Inventory</th>
                         <th class="border-b px-4 py-2">Established</th>
-                    </tr>
+                    </tr> --}}
                 </thead>
                 <tbody>
                     <tr class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Gross Revenue</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Gross Revenue</label>
                             <input type="number" name="financial[gross_revenue]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Gross Revenue">
                         </td>
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">EBITDA</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">EBITDA</label>
                             <input type="number" name="financial[ebitda]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter EBITDA">
                         </td>
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Asking Price</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Asking Price</label>
                             <input type="number" name="financial[asking_price]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Asking Price">
                         </td>
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">FF&E</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">FF&E</label>
                             <input type="number" name="financial[ffe]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter FF&E">
                         </td>
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Inventory</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Inventory</label>
                             <input type="number" name="financial[inventory]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Inventory">
                         </td>
                         <td class="border px-4 py-2">
-                            <label class="block md:hidden text-base font-semibold mb-1 text-gray-700">Established</label>
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Established</label>
                             <input type="text" name="financial[established]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Established Year">
                         </td>
                     </tr>
@@ -180,26 +192,26 @@
 
         <!-- Facilities Section -->
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <h3 class="text-lg font-semibold mb-4">FACILITIES</h3>
-            <table class="min-w-full text-left text-base font-semibold mb-1 text-gray-700 border-collapse">
+            <h3 class="text-lg font-semibold mb-2 text-gray-700">FACILITIES</h3>
+            <table class="min-w-full text-left border-collapse">
                 <tbody>
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Rent</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Rent</label>
                             <input type="number" name="facility[rent]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Rent">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Duration (months)</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Duration (months)</label>
                             <input type="number" name="facility[duration_months]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Duration in Months">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Supplies</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
                             <select name="facility[rent_Supplies]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                                 <option value="">Select</>
                                 <option value="1"> Air Conditioning</option>
                                 <option value="2">Gas</option>
@@ -213,27 +225,27 @@
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Property (Price)</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Property (Price)</label>
                             <input type="number" name="facility[property_price]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Property Price">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Pending Mortgage</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Pending Mortgage</label>
                             <input type="number" name="facility[pending_mortgage]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Pending Mortgage">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">State (Conditions)</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">State (Conditions)</label>
                             <input type="text" name="facility[state_conditions]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter State Conditions">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="" class="border-b px-4 py-2">Supplies</label>
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
                             <select name="facility[state_Supplies]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                                 <option value="">Select</option>
                                 <option value="1">New</option>
                                 <option value="2">Good</option>
@@ -249,72 +261,72 @@
 
         <!-- FF&E Section -->
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <table class="min-w-full text-left text-base font-semibold mb-1 text-gray-700 border-collapse">
+            <table class="min-w-full text-left border-collapse">
                 <tbody>
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <th colspan="3" class="border-b px-4 py-2 text-left text-lg font-semibold">FF&E</th>
+                        <th colspan="3" class="text-lg font-semibold mb-2 text-gray-700">FF&E</th>
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <td class="border px-4 py-2">
-                            <label for="price_new" class="block text-base font-semibold mb-1 text-gray-700">Price (New)</label>
+                            <label for="price_new" class="text-sm font-semibold mb-1 text-gray-500">Price (New)</label>
                             <input type="number" name="FfAndE[price_new]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Price">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="pending_payments" class="block text-base font-semibold mb-1 text-gray-700">Pending Payments</label>
+                            <label for="pending_payments" class="text-sm font-semibold mb-1 text-gray-500">Pending Payments</label>
                             <input type="number" name="FfAndE[pending_payments]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Pending Payments">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="year" class="block text-base font-semibold mb-1 text-gray-700">Year</label>
+                            <label for="year" class="text-sm font-semibold mb-1 text-gray-500">Year</label>
                             <input type="number" name="FfAndE[year]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Year">
                         </td>
                     </tr>
 
                     <!-- Vehicles Section -->
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <th colspan="3" class="border-b px-4 py-2 text-left text-lg font-semibold">Vehicles</th>
+                        <th colspan="3" class="text-lg font-semibold mb-2 text-gray-700 mt-5">Vehicles</th>
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <td class="border px-4 py-2">
-                            <label for="make_model" class="block text-base font-semibold mb-1 text-gray-700">Make and Model</label>
+                            <label for="make_model" class="text-sm font-semibold mb-1 text-gray-500">Make and Model</label>
                             <input type="text" name="vehicle[make_and_model]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Make and Model">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="vehicle_year" class="block text-base font-semibold mb-1 text-gray-700">Year</label>
+                            <label for="vehicle_year" class="text-sm font-semibold mb-1 text-gray-500">Year</label>
                             <input type="number" name="vehicle[year]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Year">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="km" class="block text-base font-semibold mb-1 text-gray-700">Km</label>
+                            <label for="km" class="text-sm font-semibold mb-1 text-gray-500">Km</label>
                             <input type="number" name="vehicle[km]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Km">
                         </td>
                     </tr>
 
                     <!-- Employees Section -->
                     <tr class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <th colspan="2" class="border-b px-4 py-2 text-left text-lg font-semibold">Employees</th>
+                        <th colspan="2" class="text-lg font-semibold mb-2 text-gray-700 mt-5">Employees</th>
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <td class="border px-4 py-2">
-                            <label for="number_employees" class="block text-base font-semibold mb-1 text-gray-700">Number of employees</label>
+                            <label for="number_employees" class="text-sm font-semibold mb-1 text-gray-500">Number of employees</label>
                             <input type="number" name="business_employee[number_employees]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Number of Employees">
                         </td>
                         <td class="border px-4 py-2">
-                            <label for="employee_cost" class="block text-base font-semibold mb-1 text-gray-700">Employee cost (company cost)</label>
+                            <label for="employee_cost" class="text-sm font-semibold mb-1 text-gray-500">Employee cost (company cost)</label>
                             <input type="number" name="business_employee[employee_cost]"
-                                class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter Employee Cost">
                         </td>
                     </tr>
@@ -324,7 +336,7 @@
 
         <!-- Features Services Section -->
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <h3 class="text-lg font-semibold mb-4">Features Services</h3>
+            <h3 class="text-lg font-semibold mb-2 text-gray-700">Features Services</h3>
             <div class="flex flex-wrap gap-2">
                 @foreach ($features as $feature)
                     <button type="button"
