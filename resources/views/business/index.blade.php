@@ -1,6 +1,5 @@
-@extends('front.layouts.app')
-@section('title', 'Business List')
-@section('header-title', 'Business List')
+@extends('layouts.vertical', ['title' => 'Display Businesses', 'sub_title' => 'Business'])
+
 @section('content')
 
 <div class="container mx-auto bg-white px-4 py-10 rounded-lg shadow-md my-10">

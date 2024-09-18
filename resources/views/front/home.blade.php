@@ -5,26 +5,26 @@
 @push('styles')
     <style>
         /* .bg-banner {
-            background: url('/front/assets/images/bg-banner.svg') no-repeat center center;
-            background-size: cover;
-            position: relative;
-            height: 445px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }*/
+                    background: url('/front/assets/images/bg-banner.svg') no-repeat center center;
+                    background-size: cover;
+                    position: relative;
+                    height: 445px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }*/
 
         /*.bg-banner::before {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-            background: rgba(39, 11, 121, 0.70);
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        } */
+                    position: absolute;
+                    content: "";
+                    top: 0;
+                    left: 0;
+                    background: rgba(39, 11, 121, 0.70);
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                } */
         .bg-banner {
             position: relative;
             display: flex;
@@ -43,7 +43,8 @@
             content: "";
             top: 0;
             left: 0;
-            background: rgba(39, 11, 121, 0.80); /* Adjust color to match */
+            background: rgba(39, 11, 121, 0.80);
+            /* Adjust color to match */
             width: 100%;
             height: 100%;
             z-index: -1;
@@ -55,7 +56,8 @@
             gap: 10px;
         }
 
-        input, select {
+        input,
+        select {
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #ddd;
@@ -85,14 +87,15 @@
                                     class="w-full p-2 border-1 rounded-lg border-gray-300">
                             </div>
                             <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
-                                <select id="category_id" name="category_id"
+                                <select id="category" name="category"
                                     class="w-full p-2 border-1 rounded-lg border-gray-300">
+                                    <option value="">Select Category</option>
                                 </select>
                             </div>
                             <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1">
-                                <select id="subcategory_id" name="subcategory_id"
+                                <select id="subcategory" name="subcategory"
                                     class="w-full p-2 border-1 rounded-lg border-gray-300">
-                                    <option value="">Sub Type</option>
+                                    <option value="">Select Subcategory</option>
                                 </select>
                             </div>
                             <div class="flex-1 xl:min-w-[230px] lg:min-w-[200px] min-w-full p-1 relative">
@@ -114,10 +117,11 @@
         </div>
         <div class="container xl:container-xl">
             <div x-data="carousel()" class="relative flex items-center justify-center w-full h-full lg:pt-16 mt-10 -mb-28">
-                <button @click="prev"
-                    class="w-8 h-8 absolute -left-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
+                <!-- Previous Button -->
+                <button @click="prev" class="w-8 h-8 absolute -left-8 z-10 text-white bg-orange-500 rounded-full focus:outline-none">
                     &lt;
                 </button>
+                <!-- Carousel -->
                 <div class="overflow-hidden p-0.5">
                     <div class="flex transition-transform duration-500"
                         :style="`transform: translateX(-${currentSlide * (100 / slidesToShow)}%); width: ${slides.length * (100 / slidesToShow)}%`">
@@ -125,7 +129,11 @@
                             <div class="flex-shrink-0 p-1.5">
                                 <div class="bg-white md:w-44 h-44 w-60 rounded-lg shadow-sm flex flex-col justify-center items-center">
                                     <div class="flex flex-col justify-center items-center">
-                                        <img :src="slide.image" alt="" class="w-12 h-12 mx-auto mb-2">
+                                        <!-- Icon Section -->
+                                        <div class="flex items-center justify-center w-16 h-16 mx-auto mb-2 rounded-full bg-gray-100">
+                                            <div x-html="slide.icons" class="text-3xl text-center"></div>
+                                        </div>
+                                        <!-- Text Section -->
                                         <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
                                     </div>
                                 </div>
@@ -133,12 +141,14 @@
                         </template>
                     </div>
                 </div>
-                <button @click="next"
-                    class="w-8 h-8 absolute -right-8 z-10  text-white bg-orange-500 rounded-full focus:outline-none">
+                <!-- Next Button -->
+                <button @click="next" class="w-8 h-8 absolute -right-8 z-10 text-white bg-orange-500 rounded-full focus:outline-none">
                     &gt;
                 </button>
             </div>
         </div>
+        
+        
     </section>
     <!-- Start Business Banner Section -->
 
@@ -165,7 +175,7 @@
                     <template x-for="(busines, index) in business" :key="index">
                         <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-3">
                             <div class="bg-white rounded-lg shadow-md shadow-gray-300">
-                                <img :src="busines.media[0]?.org_url" alt="Business" class="w-full h-44 object-cover">
+                                <img :src="busines.category_image" alt="Business Category" class="w-full h-44 object-cover">
                                 <div class="p-4">
                                     <h3 class="text-md truncate whitespace-nowrap line-clamp-1"
                                         x-text="busines.business_title"></h3>
@@ -206,7 +216,8 @@
                     class="w-full h-full object-cover md:rounded-tr-none md:rounded-l-3xl rounded-bl-none rounded-tl-2xl rounded-tr-2xl">
             </div>
             <!-- Text Part -->
-            <div class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:px-10 lg:py-12 flex flex-col justify-center md:rounded-bl-none  md:rounded-r-3xl rounded-bl-3xl rounded-br-3xl">
+            <div
+                class="w-full md:w-2/3 lg:w-3/5 bg-violet-950 text-white p-4 md:p-6 lg:px-10 lg:py-12 flex flex-col justify-center md:rounded-bl-none  md:rounded-r-3xl rounded-bl-3xl rounded-br-3xl">
                 <img src="{{ asset('/front/assets/images/logo-02.svg') }}" alt="Logo" class="h-12 w-12 mb-4">
                 <h2 class="text-lg md:text-3xl mb-6">We Don’t Just Find Premises, We Discover Your Business Success</h2>
                 <button class="bg-orange-500 text-sm font-poppins w-52 text-white p-4 rounded mb-5 md:mb-0"><a
@@ -235,8 +246,7 @@
                         business success is clear and achievable. Let us help you find not just a place, but the ideal
                         environment where your business can thrive.
                     </p>
-                    <form id="subscribeForm3"
-                        class="flex flex-col py-2 md:flex-row items-start md:items-center mt-5">
+                    <form id="subscribeForm3" class="flex flex-col py-2 md:flex-row items-start md:items-center mt-5">
                         @csrf
                         <input type="email" name="email" id="email" placeholder="Your Email"
                             class="w-full md:w-80 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-violet-500 text-gray-800">
@@ -312,7 +322,8 @@
         <div class="max-w-xs md:max-w-5xl mx-auto">
             <div class="text-center mb-10">
                 <h1 class="text-2xl font-bold">Easy Steps to join Us!</h1>
-                <p class="text-gray-600 mt-2 text-sm">Embrace the advantages of property listing and become a part of our community
+                <p class="text-gray-600 mt-2 text-sm">Embrace the advantages of property listing and become a part of our
+                    community
                     today!</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -328,7 +339,8 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Easy registration</h3>
-                        <p class="text-gray-500 text-sm">Help people get to know you by listing your business. Showcase your
+                        <p class="text-gray-500 text-sm">Help people get to know you by listing your business. Showcase
+                            your
                             business with your outstanding media gallery.</p>
                     </div>
                 </div>
@@ -361,7 +373,8 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Get on the map</h3>
-                        <p class="text-gray-500 text-sm">We will show results on the map so your customers can easily find you.</p>
+                        <p class="text-gray-500 text-sm">We will show results on the map so your customers can easily find
+                            you.</p>
                     </div>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center md:text-left block md:flex items-center">
@@ -376,7 +389,8 @@
                     </div>
                     <div>
                         <h3 class="text-lg font-semibold">Great sales benefits</h3>
-                        <p class="text-gray-500 text-sm">With the help of standout on the top of result by showing your ads as
+                        <p class="text-gray-500 text-sm">With the help of standout on the top of result by showing your ads
+                            as
                             featured.</p>
                     </div>
                 </div>
@@ -405,14 +419,16 @@
     <div class="bg-violet-950 md:p-10 p-5">
         <div x-data="slider()" class="relative container xl:container-xl md:px-4 px-1">
             <h2 class="text-2xl md:text-3xl font-bold text-white text-center pt-10 mb-1">Our Clients Success Stories</h2>
-            <p class="text-center text-white mb-4 pb-10 text-sm">Discover the experiences of those who have achieved success with
+            <p class="text-center text-white mb-4 pb-10 text-sm">Discover the experiences of those who have achieved
+                success with
                 us</p>
 
             <div class="relative overflow-hidden py-20">
                 <div id="slider" class="flex transition-transform duration-500"
                     :style="{ 'transform': `translateX(-${currentIndex * (100 / itemsPerPage)}%)` }">
                     <template x-for="(item, index) in items" :key="index">
-                        <div class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[31.5%]  flex-shrink-0 mr-6">
+                        <div
+                            class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[31.5%]  flex-shrink-0 mr-6">
                             <p class="mb-4 text-sm" x-text="item.description"> </p>
                             <div class="flex items-center pt-5">
                                 <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
@@ -450,8 +466,7 @@
                     today.</p>
             </div>
 
-            <div id="blogs-container"
-                class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
+            <div id="blogs-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 py-8">
                 <!-- Card 1 -->
             </div>
 
@@ -468,57 +483,7 @@
         function carousel() {
             return {
                 currentSlide: 0,
-                slides: [{
-                        id: 1,
-                        text: 'Real Estate',
-                        image: '{{ asset('front/assets/icons/real-state.svg') }}'
-                    },
-                    {
-                        id: 2,
-                        text: 'Business Consulting',
-                        image: '{{ asset('front/assets/icons/business.svg') }}'
-                    },
-                    {
-                        id: 3,
-                        text: 'Car Washer',
-                        image: '{{ asset('front/assets/icons/car-washer.svg') }}'
-                    },
-                    {
-                        id: 4,
-                        text: 'Beauty Salon',
-                        image: '{{ asset('front/assets/icons/beauty-salon.svg') }}'
-                    },
-                    {
-                        id: 5,
-                        text: 'Fitness Center',
-                        image: '{{ asset('front/assets/icons/fitness-center.svg') }}'
-                    },
-                    {
-                        id: 6,
-                        text: 'Real Estate',
-                        image: '{{ asset('front/assets/icons/real-state.svg') }}'
-                    },
-                    {
-                        id: 7,
-                        text: 'Business Consulting',
-                        image: '{{ asset('front/assets/icons/business.svg') }}'
-                    },
-                    {
-                        id: 8,
-                        text: 'Car Washer',
-                        image: '{{ asset('front/assets/icons/car-washer.svg') }}'
-                    },
-                    {
-                        id: 9,
-                        text: 'Beauty Salon',
-                        image: '{{ asset('front/assets/icons/beauty-salon.svg') }}'
-                    },
-                    {
-                        id: 10,
-                        text: 'Fitness Center',
-                        image: '{{ asset('front/assets/icons/fitness-center.svg') }}'
-                    },
-                ],
+                slides: [],
                 get slidesToShow() {
                     return window.innerWidth >= 1024 ? 6 : 3;
                 },
@@ -526,16 +491,20 @@
                     return window.innerWidth >= 1024 ? 'w-1/6' : 'w-1/3';
                 },
                 prev() {
+                    // Decrease currentSlide only if we're not at the first slide
                     if (this.currentSlide > 0) {
                         this.currentSlide--;
                     } else {
+                        // If on the first slide, wrap to the last group of slides
                         this.currentSlide = Math.ceil(this.slides.length / this.slidesToShow) - 1;
                     }
                 },
                 next() {
+                    // Increase currentSlide only if we're not at the last group of slides
                     if (this.currentSlide < Math.ceil(this.slides.length / this.slidesToShow) - 1) {
                         this.currentSlide++;
                     } else {
+                        // If on the last slide, wrap back to the first slide
                         this.currentSlide = 0;
                     }
                 },
@@ -546,10 +515,31 @@
                     window.addEventListener('resize', () => {
                         this.updateSlider();
                     });
+    
+                    // Fetch data from the API when the component initializes
+                    this.fetchCategories();
+                },
+                fetchCategories() {
+                    fetch('/getCategories')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Map the fetched categories to the slides array
+                            this.slides = data.map(category => ({
+                                id: category.id,
+                                text: category.name,
+                                icons: category.icon_class // Make sure this is returning the full HTML for the icon
+                            }));
+                            console.log(this.slides);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching categories:', error);
+                        });
                 }
             }
         }
     </script>
+    
+    
 
     {{-- Business Ventures carousel --}}
     <script>
@@ -653,53 +643,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            axios.get('/getCategories')
-                .then(function(response) {
-                    if (response.data.status === 1) {
-                        var categories = response.data.categories;
-                        console.log(categories);
-                        var categorySelect = document.getElementById('category_id');
-                        categorySelect.innerHTML = '<option value="">Business Type</option>';
-                        for (var name in categories) {
-                            var option = document.createElement('option');
-                            option.value = name;
-                            option.textContent = categories[name];
-                            categorySelect.appendChild(option);
-                        }
-                    }
+            const categorySelect = document.getElementById('category');
+            const subcategorySelect = document.getElementById('subcategory');
+
+            // Fetch categories from the API when the page loads
+            fetch('/getCategories')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(category => {
+                        const option = document.createElement('option');
+                        option.value = category.id;
+                        option.textContent = category.name;
+                        categorySelect.appendChild(option);
+                    });
                 })
-                .catch(function(error) {
-                    console.error('Error fetching categories:', error);
-                    alert('Failed to fetch categories.');
-                });
-        });
+                .catch(error => console.error('Error fetching categories:', error));
 
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const categorySelect = document.getElementById('category_id');
-            const subCategorySelect = document.getElementById('subcategory_id');
-
+            // Listen for category change event and fetch subcategories dynamically
             categorySelect.addEventListener('change', function() {
-                const categoryId = this.value;
+                const categoryId = categorySelect.value;
 
-                // Clear previous subcategories
-                subCategorySelect.innerHTML = '<option value="">Sub Type</option>';
+                // Clear subcategory dropdown before making the request
+                subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
 
                 if (categoryId) {
-                    // Fetch subcategories for the selected category
-                    axios.get(`/categories/${categoryId}/subcategories`)
-                        .then(response => {
-                            const subcategories = response.data;
-                            subcategories.forEach(subcategory => {
+                    fetch(`/categories/${categoryId}/subcategories`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(subcategory => {
                                 const option = document.createElement('option');
                                 option.value = subcategory.id;
                                 option.textContent = subcategory.name;
-                                subCategorySelect.appendChild(option);
+                                subcategorySelect.appendChild(option);
                             });
                         })
-                        .catch(error => {
-                            console.error('Error fetching subcategories:', error);
-                        });
+                        .catch(error => console.error('Error fetching subcategories:', error));
                 }
             });
         });

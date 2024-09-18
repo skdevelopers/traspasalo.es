@@ -1,120 +1,63 @@
 <!-- resources/views/categories/index.blade.php -->
-@extends('layouts.vertical', ['title' => 'Display Categories', 'sub_title' => 'Category'])
+@extends('layouts.vertical', ['title' => 'Categories', 'sub_title' => 'Manage Categories'])
 
 @section('content')
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12">
-            <a href="{{ route('category') }}"
-               class="inline-flex justify-center items-center bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
-                <i class="mgc_add_line text-lg me-2"></i> Create New Category
-            </a>
+    @if (session('success'))
+        <div class="bg-green-500 text-white p-4 rounded-lg mb-4">
+            {{ session('success') }}
         </div>
-        <div class="col-span-12">
-            <a href="{{ route('categories.create') }}"
-               class="inline-flex justify-center items-center bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full">
-                <i class="mgc_add_line text-lg me-2"></i> Create New SubCategory
-            </a>
-        </div>
-    </div>
+    @endif
 
-    <div class="grid grid-cols-12 gap-4 mt-6">
-        <div class="col-span-12">
-            <div class="overflow-x-auto bg-white rounded-md shadow-md">
-                <table class="min-w-full bg-white rounded-md">
-                    <thead class="bg-gray-200">
+    @if (session('error'))
+        <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Categories</h1>
+
+        <div class="mb-4">
+            <a href="{{ route('categories.create') }}"
+                class="bg-indigo-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-indigo-700">
+                <i class="mgc_add_line text-lg"></i> Create New Category
+            </a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-md shadow-md">
+                <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 py-2 text-left text-gray-700">#</th>
-                        <th class="px-4 py-2 text-left text-gray-700">Category Name</th>
-                        <th class="px-4 py-2 text-left text-gray-700">Actions</th>
+                        <th class="px-4 py-2 text-left">#</th>
+                        <th class="px-4 py-2 text-left">Category Name</th>
+                        <th class="px-4 py-2 text-left">Actions</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     @forelse($categories as $category)
                         <tr class="border-t">
                             <td class="border px-4 py-2">{{ $category->id }}</td>
                             <td class="border px-4 py-2">{{ $category->name }}</td>
-                            <td class="border px-4 py-2 whitespace-nowrap flex items-center space-x-2">
-                                <button onclick="toggleSubcategories({{ $category->id }})"
-                                        class="text-blue-500 hover:text-blue-700">
-                                     <i class="fa fa-info-circle" aria-hidden="true"></i> View Subcategories
-                                </button>
-                                @can('edit roles')
+                            <td class="border px-4 py-2">
                                 <a href="{{ route('categories.edit', $category->id) }}"
-                                   class="text-yellow-500 hover:text-yellow-700">
-                                    <i class="mgc_edit_line text-lg"></i>
-                                </a>
-                                @endcan
-                                @can('delete roles')
-                                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="inline">
+                                    class="text-yellow-500 hover:text-yellow-700">Edit</a>
+                                <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                    class="inline-block ml-2">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-500 hover:text-red-700"
-                                            onclick="return confirm('Are you sure you want to delete this category?')">
-                                        <i class="mgc_delete_line text-xl"></i>
-                                    </button>
+                                        onclick="return confirm('Are you sure?')">Delete</button>
                                 </form>
-                                @endcan
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <ul id="subcategories-{{ $category->id }}" class="bg-gray-100 px-4 py-2 hidden">
-                                    <!-- Subcategories will be loaded here -->
-                                </ul>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="text-center text-gray-500 py-4">
-                                No categories found. <a href="{{ route('categories.create') }}"
-                                                        class="text-blue-500 hover:underline">Create one</a>.
-                            </td>
+                            <td colspan="3" class="text-center py-4">No categories found.</td>
                         </tr>
                     @endforelse
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        function toggleSubcategories(categoryId) {
-            const subcategoriesList = document.getElementById(`subcategories-${categoryId}`);
-
-            if (subcategoriesList.children.length !== 0) {
-                subcategoriesList.classList.toggle('hidden');
-                return;
-            }
-
-            axios.get(`/categories/${categoryId}/subcategories`)
-                .then(response => {
-                    const subcategories = response.data;
-                    subcategoriesList.innerHTML = '';
-
-                    if (subcategories.length > 0) {
-                        subcategories.forEach(subcategory => {
-                            const li = document.createElement('li');
-                            li.innerHTML = `
-                                ${subcategory.name}
-                                <button onclick="toggleSubcategories(${subcategory.id})"
-                                        class="text-blue-500 hover:text-blue-700 mx-0.5">
-                                    <i class="mgc_expand_line text-lg"></i> View Subcategories
-                                </button>
-                                <ul id="subcategories-${subcategory.id}" class="bg-gray-100 px-4 py-2 hidden"></ul>
-                            `;
-                            subcategoriesList.appendChild(li);
-                        });
-                    } else {
-                        subcategoriesList.innerHTML = '<li class="text-gray-500">No subcategories found.</li>';
-                    }
-
-                    subcategoriesList.classList.remove('hidden');
-                })
-                .catch(error => {
-                    console.error('Error loading subcategories:', error);
-                });
-        }
-    </script>
-@endpush

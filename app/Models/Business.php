@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\Image\Enums\Fit; 
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +19,13 @@ class Business extends Model implements HasMedia
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
-        'category_id', 'subcategory_id', 'business_title', 'description', 'check_in', 'check_out',
-        'age_restriction', 'pets_permission', 'location', 'user_id', 'status', 'qr_code_path'
+        'category_id',
+        'subcategory_id',
+        'business_title',
+        'description',
+        'location',
+        'phone_no',
+        'qr_code_path'
     ];
 
     protected static function boot()
@@ -54,10 +59,11 @@ class Business extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('resized')
-             ->fit(Fit::Crop, 800, 600)
+            ->fit(Fit::Max, 800, 600)
             ->optimize()
-            ->nonQueued(); // You can remove this if you want the conversion to be queued
+            ->nonQueued();
     }
+
 
     public function media(): MorphMany
     {
@@ -105,15 +111,15 @@ class Business extends Model implements HasMedia
     public function getImageUrl()
     {
         $media = $this->getFirstMedia('images');
-       // dd($media);
+        // dd($media);
         if ($media) {
             $imageUrl = $media->getPathRelativeToRoot('resized');
-            $imageUrl= asset('/storage/images/'. $imageUrl);
+            $imageUrl = asset('/storage/images/' . $imageUrl);
         } else {
             $imageUrl = 'https://via.placeholder.com/150';
         }
 
-      //  echo 'Generated Image URL: ' . $imageUrl . '<br>'; // Print URL for debugging
+        //  echo 'Generated Image URL: ' . $imageUrl . '<br>'; // Print URL for debugging
         return $imageUrl;
     }
 

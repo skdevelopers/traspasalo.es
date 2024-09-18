@@ -67,21 +67,25 @@ class BusinessController extends Controller
             'business_title' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
+            'phone_no' =>'required',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'category_id' => 'required',
+            'subcategory_id' => 'required'
         ]);
-    
-        $request['features'] = $this->processFeatures($request['features']);
+     // dd($request->location);
+       // $request['features'] = $this->processFeatures($request['features']);
         // Use a transaction to ensure atomicity of operations
         DB::transaction(function () use ($request) {
             // Create the business
-            $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location']));
+            $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location','phone_no']));
     
             // Handle images (Ensure this function is defined properly to handle image uploads)
             $this->handleImages($request->images, $business);
             
            //dd($request->features);
-            if (!empty($request->features)) {
-                       $business->features()->sync($request->features);
-                     }
+            // if (!empty($request->features)) {
+            //            $business->features()->sync($request->features);
+            //          }
             
                  $business->generateQrCode();
     
@@ -249,19 +253,34 @@ class BusinessController extends Controller
 
     public function edit($id)
 {
-    // Find the business by ID, including related models such as features, facility, financial, etc.
-    $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
-
-    // Fetch all categories and subcategories
+    
+    // Retrieve the business with all related models, including facilities, vehicles, employees, and more.
+    $business = Business::with([
+        'features', 
+        'facility', 
+        'financial', 
+        'vehicle', 
+        'businessEmployee', 
+        'ffAndE', 
+        'media'
+    ])->findOrFail($id); 
+   // dd($business->facility());
+    // Get all categories for dropdown
     $categories = Category::all();
-    $subcategories = $business->category ? $business->category->subcategories : [];
 
-    // Fetch all available features
-    $features = FeatureService::all();
+    // Fetch media URLs for the business images
+    $media = $business->getMedia('images')->map(function ($item) {
+        return [
+            'id' => $item->id, // Include the media ID
+            'org_url' => $item->getUrl(), // The URL to display the image
+        ];
+    });
 
-    // Return the edit view, passing the necessary data
-    return view('business.edit', compact('business', 'categories', 'subcategories', 'features'));
+    // Return the view with the business and related data
+    return view('business.edit', compact('business', 'categories', 'media'));
 }
+
+
 
 
     // public function update(BusinessRequest $request, $id)
@@ -303,31 +322,47 @@ class BusinessController extends Controller
     //     return redirect()->route('business.index')->with('success', 'Business updated successfully.');
     // }
 
-    public function update(Request $request, Business $business)
+    public function update(Request $request, $id)
 {
     // Validate the basic business data
     $request->validate([
         'business_title' => 'required|string',
         'description' => 'required|string',
         'location' => 'required|string',
+        'phone_no' => 'required',
+        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Images are optional during updates
+        'category_id' => 'required',
+        'subcategory_id' => 'required'
     ]);
 
-    $request['features'] = $this->processFeatures($request['features']);
-    
+    // Find the existing business
+    $business = Business::findOrFail($id);
+
     // Use a transaction to ensure atomicity of operations
     DB::transaction(function () use ($request, $business) {
         // Update the business
-        $business->update($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location']));
+        $business->update($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location', 'phone_no']));
 
         // Handle images (Ensure this function is defined properly to handle image uploads)
-        $this->handleImages($request->images, $business);
-
-        if (!empty($request->features)) {
-            // Sync the features
-            $business->features()->sync($request->features);
+        if ($request->has('deleted_images')) {
+            $deletedImageIds = explode(',', $request->deleted_images);
+            foreach ($deletedImageIds as $imageId) {
+                $media = $business->media()->where('id', $imageId)->first();
+                if ($media) {
+                    $media->delete(); // Delete the image from the media library and storage
+                }
+            }
         }
+    
+        // Handle new image uploads
+        if ($request->hasFile('new_images')) {
+            foreach ($request->file('new_images') as $image) {
+                $business->addMedia($image)->toMediaCollection('images');
+            }
+        }
+    
 
-        // Regenerate QR code if necessary
+        // Generate or update QR code
         $business->generateQrCode();
 
         // Save related data only if necessary
@@ -336,6 +371,8 @@ class BusinessController extends Controller
 
     return redirect()->route('business.index')->with('success', 'Business and related data updated successfully');
 }
+
+
 
 
 
@@ -389,11 +426,37 @@ class BusinessController extends Controller
     // }
     public function show($id)
     {
+       
         // Find the business by ID, including related models like features, facility, etc.
         $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
-    
-        // Return the show view, passing the business data to the view
-        return view('business.show', compact('business'));
+        // dd($business->all());
+        $showPaidFeatures = auth()->user()->business_limit > 1;
+        //dd($showPaidFeatures);
+        $media = $business->getMedia('images')->map(function ($item) {
+
+            $convertedUrl = $item->getPathRelativeToRoot('resized');
+            //dd($convertedUrl);
+            // If there's no conversion, fallback to the original URL
+            if (!$convertedUrl) {
+                //  dd("hello");
+                $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+                $item['org_url'] = url($relativePath);
+            } else {
+                $item['org_url'] = asset('/storage/images/' . $convertedUrl);
+            }
+
+            // Add the URL to the item
+
+
+            //$relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
+
+            //$item['org_url'] = url($relativePath);
+
+            return $item->only(['org_url', 'name']);
+        })->toArray();
+        //dd($media);
+    // Return the show view, passing the business data to the view
+        return view('business.show', compact('business','media','showPaidFeatures'));
     }
     
     public function getBusiness($id)
@@ -507,37 +570,24 @@ class BusinessController extends Controller
     }
 
     public function getJsonBusinesses()
-    {
-        // Fetch all businesses with their related category, subcategory, and media
-        $businesses = Business::with(['category', 'subcategory', 'media'])->get();
+{
+    // Fetch all businesses with their related category and media
+    $businesses = Business::with(['category', 'subcategory', 'media'])->get();
 
-        // Iterate over each business and fetch its media
+    // Iterate over each business and attach the category image
+    $businesses->each(function ($business) {
+        // Get category image URL
+        $categoryImageUrl = $business->category ? $business->category->getImageUrlAttribute() : null;
 
+        // Attach the category image to the business object
+        $business->category_image = $categoryImageUrl;
+    });
 
-        $businesses->each(function ($business) {
-            // Get media for this specific business
-            $media = $business->getMedia('images')->map(function ($item) {
-                $convertedUrl = $item->getPathRelativeToRoot('resized');
+    // Return the JSON response with the businesses and their category images
+    return response()->json([
+        'businesses' => $businesses,
+        'status' => 1,
+    ], 200);
+}
 
-                // If there's no conversion, fallback to the original URL
-                if (!$convertedUrl) {
-                    $relativePath = 'storage/images/' . $item->id . '/' . $item->file_name;
-                    $item['org_url'] = url($relativePath);
-                } else {
-                    $item['org_url'] = asset('/storage/images/' . $convertedUrl);
-                }
-
-                return $item->only(['org_url', 'name']);
-            });
-
-            // Attach the media to the business model
-            $business->media = $media;
-        });
-
-        // Return the JSON response with the businesses and their media
-        return response()->json([
-            'businesses' => $businesses,
-            'status' => 1,
-        ], 200);
-    }
 }

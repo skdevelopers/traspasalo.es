@@ -3,110 +3,106 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the categories.
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')->with('media')->get(); // Only fetch categories with no parent
         return view('categories.index', compact('categories'));
-    }
-    
-       /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $categories = Category::all();
-        return view('categories.create', compact('categories'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the form for creating a new category.
+     */
+    public function create()
+    {
+        return view('categories.create');
+    }
+
+    /**
+     * Store a newly created category in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:categories,id',
+            'icon_class' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Category::create($request->all());
+        $category = Category::create($request->all());
+
+        // Handle image upload using Spatie Media Library
+        if ($request->hasFile('image')) {
+            $category->addMediaFromRequest('image')->toMediaCollection('images');
+        }
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        return view('categories.show', compact('category'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified category.
      */
     public function edit(Category $category)
     {
-        $categories = Category::all();
-        return view('categories.edit', compact('category', 'categories'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified category in storage.
      */
     public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'parent_id' => 'nullable|exists:categories,id',
+            'icon_class' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $category->update($request->all());
+
+        // Handle image upload using Spatie Media Library
+        if ($request->hasFile('image')) {
+            $category->clearMediaCollection('images');
+            $category->addMediaFromRequest('image')->toMediaCollection('images');
+        }
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified category from storage.
      */
     public function destroy(Category $category)
     {
+        // Check if the category has any subcategories
+        if ($category->children()->exists()) {
+            return redirect()->route('categories.index')->with('error', 'Category cannot be deleted because it has subcategories.');
+        }
+
+        // Proceed with the deletion if no subcategories exist
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 
-    /**
-     * Get subcategories of the specified resource.
-     */
-    public function getSubcategories(Category $category): JsonResponse
+
+    public function getSubcategories($categoryId)
     {
-        $subcategories = $category->children()->get(['id', 'name']);
+        $subcategories = Category::where('parent_id', $categoryId)->get();
         return response()->json($subcategories);
     }
 
-     /**
-     * display all categories
-     */
-    public function getCategories()
+    public function getCategory()
     {
+        $categories = Category::whereNull('parent_id')->get();
 
-        $categories = Category::where('parent_id', null)->pluck('name', 'id');
-       // dd($categories);
-        return response()->json([
-            'categories' => $categories,
-            'status' => 1,
-        ], 200);
-
+        // Return categories as JSON
+        return response()->json($categories);
     }
-
 }
-
-

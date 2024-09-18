@@ -13,7 +13,8 @@ class Facility extends Model
         'property_price',
         'pending_mortgage',
         'state_conditions',
-        'supplies',
+        'rent_supplies',
+        'state_supplies',
     ];
 
     // A facility belongs to a business

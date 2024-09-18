@@ -50,6 +50,12 @@
                     <span class="menu-text"> Categories </span>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ route('subcategories.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
+                    <span class="menu-text"> SubCategories </span>
+                </a>
+            </li>
             @endcan
             @can('Allow_Features')
             <li class="menu-item">
