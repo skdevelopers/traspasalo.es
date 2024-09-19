@@ -505,13 +505,15 @@ class BusinessController extends Controller
 
     public function showBusinesses(Request $request)
     {
+        //dd($request->all());
+        $categories=Category::all();
         $query = Business::with(['category', 'subcategory', 'media']);
         $hasFilters = $this->applyFilters($query, $request);
 
         $businesses = $hasFilters ? $query->get() : Business::with(['category', 'subcategory', 'media'])->get();
 
         //  dd($businesses);
-        return view('business.show', compact('businesses'));
+        return view('business.showBusiness', compact('businesses','categories'));
     }
 
     private function processFeatures($features)
@@ -545,14 +547,15 @@ class BusinessController extends Controller
     {
         $hasFilters = false;
 
-        if ($request->has('category_id') && !is_null($request->input('category_id'))) {
-            $query->where('category_id', $request->input('category_id'));
+        if ($request->has('category') && !is_null($request->input('category'))) {
+            $query->where('category_id', $request->input('category'));
             $hasFilters = true;
         }
-
-        if ($request->has('subcategory_id') && !is_null($request->input('subcategory_id'))) {
-            $query->where('subcategory_id', $request->input('subcategory_id'));
+         
+        if ($request->has('subcategory') && !is_null($request->input('subcategory'))) {
+            $query->where('subcategory_id', $request->input('subcategory'));
             $hasFilters = true;
+            
         }
 
         if ($request->has('location') && !is_null($request->input('location'))) {

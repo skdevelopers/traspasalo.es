@@ -183,11 +183,11 @@
                         <select name="facility[state_Supplies]"
                             class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                             <option value="">Select</option>
-                            <option value="New" {{ old('facility.rent_supplies') == 'New' ? 'selected' : '' }}>New</option>
-                            <option value="Good" {{ old('facility.rent_supplies') == 'Good' ? 'selected' : '' }} >Good</option>
-                            <option value="Used" {{ old('facility.rent_supplies') == 'Used' ? 'selected' : '' }}>Used</option>
-                            <option value="Acceptable" {{ old('facility.rent_supplies') == 'Acceptable' ? 'selected' : '' }}>Acceptable</option>
-                            <option value="Bad" {{ old('facility.rent_supplies') == 'Bad' ? 'selected' : '' }}>Bad</option>
+                            <option value="New" {{ old('facility.state_supplies') == 'New' ? 'selected' : '' }}>New</option>
+                            <option value="Good" {{ old('facility.state_supplies') == 'Good' ? 'selected' : '' }} >Good</option>
+                            <option value="Used" {{ old('facility.state_supplies') == 'Used' ? 'selected' : '' }}>Used</option>
+                            <option value="Acceptable" {{ old('facility.state_supplies') == 'Acceptable' ? 'selected' : '' }}>Acceptable</option>
+                            <option value="Bad" {{ old('facility.state_supplies') == 'Bad' ? 'selected' : '' }}>Bad</option>
                         </select>
                     </td>
                 </tr>

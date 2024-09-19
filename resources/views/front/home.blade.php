@@ -131,10 +131,12 @@
                                     <div class="flex flex-col justify-center items-center">
                                         <!-- Icon Section -->
                                         <div class="flex items-center justify-center w-16 h-16 mx-auto mb-2 rounded-full bg-gray-100">
-                                            <div x-html="slide.icons" class="text-3xl text-center"></div>
+                                            <a :href="'/businesses?category=' + slide.id">
+                                                <div x-html="slide.icons" class="text-3xl text-center"></div>
+                                            </a>
                                         </div>
                                         <!-- Text Section -->
-                                        <p class="text-center whitespace-nowrap text-sm" x-text="slide.text"></p>
+                                        <p class="text-center whitespace-nowrap text-black text-sm" x-text="slide.text"></p>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +187,7 @@
                                     </p>
                                     <p class="text-yellow-500 mt-1" x-text="'⭐ ' + 4 + ' (' + 48 + ' reviews)'"></p>
                                     <div class="flex p-2 justify-between">
-                                        <p class="font-bold mt-2 text-sm">234$</p>
+                                        {{-- <p class="font-bold mt-2 text-sm">234$</p> --}}
                                         <button class="mt-2 text-violet-800 px-2 py-1 border-2 border-violet-800 rounded">
                                             <a :href="`/business/${busines.id}`">View &rarr;</a>
                                         </button>

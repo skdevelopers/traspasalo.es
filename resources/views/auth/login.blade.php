@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Login Page</title>
-
+    <title>Login</title>
+    <link rel="shortcut icon" href="{{ asset('/images/fav_icon.svg') }}">
     @vite('resources/scss/app.scss')
 </head>
 
@@ -13,9 +13,9 @@
     <div class="bg-custom">
         <!-- Back to Home Button -->
         <div class="absolute top-0 left-0 m-4 flex items-center space-x-2 text-white z-10">
-            <a href="{{ url()->previous() }}" class="flex items-center space-x-2">
+            <a href="{{ url()->previous() }}" class="flex items-center space-x-2 relative w-36 h-10">
                 <img src="{{ asset('/front/assets/images/back.svg') }}" alt="Back button" class="w-12 h-12"/>
-                <span >Back to home</span>
+                Back to home
             </a>
         </div>
 
@@ -26,7 +26,9 @@
                 class="bg-white rounded-xl p-6 w-full max-w-xs sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm shadow-lg">
                 <!-- Logo -->
                 <div class="flex justify-center mb-6">
+                    <a href="{{ url('/')}}">
                     <img class="h-18 w-auto" src="{{ asset('front/assets/images/logo.svg') }}" alt="Logo">
+                    </a>
                 </div>
                 <!-- Login Form -->
                 <div>

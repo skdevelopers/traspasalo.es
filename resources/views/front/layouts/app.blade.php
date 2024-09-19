@@ -9,7 +9,7 @@
 <meta name="Author" content="Salman@everestbuys.com">
 
 <!-- App favicon -->
-<link rel="shortcut icon" href="{{ asset('front/assets/images/favicon_youtube_style.ico') }}">
+<link rel="shortcut icon" href="{{ asset('/images/fav_icon.svg') }}">
 
     <title>@yield('title', 'Traspasalo.es')</title>
     @vite('resources/scss/app.scss')

@@ -79,7 +79,7 @@
     </div>
 
     <div class="bg-white container-fluid">
-        <div class=" bg-white container mx-auto py-10 px-2">
+        {{-- <div class=" bg-white container mx-auto py-10 px-2">
             <div class="relative">
               <h2 class="text-2xl font-bold mb-5">The Latest</h2>
               <button class="slider-button slider-button-prev mr-4">&larr;</button>
@@ -126,7 +126,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
 
@@ -147,54 +147,18 @@
     </div>
 
    <div class="bg-white container-fluid">
-    <div class=" bg-white container mx-auto py-10 px-2">
-        <div class="relative">
+    <div class="bg-white container mx-auto py-10 px-2">
+      <div class="relative">
           <h2 class="text-2xl font-bold mb-5">The Latest</h2>
           <button class="slider-button slider-button-prev mr-4">&larr;</button>
           <button class="slider-button slider-button-next">&rarr;</button>
-        </div>
-        <div class="slider relative  overflow-hidden">
-          <div class="slider-track flex">
-            <div class="slider-item p-2">
-              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src={{ asset('front/assets/images/water-house.svg')}} alt="Image 1" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <span class="text-sm text-orange-500">Real Estate</span><span> | January 19, 2024</span>
-                  <h3 class="text-md font-semibold">How to build a scalable customer service team structure</h3>
-                </div>
-              </div>
-            </div>
-            <div class="slider-item p-2">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                  <img src={{ asset('front/assets/images/park-house.svg')}} class="w-full h-48 object-cover">
-                  <div class="p-4">
-                    <span class="text-sm text-orange-500">Real Estate</span><span> | January 19, 2024</span>
-                  <h3 class="text-md font-semibold">How to build a scalable customer service team structure</h3>
-                </div>
-                </div>
-              </div>
-            <div class="slider-item p-2">
-              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src={{ asset('front/assets/images/farm-house.svg')}} alt="Image 2" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <span class="text-sm text-orange-500">Real Estate</span><span> | January 19, 2024</span>
-                  <h3 class="text-md font-semibold">How to build a scalable customer service team structure</h3>
-                </div>
-              </div>
-            </div>
-            <div class="slider-item p-2">
-              <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src={{ asset('assets/images/water-house.svg')}} alt="Image 3" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <span class="text-sm text-orange-500">Real Estate</span><span> | January 19, 2024</span>
-                  <h3 class="text-md font-semibold">How to build a scalable customer service team structure</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
+      <div class="slider relative overflow-hidden">
+          <div class="slider-track flex" id="sliderTrack">
+              <!-- Slider items will be dynamically added here -->
+          </div>
+      </div>
+  </div>
 
 
     <div class="bg-white container-fluid">
@@ -219,35 +183,80 @@
 @endsection
 @push('scripts')
 <script>
-    const track = document.querySelector('.slider-track');
-    const items = document.querySelectorAll('.slider-item');
-    const nextButton = document.querySelector('.slider-button-next');
-    const prevButton = document.querySelector('.slider-button-prev');
-    let index = 0;
-  
-    function updateSlider() {
-      const width = items[0].clientWidth;
-      track.style.transform = `translateX(-${index * width}px)`;
-    }
+  // Fetch data from '/blogsAlljson' API
+  async function fetchBlogs() {
+      try {
+          const response = await fetch('/blogsAlljson');
+          const data = await response.json();
 
-    nextButton.addEventListener('click', () => {
-      if (index < items.length - 3) {  // Show 3 items at a time
-        index++;
-      } else {
-        index = 0;
+          if (data && data.blogs) {
+              const track = document.getElementById('sliderTrack');
+              track.innerHTML = ''; // Clear the slider track before appending new items
+              
+              data.blogs.forEach(blog => {
+                  // Create a new slider item
+                  const sliderItem = document.createElement('div');
+                  sliderItem.classList.add('slider-item', 'p-2');
+
+                  // Add blog content to the slider item
+                  sliderItem.innerHTML = `
+                      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                          <img src="${blog.image_url}" alt="${blog.title}" class="w-full h-48 object-cover">
+                          <div class="p-4">
+                              <h3 class="text-md font-semibold"><a :href="'/blogs/' + ${blog.id}">${blog.title}</a></h3>
+                          </div>
+                      </div>
+                  `;
+                  
+                  // Append the new slider item to the track
+                  track.appendChild(sliderItem);
+              });
+
+              initializeSlider(); // Re-initialize the slider after adding new items
+          }
+      } catch (error) {
+          console.error('Error fetching blogs:', error);
       }
-      updateSlider();
-    });
+  }
 
-    prevButton.addEventListener('click', () => {
-      if (index > 0) {
-        index--;
-      } else {
-        index = items.length - 3;  // Show 3 items at a time
+  // Initialize the slider functionality
+  function initializeSlider() {
+      const track = document.querySelector('.slider-track');
+      const items = document.querySelectorAll('.slider-item');
+      const nextButton = document.querySelector('.slider-button-next');
+      const prevButton = document.querySelector('.slider-button-prev');
+      let index = 0;
+
+      function updateSlider() {
+          const width = items[0].clientWidth;
+          track.style.transform = `translateX(-${index * width}px)`;
       }
-      updateSlider();
-    });
 
-    window.addEventListener('resize', updateSlider);
-  </script>
+      nextButton.addEventListener('click', () => {
+          if (index < items.length - 3) { // Show 3 items at a time
+              index++;
+          } else {
+              index = 0;
+          }
+          updateSlider();
+      });
+
+      prevButton.addEventListener('click', () => {
+          if (index > 0) {
+              index--;
+          } else {
+              index = items.length - 3; // Show 3 items at a time
+          }
+          updateSlider();
+      });
+
+      window.addEventListener('resize', updateSlider);
+      updateSlider(); // Call it initially
+  }
+
+  // Fetch blogs data and initialize the slider on page load
+  document.addEventListener('DOMContentLoaded', function () {
+      fetchBlogs();
+  });
+</script>
   @endpush

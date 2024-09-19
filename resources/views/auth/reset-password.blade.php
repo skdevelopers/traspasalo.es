@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
-
+    <link rel="shortcut icon" href="{{ asset('/images/fav_icon.svg') }}">
     @vite('resources/scss/app.scss')
 </head>
 
@@ -24,8 +24,10 @@
             <div class="bg-white rounded-xl p-6 w-full max-w-xs sm:max-w-sm md:max-w-sm lg:max-w-sm shadow-lg">
                 <!-- Logo -->
                 <div class="flex justify-center mb-6">
+                    <a href="{{ url('/') }}">
                     <img class="h-12 sm:h-14 md:h-16 lg:h-18 w-auto" src="{{ asset('front/assets/images/logo.svg') }}"
                         alt="Your Company">
+                    </a>
                 </div>
                 <!-- Register Form -->
                 <div>

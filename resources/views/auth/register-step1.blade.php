@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Login Page</title>
-
+    <link rel="shortcut icon" href="{{ asset('/images/fav_icon.svg') }}">
     @vite('resources/scss/app.scss')
 </head>
 
@@ -26,8 +26,9 @@
             <div class="bg-white rounded-xl p-6 w-full max-w-xs sm:max-w-md lg:max-w-md shadow-lg">
                 <!-- Logo -->
                 <div class="flex justify-center mb-6">
-                    <img class="h-12 w-auto sm:h-14 lg:h-18" src="{{ asset('front/assets/images/logo.svg') }}"
-                        alt="Your Company">
+                    <a href="{{url('/')  }}">
+                        <img class="h-12 w-auto sm:h-14 lg:h-18" src="{{ asset('front/assets/images/logo.svg') }}" alt="Your Company">
+                        </a>
                 </div>
                 <!-- Register Form -->
                 <div>

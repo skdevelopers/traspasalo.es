@@ -57,14 +57,14 @@
                 </a>
             </li>
             @endcan
-            @can('Allow_Features')
+            {{-- @can('Allow_Features')
             <li class="menu-item">
                 <a href="{{ route('feature-services.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Features </span>
                 </a>
             </li>
-            @endcan
+            @endcan --}}
             <li class="menu-item">
                 <a href="{{ route('business.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>

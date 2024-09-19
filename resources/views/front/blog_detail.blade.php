@@ -20,11 +20,15 @@
                     <p class="text-gray-600 mb-4">{!! $blog->description !!}.</p>
                 </div>
                 <div class="col-span-12 md:col-span-4">
-                    <div class="text-left p-4 shadow-lg bg-white rounded-lg">
+                    <div class="text-left p-4 shadow-lg bg-white rounded-lg" x-data="relatedBlogs()">
                         <h2 class="text-xl font-bold">Related Blogs</h2>
-                        <p class="text-gray-600 mt-2 pb-14">Embrace the advantages of property listing and become a part of our
-                            community
-                            today.</p>
+                        <template x-for="(blog, index) in blogs" :key="index">
+                            <div class="mt-4">
+                                <img :src="blog.image_url" alt="Blog Image" class="w-full h-32 object-cover rounded-lg mb-2">
+                                <h3 class="text-lg font-bold" x-text="blog.title"></h3>
+                                <p class="text-gray-600 mt-1" x-text="blog.date"></p>
+                            </div>
+                        </template>
                     </div>
         
                     <div id="blogs-container" class="grid grid-cols-1 py-8">
@@ -36,3 +40,29 @@
     </div>
     @include('front.partials.footer')
 @endsection
+
+@push('scripts')
+
+<script>
+    function relatedBlogs() {
+        return {
+            blogs: [],
+            async fetchBlogs() {
+                try {
+                    const response = await fetch('/blogsAlljson');
+                    if (!response.ok) throw new Error('Failed to fetch blogs');
+
+                    const data = await response.json();
+                    this.blogs = data.blogs.slice(4, 7); // Display only 3 related blogs
+                } catch (error) {
+                    console.error('Error fetching blogs:', error);
+                }
+            },
+            init() {
+                this.fetchBlogs(); // Fetch blogs when the component initializes
+            }
+        };
+    }
+</script>
+    
+@endpush
