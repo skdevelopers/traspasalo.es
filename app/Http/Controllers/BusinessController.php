@@ -29,7 +29,7 @@ class BusinessController extends Controller
         $totalCustomers = Customer::count(); // Assuming you have a Customer model
         $totalBlogs = Blog::count(); // Assuming you have a Blog model
 
-        return view('/index', compact('totalBusinesses', 'totalUsers', 'totalCustomers','totalBlogs'));
+        return view('/index', compact('totalBusinesses', 'totalUsers', 'totalCustomers', 'totalBlogs'));
     }
 
     public function index()
@@ -67,36 +67,55 @@ class BusinessController extends Controller
             'business_title' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
-            'phone_no' =>'required',
+            'phone_no' => 'required',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required',
-            'subcategory_id' => 'required'
+            'subcategory_id' => 'required',
+            'financial.established' => [
+                'nullable',            // The field is optional
+                'integer',             // Ensure it's an integer
+                'digits:4',            // Ensure the input is exactly 4 digits
+                'between:1900,' . date('Y') // Ensure it's between 1900 and the current year
+            ],
+            'FfAndE.year' => [
+                'nullable',           // Field is optional
+                'integer',            // Ensure it's an integer
+                'digits:4',           // Must be exactly 4 digits
+                'between:1900,' . date('Y'),  // Ensure it's between 1900 and the current year
+            ],
+            'vehicle.year' => [
+                'nullable',           // Field is optional
+                'integer',            // Ensure it's an integer
+                'digits:4',           // Must be exactly 4 digits
+                'between:1900,' . date('Y'),  // Ensure it's between 1900 and the current year
+            ],
+            
         ]);
-     // dd($request->location);
-       // $request['features'] = $this->processFeatures($request['features']);
+        // dd($request->location);
+        // $request['features'] = $this->processFeatures($request['features']);
         // Use a transaction to ensure atomicity of operations
         DB::transaction(function () use ($request) {
             // Create the business
-            $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location','phone_no']));
-    
+            $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location', 'phone_no']));
+
             // Handle images (Ensure this function is defined properly to handle image uploads)
             $this->handleImages($request->images, $business);
-            
-           //dd($request->features);
+
+            //dd($request->features);
             // if (!empty($request->features)) {
             //            $business->features()->sync($request->features);
             //          }
-            
-                 $business->generateQrCode();
-    
+
+            $business->generateQrCode();
+
             // Save related data only if necessary
             $this->saveRelatedData($business, $request);
         });
 
-    
+
         return redirect()->route('business.index')->with('success', 'Business and related data saved successfully');
     }
-    
+
     // Function to handle saving related data
     private function saveRelatedData($business, Request $request)
     {
@@ -110,7 +129,7 @@ class BusinessController extends Controller
         } elseif ($business->facility) {
             $business->facility()->delete();
         }
-    
+
         // Save or delete financial data
         $financialData = $request->input('financial') ?? [];
         if ($this->hasAtLeastOneValue($financialData)) {
@@ -121,7 +140,7 @@ class BusinessController extends Controller
         } elseif ($business->financial) {
             $business->financial()->delete();
         }
-    
+
         // Save or delete vehicle data
         $vehicleData = $request->input('vehicle') ?? [];
         if ($this->hasAtLeastOneValue($vehicleData)) {
@@ -132,7 +151,7 @@ class BusinessController extends Controller
         } elseif ($business->vehicle) {
             $business->vehicle()->delete();
         }
-    
+
         // Save or delete business employee data
         $employeeData = $request->input('business_employee') ?? [];
         if ($this->hasAtLeastOneValue($employeeData)) {
@@ -143,7 +162,7 @@ class BusinessController extends Controller
         } elseif ($business->businessEmployee) {
             $business->businessEmployee()->delete();
         }
-    
+
         // Save or delete FfAndE data
         $ffAndEData = $request->input('FfAndE') ?? [];
         if ($this->hasAtLeastOneValue($ffAndEData)) {
@@ -155,25 +174,25 @@ class BusinessController extends Controller
             $business->ffAndE()->delete();
         }
     }
-    
-    
+
+
     // Helper function to check if at least one value in the array is provided
     private function hasAtLeastOneValue($input)
     {
         if (!is_array($input)) {
             return false;
         }
-    
+
         // Filter the array to check for any non-empty values
         foreach ($input as $value) {
             if (!is_null($value) && $value !== '') {
                 return true;
             }
         }
-    
+
         return false;
     }
-    
+
 
     // public function store(BusinessRequest $request)
     // {
@@ -252,33 +271,33 @@ class BusinessController extends Controller
     // }
 
     public function edit($id)
-{
-    
-    // Retrieve the business with all related models, including facilities, vehicles, employees, and more.
-    $business = Business::with([
-        'features', 
-        'facility', 
-        'financial', 
-        'vehicle', 
-        'businessEmployee', 
-        'ffAndE', 
-        'media'
-    ])->findOrFail($id); 
-   // dd($business->facility());
-    // Get all categories for dropdown
-    $categories = Category::all();
+    {
 
-    // Fetch media URLs for the business images
-    $media = $business->getMedia('images')->map(function ($item) {
-        return [
-            'id' => $item->id, // Include the media ID
-            'org_url' => $item->getUrl(), // The URL to display the image
-        ];
-    });
+        // Retrieve the business with all related models, including facilities, vehicles, employees, and more.
+        $business = Business::with([
+            'features',
+            'facility',
+            'financial',
+            'vehicle',
+            'businessEmployee',
+            'ffAndE',
+            'media'
+        ])->findOrFail($id);
+        // dd($business->facility());
+        // Get all categories for dropdown
+        $categories = Category::all();
 
-    // Return the view with the business and related data
-    return view('business.edit', compact('business', 'categories', 'media'));
-}
+        // Fetch media URLs for the business images
+        $media = $business->getMedia('images')->map(function ($item) {
+            return [
+                'id' => $item->id, // Include the media ID
+                'org_url' => $item->getUrl(), // The URL to display the image
+            ];
+        });
+
+        // Return the view with the business and related data
+        return view('business.edit', compact('business', 'categories', 'media'));
+    }
 
 
 
@@ -323,54 +342,73 @@ class BusinessController extends Controller
     // }
 
     public function update(Request $request, $id)
-{
-    // Validate the basic business data
-    $request->validate([
-        'business_title' => 'required|string',
-        'description' => 'required|string',
-        'location' => 'required|string',
-        'phone_no' => 'required',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Images are optional during updates
-        'category_id' => 'required',
-        'subcategory_id' => 'required'
-    ]);
+    {
+        // Validate the basic business data
+        $request->validate([
+            'business_title' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'phone_no' => 'required',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'rent_supplies' => 'nullable|array',
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'financial.established' => [
+                'nullable',            // The field is optional
+                'integer',             // Ensure it's an integer
+                'digits:4',            // Ensure the input is exactly 4 digits
+                'between:1900,' . date('Y') // Ensure it's between 1900 and the current year
+            ],
+            'FfAndE.year' => [
+                'nullable',           // Field is optional
+                'integer',            // Ensure it's an integer
+                'digits:4',           // Must be exactly 4 digits
+                'between:1900,' . date('Y'),  // Ensure it's between 1900 and the current year
+            ],
+            'vehicle.year' => [
+                'nullable',           // Field is optional
+                'integer',            // Ensure it's an integer
+                'digits:4',           // Must be exactly 4 digits
+                'between:1900,' . date('Y'),  // Ensure it's between 1900 and the current year
+            ],
+        ]);
 
-    // Find the existing business
-    $business = Business::findOrFail($id);
+        // Find the existing business
+        $business = Business::findOrFail($id);
 
-    // Use a transaction to ensure atomicity of operations
-    DB::transaction(function () use ($request, $business) {
-        // Update the business
-        $business->update($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location', 'phone_no']));
+        // Use a transaction to ensure atomicity of operations
+        DB::transaction(function () use ($request, $business) {
+            // Update the business
+            $business->update($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location', 'phone_no']));
 
-        // Handle images (Ensure this function is defined properly to handle image uploads)
-        if ($request->has('deleted_images')) {
-            $deletedImageIds = explode(',', $request->deleted_images);
-            foreach ($deletedImageIds as $imageId) {
-                $media = $business->media()->where('id', $imageId)->first();
-                if ($media) {
-                    $media->delete(); // Delete the image from the media library and storage
+            // Handle images (Ensure this function is defined properly to handle image uploads)
+            if ($request->has('deleted_images')) {
+                $deletedImageIds = explode(',', $request->deleted_images);
+                foreach ($deletedImageIds as $imageId) {
+                    $media = $business->media()->where('id', $imageId)->first();
+                    if ($media) {
+                        $media->delete(); // Delete the image from the media library and storage
+                    }
                 }
             }
-        }
-    
-        // Handle new image uploads
-        if ($request->hasFile('new_images')) {
-            foreach ($request->file('new_images') as $image) {
-                $business->addMedia($image)->toMediaCollection('images');
+
+            // Handle new image uploads
+            if ($request->hasFile('new_images')) {
+                foreach ($request->file('new_images') as $image) {
+                    $business->addMedia($image)->toMediaCollection('images');
+                }
             }
-        }
-    
 
-        // Generate or update QR code
-        $business->generateQrCode();
 
-        // Save related data only if necessary
-        $this->saveRelatedData($business, $request);
-    });
+            // Generate or update QR code
+            $business->generateQrCode();
 
-    return redirect()->route('business.index')->with('success', 'Business and related data updated successfully');
-}
+            // Save related data only if necessary
+            $this->saveRelatedData($business, $request);
+        });
+
+        return redirect()->route('business.index')->with('success', 'Business and related data updated successfully');
+    }
 
 
 
@@ -388,7 +426,7 @@ class BusinessController extends Controller
     {
         // Find the business by ID
         $business = Business::findOrFail($id);
-    
+
         // Start a transaction to ensure data integrity
         DB::transaction(function () use ($business) {
             // If business has images, delete them
@@ -398,7 +436,7 @@ class BusinessController extends Controller
                     $this->mediaUploadService->deleteMedia($media);
                 }
             }
-    
+
             // Delete the related data if necessary (features, facility, etc.)
             $business->features()->detach();
             $business->facility()->delete();
@@ -406,15 +444,15 @@ class BusinessController extends Controller
             $business->vehicle()->delete();
             $business->businessEmployee()->delete();
             $business->ffAndE()->delete();
-    
+
             // Finally, delete the business itself
             $business->delete();
         });
-    
+
         // Redirect to the business index page with a success message
         return redirect()->route('business.index')->with('success', 'Business deleted successfully');
     }
-    
+
     // public function show($id)
     // {
     //     try {
@@ -426,7 +464,7 @@ class BusinessController extends Controller
     // }
     public function show($id)
     {
-       
+
         // Find the business by ID, including related models like features, facility, etc.
         $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
         // dd($business->all());
@@ -455,10 +493,10 @@ class BusinessController extends Controller
             return $item->only(['org_url', 'name']);
         })->toArray();
         //dd($media);
-    // Return the show view, passing the business data to the view
-        return view('business.show', compact('business','media','showPaidFeatures'));
+        // Return the show view, passing the business data to the view
+        return view('business.show', compact('business', 'media', 'showPaidFeatures'));
     }
-    
+
     public function getBusiness($id)
     {
         try {
@@ -506,14 +544,14 @@ class BusinessController extends Controller
     public function showBusinesses(Request $request)
     {
         //dd($request->all());
-        $categories=Category::all();
+        $categories = Category::all();
         $query = Business::with(['category', 'subcategory', 'media']);
         $hasFilters = $this->applyFilters($query, $request);
 
         $businesses = $hasFilters ? $query->get() : Business::with(['category', 'subcategory', 'media'])->get();
 
         //  dd($businesses);
-        return view('business.showBusiness', compact('businesses','categories'));
+        return view('business.showBusiness', compact('businesses', 'categories'));
     }
 
     private function processFeatures($features)
@@ -551,11 +589,10 @@ class BusinessController extends Controller
             $query->where('category_id', $request->input('category'));
             $hasFilters = true;
         }
-         
+
         if ($request->has('subcategory') && !is_null($request->input('subcategory'))) {
             $query->where('subcategory_id', $request->input('subcategory'));
             $hasFilters = true;
-            
         }
 
         if ($request->has('location') && !is_null($request->input('location'))) {
@@ -573,24 +610,23 @@ class BusinessController extends Controller
     }
 
     public function getJsonBusinesses()
-{
-    // Fetch all businesses with their related category and media
-    $businesses = Business::with(['category', 'subcategory', 'media'])->get();
+    {
+        // Fetch all businesses with their related category and media
+        $businesses = Business::with(['category', 'subcategory', 'media'])->get();
 
-    // Iterate over each business and attach the category image
-    $businesses->each(function ($business) {
-        // Get category image URL
-        $categoryImageUrl = $business->category ? $business->category->getImageUrlAttribute() : null;
+        // Iterate over each business and attach the category image
+        $businesses->each(function ($business) {
+            // Get category image URL
+            $categoryImageUrl = $business->category ? $business->category->getImageUrlAttribute() : null;
 
-        // Attach the category image to the business object
-        $business->category_image = $categoryImageUrl;
-    });
+            // Attach the category image to the business object
+            $business->category_image = $categoryImageUrl;
+        });
 
-    // Return the JSON response with the businesses and their category images
-    return response()->json([
-        'businesses' => $businesses,
-        'status' => 1,
-    ], 200);
-}
-
+        // Return the JSON response with the businesses and their category images
+        return response()->json([
+            'businesses' => $businesses,
+            'status' => 1,
+        ], 200);
+    }
 }

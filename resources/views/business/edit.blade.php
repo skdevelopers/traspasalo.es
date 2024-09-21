@@ -108,7 +108,7 @@
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4H5a1 1 0 100 2h4v4a1 1 0 102 0v-4h4a1 1 0 100-2h-4V5z" clip-rule="evenodd" />
                         </svg>
                     </span>
-                    <input type="file" id="hiddenImagesInput" name="new_images[]" multiple class="hidden">
+                    <input type="file" id="hiddenImagesInput" name="new_images[]"  class="hidden">
                 </label>
             
                 <!-- Hidden input to track deleted images -->
@@ -145,6 +145,9 @@
                             <td class="border px-4 py-2">
                                 <label class="text-sm font-semibold mb-1 text-gray-500">Established</label>
                                 <input type="text" name="financial[established]" value="{{ old('financial.established', $business->financial->established ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                @error('financial.established')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
                             </td>
                         </tr>
                     </tbody>
@@ -166,14 +169,31 @@
                                 <input type="number" name="facility[duration_months]" value="{{ old('facility.duration_months', $business->facility->duration_months ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                             </td>
                             <td class="border px-4 py-2">
-                                <label class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
-                                <select name="facility[rent_supplies]" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
-                                    <option value="">Select</option>
-                                    <option value="Air Conditioning" {{ old('facility.rent_supplies', $business->facility->rent_supplies ?? '') == 'Air Conditioning' ? 'selected' : '' }}>Air Conditioning</option>
-                                    <option value="Gas" {{ old('facility.rent_supplies', $business->facility->rent_supplies ?? '') == 'Gas' ? 'selected' : '' }}>Gas</option>
-                                    <option value="Electricity" {{ old('facility.rent_supplies', $business->facility->rent_supplies ?? '') == 'Electricity' ? 'selected' : '' }}>Electricity</option>
-                                    <option value="3 Phase Electricity" {{ old('facility.rent_supplies', $business->facility->rent_supplies ?? '') == '3 Phase Electricity' ? 'selected' : '' }}>3 Phase Electricity</option>
-                                </select>
+                               
+                                <div class="mt-3">
+                                    <label class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
+                                    <div>
+                                        <input type="checkbox" name="facility[rent_supplies][]" value="Air Conditioning" 
+                                            {{ in_array('Air Conditioning', old('facility.rent_supplies', $business->facility->rent_supplies ?? [])) ? 'checked' : '' }}> 
+                                        Air Conditioning
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="facility[rent_supplies][]" value="Gas" 
+                                            {{ in_array('Gas', old('facility.rent_supplies', $business->facility->rent_supplies ?? [])) ? 'checked' : '' }}> 
+                                        Gas
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="facility[rent_supplies][]" value="Electricity" 
+                                            {{ in_array('Electricity', old('facility.rent_supplies', $business->facility->rent_supplies ?? [])) ? 'checked' : '' }}> 
+                                        Electricity
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="facility[rent_supplies][]" value="3 Phase Electricity" 
+                                            {{ in_array('3 Phase Electricity', old('facility.rent_supplies', $business->facility->rent_supplies ?? [])) ? 'checked' : '' }}> 
+                                        3 Phase Electricity
+                                    </div>
+                                </div>
+                                
                             </td>
                         </tr>
                         <tr class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -224,6 +244,9 @@
                             <td class="border px-4 py-2">
                                 <label for="year" class="text-sm font-semibold mb-1 text-gray-500">Year</label>
                                 <input type="number" name="FfAndE[year]" value="{{ old('FfAndE.year', $business->ffAndE->year ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Enter Year">
+                                @error('FfAndE.year')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
                             </td>
                         </tr>
 
@@ -239,7 +262,11 @@
                             <td class="border px-4 py-2">
                                 <label for="vehicle_year" class="text-sm font-semibold mb-1 text-gray-500">Year</label>
                                 <input type="number" name="vehicle[year]" value="{{ old('vehicle.year', $business->vehicle->year ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Enter Year">
+                                @error('vehicle.year')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
                             </td>
+
                             <td class="border px-4 py-2">
                                 <label for="km" class="text-sm font-semibold mb-1 text-gray-500">Km</label>
                                 <input type="number" name="vehicle[km]" value="{{ old('vehicle.km', $business->vehicle->km ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Enter Km">

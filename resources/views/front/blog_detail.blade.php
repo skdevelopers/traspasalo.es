@@ -53,7 +53,7 @@
                     if (!response.ok) throw new Error('Failed to fetch blogs');
 
                     const data = await response.json();
-                    this.blogs = data.blogs.slice(4, 7); // Display only 3 related blogs
+                    this.blogs = data.blogs.slice(0,3); // Display only 3 related blogs
                 } catch (error) {
                     console.error('Error fetching blogs:', error);
                 }

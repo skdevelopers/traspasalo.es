@@ -154,8 +154,17 @@
                         </td>
                         <td class="border px-4 py-2">
                             <label class="text-lg font-bold mb-2 text-gray-700">Supplies</label>
-                            <p class="text-sm text-gray-800">{{ $business->facility->rent_supplies ?? 'N/A' }}</p>
+                            @if(!empty($business->facility->rent_supplies) && is_array($business->facility->rent_supplies))
+                                <ul class="text-sm text-gray-800">
+                                    @foreach($business->facility->rent_supplies as $supply)
+                                        <li>{{ $supply }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-sm text-gray-800">N/A</p>
+                            @endif
                         </td>
+                        
                     </tr>
                     <tr class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                         <td class="border px-4 py-2">

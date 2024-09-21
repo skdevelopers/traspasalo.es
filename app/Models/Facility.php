@@ -17,6 +17,11 @@ class Facility extends Model
         'state_supplies',
     ];
 
+
+    protected $casts = [
+        'rent_supplies' => 'array',
+    ];
+
     // A facility belongs to a business
     public function business()
     {
