@@ -426,32 +426,45 @@ class BusinessController extends Controller
     {
         // Find the business by ID
         $business = Business::findOrFail($id);
-
-        // Start a transaction to ensure data integrity
+    
+        // Use a transaction to ensure atomicity of the delete operations
         DB::transaction(function () use ($business) {
-            // If business has images, delete them
-            if ($business->media) {
-                foreach ($business->media as $media) {
-                    // Assuming there's a service or logic to delete media files
-                    $this->mediaUploadService->deleteMedia($media);
-                }
+            // Delete the related data
+    
+            // Delete facility data if exists
+            if ($business->facility) {
+                $business->facility()->delete();
             }
-
-            // Delete the related data if necessary (features, facility, etc.)
-            $business->features()->detach();
-            $business->facility()->delete();
-            $business->financial()->delete();
-            $business->vehicle()->delete();
-            $business->businessEmployee()->delete();
-            $business->ffAndE()->delete();
-
+    
+            // Delete financial data if exists
+            if ($business->financial) {
+                $business->financial()->delete();
+            }
+    
+            // Delete vehicle data if exists
+            if ($business->vehicle) {
+                $business->vehicle()->delete();
+            }
+    
+            // Delete business employee data if exists
+            if ($business->businessEmployee) {
+                $business->businessEmployee()->delete();
+            }
+    
+            // Delete FfAndE data if exists
+            if ($business->ffAndE) {
+                $business->ffAndE()->delete();
+            }
+    
             // Finally, delete the business itself
             $business->delete();
         });
-
-        // Redirect to the business index page with a success message
-        return redirect()->route('business.index')->with('success', 'Business deleted successfully');
+    
+        // Redirect with a success message
+        return redirect()->route('business.index')->with('success', 'Business and related data deleted successfully');
     }
+    
+
 
     // public function show($id)
     // {

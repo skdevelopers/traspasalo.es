@@ -70,8 +70,9 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700 mx-2">
+                                <!-- Trash Icon for delete -->
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H3a1 1 0 100 2h1v10a2 2 0 002 2h8a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-2 0v1H7V3a1 1 0 00-2 0v1H3a1 1 0 000 2h1v10a2 2 0 002 2h8a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H3a1 1 0 100 2h1v10a2 2 0 002 2h8a2 2 0 002-2V6h1a1 1 0 100-2h-4V3a1 1 0 00-2 0v1H7V3a1 1 0 00-1-1z" clip-rule="evenodd" />
                                 </svg>
                             </button>
                         </form>
