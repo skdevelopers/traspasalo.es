@@ -468,7 +468,8 @@ class BusinessController extends Controller
         // Find the business by ID, including related models like features, facility, etc.
         $business = Business::with(['features', 'facility', 'financial', 'vehicle', 'businessEmployee', 'ffAndE', 'media'])->findOrFail($id);
         // dd($business->all());
-        $showPaidFeatures = auth()->user()->business_limit > 1;
+        $showPaidFeatures = auth()->check() && auth()->user()->business_limit > 1;
+
         //dd($showPaidFeatures);
         $media = $business->getMedia('images')->map(function ($item) {
 
