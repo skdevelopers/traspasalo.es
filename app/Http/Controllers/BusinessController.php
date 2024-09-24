@@ -62,6 +62,7 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         // Validate the basic business data
         $request->validate([
             'business_title' => 'required|string',

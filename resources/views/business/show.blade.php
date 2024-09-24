@@ -123,7 +123,7 @@
                     <tr class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <td class="border px-4 py-2">
                             <label class="text-lg font-bold mb-2 text-gray-700">FF&E</label>
-                            <p class="text-sm text-gray-800">{{ $business->financial->ffe ?? 'N/A' }}</p>
+                            <p class="text-sm text-gray-800">{{ $business->financial->ff_and_e ?? 'N/A' }}</p>
                         </td>
                         <td class="border px-4 py-2">
                             <label class="text-lg font-bold mb-2 text-gray-700">Inventory</label>

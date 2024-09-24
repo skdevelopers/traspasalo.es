@@ -143,7 +143,7 @@
                         </td>
                         <td class="border px-4 py-2">
                             <label class="text-sm font-semibold mb-1 text-gray-500">FF&E</label>
-                            <input type="number" name="financial[ffe]" value="{{ old('financial.ffe') }}"
+                            <input type="number" name="financial[ff_and_e]" value="{{ old('financial.ff_and_e') }}"
                                 class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
                                 placeholder="Enter FF&E">
                         </td>
@@ -244,7 +244,7 @@
                         </td>
                         <td class="border px-4 py-2">
                             <label for="" class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
-                            <select name="facility[state_Supplies]"
+                            <select name="facility[state_supplies]"
                                 class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                                 <option value="">Select</option>
                                 <option value="New"

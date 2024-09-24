@@ -136,7 +136,7 @@
                             </td>
                             <td class="border px-4 py-2">
                                 <label class="text-sm font-semibold mb-1 text-gray-500">FF&E</label>
-                                <input type="number" name="financial[ffe]" value="{{ old('financial.ffe', $business->financial->ffe ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <input type="number" name="financial[ff_and_e]" value="{{ old('financial.ff_and_e', $business->financial->ff_and_e ?? '') }}" class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
                             </td>
                             <td class="border px-4 py-2">
                                 <label class="text-sm font-semibold mb-1 text-gray-500">Inventory</label>
