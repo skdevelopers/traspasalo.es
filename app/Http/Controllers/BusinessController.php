@@ -62,13 +62,13 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
-        // Validate the basic business data
+        // dd($request->all());
         $request->validate([
             'business_title' => 'required|string',
             'description' => 'required|string',
             'location' => 'required|string',
             'phone_no' => 'required',
+            'images' => 'required|array',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'category_id' => 'required',
             'subcategory_id' => 'required',
@@ -92,13 +92,15 @@ class BusinessController extends Controller
             ],
             
         ]);
+
         // dd($request->location);
         // $request['features'] = $this->processFeatures($request['features']);
         // Use a transaction to ensure atomicity of operations
         DB::transaction(function () use ($request) {
+            
             // Create the business
             $business = Business::create($request->only(['business_title', 'description', 'category_id', 'subcategory_id', 'location', 'phone_no']));
-
+            
             // Handle images (Ensure this function is defined properly to handle image uploads)
             $this->handleImages($request->images, $business);
 
@@ -344,6 +346,7 @@ class BusinessController extends Controller
 
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         // Validate the basic business data
         $request->validate([
             'business_title' => 'required|string',
@@ -585,10 +588,15 @@ class BusinessController extends Controller
 
     private function handleImages($images, $business)
     {
+        //dd($images);
         if (!empty($images)) {
+            
             foreach ($images as $image) {
+                
                 $result = $this->mediaUploadService->uploadAndAttachMedia($image, $business);
+                //dd($result);
                 if (!$result['success']) {
+                    //dd($images);    
                     return back()->withErrors($result['message']);
                 }
             }

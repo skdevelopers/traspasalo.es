@@ -86,34 +86,24 @@
             <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
                 <h3 class="text-lg font-semibold mb-2 text-gray-700">Business Images</h3>
             
-                <!-- Preview existing images with delete option -->
-                <div id="existingImagesContainer" class="flex flex-wrap gap-4 mt-4">
-                    @foreach ($media as $image)
-                        <div class="relative w-[118px] h-[118px]" id="existingImage-{{ $image['id'] }}">
-                            <img src="{{ $image['org_url'] }}" class="w-full h-full object-cover rounded-lg border border-gray-300">
-                            <button type="button" class="absolute top-2 right-2 text-white bg-red-500 rounded-full w-6 h-6 flex items-center justify-center"
-                                onclick="markForDeletion('{{ $image['id'] }}')">&times;</button>
-                            <input type="hidden" name="existing_images[]" value="{{ $image['id'] }}">
-                        </div>
-                    @endforeach
+                <!-- Container for upload buttons and images -->
+                <div id="imageContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4">
+                    <!-- Buttons and existing images will be dynamically generated here -->
                 </div>
             
-                <!-- Preview new images with delete option -->
-                <div id="previewContainer" class="flex flex-wrap gap-4 mt-4"></div>
-            
-                <!-- Input for adding new images -->
-                <label for="hiddenImagesInput" class="flex flex-col items-center justify-center w-28 h-28 bg-gray-100 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:bg-gray-200 mt-4">
-                    <span class="text-gray-500 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4H5a1 1 0 100 2h4v4a1 1 0 102 0v-4h4a1 1 0 100-2h-4V5z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                    <input type="file" id="hiddenImagesInput" name="new_images[]"  class="hidden">
-                </label>
+                <!-- Hidden file input for image selection -->
+                <input type="file" id="hiddenFileInput" class="hidden" accept="image/*">
             
                 <!-- Hidden input to track deleted images -->
                 <input type="hidden" name="deleted_images" id="deletedImagesInput" value="">
+            
+                <!-- Hidden inputs to store new images (for server-side processing) -->
+                <div id="hiddenInputsContainer" class="hidden"></div>
             </div>
+            
+            
+            
+            
             
 
             <!-- Financials Section -->
@@ -436,52 +426,119 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const maxImages = 10;
+    let imagesArray = new Array(maxImages).fill(null); // Track images in their respective slots
+    let deletedImages = []; // Track deleted existing images
+    let currentIndex = null; // Track which button was clicked to upload a new image
 
-let deletedImages = [];
+    const buttonsContainer = document.getElementById('imageContainer');
+    const hiddenFileInput = document.getElementById('hiddenFileInput');
+    const deletedImagesInput = document.getElementById('deletedImagesInput');
+    const hiddenInputsContainer = document.getElementById('hiddenInputsContainer');
+    const existingImages = @json($media); // Fetch existing images from the backend
 
-// Handle new image preview and deletion
-document.getElementById('hiddenImagesInput').addEventListener('change', function(event) {
-    const previewContainer = document.getElementById('previewContainer');
-    previewContainer.innerHTML = ''; // Clear previous previews
+    // Populate slots with existing images or upload buttons
+    for (let i = 0; i < maxImages; i++) {
+        const buttonWrapper = document.createElement('div');
+        buttonWrapper.classList.add('relative', 'group', 'w-[118px]', 'h-[118px]');
+        buttonWrapper.setAttribute('data-index', i);
 
-    const files = event.target.files;
-    if (files) {
-        Array.from(files).forEach((file) => {
+        if (existingImages[i]) {
+            createImagePreview(buttonWrapper, existingImages[i].org_url, existingImages[i].id, i, true);
+            imagesArray[i] = { id: existingImages[i].id, type: 'existing' }; // Track existing images
+        } else {
+            createUploadButton(buttonWrapper, i);
+        }
+
+        buttonsContainer.appendChild(buttonWrapper);
+    }
+
+    // Function to create the upload button
+    function createUploadButton(buttonWrapper, index) {
+        const button = document.createElement('button');
+        button.type = 'button'; // Prevent form submission
+        button.classList.add('w-28', 'h-28', 'border-2', 'border-dashed', 'border-gray-400', 'rounded-lg', 'flex', 'items-center', 'justify-center', 'bg-gray-100', 'cursor-pointer');
+        button.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4H5a1 1 0 100 2h4v4a1 1 0 102 0v-4h4a1 1 0 100-2h-4V5z" clip-rule="evenodd" />
+            </svg>
+        `;
+
+        // Handle file selection on button click
+        button.addEventListener('click', function () {
+            currentIndex = index;
+            hiddenFileInput.value = ''; // Reset file input so change event triggers even if the same file is uploaded
+            hiddenFileInput.click(); // Trigger file input
+        });
+
+        buttonWrapper.innerHTML = ''; // Clear the wrapper
+        buttonWrapper.appendChild(button); // Add button to the wrapper
+    }
+
+    // Function to create image preview with a delete button
+    function createImagePreview(buttonWrapper, imageUrl, imageId, index, isExisting) {
+        buttonWrapper.innerHTML = ''; // Clear previous content
+
+        // Create image preview
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'Uploaded Image';
+        img.classList.add('w-[118px]', 'h-[118px]', 'object-cover', 'rounded-lg', 'border', 'border-gray-300');
+
+        // Create delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.innerHTML = '&times;';
+        deleteButton.classList.add('absolute', 'top-4', '-right-2', 'text-white', 'bg-red-500', 'rounded-full', 'w-6', 'h-6', 'flex', 'items-center', 'justify-center', 'opacity-0', 'group-hover:opacity-100', 'transition-opacity', 'duration-300');
+
+        // Handle image removal
+        deleteButton.addEventListener('click', function () {
+            if (isExisting) {
+                deletedImages.push(imageId); // Track deleted existing images
+                deletedImagesInput.value = deletedImages.join(','); // Update hidden input
+            }
+            createUploadButton(buttonWrapper, index); // Re-add the upload button for that slot
+            imagesArray[index] = null; // Remove image from array
+            updateHiddenInputs(); // Update hidden inputs after removing an image
+        });
+
+        buttonWrapper.appendChild(img);
+        buttonWrapper.appendChild(deleteButton);
+    }
+
+    // Handle file input change (image selected)
+    hiddenFileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && currentIndex !== null) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                const wrapper = document.createElement('div');
-                wrapper.classList.add('relative', 'group', 'w-[118px]', 'h-[118px]');
-
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = 'Uploaded Image';
-                img.classList.add('w-[118px]', 'h-[118px]', 'object-cover', 'rounded-lg', 'border', 'border-gray-300');
-
-                const deleteButton = document.createElement('button');
-                deleteButton.innerHTML = '&times;';
-                deleteButton.classList.add('absolute', 'top-4', '-right-2', 'text-white', 'bg-red-500', 'rounded-full', 'w-6', 'h-6', 'flex', 'items-center', 'justify-center', 'opacity-0', 'group-hover:opacity-100', 'transition-opacity', 'duration-300');
-
-                deleteButton.addEventListener('click', function() {
-                    wrapper.remove();
-                });
-
-                wrapper.appendChild(img);
-                wrapper.appendChild(deleteButton);
-                previewContainer.appendChild(wrapper);
+                const buttonWrapper = document.querySelector(`[data-index="${currentIndex}"]`);
+                createImagePreview(buttonWrapper, e.target.result, null, currentIndex, false); // Preview new image
+                imagesArray[currentIndex] = { file: file, type: 'new' }; // Store the file in the images array
+                updateHiddenInputs(); // Update hidden inputs after adding an image
             };
             reader.readAsDataURL(file);
+        }
+    });
+
+    // Function to dynamically update hidden inputs for new images
+    function updateHiddenInputs() {
+        hiddenInputsContainer.innerHTML = ''; // Clear old hidden inputs
+
+        imagesArray.forEach((image, index) => {
+            if (image && image.type === 'new') {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.name = `new_images[${index}]`; // Name for backend to handle
+                input.files = hiddenFileInput.files; // Attach the file
+
+                hiddenInputsContainer.appendChild(input); // Append to hidden inputs container
+            }
         });
     }
 });
 
-// Handle deletion of existing images
-function markForDeletion(imageId) {
-    deletedImages.push(imageId);
-    document.getElementById('deletedImagesInput').value = deletedImages.join(',');
 
-    // Remove the image from the DOM
-    document.getElementById('existingImage-' + imageId).remove();
-}
 
 </script>
 @endpush

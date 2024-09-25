@@ -48,7 +48,7 @@ class BlogController extends Controller
         //dd($request->all());
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'required|string|max:4294967295',
             'date' => 'required|date',
             'image' => 'required|image',
         ]);
@@ -76,7 +76,7 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'description' => 'required|string|max:4294967295',
             'date' => 'required|date',
             'image' => 'nullable|image',
         ]);
