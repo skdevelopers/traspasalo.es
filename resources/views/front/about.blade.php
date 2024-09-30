@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
-@section('title', 'About US')
-@section('header-title', 'About Us')
+@section('title', translate('About US'))
+@section('header-title', translate('About Us'))
 @section('header-subtitle', '')
 
 @push('styles')
@@ -25,24 +25,24 @@
             <div class="grid grid-cols-12 py-5 md:py-20 items-center gap-4">
                 <!-- Text Section -->
                 <div class="py-10 col-span-12 md:col-span-6 lg:col-span-5 pl-3">
-                    <h1 class="text-2xl font-bold mb-6">Find The Best Accommodation</h1>
+                    <h1 class="text-2xl font-bold mb-6">{{ translate('Find The Best Accommodation') }}</h1>
                     <p class="mb-6 text-sm">
-                        Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.
+                        {{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.
                         Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat. Donec vehicula elit eu
                         erat pulvinar, vel congue ex egestas. Praesent egestas purus dui, a porta arcu pharetra quis. Sed
                         vestibulum semper ligula, id accumsan orci ornare ut. Donec id pharetra nunc, sit amet sollicitudin
                         mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                         Aliquam dapibus nisl at diam scelerisque luctus. Nam mattis, velit in malesuada maximus, erat ligula
-                        eleifend eros, et lacinia nunc ante vel odio.
+                        eleifend eros, et lacinia nunc ante vel odio.') }}
                     </p>
                     <p class="text-sm">
-                        Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.
+                        {{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit.
                         Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat. Donec vehicula elit eu
                         erat pulvinar, vel congue ex egestas. Praesent egestas purus dui, a porta arcu pharetra quis. Sed
                         vestibulum semper ligula, id accumsan orci ornare ut. Donec id pharetra nunc, sit amet sollicitudin
                         mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                         Aliquam dapibus nisl at diam scelerisque luctus. Nam mattis, velit in malesuada maximus, erat ligula
-                        eleifend eros, et lacinia nunc ante vel odio.
+                        eleifend eros, et lacinia nunc ante vel odio.') }}
                     </p>
                 </div>
 
@@ -51,11 +51,11 @@
                     <div class="relative flex justify-end">
                         <div class="bg-orange-100 rounded-lg w-40 h-40 absolute right-0 top-0"></div>
                         <div class="relative z-10 pr-10 pl-16 pt-20">
-                            <img src="{{ asset('front/assets/images/mirror-room.svg') }}" alt="Main Image"
+                            <img src="{{ asset('front/assets/images/mirror-room.svg') }}" alt="{{ translate('Main Image') }}"
                                 class="w-[580px] rounded-lg">
                         </div>
                         <div class="absolute left-0 bottom-0 z-10 transform translate-y-1/2">
-                            <img src="{{ asset('front/assets/images/bed-room.svg') }}" alt="Small Image"
+                            <img src="{{ asset('front/assets/images/bed-room.svg') }}" alt="{{ translate('Small Image') }}"
                                 class="w-[200px] rounded-lg shadow-lg">
                         </div>
                     </div>
@@ -68,44 +68,44 @@
     <div class="container xl:container-xl">
         <div class="flex-col items-center justify-center flex px-3 md:px-20 py-10">
             <div class="text-center mb-12 w-full md:w-2/3">
-                <h2 class="text-3xl font-bold mb-4">What We Offers</h2>
-                <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel
-                    malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat.</p>
+                <h2 class="text-3xl font-bold mb-4">{{ translate('What We Offers') }}</h2>
+                <p class="text-gray-600 text-sm">{{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel
+                    malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat.') }}</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('front/assets/icons/low-rate.png') }}" alt="Low Rates" class="mx-auto">
+                        <img src="{{ asset('front/assets/icons/low-rate.png') }}" alt="{{ translate('Low Rates') }}" class="mx-auto">
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Low Rates</h3>
-                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
-                        vel malesuada velit.</p>
+                    <h3 class="text-xl font-semibold mb-2">{{ translate('Low Rates') }}</h3>
+                    <p class="text-gray-600 text-sm">{{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.') }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('front/assets/icons/booking-reservation-icon.png') }}" alt="No Reservation Fees"
+                        <img src="{{ asset('front/assets/icons/booking-reservation-icon.png') }}" alt="{{ translate('No Reservation Fees') }}"
                             class="mx-auto">
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">No Reservation Fees</h3>
-                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
-                        vel malesuada velit.</p>
+                    <h3 class="text-xl font-semibold mb-2">{{ translate('No Reservation Fees') }}</h3>
+                    <p class="text-gray-600 text-sm">{{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.') }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('front/assets/icons/secure-booking.png') }}" alt="Secure Booking" class="mx-auto">
+                        <img src="{{ asset('front/assets/icons/secure-booking.png') }}" alt="{{ translate('Secure Booking') }}" class="mx-auto">
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Secure Booking</h3>
-                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
-                        vel malesuada velit.</p>
+                    <h3 class="text-xl font-semibold mb-2">{{ translate('Secure Booking') }}</h3>
+                    <p class="text-gray-600 text-sm">{{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.') }}</p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg text-center">
                     <div class="mb-4">
-                        <img src="{{ asset('front/assets/icons/24-hours-phone-support-icon.png') }}" alt="24/7 Support"
+                        <img src="{{ asset('front/assets/icons/24-hours-phone-support-icon.png') }}" alt="{{ translate('24/7 Support') }}"
                             class="mx-auto">
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
-                    <p class="text-gray-600 text-sm">Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
-                        vel malesuada velit.</p>
+                    <h3 class="text-xl font-semibold mb-2">{{ translate('24/7 Support') }}</h3>
+                    <p class="text-gray-600 text-sm">{{ translate('Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero,
+                        vel malesuada velit.') }}</p>
                 </div>
             </div>
         </div>
@@ -115,8 +115,8 @@
     <div class="bg-violet-950 p-10">
         <div class="container xl:container-xl mx-auto px-4">
             <div x-data="slider()" class="relative">
-                <h2 class="text-3xl font-bold text-white text-center pt-10">Our Clients Success Stories</h2>
-                <p class="text-center text-white mb-4 pb-10">Discover the experiences of those who have achieved success with us</p>
+                <h2 class="text-3xl font-bold text-white text-center pt-10">{{ translate('Our Clients Success Stories') }}</h2>
+                <p class="text-center text-white mb-4 pb-10">{{ translate('Discover the experiences of those who have achieved success with us') }}</p>
                 
                 <div class="relative overflow-hidden py-20">
                     <div id="slider" class="flex transition-transform duration-500 space-x-8"
@@ -126,7 +126,7 @@
                                 class="bg-white text-black p-6 rounded-lg shadow-lg w-[92%] sm:w-[47%] lg:w-[30.5%]  flex-shrink-0">
                                 <p class="mb-4" x-text="item.description"> </p>
                                 <div class="flex items-center pt-5">
-                                    <img :src="item.image_url" alt="User Image" class="w-10 h-10 rounded-full mr-3">
+                                    <img :src="item.image_url" alt="{{ translate('User Image') }}" class="w-10 h-10 rounded-full mr-3">
                                     <div>
                                         <h3 class="font-semibold" x-text="item.name"></h3>
                                         <p class="text-gray-600 text-sm" x-text="item.job_position"></p>
@@ -152,9 +152,8 @@
     <!-- Frequently Asked Questions -->
     <section class="text-black py-16">
         <div class="container flex flex-col justify-center mx-auto">
-            <h2 class=" text-2xl font-bold leadi text-center sm:text-xl">Frequently Asked Questions</h2>
-            <h2 class="mb-12 text-sm  text-center sm:text-sm">Discover the experiences of those who have achieved success
-                with us</h2>
+            <h2 class=" text-2xl font-bold leadi text-center sm:text-xl">{{ translate('Frequently Asked Questions') }}</h2>
+            <h2 class="mb-12 text-sm  text-center sm:text-sm">{{ translate('Discover the experiences of those who have achieved success with us') }}</h2>
             <div class="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 divide-gray-700">
                 <ul class="basis-1/2" id="faq-list">
                     

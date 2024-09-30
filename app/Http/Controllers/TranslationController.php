@@ -21,7 +21,7 @@ class TranslationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'key' => 'required|string|max:255',
+            'key' => 'required|string|max:255|unique:translations,key',
             'language' => 'required|string|max:2',
             'value' => 'required',
         ]);
@@ -45,7 +45,7 @@ class TranslationController extends Controller
     public function update(Request $request, Translation $translation)
     {
         $request->validate([
-            'key' => 'required|string|max:255',
+            'key' => 'required|string|max:255|unique:translations,key',
             'language' => 'required|string|max:2',
             'value' => 'required',
         ]);
