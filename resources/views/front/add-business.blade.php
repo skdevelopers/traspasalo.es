@@ -1,4 +1,3 @@
-@extends('front.layouts.app')
 
 @extends('front.layouts.app')
 
@@ -132,7 +131,52 @@
             <h3 class="text-lg font-semibold mb-2 text-gray-700">{{ translate('FINANCIALS') }}</h3>
             <table class="min-w-full text-sm text-left text-gray-700">
                 <tbody>
-                    <!-- Financial inputs... -->
+                    <tr class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Gross Revenue</label>
+                            <input type="number" name="financial[gross_revenue]"
+                                value="{{ old('financial.gross_revenue') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Gross Revenue">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">EBITDA</label>
+                            <input type="number" name="financial[ebitda]" value="{{ old('financial.ebitda') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter EBITDA">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Asking Price</label>
+                            <input type="number" name="financial[asking_price]"
+                                value="{{ old('financial.asking_price') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Asking Price">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">FF&E</label>
+                            <input type="number" name="financial[ff_and_e]"
+                                value="{{ old('financial.ff_and_e') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter FF&E">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Inventory</label>
+                            <input type="number" name="financial[inventory]"
+                                value="{{ old('financial.inventory') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Inventory">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Established</label>
+                            <input type="text" name="financial[established]"
+                                value="{{ old('financial.established') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Established Year">
+                            @error('financial.established')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -142,7 +186,96 @@
             <h3 class="text-lg font-semibold mb-2 text-gray-700">{{ translate('FACILITIES') }}</h3>
             <table class="min-w-full text-left">
                 <tbody>
-                    <!-- Facility inputs... -->
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Rent</label>
+                            <input type="number" name="facility[rent]" value="{{ old('facility.rent') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Rent">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label class="text-sm font-semibold mb-1 text-gray-500">Duration (months)</label>
+                            <input type="number" name="facility[duration_months]"
+                                value="{{ old('facility.duration_months') }}"
+                                class="w-full mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Duration in Months">
+                        </td>
+                        <td class="border px-4 py-2">
+
+
+                            <!-- Checkboxes for rent_supplies -->
+                            <div class="mt-3">
+                                <label class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
+                                <div>
+                                    <input type="checkbox" name="facility[rent_supplies][]"
+                                        value="Air Conditioning"
+                                        {{ in_array('Air Conditioning', old('facility.rent_supplies', $facility->rent_supplies ?? [])) ? 'checked' : '' }}>
+                                    Air Conditioning
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="facility[rent_supplies][]" value="Gas"
+                                        {{ in_array('Gas', old('facility.rent_supplies', $facility->rent_supplies ?? [])) ? 'checked' : '' }}>
+                                    Gas
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="facility[rent_supplies][]" value="Electricity"
+                                        {{ in_array('Electricity', old('facility.rent_supplies', $facility->rent_supplies ?? [])) ? 'checked' : '' }}>
+                                    Electricity
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="facility[rent_supplies][]"
+                                        value="3 Phase Electricity"
+                                        {{ in_array('3 Phase Electricity', old('facility.rent_supplies', $facility->rent_supplies ?? [])) ? 'checked' : '' }}>
+                                    3 Phase Electricity
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                    </tr>
+                    <tr class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <td class="border px-4 py-2">
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Property
+                                (Price)</label>
+                            <input type="number" name="facility[property_price]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Property Price">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">Pending
+                                Mortgage</label>
+                            <input type="number" name="facility[pending_mortgage]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Pending Mortgage">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="" class="text-sm font-semibold mb-1 text-gray-500">State
+                                (Conditions)</label>
+                            <input type="text" name="facility[state_conditions]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter State Conditions">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for=""
+                                class="text-sm font-semibold mb-1 text-gray-500">Supplies</label>
+                            <select name="facility[state_supplies]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <option value="">Select</option>
+                                <option value="New"
+                                    {{ old('facility.state_supplies') == 'New' ? 'selected' : '' }}>New</option>
+                                <option value="Good"
+                                    {{ old('facility.state_supplies') == 'Good' ? 'selected' : '' }}>Good</option>
+                                <option value="Used"
+                                    {{ old('facility.state_supplies') == 'Used' ? 'selected' : '' }}>Used</option>
+                                <option value="Acceptable"
+                                    {{ old('facility.state_supplies') == 'Acceptable' ? 'selected' : '' }}>
+                                    Acceptable
+                                </option>
+                                <option value="Bad"
+                                    {{ old('facility.state_supplies') == 'Bad' ? 'selected' : '' }}>Bad</option>
+                            </select>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -151,16 +284,89 @@
         <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
             <table class="min-w-full text-left border-collapse">
                 <tbody>
-                    <!-- FF&E inputs... -->
-                </tbody>
-            </table>
-        </div>
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <th colspan="3" class="text-lg font-semibold mb-2 text-gray-700">FF&E</th>
+                    </tr>
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <td class="border px-4 py-2">
+                            <label for="price_new" class="text-sm font-semibold mb-1 text-gray-500">Price
+                                (New)</label>
+                            <input type="number" name="FfAndE[price_new]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Price">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="pending_payments" class="text-sm font-semibold mb-1 text-gray-500">Pending
+                                Payments</label>
+                            <input type="number" name="FfAndE[pending_payments]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Pending Payments">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="year" class="text-sm font-semibold mb-1 text-gray-500">Year</label>
+                            <input type="number" name="FfAndE[year]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Year">
+                            @error('FfAndE.year')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </td>
 
-        <!-- Employees Section -->
-        <div class="border border-gray-300 rounded-lg shadow-md p-6 bg-white mb-6">
-            <table class="min-w-full text-left border-collapse">
-                <tbody>
-                    <!-- Employees inputs... -->
+                    </tr>
+
+                    <!-- Vehicles Section -->
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <th colspan="3" class="text-lg font-semibold mb-2 text-gray-700 mt-5">Vehicles</th>
+                    </tr>
+                    <tr class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <td class="border px-4 py-2">
+                            <label for="make_model" class="text-sm font-semibold mb-1 text-gray-500">Make and
+                                Model</label>
+                            <input type="text" name="vehicle[make_and_model]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Make and Model">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="vehicle_year"
+                                class="text-sm font-semibold mb-1 text-gray-500">Year</label>
+                            <input type="number" name="vehicle[year]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Year">
+                            @error('vehicle.year')
+                                <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="km" class="text-sm font-semibold mb-1 text-gray-500">Km</label>
+                            <input type="number" name="vehicle[km]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Km">
+                        </td>
+                    </tr>
+
+                    <!-- Employees Section -->
+                    <tr class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <th colspan="2" class="text-lg font-semibold mb-2 text-gray-700 mt-5">Employees</th>
+                    </tr>
+                    <tr class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <td class="border px-4 py-2">
+                            <label for="number_employees" class="text-sm font-semibold mb-1 text-gray-500">Number
+                                of
+                                employees</label>
+                            <input type="number" name="business_employee[number_of_employees]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Number of Employees">
+                        </td>
+                        <td class="border px-4 py-2">
+                            <label for="employee_cost" class="text-sm font-semibold mb-1 text-gray-500">Employee
+                                cost
+                                (company cost)</label>
+                            <input type="number" name="business_employee[employee_cost]"
+                                class="w-full mt-1 p-2 placeholder:text-base placeholder:text-gray-500 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                placeholder="Enter Employee Cost">
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
