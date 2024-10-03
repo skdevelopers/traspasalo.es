@@ -285,7 +285,9 @@ Route::get('/lang/{lang}', function ($lang) {
     return redirect()->back();
 });
 
-
+route::get('/Privacy-Policy',function(){
+    return view ('front.privacy-policy');
+})->name('Privacy-Policy');
 
 Route::resource('translations', TranslationController::class)->middleware('auth');
 Route::resource('blogs', BlogController::class);

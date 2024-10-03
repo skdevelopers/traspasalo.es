@@ -71,9 +71,9 @@
         <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-700 py-4 mt-8">
             <p class="text-sm">{{ translate('Copyright') }} &copy; 2024, {{ translate('All rights reserved.') }}</p>
             <div class="flex w-full md:w-auto justify-between md:justify-normal md:space-x-4 space-x-2 mt-4 md:mt-0">
-                <a href="#" class="text-xs md:text-base hover:underline">{{ translate('Terms of Use') }}</a>
-                <a href="#" class="text-xs md:text-base hover:underline">{{ translate('Privacy Policy') }}</a>
-                <a href="#" class="text-xs md:text-base hover:underline">{{ translate('Help Center') }}</a>
+                {{-- <a href="#" class="text-xs md:text-base hover:underline">{{ translate('Terms of Use') }}</a> --}}
+                <a href="{{ route('Privacy-Policy') }}" class="text-xs md:text-base hover:underline">{{ translate('Privacy Policy') }}</a>
+                {{-- <a href="#" class="text-xs md:text-base hover:underline">{{ translate('Help Center') }}</a> --}}
             </div>
             <div class="flex space-x-4 p-4 md:mt-0">
                 <ul class="flex justify-center space-x-5">
