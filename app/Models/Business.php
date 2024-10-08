@@ -25,7 +25,8 @@ class Business extends Model implements HasMedia
         'description',
         'location',
         'phone_no',
-        'qr_code_path'
+        'qr_code_path',
+        'user_id'
     ];
 
     protected static function boot()

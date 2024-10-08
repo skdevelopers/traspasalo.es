@@ -88,8 +88,8 @@ Route::post('/upload-media', [UploadController::class, 'upload'])->name('upload-
 Route::delete('/delete-media/{media}', [UploadController::class, 'delete'])->name('delete-media');
 //Route::resource('/users', RegisteredUserController::class)->middleware('auth');
 // Route::delete('/users/{id}/destroy', [RegisteredUserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
-// Route::get('/users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('users.edit')->middleware('auth');
-// Route::put('/users/{id}/update', [RegisteredUserController::class, 'update'])->name('users.update')->middleware('auth');
+ //Route::get('/users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('users.edit')->middleware('auth');
+ //Route::put('/users/{id}/update', [RegisteredUserController::class, 'update'])->name('users.update')->middleware('auth');
 
 //// Define specific routes for data retrieval
 Route::prefix('/api/')->group(function () {

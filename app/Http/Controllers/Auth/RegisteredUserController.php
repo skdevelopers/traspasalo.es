@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Gate;
@@ -46,43 +47,43 @@ class RegisteredUserController extends Controller
 
     public function postStep2(Request $request)
     {
-        
+
         //dd($request->all());
         $request->validate([
             'mobile_number' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
         try {
-        $registrationData = Session::get('registration');
-        $registrationData['mobile_number'] = $request->mobile_number ?? null;
-        $registrationData['password'] = hash::make($request->password);
+            $registrationData = Session::get('registration');
+            $registrationData['mobile_number'] = $request->mobile_number ?? null;
+            $registrationData['password'] = hash::make($request->password);
 
-        // Save the user data to the database
-        $user = User::create($registrationData);
+            // Save the user data to the database
+            $user = User::create($registrationData);
 
-        event(new Registered($user));
-        // Log the user in
-        Auth::login($user);
+            event(new Registered($user));
+            // Log the user in
+            Auth::login($user);
 
-        // Clear the session
-        Session::forget('registration');
+            // Clear the session
+            Session::forget('registration');
 
-        return redirect(RouteServiceProvider::HOME);
-     } catch (Exception $e) {
-        // Log the error or handle it as needed
-        return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
-    }
+            return redirect(RouteServiceProvider::HOME);
+        } catch (Exception $e) {
+            // Log the error or handle it as needed
+            return redirect()->route('register.step2')->with('error', 'An error occurred while processing your registration. Please try again.');
+        }
         //$roles = Role::findOrFail(2);
-        
+
     }
     public function index()
     {
-        $users = User::with('roles')->get(); 
+        $users = User::with('roles')->get();
         // Use 'roles' instead of 'role'
         //dd($users);
         return view('users.index', compact('users'));
     }
-    
+
 
     public function edit(User $user)
     {
@@ -92,18 +93,25 @@ class RegisteredUserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        
+
         $request->validate([
             'roles' => 'required|array',
             'roles.*' => 'exists:roles,name', // Ensure each role exists in the roles table
         ]);
-        
+        // dd( $request->roles);
+        //$user->assignRole($request->roles);
         $user->syncRoles($request->roles);
-        //dd($user->syncRoles($request->roles));
+        DB::table('model_has_roles')
+            ->where('model_id', $user->id)
+            ->update(['model_type' => 'App\\Models\\User']);
+        $user->load('roles');
+        //dd($user->roles->toArray());
+        //$user->refresh();
+        // dd($user->roles);
         return redirect()->route('users.index')->with('success', 'User updated and roles assigned successfully');
     }
 
-    
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
