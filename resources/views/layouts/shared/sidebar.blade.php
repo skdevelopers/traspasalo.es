@@ -89,6 +89,12 @@
                 </a>
             </li>
             <li class="menu-item">
+                <a href="{{ route('subscribers.index') }}" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
+                    <span class="menu-text"> NewsLetter </span>
+                </a>
+            </li>
+            <li class="menu-item">
                 <a href="{{ route('permissions.index') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_file_check_line"></i></span>
                     <span class="menu-text"> Permissions </span>

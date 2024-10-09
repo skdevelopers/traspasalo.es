@@ -169,7 +169,7 @@
                     <template x-for="(busines, index) in business" :key="index">
                         <div class="slide flex-none w-full md:w-1/3 lg:w-1/4 p-3">
                             <div class="bg-white rounded-lg shadow-md shadow-gray-300">
-                                <img :src="busines.category_image" alt="{{ translate('Business Category') }}" class="w-full h-44 object-cover">
+                                <img :src="busines.subcategory_image" alt="{{ translate('Business Category') }}" class="w-full h-44 object-cover">
                                 <div class="p-4">
                                     <h3 class="text-md truncate whitespace-nowrap line-clamp-1" x-text="busines.business_title"></h3>
                                     <p class="text-gray-600 text-sm truncate">

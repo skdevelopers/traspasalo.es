@@ -67,7 +67,7 @@
             
             
 
-            <div class="grid lg:grid-cols-3 gap-6">
+            {{-- <div class="grid lg:grid-cols-3 gap-6">
                 <div class="col-span-1">
                     <div class="card">
                         <div class="p-6">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
         {{-- <div class="col-span-1">

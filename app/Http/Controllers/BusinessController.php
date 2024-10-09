@@ -640,10 +640,10 @@ class BusinessController extends Controller
         // Iterate over each business and attach the category image
         $businesses->each(function ($business) {
             // Get category image URL
-            $categoryImageUrl = $business->category ? $business->category->getImageUrlAttribute() : null;
+            $subcategoryImageUrl = $business->subcategory ? $business->subcategory->getImageUrlAttribute() : null;
 
             // Attach the category image to the business object
-            $business->category_image = $categoryImageUrl;
+            $business->subcategory_image = $subcategoryImageUrl;
         });
 
         // Return the JSON response with the businesses and their category images

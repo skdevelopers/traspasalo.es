@@ -48,7 +48,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach ($businesses as $business)
                 <div class="bg-white rounded-lg shadow-md p-4">
-                    <img src="{{ $business->category->getImageUrlAttribute() }}" alt="Category Image" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <img src="{{ $business->subcategory->getImageUrlAttribute() }}" alt="Category Image" class="w-full h-48 object-cover rounded-lg mb-4">
                     <h3 class="text-lg font-bold mb-2"><a href="{{ route('business.show', $business->id) }}">{{ $business->business_title }}</a></h3>
                     <p class="text-gray-600">{{ $business->location }}</p>
                 </div>
